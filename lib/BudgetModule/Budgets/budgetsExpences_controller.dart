@@ -1,0 +1,7 @@
+getBudgetsExpencesList() {}
+
+addExpense() {}
+
+updateExpense() {}
+
+deleteExpense() {}
