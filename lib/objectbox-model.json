@@ -1,0 +1,218 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:3912639388013938141",
+      "lastPropertyId": "3:2295571132967557559",
+      "name": "Budget",
+      "properties": [
+        {
+          "id": "1:5089663918438219010",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7117724927169584856",
+          "name": "repeats",
+          "type": 9
+        },
+        {
+          "id": "3:2295571132967557559",
+          "name": "amount",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1588695050128735560",
+      "lastPropertyId": "4:3292258396681020156",
+      "name": "Category",
+      "properties": [
+        {
+          "id": "1:4169513893214613262",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2752402896608338538",
+          "name": "isExpense",
+          "type": 1
+        },
+        {
+          "id": "3:2832366461472518905",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3292258396681020156",
+          "name": "icon",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:1358053335749135773",
+      "lastPropertyId": "6:5580495707262040883",
+      "name": "IncomeExpense",
+      "properties": [
+        {
+          "id": "1:7685506308775661417",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7430617893173994657",
+          "name": "isIncome",
+          "type": 1
+        },
+        {
+          "id": "3:8772035493217625258",
+          "name": "dateTime",
+          "type": 10
+        },
+        {
+          "id": "4:3433267797551436833",
+          "name": "amount",
+          "type": 6
+        },
+        {
+          "id": "5:8378074971595057259",
+          "name": "note",
+          "type": 9
+        },
+        {
+          "id": "6:5580495707262040883",
+          "name": "category",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:9052435534381775407",
+      "lastPropertyId": "8:8499334383457211072",
+      "name": "LoanLend",
+      "properties": [
+        {
+          "id": "1:2062997448433781121",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3324376512030445888",
+          "name": "isLoan",
+          "type": 1
+        },
+        {
+          "id": "3:4028527212899484197",
+          "name": "dateTime",
+          "type": 10
+        },
+        {
+          "id": "4:2845511107751879036",
+          "name": "dateOfReturn",
+          "type": 10
+        },
+        {
+          "id": "5:7572490216904874117",
+          "name": "amount",
+          "type": 6
+        },
+        {
+          "id": "6:472858004322395733",
+          "name": "note",
+          "type": 9
+        },
+        {
+          "id": "7:8637945009649281167",
+          "name": "phone",
+          "type": 9
+        },
+        {
+          "id": "8:8499334383457211072",
+          "name": "returnStatus",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:3071978227778497905",
+      "lastPropertyId": "10:5205876471603607160",
+      "name": "Metadata",
+      "properties": [
+        {
+          "id": "1:3918733605684651353",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6529066406702624820",
+          "name": "currentBalance",
+          "type": 6
+        },
+        {
+          "id": "3:7525627846413658126",
+          "name": "yourWorth",
+          "type": 6
+        },
+        {
+          "id": "4:2882924185126059228",
+          "name": "userName",
+          "type": 9
+        },
+        {
+          "id": "5:1538656536889066998",
+          "name": "currency",
+          "type": 9
+        },
+        {
+          "id": "6:1530149613637301564",
+          "name": "country",
+          "type": 9
+        },
+        {
+          "id": "7:7731241619166360903",
+          "name": "countryCode",
+          "type": 6
+        },
+        {
+          "id": "8:7650055383835823745",
+          "name": "password",
+          "type": 9
+        },
+        {
+          "id": "9:5402709417376191570",
+          "name": "hideOn",
+          "type": 1
+        },
+        {
+          "id": "10:5205876471603607160",
+          "name": "readMessage",
+          "type": 1
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "5:3071978227778497905",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
