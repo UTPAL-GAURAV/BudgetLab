@@ -1,0 +1,7 @@
+getAllBudgetsList() {}
+
+addBudget() {}
+
+updateBudget() {}
+
+deleteBudget() {}

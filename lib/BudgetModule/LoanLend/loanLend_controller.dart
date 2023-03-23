@@ -1,0 +1,7 @@
+getAllLoanLendList() {}
+
+addLoanLend() {}
+
+updateLoanLend() {}
+
+deleteLoanLend() {}
