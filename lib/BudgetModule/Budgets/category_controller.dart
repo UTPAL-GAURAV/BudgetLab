@@ -1,7 +1,10 @@
-getAllCategoryList() {}
+class CategoryController {
+  getAllCategoryList() {}
 
-addCategory() {}
+  addCategory() {}
 
-updateCategory() {}
+  updateCategory() {}
 
-deleteCategory() {}
+  deleteCategory() {}
+
+}

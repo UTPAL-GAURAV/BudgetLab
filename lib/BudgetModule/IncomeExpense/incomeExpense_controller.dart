@@ -1,7 +1,11 @@
-getAllIncomeExpenseList() {}
 
-addIncomeExpense() {}
+class IncomeExpenseController {
+  getAllIncomeExpenseList() {}
 
-updateIncomeExpense() {}
+  addIncomeExpense() {}
 
-deleteIncomeExpense() {}
+  updateIncomeExpense() {}
+
+  deleteIncomeExpense() {}
+}
+

@@ -1,7 +1,10 @@
-getAllBudgetsList() {}
+class BudgetController {
+  getAllBudgetsList() {}
 
-addBudget() {}
+  addBudget() {}
 
-updateBudget() {}
+  updateBudget() {}
 
-deleteBudget() {}
+  deleteBudget() {}
+
+}

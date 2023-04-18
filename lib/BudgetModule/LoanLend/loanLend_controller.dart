@@ -1,7 +1,10 @@
-getAllLoanLendList() {}
+class LoanLendController {
+  getAllLoanLendList() {}
 
-addLoanLend() {}
+  addLoanLend() {}
 
-updateLoanLend() {}
+  updateLoanLend() {}
 
-deleteLoanLend() {}
+  deleteLoanLend() {}
+
+}
