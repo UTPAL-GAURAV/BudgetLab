@@ -14,3 +14,22 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+flutter pub run build_runner watch --delete-conflicting-outputs 
+
+flutter clean
+
+flutter pub get
+
+
+var budget = Budget(repeats: "yea", amount: 100);
+
+    WidgetsFlutterBinding.ensureInitialized();
+    final store = await openStore();
+    final userBox = store.box<Budget>();
+    // If id exists updates the object else creates new object
+    userBox.put(budget);
+    print("xxxxxxxxx");
+    print(userBox.getAll());
+    store.close();

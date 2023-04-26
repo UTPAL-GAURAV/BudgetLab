@@ -364,7 +364,7 @@ packages:
     source: hosted
     version: "1.0.4"
   objectbox:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: objectbox
       sha256: a8a3052e430a1e6f91496dc4ffe7c2accab12d24ddfd09412f19541e9f2fe124

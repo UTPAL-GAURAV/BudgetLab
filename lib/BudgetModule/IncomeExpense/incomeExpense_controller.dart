@@ -1,4 +1,3 @@
-
 class IncomeExpenseController {
   getAllIncomeExpenseList() {}
 
@@ -8,4 +7,3 @@ class IncomeExpenseController {
 
   deleteIncomeExpense() {}
 }
-

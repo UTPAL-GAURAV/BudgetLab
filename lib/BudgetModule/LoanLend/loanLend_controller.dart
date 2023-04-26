@@ -6,5 +6,4 @@ class LoanLendController {
   updateLoanLend() {}
 
   deleteLoanLend() {}
-
 }

@@ -6,5 +6,4 @@ class CategoryController {
   updateCategory() {}
 
   deleteCategory() {}
-
 }
