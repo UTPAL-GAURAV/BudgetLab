@@ -1,11 +1,13 @@
-import 'package:budgetlab/BudgetModule/Budgets/budget_controller.dart';
+import 'package:budgetlab/BudgetModule/Budgets/Budget/budget_controller.dart';
+import 'package:budgetlab/Shared/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'DB/ObjectBoxManager.dart';
 
 Future<void> main() async {
+  // Open DB
   ObjectBoxManager.openObjectBoxStore();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BudgetLab',
+      title: Constants.APP_NAME,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'BudgetLab'),
+      home: const MyHomePage(title: Constants.APP_NAME),
     );
   }
 }
@@ -37,6 +39,7 @@ class MyHomePage extends StatefulWidget {
  * WidgetsBindingObserver keeps track of lifecycle.
  */
 class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
+  // This method is required for lifecycle management
   @override
   void initState() {
     super.initState();

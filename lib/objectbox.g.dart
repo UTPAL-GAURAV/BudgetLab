@@ -14,8 +14,8 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'BudgetModule/Budgets/budget_entity.dart';
-import 'BudgetModule/Budgets/category_entity.dart';
+import 'BudgetModule/Budgets/Budget/budget_entity.dart';
+import 'BudgetModule/Budgets/Category/category_entity.dart';
 import 'BudgetModule/IncomeExpense/incomeExpense_entity.dart';
 import 'BudgetModule/LoanLend/loanLend_entity.dart';
 import 'SettingsModule/metadata_entity.dart';
