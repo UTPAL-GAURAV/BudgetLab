@@ -1,5 +1,5 @@
 import 'package:budgetlab/BudgetModule/Budgets/Budget/budget_controller.dart';
-import 'package:budgetlab/Shared/constants.dart';
+import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'DB/ObjectBoxManager.dart';
@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Constants.APP_NAME,
+      title: ConstantsManager.APP_NAME,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: Constants.APP_NAME),
+      home: const MyHomePage(title: ConstantsManager.APP_NAME),
     );
   }
 }
