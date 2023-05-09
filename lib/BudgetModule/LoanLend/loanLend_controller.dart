@@ -8,8 +8,8 @@ class LoanLendController {
     return loanLendService.getAllLoanLendList();
   }
 
-  int addLoanLend(bool isLoan, DateTime dateTime, DateTime dateOfReturn, int amount, String note, String phone, String returnStatus) {
-    return loanLendService.addLoanLend(isLoan, dateTime, dateOfReturn, amount, note, phone, returnStatus);
+  int addLoanLend(bool isLoan, DateTime dateTime, DateTime dateOfReturn, int amount, String name, String note, String phone, String returnStatus, String genderEmoji) {
+    return loanLendService.addLoanLend(isLoan, dateTime, dateOfReturn, amount, name, note, phone, returnStatus, genderEmoji);
   }
 
   updateLoanLend() {}

@@ -28,3 +28,5 @@ var budget = Budget(repeats: "yea", amount: 100);
     print("xxxxxxxxx");
     print(userBox.getAll());
     store.close();
+
+await avatarService.getGenderAvatarFromName("Gaurav");

@@ -118,7 +118,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(4, 9052435534381775407),
       name: 'LoanLend',
-      lastPropertyId: const IdUid(8, 8499334383457211072),
+      lastPropertyId: const IdUid(10, 83039039708730487),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -159,6 +159,16 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(8, 8499334383457211072),
             name: 'returnStatus',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 2156790177571280887),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 83039039708730487),
+            name: 'genderEmoji',
             type: 9,
             flags: 0)
       ],
@@ -374,7 +384,9 @@ ModelDefinition getObjectBoxModel() {
           final noteOffset = fbb.writeString(object.note);
           final phoneOffset = fbb.writeString(object.phone);
           final returnStatusOffset = fbb.writeString(object.returnStatus);
-          fbb.startTable(9);
+          final nameOffset = fbb.writeString(object.name);
+          final genderEmojiOffset = fbb.writeString(object.genderEmoji);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addBool(1, object.isLoan);
           fbb.addInt64(2, object.dateTime.millisecondsSinceEpoch);
@@ -383,6 +395,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(5, noteOffset);
           fbb.addOffset(6, phoneOffset);
           fbb.addOffset(7, returnStatusOffset);
+          fbb.addOffset(8, nameOffset);
+          fbb.addOffset(9, genderEmojiOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -400,12 +414,16 @@ ModelDefinition getObjectBoxModel() {
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0)),
               amount:
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 20, ''),
               note: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 14, ''),
               phone: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 16, ''),
               returnStatus: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 18, ''));
+                  .vTableGet(buffer, rootOffset, 18, ''),
+              genderEmoji: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 22, ''));
 
           return object;
         }),
@@ -556,6 +574,13 @@ class LoanLend_ {
   /// see [LoanLend.returnStatus]
   static final returnStatus =
       QueryStringProperty<LoanLend>(_entities[3].properties[7]);
+
+  /// see [LoanLend.name]
+  static final name = QueryStringProperty<LoanLend>(_entities[3].properties[8]);
+
+  /// see [LoanLend.genderEmoji]
+  static final genderEmoji =
+      QueryStringProperty<LoanLend>(_entities[3].properties[9]);
 }
 
 /// [Metadata] entity fields to define ObjectBox queries.
