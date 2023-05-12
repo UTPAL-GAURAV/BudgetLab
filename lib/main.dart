@@ -1,6 +1,6 @@
 import 'package:budgetlab/BudgetModule/Budgets/Budget/budget_controller.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
-import 'package:budgetlab/Shared/external_api_service.dart';
+import 'package:budgetlab/Shared/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/services/avatar_service.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +94,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      bottomNavigationBar: WidgetManager.getBottomNavigationBar(),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
