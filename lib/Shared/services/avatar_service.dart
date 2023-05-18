@@ -1,7 +1,9 @@
 
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:budgetlab/Shared/external_api_service.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../enums_manager.dart';
 
@@ -16,7 +18,8 @@ class AvatarService {
     } else if(gender == Gender.female) {
       return getRandomFemaleAvatar();
     } else {
-      return getNeutralGenderAvatar();
+      // return getNeutralGenderAvatar();
+      return "";
     }
   }
 
@@ -50,7 +53,10 @@ class AvatarService {
     return "assets/images/avatars/maleBrownHair.jpg";
   }
 
-  String getNeutralGenderAvatar() {
-    return "assets/images/avatars/neutralGreenHair.jpg";
+  Image getNeutralGenderAvatar() {
+    return const Image(
+      image: AssetImage('assets/images/avatars/neutralGreenHair.jpg'),
+    );
+    // return "../../assets/images/avatars/neutralGreenHair.jpg";
   }
 }

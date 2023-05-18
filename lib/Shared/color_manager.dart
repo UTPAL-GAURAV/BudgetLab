@@ -2,16 +2,8 @@
 import 'dart:ui';
 
 class ColorManager {
-  static Color PRIMARY = HexColor.fromHex("#00000");
-}
-
-extension HexColor on Color {
-  static Color fromHex(String hex) {
-    // remove the hash symbol from the hex string
-    hex = hex.replaceAll("#", "");
-    // convert the hex string to an integer
-    int hexInt = int.parse(hex, radix: 16);
-    // create a color object from the integer value
-    return Color(hexInt);
-  }
+  static Color PRIMARY = const Color(0xFF4B39EF);
+  static Color PRIMARY_BACKGROUND = const Color(0xFFF1F4F8);
+  static Color LIGHT_GREY = const Color(0xFFededed);
+  static Color DARK_GREY = const Color(0xFFadadad);
 }
