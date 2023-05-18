@@ -2,7 +2,8 @@ import 'package:budgetlab/Shared/services/avatar_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:budgetlab/Shared/widget_manager.dart' as WidgetManager;
+import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
+import 'package:budgetlab/Shared/widgets/bottomNavigationBar.dart' as BottomNavigationBar;
 
 import '../../Shared/constants_manager.dart';
 
@@ -99,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: WidgetManager.getBottomNavigationBar(),
+      bottomNavigationBar: BottomNavigationBar.getBottomNavigationBar(),
     );
   }
 }
