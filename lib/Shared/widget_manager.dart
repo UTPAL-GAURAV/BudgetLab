@@ -3,73 +3,33 @@ import 'package:flutter/material.dart';
 
 import 'color_manager.dart';
 
-
 /// Global Vars to be used by Widgets //////////////////////////////////////////
 int currentBottomNavigationBarIndex = 0;
 
-
 /// BUTTONS ////////////////////////////////////////////////////////////////////
-
-
-
-/// Home Bottom Navigation Bar Button
-// HomeNavigationButton getHomeNavigationButton() {
-//   return const HomeNavigationButton();
-// }
-//
-// class HomeNavigationButton extends StatefulWidget {
-//   const HomeNavigationButton({Key? key}) : super(key: key);
-//
-//   @override
-//   State<HomeNavigationButton> createState() => _HomeNavigationButtonState();
-// }
-//
-// class _HomeNavigationButtonState extends State<HomeNavigationButton> {
-//   bool isSelected = false;
-//   Color notSelectedColor= Colors.black;
-//
-//   void toggleSelection() {
-//     setState(() {
-//       isSelected = !isSelected;
-//       if(isSelected) {
-//
-//       }
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return IconButton(
-//       focusColor: ColorManager.PRIMARY,
-//       icon: const Icon(
-//         Icons.home_rounded,
-//         color: Color(0x1A57636C),
-//         size: 24,
-//       ),
-//       onPressed: () {
-//         setState(() {
-//           // Update the iconColor variable with a new color
-//           notSelectedColor = Colors.blue;
-//         });
-//         // handleButtonPress(context);
-//         toggleSelection();
-//         print('IconButton pressed ...');
-//       },
-//     );
-//   }
-// }
-
 
 /// Text Boxes /////////////////////////////////////////////////////////////////
 getHeaderDividerSizedBox(String displayText) {
-  return SizedBox(
-    child: Text(displayText),
+  return Container(
+    color: ColorManager.LIGHT_GREY,
+    child: Row(children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(14, 16, 0, 10),
+        child: Text(
+          displayText,
+          style: TextStyle(
+            color: ColorManager.DARK_GREY,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 2,
+          ),
+        ),
+      ),
+    ]),
   );
 }
 
-
 /// Calendars //////////////////////////////////////////////////////////////////
-
 
 /// Bottom Navigation Bar //////////////////////////////////////////////////////
 
@@ -236,7 +196,7 @@ void navigateOnBottomNavigationButtonClick(int index, context) {
   }
   currentBottomNavigationBarIndex = index;
 
-  switch(index) {
+  switch (index) {
     case 0:
       break;
     case 1:
@@ -244,10 +204,8 @@ void navigateOnBottomNavigationButtonClick(int index, context) {
     case 2:
       break;
     case 3:
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: routes['/settings']!));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: routes['/settings']!));
       break;
   }
 }
-
-
-
