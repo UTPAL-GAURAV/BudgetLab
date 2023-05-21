@@ -2,7 +2,7 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:budgetlab/Shared/external_api_service.dart';
+import 'package:budgetlab/Shared/service/external_api_service.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../enums_manager.dart';

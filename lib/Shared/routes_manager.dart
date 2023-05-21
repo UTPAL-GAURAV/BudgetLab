@@ -1,14 +1,39 @@
-
-import 'package:budgetlab/BudgetModule/LoanLend/UI/loanLend_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/widgets.dart';
 
+import '../BudgetModule/LoanLend/UI/addLoanLend_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
 
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/settings': (BuildContext context) => const SettingsScreen(),
   '/home': (BuildContext context) => const HomePageScreen(),
-  '/loanLend': (BuildContext context) => const LoanLendScreen(),
+  '/loanLend': (BuildContext context) => const AddLoanLendScreen(),
   // add more routes as needed
 };
+
+enum RoutesIndex {
+  HOME,
+  INCOME_EXPENSE,
+  HISTORY,
+  SETTINGS,
+}
+
+extension RoutesIndexValues on RoutesIndex {
+  int get value {
+    switch (this) {
+      case RoutesIndex.HOME:
+        return 0;
+      case RoutesIndex.INCOME_EXPENSE:
+        return 2;
+      case RoutesIndex.HISTORY:
+        return 3;
+      case RoutesIndex.SETTINGS:
+        return 4;
+    }
+  }
+}
+
+class RoutesManager {
+  static int currentBottomNavigationBarIndex = 0;
+}
