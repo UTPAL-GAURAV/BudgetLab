@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
-getCalendar() {
-  return const Calendar();
+getCalendar(updateValueOnPressedCallback) {
+  return Calendar(updateValueOnPressed: updateValueOnPressedCallback,);
 }
 
 
@@ -14,7 +14,9 @@ getCalendar() {
 
 class Calendar extends StatefulWidget {
   // const Calendar({Key? key}) : super(key: key);
-  const Calendar({super.key, this.restorationId});
+  Calendar({super.key, this.restorationId, required this.updateValueOnPressed});
+
+  final Function(DateTime) updateValueOnPressed;
 
   final String? restorationId;
 
@@ -41,6 +43,9 @@ class _CalendarState extends State<Calendar> {
              selectedDate = newSelectedDate;
            });
          }
+         widget.updateValueOnPressed(
+             selectedDate
+         );
       },
       child: Text(DateFormat('dd-MM-yyyy').format(selectedDate)),
     );
