@@ -49,7 +49,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                       8,
                       Validator.validateLendExpenseField,
                           (value) => amount = value!),
-                  Calendar.getCalendar(),
+                  Calendar.getCalendar((value) => date = value),
                   WidgetManager.getTextFormField(
                       "Notes",
                       " For tuition fees.",
