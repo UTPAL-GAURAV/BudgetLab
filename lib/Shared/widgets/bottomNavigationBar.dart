@@ -121,6 +121,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                           size: 30,
                         ),
                         onPressed: () {
+                          // Add navigation for add expense/income here
                           print('MiddleButton pressed ...');
                         },
                       ),
