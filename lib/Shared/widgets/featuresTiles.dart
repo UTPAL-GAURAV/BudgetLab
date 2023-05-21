@@ -40,7 +40,7 @@ getLoanLendIconTile(context) {
       children: [
         FloatingActionButton(
           onPressed: () {
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, MaterialPageRoute(builder: routes['/loanLend']!));
           },
           backgroundColor: Colors.blueAccent,

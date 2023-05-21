@@ -183,7 +183,7 @@ void navigateOnBottomNavigationButtonClick(int index, context) {
     case 2:
       break;
     case 3:
-      Navigator.pushReplacement(
+      Navigator.push(
           context, MaterialPageRoute(builder: routes['/settings']!));
       break;
   }

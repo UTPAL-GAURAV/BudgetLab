@@ -1,6 +1,8 @@
 import 'package:budgetlab/Shared/constants_manager.dart';
+import 'package:budgetlab/Shared/model/callback_model.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
 
 import '../color_manager.dart';
 
@@ -26,5 +28,19 @@ getHeaderDividerSizedBox(String displayText) {
         ),
       ),
     ]),
+  );
+}
+
+
+getTextFormField(String labelText, String hintText, TextInputType keyboardType, int maxLength, FieldValidator validatorCallback, OnSavedFunction onSavedCallback) {
+  return TextFormField(
+    decoration: InputDecoration(hintText: hintText, labelText: labelText),
+    keyboardType: keyboardType,
+    maxLength: maxLength,
+    validator: (value) {
+      String response = validatorCallback(value!);
+      return response.isNotEmpty ? response : null;
+    },
+    onSaved: onSavedCallback,
   );
 }

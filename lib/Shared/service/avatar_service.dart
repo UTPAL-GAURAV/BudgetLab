@@ -18,8 +18,8 @@ class AvatarService {
     } else if(gender == Gender.female) {
       return getRandomFemaleAvatar();
     } else {
-      // return getNeutralGenderAvatar();
-      return "";
+      return getNeutralGenderAvatar();
+      // return "";
     }
   }
 
@@ -53,10 +53,10 @@ class AvatarService {
     return "assets/images/avatars/maleBrownHair.jpg";
   }
 
-  Image getNeutralGenderAvatar() {
-    return const Image(
-      image: AssetImage('assets/images/avatars/neutralGreenHair.jpg'),
-    );
-    // return "../../assets/images/avatars/neutralGreenHair.jpg";
+  String getNeutralGenderAvatar() {
+    // return const Image(
+    //   image: AssetImage('assets/images/avatars/neutralGreenHair.jpg'),
+    // );
+    return "assets/images/avatars/neutralGreenHair.jpg";
   }
 }
