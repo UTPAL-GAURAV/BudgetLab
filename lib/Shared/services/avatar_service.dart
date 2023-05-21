@@ -1,7 +1,12 @@
 
 import 'dart:math';
 
+<<<<<<< Updated upstream:lib/Shared/services/avatar_service.dart
 import 'package:budgetlab/Shared/external_api_service.dart';
+=======
+import 'package:budgetlab/Shared/service/external_api_service.dart';
+import 'package:flutter/cupertino.dart';
+>>>>>>> Stashed changes:lib/Shared/service/avatar_service.dart
 
 import '../enums_manager.dart';
 

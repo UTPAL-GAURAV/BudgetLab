@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:budgetlab/Shared/widget_manager.dart' as WidgetManager;
 
 import '../../Shared/constants_manager.dart';
+import '../../Shared/routes_manager.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     return Scaffold(
       appBar: AppBar(
         title: const Text(ConstantsManager.APP_NAME),
@@ -24,6 +26,96 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
       bottomNavigationBar: WidgetManager.getBottomNavigationBar(),
+=======
+    return WillPopScope(
+      onWillPop: () async {
+        RoutesManager.currentBottomNavigationBarIndex = 0;
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: routes['/home']!));
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(ConstantsManager.APP_NAME),
+        ),
+        body: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage:
+                    AssetImage('assets/images/avatars/neutralGreenHair.jpg'),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Hello User",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(0.0),
+              child: Text(
+                "user@gmail.com",
+                style: TextStyle(fontSize: 20, color: Colors.grey),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: FilledButton(
+                onPressed: null,
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blueAccent),
+                  fixedSize: MaterialStateProperty.all<Size>(const Size(180, 50)),
+                  alignment: Alignment.center,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0,0,12,0),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
+                    ),
+                    Icon(Icons.arrow_forward_ios, color: Colors.white, size: 22,)
+                  ],
+                ),
+              ),
+            ),
+            WidgetManager.getHeaderDividerSizedBox(ConstantsManager.PREFERENCES),
+            Row(
+              children: [
+                const Text("Hide"),
+                CupertinoSwitch(
+                    value: isSwitchedHide,
+                    onChanged: (bool newValue) {
+                      setState(() {
+                        isSwitchedHide = newValue;
+                      });
+                    })
+              ],
+            ),
+            Row(
+              children: const [
+                Text("Currency"),
+              ],
+            ),
+            WidgetManager.getHeaderDividerSizedBox(ConstantsManager.MORE),
+            Row(
+              children: const [
+                Text("FAQ"),
+              ],
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar.getBottomNavigationBar(),
+      ),
+>>>>>>> Stashed changes
     );
   }
 }
