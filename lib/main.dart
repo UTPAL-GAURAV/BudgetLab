@@ -1,7 +1,4 @@
-import 'package:budgetlab/BudgetModule/Budgets/Budget/budget_controller.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
-import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
-import 'package:budgetlab/Shared/services/avatar_service.dart';
 import 'package:flutter/material.dart';
 
 import 'DB/ObjectBoxManager.dart';
@@ -57,18 +54,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
     } else if (state == AppLifecycleState.resumed) {
       ObjectBoxManager.openObjectBoxStore();
     }
-  }
-
-  int _counter = 0;
-  BudgetController budgetController = BudgetController();
-  AvatarService avatarService = AvatarService();
-
-  void _incrementCounter() async {
-    budgetController.getAllBudgetsList();
-    print(await avatarService.getGenderAvatarFromName("Gaurav"));
-    setState(() {
-      _counter++;
-    });
   }
 
   @override
