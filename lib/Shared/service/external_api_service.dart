@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'enums_manager.dart';
+import '../enums_manager.dart';
 
 class ExternalApiService {
   /// API to get gender from name.

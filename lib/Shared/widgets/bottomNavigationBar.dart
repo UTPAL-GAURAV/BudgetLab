@@ -83,7 +83,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   size: 24,
                 ),
                 onPressed: () {
-                  navigateOnBottomNavigationButtonClick(0, context);
+                  navigateOnBottomNavigationButtonClick(RoutesIndex.HOME.value, context);
                 },
               ),
               IconButton(
@@ -121,7 +121,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                           size: 30,
                         ),
                         onPressed: () {
-                          print('MiddleButton pressed ...');
+                          navigateOnBottomNavigationButtonClick(RoutesIndex.INCOME_EXPENSE.value, context);
                         },
                       ),
                     ),
@@ -145,7 +145,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                     size: 24,
                   ),
                   onPressed: () {
-                    print('IconButton pressed ...');
+                    navigateOnBottomNavigationButtonClick(RoutesIndex.HISTORY.value, context);
                   },
                 ),
               ),
@@ -156,7 +156,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   size: 24,
                 ),
                 onPressed: () {
-                  navigateOnBottomNavigationButtonClick(3, context);
+                  navigateOnBottomNavigationButtonClick(RoutesIndex.SETTINGS.value, context);
                 },
               ),
             ],
@@ -168,10 +168,10 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
 }
 
 void navigateOnBottomNavigationButtonClick(int index, context) {
-  if (currentBottomNavigationBarIndex == index) {
+  if (RoutesManager.currentBottomNavigationBarIndex == index) {
     return; // Do nothing if the selected index is already the current index
   }
-  currentBottomNavigationBarIndex = index;
+  RoutesManager.currentBottomNavigationBarIndex = index;
 
   switch (index) {
     case 0:
@@ -183,8 +183,12 @@ void navigateOnBottomNavigationButtonClick(int index, context) {
     case 2:
       break;
     case 3:
-      Navigator.push(
+      break;
+    case 4:
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: routes['/settings']!));
+      break;
+    default:
       break;
   }
 }

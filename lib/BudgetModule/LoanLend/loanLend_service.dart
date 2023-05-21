@@ -1,6 +1,6 @@
 import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
 import 'package:budgetlab/BudgetModule/LoanLend/loanLend_repository.dart';
-import 'package:budgetlab/Shared/external_api_service.dart';
+import 'package:budgetlab/Shared/service/external_api_service.dart';
 
 class LoanLendService {
   LoanLendRepository loanLendRepository = LoanLendRepository();
