@@ -7,8 +7,8 @@ class CategoryController {
     return categoryService.getAllCategoryList();
   }
 
-  int addCategory(bool isExpense, String name, String icon) {
-    return categoryService.addCategory(isExpense, name, icon);
+  int addCategory(Category category) {
+    return categoryService.addCategory(category);
   }
 
   updateCategory() {}

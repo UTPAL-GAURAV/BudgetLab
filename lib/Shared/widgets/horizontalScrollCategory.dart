@@ -1,5 +1,6 @@
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/Shared/widgets/widget_manager.dart';
 import 'package:flutter/material.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
@@ -18,81 +19,44 @@ class HorizontalScrollCategory extends StatefulWidget {
       _HorizontalScrollCategoryState();
 }
 
-class Database {
-  ValueNotifier<List<String>> dataListNotifier = ValueNotifier([]);
-
-  Future<void> fetchDataFromDatabase() async {
-    // Simulating fetching data from the database
-    await Future.delayed(Duration(seconds: 2));
-
-    // Dummy data
-    List<String> dataList = ["asd", "sdf"];
-
-    dataListNotifier.value = dataList;
-  }
-}
-
 class _HorizontalScrollCategoryState extends State<HorizontalScrollCategory> {
-  late int allCategoryListLength;
-  late List<Category> allCategoryList;
+  int allCategoryListLength = 0;
+  late ValueNotifier<List<Category>> allCategoryList;
 
-  Database database = Database();
   CategoryController categoryController = CategoryController();
 
   @override
   void initState() {
     super.initState();
+    allCategoryList = ValueNotifier<List<Category>>([]);
     fetchData();
-    allCategoryList = categoryController.getAllCategoryList();
-    allCategoryListLength = allCategoryList.length;
   }
 
-  Future<void> fetchData() async {
-    await database.fetchDataFromDatabase();
+  void fetchData() async {
+    List<Category> fetchedData = await categoryController.getAllCategoryList();
+    allCategoryList.value = fetchedData;
+    allCategoryListLength = fetchedData.length;
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: database.dataListNotifier,
-      builder: (context, allCategoryList, _) {
-        return ListView.builder(
-          itemCount: allCategoryListLength,
-          itemBuilder: (context, index) {
-            final category = allCategoryList[index] as Category;
-            return SizedBox(
-              height: 70,
-              child: Card(
-                child: ListTile(
-                  tileColor: Colors.white70,
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                          height: 35,
-                          width: 35,
-                          child: Image.asset(
-                            "",
-                            fit: BoxFit.fill,
-                          )),
-                      Text(
-                        category.name,
-                      ),
-                    ],
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      null;
-                    },
-                  ),
-                ),
-              ),
-            );
-          },
+    return ValueListenableBuilder<List<Category>>(
+      valueListenable: allCategoryList,
+      builder: (context, categoryList, _) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(
+              categoryList.length,
+              (index) {
+                final category = categoryList[index];
+                return Container(
+                  margin: const EdgeInsets.all(6), // Adjust the padding between buttons
+                  child: getIconButtons(category.icon, category.name),
+                );
+              },
+            ),
+          ),
         );
       },
     );
