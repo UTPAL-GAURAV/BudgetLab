@@ -1,4 +1,5 @@
 import 'package:budgetlab/Shared/constants_manager.dart';
+import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/model/callback_model.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
@@ -32,15 +33,20 @@ getHeaderDividerSizedBox(String displayText) {
 }
 
 
-getTextFormField(String labelText, String hintText, TextInputType keyboardType, int maxLength, FieldValidator validatorCallback, OnSavedFunction onSavedCallback) {
+getTextFormField(TextFormFieldConfig config) {
   return TextFormField(
-    decoration: InputDecoration(hintText: hintText, labelText: labelText),
-    keyboardType: keyboardType,
-    maxLength: maxLength,
+    decoration: InputDecoration(hintText: config.hintText, labelText: config.labelText),
+    keyboardType: config.keyboardType,
+    maxLength: config.maxLength,
     validator: (value) {
-      String response = validatorCallback(value!);
+      String response = config.validatorCallback(value!);
       return response.isNotEmpty ? response : null;
     },
-    onSaved: onSavedCallback,
+    onSaved: config.onSavedCallback,
+    onFieldSubmitted: (value) {
+      if (config.onFieldSubmitted != null) {
+        config.onFieldSubmitted!(value);
+      }
+    },
   );
 }

@@ -181,6 +181,8 @@ void navigateOnBottomNavigationButtonClick(int index, context) {
     case 1:
       break;
     case 2:
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: routes['/addIncomeExpense']!));
       break;
     case 3:
       break;

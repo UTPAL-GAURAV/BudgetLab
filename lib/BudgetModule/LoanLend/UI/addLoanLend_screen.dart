@@ -5,6 +5,7 @@ import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
 
 import '../../../Shared/constants_manager.dart';
+import '../../../Shared/model/TextFormFieldConfig.dart';
 import '../../../Shared/routes_manager.dart';
 import '../loanLend_controller.dart';
 
@@ -18,7 +19,8 @@ class AddLoanLendScreen extends StatefulWidget {
 class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
   final formKey = GlobalKey<FormState>();
   late String name, amount, notes;
-  late DateTime date;
+  String avatar = AvatarService().getNeutralGenderAvatar();
+  DateTime date = DateTime.now();
 
   LoanLendController loanLendController = LoanLendController();
   AvatarService avatarService = AvatarService();
@@ -31,55 +33,64 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
         appBar: AppBar(
           title: const Text(ConstantsManager.APP_NAME),
         ),
-        body: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                children: [
-                  WidgetManager.getTextFormField(
-                      "Name",
-                      " John",
-                      TextInputType.name,
-                      40,
-                      Validator.validateNameField,
-                          (value) => name = value!),
-                  WidgetManager.getTextFormField(
-                      "Amount",
-                      " 0",
-                      TextInputType.number,
-                      8,
-                      Validator.validateLendExpenseField,
-                          (value) => amount = value!),
-                  Calendar.getCalendar((value) => date = value),
-                  WidgetManager.getTextFormField(
-                      "Notes",
-                      " For tuition fees.",
-                      TextInputType.name,
-                      100,
-                      Validator.validateNothing,
-                          (value) => notes = value!),
-                  TextButton(
-                      child: const Text(ConstantsManager.SAVE),
-                      onPressed: () {
-                        formKey.currentState!.save();
-                        if (formKey.currentState!.validate()) {
-                          loanLendController.addLoanLend(
-                              true,
-                              DateTime.now(),
-                              DateTime.now(),
-                              int.parse(amount),
-                              name,
-                              notes,
-                              "",
-                              "",
-                              avatarService.getGenderAvatarFromName(name)
-                              as String);
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: routes['/home']!));
-                        }
-                      }),
-                ],
-              );
-            }),
+        body: SingleChildScrollView(
+          child: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Column(
+                  children: [
+                    WidgetManager.getTextFormField(TextFormFieldConfig(
+                      labelText: "Name",
+                      hintText: " John",
+                      keyboardType: TextInputType.name,
+                      maxLength: 40,
+                      validatorCallback: Validator.validateNameField,
+                      onSavedCallback: (value) => name = value!,
+                      onFieldSubmitted: (value) => AvatarService()
+                          .getGenderAvatarFromName(value)
+                          .then((avatarPath) => {avatar = avatarPath}),
+                    )),
+                    WidgetManager.getTextFormField(
+                      TextFormFieldConfig(
+                          labelText: "Amount",
+                          hintText: " 0",
+                          keyboardType: TextInputType.number,
+                          maxLength: 8,
+                          validatorCallback: Validator.validateLendExpenseField,
+                          onSavedCallback: (value) => amount = value!),
+                    ),
+                    Calendar.getCalendar((value) => date = value),
+                    WidgetManager.getTextFormField(
+                      TextFormFieldConfig(
+                          labelText: "Notes",
+                          hintText: " For tuition fees.",
+                          keyboardType: TextInputType.name,
+                          maxLength: 100,
+                          validatorCallback: Validator.validateNothing,
+                          onSavedCallback: (value) => notes = value!),
+                    ),
+                    TextButton(
+                        child: const Text(ConstantsManager.SAVE),
+                        onPressed: () {
+                          formKey.currentState!.save();
+                          if (formKey.currentState!.validate()) {
+                            loanLendController.addLoanLend(
+                                true,
+                                DateTime.now(),
+                                date,
+                                int.parse(amount),
+                                name,
+                                notes,
+                                "",
+                                "",
+                                avatar);
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: routes['/home']!));
+                          }
+                        }),
+                  ],
+                );
+              }),
+        ),
       ),
     );
   }

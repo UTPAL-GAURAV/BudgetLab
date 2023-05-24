@@ -1,3 +1,4 @@
+import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpense_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,6 +10,9 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/settings': (BuildContext context) => const SettingsScreen(),
   '/home': (BuildContext context) => const HomePageScreen(),
   '/loanLend': (BuildContext context) => const AddLoanLendScreen(),
+  '/addLoanLend': (BuildContext context) => const AddLoanLendScreen(),
+  '/incomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
+  '/addIncomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
   // add more routes as needed
 };
 
@@ -33,6 +37,21 @@ extension RoutesIndexValues on RoutesIndex {
     }
   }
 }
+
+// extension RoutesIndexPath on RoutesIndex {
+//   String get value {
+//     switch(this) {
+//       case RoutesIndex.HOME:
+//         return '/home';
+//       case RoutesIndex.INCOME_EXPENSE:
+//         return '/incomeExpense';
+//       case RoutesIndex.HISTORY:
+//         return '';
+//       case RoutesIndex.SETTINGS:
+//         return '/settings';
+//     }
+//   }
+// }
 
 class RoutesManager {
   static int currentBottomNavigationBarIndex = 0;
