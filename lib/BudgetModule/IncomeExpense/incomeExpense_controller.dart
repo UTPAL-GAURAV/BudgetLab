@@ -9,8 +9,8 @@ class IncomeExpenseController {
     return incomeExpenseService.getAllIncomeExpenseList();
   }
 
-  int addIncomeExpense(bool isIncome, DateTime dateTime, int amount, String note, String category) {
-    return incomeExpenseService.addIncomeExpense(isIncome, dateTime, amount, note, category);
+  int addIncomeExpense(IncomeExpense incomeExpense) {
+    return incomeExpenseService.addIncomeExpense(incomeExpense);
   }
 
   updateIncomeExpense() {}

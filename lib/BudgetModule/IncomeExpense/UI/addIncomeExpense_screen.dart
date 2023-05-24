@@ -1,4 +1,6 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_controller.dart';
+import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
+import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/widgets/horizontalScrollCategory.dart';
 import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,8 @@ class AddIncomeExpenseScreen extends StatefulWidget {
 
 class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   final formKey = GlobalKey<FormState>();
-  late String amount, notes, category;
-  late DateTime date;
+  late String amount, note, category = 'Shopping';
+  DateTime date = DateTime.now();
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
 
@@ -33,38 +35,45 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
         ),
         body: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                children: [
-                  getToggleButtons(["Income", "Expense"]),
-                  WidgetManager.getTextFormField(
-                      "Amount",
-                      " 0",
-                      TextInputType.number,
-                      8,
-                      Validator.validateLendExpenseField,
-                          (value) => amount = value!),
-                  WidgetManager.getTextFormField(
-                      "Notes",
-                      " For tuition fees.",
-                      TextInputType.name,
-                      100,
-                      Validator.validateNothing,
-                          (value) => notes = value!),
-                  // getHorizontalScrollCategory(),
-                  Calendar.getCalendar((value) => date = value),
-                  TextButton(
-                      child: const Text(ConstantsManager.SAVE),
-                      onPressed: () {
-                        formKey.currentState!.save();
-                        if (formKey.currentState!.validate()) {
-                          incomeExpenseController.addIncomeExpense(true, date, int.parse(amount), notes, category);
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: routes['/home']!));
-                        }
-                      }),
-                ],
-              );
-            }),
+          return Column(
+            children: [
+              getToggleButtons(["Income", "Expense"]),
+              WidgetManager.getTextFormField(TextFormFieldConfig(
+                  labelText: "Amount",
+                  hintText: " 0",
+                  keyboardType: TextInputType.number,
+                  maxLength: 8,
+                  validatorCallback: Validator.validateLendExpenseField,
+                  onSavedCallback: (value) => amount = value!)),
+              WidgetManager.getTextFormField(TextFormFieldConfig(
+                  labelText: "Notes",
+                  hintText: " For tuition fees",
+                  keyboardType: TextInputType.name,
+                  maxLength: 100,
+                  validatorCallback: Validator.validateNothing,
+                  onSavedCallback: (value) => note = value!)
+              ),
+              // getHorizontalScrollCategory(),
+              Calendar.getCalendar((value) => date = value),
+              TextButton(
+                  child: const Text(ConstantsManager.SAVE),
+                  onPressed: () {
+                    formKey.currentState!.save();
+                    if (formKey.currentState!.validate()) {
+                      incomeExpenseController.addIncomeExpense(IncomeExpense(
+                          isIncome: true,
+                          dateTime: date,
+                          amount: int.parse(amount),
+                          note: note,
+                          category: category),
+                      );
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: routes['/home']!));
+                    }
+                  }),
+            ],
+          );
+        }),
       ),
     );
   }

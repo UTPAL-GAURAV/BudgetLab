@@ -17,4 +17,10 @@ class IncomeExpense {
     this.note = "",
     required this.category,
   });
+
+  @override
+  String toString() {
+    return 'IncomeExpense: id=$id, isIncome=$isIncome, dateTime=$dateTime, amount=$amount, note=$note, category=$category';
+  }
+
 }
