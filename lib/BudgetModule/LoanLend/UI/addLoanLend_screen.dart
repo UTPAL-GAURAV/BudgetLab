@@ -18,8 +18,9 @@ class AddLoanLendScreen extends StatefulWidget {
 
 class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
   final formKey = GlobalKey<FormState>();
-  late String name, amount, notes, avatar = '';
-  late DateTime date = DateTime.now();
+  late String name, amount, notes;
+  String avatar = AvatarService().getNeutralGenderAvatar();
+  DateTime date = DateTime.now();
 
   LoanLendController loanLendController = LoanLendController();
   AvatarService avatarService = AvatarService();
