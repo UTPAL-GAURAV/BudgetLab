@@ -47,13 +47,18 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                   onSavedCallback: (value) => amount = value!)),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Notes",
-                  hintText: " For tuition fees",
+                  hintText: " Tuition fees",
                   keyboardType: TextInputType.name,
                   maxLength: 100,
                   validatorCallback: Validator.validateNothing,
                   onSavedCallback: (value) => note = value!)
               ),
-              // getHorizontalScrollCategory(),
+              const Text("Category"),
+              SizedBox(
+                height: 100,
+                child: getHorizontalScrollCategory(),
+              ),
+
               Calendar.getCalendar((value) => date = value),
               TextButton(
                   child: const Text(ConstantsManager.SAVE),

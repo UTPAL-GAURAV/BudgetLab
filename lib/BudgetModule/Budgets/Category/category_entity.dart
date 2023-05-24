@@ -11,6 +11,6 @@ class Category {
     this.id = 0,
     required this.isExpense,
     required this.name,
-    this.icon = "",
+    required this.icon,
   });
 }

@@ -7,8 +7,8 @@ class CategoryService {
     return categoryRepository.getAllCategoryList();
   }
 
-  int addCategory(bool isExpense, String name, String icon) {
-    return categoryRepository.addOrUpdateCategory(Category(isExpense: isExpense, name: name));
+  int addCategory(Category category) {
+    return categoryRepository.addOrUpdateCategory(category);
   }
 
   updateCategory() {}

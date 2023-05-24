@@ -1,4 +1,5 @@
 import 'package:budgetlab/Shared/service/avatar_service.dart';
+import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
@@ -38,6 +39,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
               builder: (BuildContext context, StateSetter setState) {
                 return Column(
                   children: [
+                    getToggleButtons(["Loan", "Lend"]),
                     WidgetManager.getTextFormField(TextFormFieldConfig(
                       labelText: "Name",
                       hintText: " John",

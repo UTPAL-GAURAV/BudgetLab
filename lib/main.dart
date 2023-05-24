@@ -1,5 +1,8 @@
+import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
+import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'DB/ObjectBoxManager.dart';
 import 'HomeModule/UI/homePage_screen.dart';
@@ -43,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
   @override
   void initState() {
     super.initState();
+    setOnFirstRun();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -61,4 +65,21 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
     return const HomePageScreen();
   }
 
+  /// These data should be set on First run of the app
+  void setOnFirstRun() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getBool('firstRun') ?? true) {
+      print("This part is executed because the app run for the very first time.");
+      await prefs.setBool('firstRun', false);
+
+      CategoryController categoryController = CategoryController();
+
+      categoryController.addCategory(Category(isExpense: false, name: "Salary", icon: 'assets/images/icons/salary.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Food", icon: 'assets/images/icons/fast-food.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Shopping", icon: 'assets/images/icons/trolley.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Fuel", icon: 'assets/images/icons/fuel.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Rent", icon: 'assets/images/icons/house.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Entertainment", icon: 'assets/images/icons/theater.png'));
+    }
+  }
 }
