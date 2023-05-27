@@ -1,7 +1,7 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_controller.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
-import 'package:budgetlab/Shared/widgets/horizontalScrollCategory.dart';
+import 'package:budgetlab/BudgetModule/IncomeExpense/UI/scrollableIncomeExpenseCategory.dart';
 import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
@@ -27,6 +27,18 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
 
   @override
+  void initState() {
+    RoutesManager.currentBottomNavigationBarIndex = 2;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    RoutesManager.currentBottomNavigationBarIndex = 0;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
@@ -38,9 +50,8 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
             builder: (BuildContext context, StateSetter setState) {
           return Column(
             children: [
-              getToggleButtons(["Expense", "Income"],
-                  ((value) => isIncome = value == 1)
-              ),
+              getToggleButtons(
+                  ["Expense", "Income"], ((value) => isIncome = value == 1)),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Amount",
                   hintText: " 0",
@@ -54,31 +65,36 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                   keyboardType: TextInputType.name,
                   maxLength: 100,
                   validatorCallback: Validator.validateNothing,
-                  onSavedCallback: (value) => note = value!)
-              ),
+                  onSavedCallback: (value) => note = value!)),
               const Text("Category"),
               SizedBox(
                 height: 100,
-                child: getHorizontalScrollCategory(),
+                child: getScrollableIncomeExpenseCategory(),
               ),
-
               Calendar.getCalendar((value) => date = value),
-              TextButton(
-                  child: const Text(ConstantsManager.SAVE),
-                  onPressed: () {
-                    formKey.currentState!.save();
-                    if (formKey.currentState!.validate()) {
-                      incomeExpenseController.addIncomeExpense(IncomeExpense(
-                          isIncome: isIncome,
-                          dateTime: date,
-                          amount: int.parse(amount),
-                          note: note,
-                          category: category),
-                      );
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: routes['/home']!));
-                    }
-                  }),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.90,
+                  child: FloatingActionButton.extended(
+                      label: const Text("Save"),
+                      onPressed: () {
+                        formKey.currentState!.save();
+                        if (formKey.currentState!.validate()) {
+                          incomeExpenseController.addIncomeExpense(
+                            IncomeExpense(
+                                isIncome: isIncome,
+                                dateTime: date,
+                                amount: int.parse(amount),
+                                note: note,
+                                category: category),
+                          );
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: routes['/home']!));
+                        }
+                      }),
+                ),
+              ),
             ],
           );
         }),

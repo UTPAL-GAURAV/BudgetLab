@@ -65,6 +65,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
     return const HomePageScreen();
   }
 
+
+
   /// These data should be set on First run of the app
   void setOnFirstRun() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

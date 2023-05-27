@@ -1,3 +1,4 @@
+import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:budgetlab/Shared/service/avatar_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,19 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
+  @override
+  void initState() {
+    RoutesManager.currentBottomNavigationBarIndex = 4;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    RoutesManager.currentBottomNavigationBarIndex = 0;
+    super.dispose();
+  }
+
   bool isSwitchedHide = false;
 
   AvatarService avatarService = AvatarService();

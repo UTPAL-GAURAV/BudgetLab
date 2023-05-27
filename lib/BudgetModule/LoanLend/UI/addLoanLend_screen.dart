@@ -38,43 +38,46 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
         body: SingleChildScrollView(
           child: StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-                return Column(
-                  children: [
-                    getToggleButtons(["Loan", "Lend"],
-                        ((value) => isLoan = value == 0)
-                    ),
-                    WidgetManager.getTextFormField(TextFormFieldConfig(
-                      labelText: "Name",
-                      hintText: " John",
+            return Column(
+              children: [
+                getToggleButtons(
+                    ["Loan", "Lend"], ((value) => isLoan = value == 0)),
+                WidgetManager.getTextFormField(TextFormFieldConfig(
+                  labelText: "Name",
+                  hintText: " John",
+                  keyboardType: TextInputType.name,
+                  maxLength: 40,
+                  validatorCallback: Validator.validateNameField,
+                  onSavedCallback: (value) => name = value!,
+                  onFieldSubmitted: (value) => AvatarService()
+                      .getGenderAvatarFromName(value)
+                      .then((avatarPath) => {avatar = avatarPath}),
+                )),
+                WidgetManager.getTextFormField(
+                  TextFormFieldConfig(
+                      labelText: "Amount",
+                      hintText: " 0",
+                      keyboardType: TextInputType.number,
+                      maxLength: 8,
+                      validatorCallback: Validator.validateLendExpenseField,
+                      onSavedCallback: (value) => amount = value!),
+                ),
+                Calendar.getCalendar((value) => date = value),
+                WidgetManager.getTextFormField(
+                  TextFormFieldConfig(
+                      labelText: "Notes",
+                      hintText: " For tuition fees.",
                       keyboardType: TextInputType.name,
-                      maxLength: 40,
-                      validatorCallback: Validator.validateNameField,
-                      onSavedCallback: (value) => name = value!,
-                      onFieldSubmitted: (value) => AvatarService()
-                          .getGenderAvatarFromName(value)
-                          .then((avatarPath) => {avatar = avatarPath}),
-                    )),
-                    WidgetManager.getTextFormField(
-                      TextFormFieldConfig(
-                          labelText: "Amount",
-                          hintText: " 0",
-                          keyboardType: TextInputType.number,
-                          maxLength: 8,
-                          validatorCallback: Validator.validateLendExpenseField,
-                          onSavedCallback: (value) => amount = value!),
-                    ),
-                    Calendar.getCalendar((value) => date = value),
-                    WidgetManager.getTextFormField(
-                      TextFormFieldConfig(
-                          labelText: "Notes",
-                          hintText: " For tuition fees.",
-                          keyboardType: TextInputType.name,
-                          maxLength: 100,
-                          validatorCallback: Validator.validateNothing,
-                          onSavedCallback: (value) => notes = value!),
-                    ),
-                    TextButton(
-                        child: const Text(ConstantsManager.SAVE),
+                      maxLength: 100,
+                      validatorCallback: Validator.validateNothing,
+                      onSavedCallback: (value) => notes = value!),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: FloatingActionButton.extended(
+                        label: const Text("Save"),
                         onPressed: () {
                           formKey.currentState!.save();
                           if (formKey.currentState!.validate()) {
@@ -88,13 +91,16 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                                 "",
                                 "",
                                 avatar);
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: routes['/home']!));
+                            Navigator.of(context).pop();
+                            // Navigator.pushReplacement(context,
+                            //     MaterialPageRoute(builder: routes['/loanLend']!));
                           }
                         }),
-                  ],
-                );
-              }),
+                  ),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );

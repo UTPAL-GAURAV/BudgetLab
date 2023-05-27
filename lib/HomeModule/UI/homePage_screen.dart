@@ -1,7 +1,10 @@
 import 'package:budgetlab/Shared/constants_manager.dart';
+import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:budgetlab/Shared/widgets/bottomNavigationBar.dart' as BottomNavigationBar;
-import 'package:budgetlab/Shared/widgets/piggyBalanceTile.dart' as PiggyBalanceTile;
+import 'package:budgetlab/Shared/widgets/bottomNavigationBar.dart'
+    as BottomNavigationBar;
+import 'package:budgetlab/Shared/widgets/piggyBalanceTile.dart'
+    as PiggyBalanceTile;
 import 'package:budgetlab/Shared/widgets/featuresTiles.dart' as FeaturesTiles;
 
 class HomePageScreen extends StatefulWidget {
@@ -12,6 +15,16 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+  @override
+  void initState() {
+    RoutesManager.currentBottomNavigationBarIndex = 0;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +51,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
           ],
         ),
       ),
-        bottomNavigationBar: BottomNavigationBar.getBottomNavigationBar(),
+      bottomNavigationBar: BottomNavigationBar.getBottomNavigationBar(),
     );
   }
 }
