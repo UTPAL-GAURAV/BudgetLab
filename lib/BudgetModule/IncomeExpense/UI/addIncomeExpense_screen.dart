@@ -22,6 +22,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   final formKey = GlobalKey<FormState>();
   late String amount, note, category = 'Shopping';
   DateTime date = DateTime.now();
+  bool isIncome = false;
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
 
@@ -37,7 +38,9 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
             builder: (BuildContext context, StateSetter setState) {
           return Column(
             children: [
-              getToggleButtons(["Income", "Expense"]),
+              getToggleButtons(["Expense", "Income"],
+                  ((value) => isIncome = value == 1)
+              ),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Amount",
                   hintText: " 0",
@@ -66,7 +69,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                     formKey.currentState!.save();
                     if (formKey.currentState!.validate()) {
                       incomeExpenseController.addIncomeExpense(IncomeExpense(
-                          isIncome: true,
+                          isIncome: isIncome,
                           dateTime: date,
                           amount: int.parse(amount),
                           note: note,

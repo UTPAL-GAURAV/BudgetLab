@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
-getToggleButtons(List<String> toggleList) {
-  return TwoToggleButtons(toggleList: toggleList);
+getToggleButtons(List<String> toggleList, void Function(int) onToggleChangeCallback) {
+  return TwoToggleButtons(toggleList: toggleList, onToggleChangeCallback: onToggleChangeCallback);
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
@@ -11,8 +11,9 @@ getToggleButtons(List<String> toggleList) {
 
 class TwoToggleButtons extends StatefulWidget {
   final List<String> toggleList;
+  void Function(int) onToggleChangeCallback;
 
-  const TwoToggleButtons({required this.toggleList, Key? key}) : super(key: key);
+  TwoToggleButtons({required this.toggleList, required this.onToggleChangeCallback, Key? key}) : super(key: key);
 
   @override
   State<TwoToggleButtons> createState() => _TwoToggleButtonsState();
@@ -44,6 +45,7 @@ class _TwoToggleButtonsState extends State<TwoToggleButtons> {
     return ToggleButtons(
       direction: Axis.horizontal,
       onPressed: (int index) {
+        widget.onToggleChangeCallback(index);
         setState(() {
           // The button that is tapped is set to true, and the others to false.
           for (int i = 0; i < toggleListLength ; i++) {

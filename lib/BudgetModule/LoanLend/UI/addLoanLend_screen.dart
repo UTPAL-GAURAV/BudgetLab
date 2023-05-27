@@ -22,6 +22,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
   late String name, amount, notes;
   String avatar = AvatarService().getNeutralGenderAvatar();
   DateTime date = DateTime.now();
+  bool isLoan = true;
 
   LoanLendController loanLendController = LoanLendController();
   AvatarService avatarService = AvatarService();
@@ -39,7 +40,9 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
               builder: (BuildContext context, StateSetter setState) {
                 return Column(
                   children: [
-                    getToggleButtons(["Loan", "Lend"]),
+                    getToggleButtons(["Loan", "Lend"],
+                        ((value) => isLoan = value == 0)
+                    ),
                     WidgetManager.getTextFormField(TextFormFieldConfig(
                       labelText: "Name",
                       hintText: " John",
@@ -76,7 +79,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                           formKey.currentState!.save();
                           if (formKey.currentState!.validate()) {
                             loanLendController.addLoanLend(
-                                true,
+                                isLoan,
                                 DateTime.now(),
                                 date,
                                 int.parse(amount),
