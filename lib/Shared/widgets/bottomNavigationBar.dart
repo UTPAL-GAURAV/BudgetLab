@@ -169,7 +169,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
   }
 }
 
-void navigateOnBottomNavigationButtonClick(int index, context) {
+void navigateOnBottomNavigationButtonClick(int index, BuildContext context) {
   if (RoutesManager.currentBottomNavigationBarIndex == index) {
     return; // Do nothing if the selected index is already the current index
   }

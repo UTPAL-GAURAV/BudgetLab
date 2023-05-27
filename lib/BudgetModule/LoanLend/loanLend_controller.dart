@@ -9,7 +9,6 @@ class LoanLendController {
   }
 
   int addLoanLend(bool isLoan, DateTime dateTime, DateTime dateOfReturn, int amount, String name, String note, String phone, String returnStatus, String genderEmoji) {
-    print("zzzzzzzzzzzzzzzzzzz: "+genderEmoji);
     return loanLendService.addLoanLend(isLoan, dateTime, dateOfReturn, amount, name, note, phone, returnStatus, genderEmoji);
   }
 

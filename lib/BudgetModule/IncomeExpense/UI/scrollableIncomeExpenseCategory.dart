@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
-getHorizontalScrollCategory() {
-  return const HorizontalScrollCategory();
+getScrollableIncomeExpenseCategory() {
+  return const ScrollableIncomeExpenseCategory();
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
 
-class HorizontalScrollCategory extends StatefulWidget {
-  const HorizontalScrollCategory({Key? key}) : super(key: key);
+class ScrollableIncomeExpenseCategory extends StatefulWidget {
+  const ScrollableIncomeExpenseCategory({Key? key}) : super(key: key);
 
   @override
-  State<HorizontalScrollCategory> createState() =>
-      _HorizontalScrollCategoryState();
+  State<ScrollableIncomeExpenseCategory> createState() =>
+      _ScrollableIncomeExpenseCategoryState();
 }
 
-class _HorizontalScrollCategoryState extends State<HorizontalScrollCategory> {
+class _ScrollableIncomeExpenseCategoryState extends State<ScrollableIncomeExpenseCategory> {
   int allCategoryListLength = 0;
   late ValueNotifier<List<Category>> allCategoryList;
 

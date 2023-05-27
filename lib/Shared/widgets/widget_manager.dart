@@ -83,3 +83,24 @@ getTextFormField(TextFormFieldConfig config) {
     },
   );
 }
+
+
+
+/// BANNERS ////////////////////////////////////////////////////////////////////
+
+getBanners(String title, String subtitle, String color, double height, double width) {
+  return Container(
+    color: Colors.amber,
+    child: SizedBox(
+      height: height,
+      width: width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(title),
+          Text(subtitle)
+        ],
+      ),
+    ),
+  );
+}
