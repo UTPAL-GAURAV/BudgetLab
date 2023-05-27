@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 
 int currentBottomNavigationBarIndex = 0;
 
-
 /// Public Method //////////////////////////////////////////////////////////////
 
 getBottomNavigationBar() {
   return const BottomMenuBar();
 }
-
 
 /// Widget /////////////////////////////////////////////////////////////////////
 
@@ -83,7 +81,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   size: 24,
                 ),
                 onPressed: () {
-                  navigateOnBottomNavigationButtonClick(RoutesIndex.HOME.value, context);
+                  navigateOnBottomNavigationButtonClick(
+                      RoutesIndex.HOME.value, context);
                 },
               ),
               IconButton(
@@ -121,7 +120,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                           size: 30,
                         ),
                         onPressed: () {
-                          navigateOnBottomNavigationButtonClick(RoutesIndex.INCOME_EXPENSE.value, context);
+                          navigateOnBottomNavigationButtonClick(
+                              RoutesIndex.INCOME_EXPENSE.value, context);
                         },
                       ),
                     ),
@@ -145,7 +145,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                     size: 24,
                   ),
                   onPressed: () {
-                    navigateOnBottomNavigationButtonClick(RoutesIndex.HISTORY.value, context);
+                    navigateOnBottomNavigationButtonClick(
+                        RoutesIndex.HISTORY.value, context);
                   },
                 ),
               ),
@@ -156,7 +157,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   size: 24,
                 ),
                 onPressed: () {
-                  navigateOnBottomNavigationButtonClick(RoutesIndex.SETTINGS.value, context);
+                  navigateOnBottomNavigationButtonClick(
+                      RoutesIndex.SETTINGS.value, context);
                 },
               ),
             ],
@@ -181,16 +183,29 @@ void navigateOnBottomNavigationButtonClick(int index, context) {
     case 1:
       break;
     case 2:
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: routes['/addIncomeExpense']!));
+      pushCurrentRouteOnHomeRoute(context, '/addIncomeExpense');
       break;
     case 3:
       break;
     case 4:
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: routes['/settings']!));
+      pushCurrentRouteOnHomeRoute(context, '/settings');
       break;
     default:
       break;
   }
+}
+
+/// Used for BottomNavigationBar buttons
+/// Replace all routes with Home and put current route on top of Home
+void pushCurrentRouteOnHomeRoute(BuildContext context, String routePage) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: routes['/home']!),
+    (route) => false,
+  );
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: routes[routePage]!),
+  );
 }

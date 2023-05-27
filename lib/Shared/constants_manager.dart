@@ -2,8 +2,6 @@ class ConstantsManager {
   /// APP //////////////////////////////////////////////////////////////////////
   static const String APP_NAME = "BudgetLab";
   static const String CONTENT = "CONTENT";
-  static const String PREFERENCES = "PREFERENCES";
-  static const String MORE = "MORE";
   static const String LOAN_LEND = "Loan/Lend";
 
   /// ERROR ////////////////////////////////////////////////////////////////////
@@ -11,6 +9,11 @@ class ConstantsManager {
   static const String NOT_VALID_AMOUNT = "Enter a valid amount";
   static const String NOT_ENOUGH_BALANCE = "Not enough balance";
 
-  /// BUTTONS ///////////////////////////////////////////////////////////
+  /// HEADERS //////////////////////////////////////////////////////////////////
+  static const String PREFERENCES = "PREFERENCES";
+  static const String MORE = "MORE";
+  static const String TRANSACTIONS = "TRANSACTIONS";
+
+  /// BUTTONS //////////////////////////////////////////////////////////////////
   static const String SAVE = "Save";
 }
