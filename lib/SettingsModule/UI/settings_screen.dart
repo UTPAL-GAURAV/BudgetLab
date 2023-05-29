@@ -37,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(ConstantsManager.APP_NAME),
+        title: const Text(ConstantsManager.PROFILE),
       ),
       body: Column(
         children: [
