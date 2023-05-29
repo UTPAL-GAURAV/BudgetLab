@@ -44,7 +44,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
       key: formKey,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(ConstantsManager.APP_NAME),
+          title: const Text(ConstantsManager.ADD_INCOME_EXPENSE),
         ),
         body: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
