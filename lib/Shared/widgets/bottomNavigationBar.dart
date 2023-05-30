@@ -186,6 +186,7 @@ void navigateOnBottomNavigationButtonClick(int index, BuildContext context) {
       pushCurrentRouteOnHomeRoute(context, '/addIncomeExpense');
       break;
     case 3:
+      pushCurrentRouteOnHomeRoute(context, '/history');
       break;
     case 4:
       pushCurrentRouteOnHomeRoute(context, '/settings');
