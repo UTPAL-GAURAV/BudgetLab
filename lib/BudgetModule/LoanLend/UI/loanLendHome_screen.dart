@@ -17,7 +17,7 @@ class _LoanLendHomeScreenState extends State<LoanLendHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(ConstantsManager.APP_NAME),
+          title: const Text(ConstantsManager.LOAN_LEND),
         ),
         body: Column(
           children: [
@@ -36,7 +36,9 @@ class _LoanLendHomeScreenState extends State<LoanLendHomeScreen> {
             ),
             WidgetManager.getHeaderDividerSizedBox(
                 ConstantsManager.TRANSACTIONS),
+
             getScrollableLoanLendTransactions(),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Align(

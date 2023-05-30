@@ -3,6 +3,12 @@ class ConstantsManager {
   static const String APP_NAME = "BudgetLab";
   static const String CONTENT = "CONTENT";
   static const String LOAN_LEND = "Loan/Lend";
+  static const String SAVINGS = "Savings";
+  static const String ADD_SAVINGS = "Add Savings";
+  static const String ADD_LOAN_LEND = "Add Loan/Lend";
+  static const String PROFILE = "Profile";
+  static const String ADD_INCOME_EXPENSE = "Add Income/Expense";
+
 
   /// ERROR ////////////////////////////////////////////////////////////////////
   static const String NO_TEXT = "Please enter some text";
