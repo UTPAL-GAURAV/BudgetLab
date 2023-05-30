@@ -90,7 +90,10 @@ getTextFormField(TextFormFieldConfig config) {
 
 getBanners(String title, String subtitle, String color, double height, double width) {
   return Container(
-    color: Colors.amber,
+    decoration: BoxDecoration(
+      color: Colors.blue[200],
+      borderRadius: BorderRadius.circular(20),
+    ),
     child: SizedBox(
       height: height,
       width: width,

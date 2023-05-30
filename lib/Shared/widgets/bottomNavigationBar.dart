@@ -105,7 +105,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: ColorManager.PRIMARY,
+                        color: ColorManager.BLUE,
                         border: Border.all(
                           color: Colors.transparent,
                           width: 1,

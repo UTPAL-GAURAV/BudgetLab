@@ -56,7 +56,7 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.90,
+                width: MediaQuery.of(context).size.width * 0.50,
                 child: FloatingActionButton.extended(
                     label: const Text("Save"),
                     onPressed: () {
