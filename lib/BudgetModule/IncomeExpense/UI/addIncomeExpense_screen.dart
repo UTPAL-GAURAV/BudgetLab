@@ -53,13 +53,13 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
           return Column(
             children: [
               getToggleButtons(
-                  ["Expense", "Income"], ((value) => isIncome = value == 1)),
+                  ["Expense", "Income"], ((value) => setState((){ isIncome = value == 1; }))),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Amount",
                   hintText: " 0",
                   keyboardType: TextInputType.number,
                   maxLength: 8,
-                  validatorCallback: Validator.validateLendExpenseField,
+                  validatorCallback: isIncome ? Validator.validateAmountField : Validator.validateLendExpenseField,
                   onSavedCallback: (value) => amount = value!)),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Notes",
