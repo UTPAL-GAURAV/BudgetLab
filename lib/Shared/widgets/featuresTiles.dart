@@ -25,6 +25,7 @@ class _FeaturesTilesState extends State<FeaturesTiles> {
     return Row(
       children: [
         getLoanLendIconTile(context),
+        getSavingsIconTile(context),
       ],
     );
   }
@@ -53,6 +54,39 @@ getLoanLendIconTile(context) {
         const SizedBox(height: 8),
         const Text(
           ConstantsManager.LOAN_LEND,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.blueAccent,
+            fontSize: 14,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
+
+getSavingsIconTile(context) {
+  return SizedBox(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: routes['/savings']!));
+          },
+          backgroundColor: Colors.blueAccent,
+          child: const Icon(
+            Icons.savings,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          ConstantsManager.SAVINGS,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.blueAccent,

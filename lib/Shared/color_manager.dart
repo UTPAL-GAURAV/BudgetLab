@@ -9,4 +9,7 @@ class ColorManager {
   static Color VISTA_WHITE = Color(0xffFdfcfa);
   static Color CHILLY_PEPPER = Color(0xffC11B17);
   static Color CLOVER_GREEN = Color(0xff3EA055);
+  static Color BLUE =  Color(0xFF1E88E5);
+
+
 }

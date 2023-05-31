@@ -18,6 +18,7 @@ import 'BudgetModule/Budgets/Budget/budget_entity.dart';
 import 'BudgetModule/Budgets/Category/category_entity.dart';
 import 'BudgetModule/IncomeExpense/incomeExpense_entity.dart';
 import 'BudgetModule/LoanLend/loanLend_entity.dart';
+import 'BudgetModule/Savings/saings_entity.dart';
 import 'SettingsModule/metadata_entity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -232,6 +233,40 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(6, 5953722859783493972),
+      name: 'Savings',
+      lastPropertyId: const IdUid(5, 5271227194289515064),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 1975492489271444302),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 2945359868757435183),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2768477032845607697),
+            name: 'targetAmount',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 3986030090361302007),
+            name: 'savedAmount',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 5271227194289515064),
+            name: 'icon',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -255,7 +290,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(5, 3071978227778497905),
+      lastEntityId: const IdUid(6, 5953722859783493972),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -480,6 +515,43 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 22, false));
 
           return object;
+        }),
+    Savings: EntityDefinition<Savings>(
+        model: _entities[5],
+        toOneRelations: (Savings object) => [],
+        toManyRelations: (Savings object) => {},
+        getId: (Savings object) => object.id,
+        setId: (Savings object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Savings object, fb.Builder fbb) {
+          final titleOffset = fbb.writeString(object.title);
+          final iconOffset = fbb.writeString(object.icon);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, titleOffset);
+          fbb.addInt64(2, object.targetAmount);
+          fbb.addInt64(3, object.savedAmount);
+          fbb.addOffset(4, iconOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Savings(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              title: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              targetAmount:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0),
+              savedAmount:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0),
+              icon: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, ''));
+
+          return object;
         })
   };
 
@@ -623,4 +695,24 @@ class Metadata_ {
   /// see [Metadata.readMessage]
   static final readMessage =
       QueryBooleanProperty<Metadata>(_entities[4].properties[9]);
+}
+
+/// [Savings] entity fields to define ObjectBox queries.
+class Savings_ {
+  /// see [Savings.id]
+  static final id = QueryIntegerProperty<Savings>(_entities[5].properties[0]);
+
+  /// see [Savings.title]
+  static final title = QueryStringProperty<Savings>(_entities[5].properties[1]);
+
+  /// see [Savings.targetAmount]
+  static final targetAmount =
+      QueryIntegerProperty<Savings>(_entities[5].properties[2]);
+
+  /// see [Savings.savedAmount]
+  static final savedAmount =
+      QueryIntegerProperty<Savings>(_entities[5].properties[3]);
+
+  /// see [Savings.icon]
+  static final icon = QueryStringProperty<Savings>(_entities[5].properties[4]);
 }

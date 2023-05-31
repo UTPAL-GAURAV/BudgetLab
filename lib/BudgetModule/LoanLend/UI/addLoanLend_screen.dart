@@ -33,7 +33,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
       key: formKey,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(ConstantsManager.APP_NAME),
+          title: const Text(ConstantsManager.ADD_LOAN_LEND),
         ),
         body: SingleChildScrollView(
           child: StatefulBuilder(

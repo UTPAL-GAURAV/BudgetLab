@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 
 import '../BudgetModule/LoanLend/UI/addLoanLend_screen.dart';
 import '../BudgetModule/LoanLend/UI/loanLendHome_screen.dart';
+import '../BudgetModule/Savings/UI/addSavings_screen.dart';
+import '../BudgetModule/Savings/UI/savingsHome_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
@@ -13,6 +15,8 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/addLoanLend': (BuildContext context) => const AddLoanLendScreen(),
   '/incomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
   '/addIncomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
+  '/savings': (BuildContext context) => const SavingsHomeScreen(),
+  '/addSavings': (BuildContext context) => const AddSavingsScreen(),
   // add more routes as needed
 };
 
