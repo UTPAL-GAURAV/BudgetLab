@@ -1,5 +1,6 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_controller.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/scrollableIncomeExpenseCategory.dart';
 import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
@@ -25,6 +26,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   bool isIncome = false;
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
+  MetaDataController metaDataController = MetaDataController();
 
   @override
   void initState() {
@@ -89,6 +91,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                 note: note,
                                 category: category),
                           );
+                          metaDataController.updateCurrentBalance(isIncome, int.parse(amount));
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: routes['/home']!));
                         }

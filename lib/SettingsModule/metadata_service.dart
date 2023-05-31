@@ -8,5 +8,19 @@ class MetadataService {
     metadataRepository.getAllMetadata();
   }
 
-  updateMetadata() {}
+  int updateMetadata(Metadata metadata) {
+    return metadataRepository.updateMetadata(metadata);
+  }
+
+  int getCurrentBalance(){
+    return metadataRepository.getCurrentBalance();
+  }
+
+  int addToCurrentBalance(int amount) {
+    return metadataRepository.addToCurrentBalance(amount);
+  }
+
+  int subtractToCurrentBalance(int amount) {
+    return metadataRepository.subtractToCurrentBalance(amount);
+  }
 }

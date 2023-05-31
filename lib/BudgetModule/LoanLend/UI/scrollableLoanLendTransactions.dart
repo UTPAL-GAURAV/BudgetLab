@@ -23,7 +23,8 @@ class ScrollableLoanLendTransactions extends StatefulWidget {
       _ScrollableLoanLendTransactionsState();
 }
 
-class _ScrollableLoanLendTransactionsState extends State<ScrollableLoanLendTransactions> {
+class _ScrollableLoanLendTransactionsState
+    extends State<ScrollableLoanLendTransactions> {
   int loanLendListLength = 0;
   late ValueNotifier<List<LoanLend>> loanLendList;
 
@@ -47,58 +48,78 @@ class _ScrollableLoanLendTransactionsState extends State<ScrollableLoanLendTrans
     return ValueListenableBuilder<List<LoanLend>>(
       valueListenable: loanLendList,
       builder: (context, loanLendList, _) {
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.50),
-          child: ListView.builder(
-            itemCount: loanLendListLength,
-            itemBuilder: (context, index) {
-              final loanLend = loanLendList[index];
-              return SizedBox(
-                height: 70, // Height of each tile
-                child: ListTile(
-                  tileColor: ColorManager.VISTA_WHITE,
-                  leading: SizedBox(
-                      height: 35,
-                      width: 35,
-                      child: Image.asset(
-                        loanLend.genderEmoji,
-                        fit: BoxFit.fill,
-                      )),
-                  title: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Text(loanLend.name),
-                          ),
-                          Text("Due date: ${DateFormat('dd-MM-yyyy').format(loanLend.dateOfReturn)}"),
-                        ],
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.61),
+            child: Container(
+              color: ColorManager.LIGHT_GREY2,
+              child: ListView.builder(
+                itemCount: loanLendListLength,
+                itemBuilder: (context, index) {
+                  final loanLend = loanLendList[index];
+                  return SizedBox(
+                    height: 90,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16), // adjust the radius of shadow
                       ),
-
-                      Expanded(
-                        flex: 1,
-                        child: Text(loanLend.amount.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: loanLend.isLoan
-                                ? ColorManager.CHILLY_PEPPER
-                                : ColorManager.CLOVER_GREEN,
-                          ),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16), // adjust the radius of tile
+                        ),
+                        tileColor: ColorManager.VISTA_WHITE,
+                        contentPadding: const EdgeInsets.fromLTRB(16, 0, 26, 10),
+                        leading: ClipOval(
+                          child: SizedBox(
+                              height: 60,
+                              width: 55,
+                              child: Image.asset(
+                                loanLend.genderEmoji,
+                                fit: BoxFit.fill,
+                              )),
+                        ),
+                        title: Row(
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center, // Centers the Texts vertically
+                              crossAxisAlignment : CrossAxisAlignment.start, // Keeps the texts on left
+                              children: [
+                                Text(loanLend.name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20)),
+                                SizedBox(height: 8,),
+                                Text(
+                                  "Due date: ${DateFormat('dd-MM-yyyy').format(loanLend.dateOfReturn)}",
+                                  style: const TextStyle(color: Colors.grey, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              loanLend.amount.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: loanLend.isLoan
+                                    ? ColorManager.CHILLY_PEPPER
+                                    : ColorManager.CLOVER_GREEN,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      // openLoanLendEditPopup(context, index);
-                    },
-                  ),
-                ),
-              );
-            },
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         );
       },

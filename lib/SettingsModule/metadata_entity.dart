@@ -17,7 +17,7 @@ class Metadata {
     this.id = 0,
     this.currentBalance = 0,
     this.yourWorth = 0,
-    this.userName = "Guest User",
+    this.userName = "Hello User",
     this.currency = "USD",
     this.country = "",
     this.countryCode = 0,
