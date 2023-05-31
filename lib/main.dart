@@ -1,5 +1,7 @@
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
+import 'package:budgetlab/SettingsModule/metadata_entity.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,7 +11,7 @@ import 'HomeModule/UI/homePage_screen.dart';
 
 Future<void> main() async {
   // Open DB
-  ObjectBoxManager.openObjectBoxStore();
+  await ObjectBoxManager.openObjectBoxStore();
   runApp(const MyApp());
 }
 
@@ -75,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       await prefs.setBool('firstRun', false);
 
       CategoryController categoryController = CategoryController();
+      MetaDataController metaDataController = MetaDataController();
 
       categoryController.addCategory(Category(isExpense: false, name: "Salary", icon: 'assets/images/icons/salary.png'));
       categoryController.addCategory(Category(isExpense: true, name: "Food", icon: 'assets/images/icons/fast-food.png'));
@@ -82,6 +85,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       categoryController.addCategory(Category(isExpense: true, name: "Fuel", icon: 'assets/images/icons/fuel.png'));
       categoryController.addCategory(Category(isExpense: true, name: "Rent", icon: 'assets/images/icons/house.png'));
       categoryController.addCategory(Category(isExpense: true, name: "Entertainment", icon: 'assets/images/icons/theater.png'));
+
+      metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "Hello User", currency: "", country: "", countryCode: 0, password: "", hideOn: false, readMessage: false));
     }
   }
 }
