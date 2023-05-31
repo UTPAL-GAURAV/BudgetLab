@@ -52,14 +52,14 @@ class _TwoToggleButtonsState extends State<TwoToggleButtons> {
             selectedToggleBoolList[i] = i == index;
           }
         });},
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
-      selectedBorderColor: Colors.red[700],
+      borderRadius: const BorderRadius.all(Radius.circular(35)),
+      selectedBorderColor: Colors.blue[100],
       selectedColor: Colors.white,
-      fillColor: Colors.red[200],
-      color: Colors.red[400],
+      fillColor: Colors.blue[600],
+      color: Colors.blue[600],
       constraints: const BoxConstraints(
         minHeight: 40.0,
-        minWidth: 80.0,
+        minWidth: 120.0,
       ),
       isSelected: selectedToggleBoolList,
       children: toggleListWidget,

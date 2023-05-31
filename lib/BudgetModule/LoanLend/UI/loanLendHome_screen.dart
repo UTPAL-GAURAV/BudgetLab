@@ -25,13 +25,13 @@ class _LoanLendHomeScreenState extends State<LoanLendHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(16.0),
                     child:
-                        WidgetManager.getBanners("Loan", "10", "blue", 70, 70)),
+                        WidgetManager.getBanners("Loan", "10", "blue", 90, 130)),
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child:
-                        WidgetManager.getBanners("Lend", "10", "blue", 70, 70)),
+                        WidgetManager.getBanners("Lend", "10", "blue", 90, 130)),
               ],
             ),
             WidgetManager.getHeaderDividerSizedBox(
