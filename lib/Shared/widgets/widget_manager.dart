@@ -112,3 +112,28 @@ getTwinBanners(String title, String subtitle, Color color, double height, double
     ),
   );
 }
+
+getSingleBanner(String title, String subtitle, Color color, double height, double width) {
+  return Container(
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: SizedBox(
+      height: height,
+      width: width,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: ColorManager.GREY),),
+            SizedBox(height: 10,),
+            Text(subtitle, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),)
+          ],
+        ),
+      ),
+    ),
+  );
+}
