@@ -20,7 +20,9 @@ class AddSavingsScreen extends StatefulWidget {
 
 class _AddSavingsScreenState extends State<AddSavingsScreen> {
   final formKey = GlobalKey<FormState>();
-  late String targetAmount, title, category = 'Car';
+  late String targetAmount, title;
+  String icon = 'Car';
+
   SavingsController savingsController = SavingsController();
 
   @override
@@ -48,11 +50,11 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
                 maxLength: 8,
                 validatorCallback: Validator.validateLendExpenseField,
                 onSavedCallback: (value) => targetAmount = value!)),
-            const Text("Category"),
-            SizedBox(
-              height: 100,
-              child: getScrollableSavingsCategory(),
-            ),
+            // const Text("Category"),
+            // SizedBox(
+            //   height: 100,
+            //   child: getScrollableSavingsCategory((value) => icon = value),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -65,6 +67,7 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
                         savingsController.addSavings(Savings(
                             title: title,
                             targetAmount: int.parse(targetAmount),
+                            icon: icon,
                             savedAmount: 0));
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: routes['/home']!));

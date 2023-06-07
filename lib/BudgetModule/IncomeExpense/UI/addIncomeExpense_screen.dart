@@ -21,9 +21,10 @@ class AddIncomeExpenseScreen extends StatefulWidget {
 
 class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   final formKey = GlobalKey<FormState>();
-  late String amount, note, category = 'Shopping';
+  late String amount, note;
   DateTime date = DateTime.now();
   bool isIncome = false;
+  String category = 'Shopping';
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
   MetaDataController metaDataController = MetaDataController();
@@ -71,7 +72,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
               const Text("Category"),
               SizedBox(
                 height: 100,
-                child: getScrollableIncomeExpenseCategory(),
+                child: getScrollableIncomeExpenseCategory((value) => category = value),
               ),
               Calendar.getCalendar((value) => date = value),
               Padding(

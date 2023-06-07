@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
-getScrollableIncomeExpenseCategory() {
-  return const ScrollableIncomeExpenseCategory();
+getScrollableIncomeExpenseCategory(onCategorySelectedCallback) {
+  return ScrollableIncomeExpenseCategory(onCategorySelected: onCategorySelectedCallback);
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
 
 class ScrollableIncomeExpenseCategory extends StatefulWidget {
-  const ScrollableIncomeExpenseCategory({Key? key}) : super(key: key);
+  final Function(String) onCategorySelected;
+  ScrollableIncomeExpenseCategory({Key? key, required this.onCategorySelected}) : super(key: key);
 
   @override
   State<ScrollableIncomeExpenseCategory> createState() =>
@@ -50,9 +51,12 @@ class _ScrollableIncomeExpenseCategoryState extends State<ScrollableIncomeExpens
               categoryList.length,
               (index) {
                 final category = categoryList[index];
-                return Container(
-                  margin: const EdgeInsets.all(6), // Adjust the padding between buttons
-                  child: getIconButtons(category.icon, category.name),
+                return GestureDetector(
+                  onTap: () => widget.onCategorySelected(category.name),
+                  child: Container(
+                    margin: const EdgeInsets.all(6), // Adjust the padding between buttons
+                    child: getIconButtons(category.icon, category.name),
+                  ),
                 );
               },
             ),

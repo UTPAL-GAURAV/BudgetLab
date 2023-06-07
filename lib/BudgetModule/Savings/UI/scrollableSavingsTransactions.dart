@@ -65,7 +65,7 @@ class _ScrollableSavingsTransactionsState
                       height: 35,
                       width: 35,
                       child: Image.asset(
-                        savings.icon,
+                        'assets/images/icons/' + savings.icon + '.png',
                         fit: BoxFit.fill,
                       )),
                   title: Row(
