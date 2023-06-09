@@ -1,4 +1,5 @@
 
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 
 String validateNothing(value) {
@@ -29,10 +30,11 @@ String validateAmountField(value) {
 }
 
 String validateLendExpenseField(value) {
+  MetaDataController metaDataController = MetaDataController();
   String response = validateAmountField(value);
-  // if(response.isEmpty && (value > getBankBalance())) {
-  //   return ConstantsManager.NOT_ENOUGH_BALANCE;
-  // }
+  if(response.isEmpty && (int.parse(value) > metaDataController.getCurrentBalance())) {
+    return ConstantsManager.NOT_ENOUGH_BALANCE;
+  }
   return response;
 }
 

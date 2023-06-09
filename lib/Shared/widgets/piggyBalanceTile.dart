@@ -1,4 +1,5 @@
 
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:flutter/material.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
@@ -18,6 +19,8 @@ class PiggyBalanceTile extends StatefulWidget {
 }
 
 class _PiggyBalanceTileState extends State<PiggyBalanceTile> {
+  MetaDataController metaDataController = MetaDataController();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -62,8 +65,8 @@ class _PiggyBalanceTileState extends State<PiggyBalanceTile> {
                           "Current balance",
                           style: TextStyle(color: Colors.white),
                         ),
-                        const Text(
-                          "",
+                         Text(
+                          metaDataController.getCurrentBalance().toString(),
                           style: TextStyle(
                               fontSize: 30,
                               color: Colors.white),

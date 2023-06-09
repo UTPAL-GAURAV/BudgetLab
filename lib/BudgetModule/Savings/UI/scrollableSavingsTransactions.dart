@@ -50,51 +50,69 @@ class _ScrollableSavingsTransactionsState
     return ValueListenableBuilder<List<Savings>>(
       valueListenable: savingsList,
       builder: (context, savingsList, _) {
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.50),
-          child: ListView.builder(
-            itemCount: savingListLength,
-            itemBuilder: (context, index) {
-              final savings = savingsList[index];
-              return SizedBox(
-                height: 70, // Height of each tile
-                child: ListTile(
-                  tileColor: ColorManager.VISTA_WHITE,
-                  leading: SizedBox(
-                      height: 35,
-                      width: 35,
-                      child: Image.asset(
-                        savings.icon,
-                        fit: BoxFit.fill,
-                      )),
-                  title: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Text(savings.title),
-                          ),
-                        ],
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.50),
+            child: Container(
+              child: ListView.builder(
+                itemCount: savingListLength,
+                itemBuilder: (context, index) {
+                  final savings = savingsList[index];
+                  return SizedBox(
+                    height: 70, // Height of each tile
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            16), // adjust the radius of shadow
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          savings.targetAmount.toString(),
+                      child: ListTile(
+                        tileColor: ColorManager.VISTA_WHITE,
+                        leading: ClipOval(
+                          child: SizedBox(
+                              height: 60,
+                              width: 55,
+                              child: Image.asset(
+                                savings.icon,
+                                fit: BoxFit.fill,
+                              )),
+                        ),
+                        title: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(savings.title,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20)),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "+ " + savings.targetAmount.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: ColorManager.CLOVER_GREEN,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      // openLoanLendEditPopup(context, index);
-                    },
-                  ),
-                ),
-              );
-            },
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         );
       },

@@ -8,5 +8,19 @@ class MetaDataController {
     return metadataService.getAllMetadata();
   }
 
-  updateMetadata() {}
+  int updateMetadata(Metadata metadata) {
+    return metadataService.updateMetadata(metadata);
+  }
+
+  int getCurrentBalance(){
+    return metadataService.getCurrentBalance();
+  }
+
+  int updateCurrentBalance(bool isAddition, int amount) {
+    if(isAddition) {
+      return metadataService.addToCurrentBalance(amount);
+    } else {
+      return metadataService.subtractToCurrentBalance(amount);
+    }
+  }
 }
