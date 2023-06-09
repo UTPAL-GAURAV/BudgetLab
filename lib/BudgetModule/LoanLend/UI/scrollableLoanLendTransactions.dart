@@ -52,7 +52,7 @@ class _ScrollableLoanLendTransactionsState
           padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.61),
+                maxHeight: MediaQuery.of(context).size.height * 0.50),
             child: Container(
               color: ColorManager.LIGHT_GREY2,
               child: ListView.builder(

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 
+import '../../../Shared/color_manager.dart';
 import '../../../Shared/routes_manager.dart';
 
 class SavingsHomeScreen extends StatefulWidget {
@@ -22,10 +23,15 @@ class _SavingsHomeScreenState extends State<SavingsHomeScreen> {
       ),
       body: Column(
         children: [
-          Text(
-            " Total Savings : 20,000",
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
-          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 4, 16),
+              child:
+              WidgetManager.getSingleBanner("SAVINGS", "10,500", ColorManager.LIGHT_GREEN, 100, MediaQuery.of(context).size.width * 0.45)),
+
+          // Text(
+          //   " Total Savings : 20,000",
+          //   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
+          // ),
           WidgetManager.getHeaderDividerSizedBox(ConstantsManager.TRANSACTIONS),
           getScrollableSavingsTransactions(),
 
