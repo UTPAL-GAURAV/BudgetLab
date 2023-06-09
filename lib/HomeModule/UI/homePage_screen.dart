@@ -3,7 +3,7 @@ import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/bottomNavigationBar.dart'
     as BottomNavigationBar;
-import 'package:budgetlab/Shared/widgets/piggyBalanceTile.dart'
+import 'package:budgetlab/HomeModule/UI/piggyBalanceTile.dart'
     as PiggyBalanceTile;
 import 'package:budgetlab/Shared/widgets/featuresTiles.dart' as FeaturesTiles;
 
