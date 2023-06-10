@@ -88,18 +88,51 @@ getTextFormField(TextFormFieldConfig config) {
 
 /// BANNERS ////////////////////////////////////////////////////////////////////
 
-getBanners(String title, String subtitle, String color, double height, double width) {
+getTwinBanners(String title, String subtitle, Color color, double height, double width) {
   return Container(
-    color: Colors.amber,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(20),
+    ),
     child: SizedBox(
       height: height,
       width: width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(title),
-          Text(subtitle)
-        ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: ColorManager.DARK_GREY2),),
+            SizedBox(height: 10,),
+            Text(subtitle, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),)
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+getSingleBanner(String title, String subtitle, Color color, double height, double width) {
+  return Container(
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: SizedBox(
+      height: height,
+      width: width,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: ColorManager.GREY),),
+            SizedBox(height: 10,),
+            Text(subtitle, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),)
+          ],
+        ),
       ),
     ),
   );

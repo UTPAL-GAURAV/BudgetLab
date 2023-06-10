@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   objectbox: ^2.0.0
-  objectbox_flutter_libs: any
+  objectbox_flutter_libs: ^2.0.0
   path_provider: ^2.0.1
   http: ^0.13.6
   intl: ^0.18.1

@@ -1,4 +1,5 @@
 import 'package:budgetlab/BudgetModule/LoanLend/UI/scrollableLoanLendTransactions.dart';
+import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,13 +26,13 @@ class _LoanLendHomeScreenState extends State<LoanLendHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(0, 16, 4, 16),
                     child:
-                        WidgetManager.getBanners("Loan", "10", "blue", 70, 70)),
+                        WidgetManager.getTwinBanners("Loan", "10,500", ColorManager.LIGHT_RED, 100, MediaQuery.of(context).size.width * 0.45)),
                 Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(4, 16, 0, 16),
                     child:
-                        WidgetManager.getBanners("Lend", "10", "blue", 70, 70)),
+                        WidgetManager.getTwinBanners("Lend", "10,700", ColorManager.LIGHT_PURPLE, 100, MediaQuery.of(context).size.width * 0.45)),
               ],
             ),
             WidgetManager.getHeaderDividerSizedBox(
@@ -40,7 +41,7 @@ class _LoanLendHomeScreenState extends State<LoanLendHomeScreen> {
             getScrollableLoanLendTransactions(),
 
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(0, 16, 12, 12),
               child: Align(
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton.extended(

@@ -19,7 +19,7 @@ class ObjectBoxManager {
   static late Box<Metadata> metadataBox;
   static late Box<Savings> savingsBox;
 
-  static void openObjectBoxStore() async {
+  static Future<void> openObjectBoxStore() async {
     // Open ObjectBox Store to use DB
       WidgetsFlutterBinding.ensureInitialized();
       store = await openStore();

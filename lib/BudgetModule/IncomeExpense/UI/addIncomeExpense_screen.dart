@@ -1,5 +1,6 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_controller.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/scrollableIncomeExpenseCategory.dart';
 import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
@@ -20,11 +21,13 @@ class AddIncomeExpenseScreen extends StatefulWidget {
 
 class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   final formKey = GlobalKey<FormState>();
-  late String amount, note, category = 'Shopping';
+  late String amount, note;
   DateTime date = DateTime.now();
   bool isIncome = false;
+  String category = 'Shopping';
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
+  MetaDataController metaDataController = MetaDataController();
 
   @override
   void initState() {
@@ -51,13 +54,13 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
           return Column(
             children: [
               getToggleButtons(
-                  ["Expense", "Income"], ((value) => isIncome = value == 1)),
+                  ["Expense", "Income"], ((value) => setState((){ isIncome = value == 1; }))),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Amount",
                   hintText: " 0",
                   keyboardType: TextInputType.number,
                   maxLength: 8,
-                  validatorCallback: Validator.validateLendExpenseField,
+                  validatorCallback: isIncome ? Validator.validateAmountField : Validator.validateLendExpenseField,
                   onSavedCallback: (value) => amount = value!)),
               WidgetManager.getTextFormField(TextFormFieldConfig(
                   labelText: "Notes",
@@ -69,7 +72,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
               const Text("Category"),
               SizedBox(
                 height: 100,
-                child: getScrollableIncomeExpenseCategory(),
+                child: getScrollableIncomeExpenseCategory((value) => category = value),
               ),
               Calendar.getCalendar((value) => date = value),
               Padding(
@@ -89,6 +92,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                 note: note,
                                 category: category),
                           );
+                          metaDataController.updateCurrentBalance(isIncome, int.parse(amount));
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: routes['/home']!));
                         }

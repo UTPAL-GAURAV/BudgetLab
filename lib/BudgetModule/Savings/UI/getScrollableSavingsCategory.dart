@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
-getScrollableSavingsCategory() {
-  return const ScrollableSavingsCategory();
+getScrollableSavingsCategory(onCategorySelectedCallback) {
+  return ScrollableSavingsCategory(onCategorySelectedCallback: onCategorySelectedCallback);
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
 
 class ScrollableSavingsCategory extends StatefulWidget {
-  const ScrollableSavingsCategory({Key? key}) : super(key: key);
+  final Function(String) onCategorySelectedCallback;
+  const ScrollableSavingsCategory({Key? key, required this.onCategorySelectedCallback}) : super(key: key);
 
   @override
   State<ScrollableSavingsCategory> createState() =>
@@ -50,9 +51,12 @@ class _ScrollableSavingsCategoryState extends State<ScrollableSavingsCategory> {
               categoryList.length,
                   (index) {
                 final category = categoryList[index];
-                return Container(
-                  margin: const EdgeInsets.all(6), // Adjust the padding between buttons
-                  child: getIconButtons(category.icon, category.name),
+                return GestureDetector(
+                  onTap: () => widget.onCategorySelectedCallback(category.icon),
+                  child: Container(
+                    margin: const EdgeInsets.all(6), // Adjust the padding between buttons
+                    child: getIconButtons(category.icon, category.name),
+                  ),
                 );
               },
             ),

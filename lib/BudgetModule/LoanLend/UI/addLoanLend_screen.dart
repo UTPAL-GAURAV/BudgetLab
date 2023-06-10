@@ -1,3 +1,5 @@
+import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/Shared/service/avatar_service.dart';
 import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +23,11 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
   final formKey = GlobalKey<FormState>();
   late String name, amount, notes;
   String avatar = AvatarService().getNeutralGenderAvatar();
-  DateTime date = DateTime.now();
+  DateTime dateOfReturn = DateTime.now();
   bool isLoan = true;
 
   LoanLendController loanLendController = LoanLendController();
+  MetaDataController metaDataController = MetaDataController();
   AvatarService avatarService = AvatarService();
 
   @override
@@ -62,7 +65,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                       validatorCallback: Validator.validateLendExpenseField,
                       onSavedCallback: (value) => amount = value!),
                 ),
-                Calendar.getCalendar((value) => date = value),
+                Calendar.getCalendar((value) => dateOfReturn = value),
                 WidgetManager.getTextFormField(
                   TextFormFieldConfig(
                       labelText: "Notes",
@@ -81,19 +84,20 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                         onPressed: () {
                           formKey.currentState!.save();
                           if (formKey.currentState!.validate()) {
-                            loanLendController.addLoanLend(
-                                isLoan,
-                                DateTime.now(),
-                                date,
-                                int.parse(amount),
-                                name,
-                                notes,
-                                "",
-                                "",
-                                avatar);
+                            loanLendController.addLoanLend(LoanLend(
+                                isLoan: isLoan,
+                                dateTime: DateTime.now(),
+                                dateOfReturn: dateOfReturn,
+                                amount: int.parse(amount),
+                                name: name,
+                                note: notes,
+                                phone: "",
+                                returnStatus: "",
+                                genderEmoji: avatar));
+                            metaDataController.updateCurrentBalance(isLoan, int.parse(amount));
                             Navigator.of(context).pop();
-                            // Navigator.pushReplacement(context,
-                            //     MaterialPageRoute(builder: routes['/loanLend']!));
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: routes['/loanLend']!));
                           }
                         }),
                   ),

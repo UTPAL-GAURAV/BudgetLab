@@ -10,9 +10,9 @@ class LoanLendService {
     return loanLendRepository.getAllLoanLendList();
   }
 
-  int addLoanLend(bool isLoan, DateTime dateTime, DateTime dateOfReturn, int amount, String name, String note, String phone, String returnStatus, String genderEmoji) {
+  int addLoanLend(LoanLend loanLend) {
 
-    return loanLendRepository.addOrUpdateLoanLend(LoanLend(isLoan: isLoan, dateTime: dateTime, dateOfReturn: dateOfReturn, amount: amount, name: name, note: note, phone: phone,returnStatus: returnStatus, genderEmoji: genderEmoji));
+    return loanLendRepository.addOrUpdateLoanLend(loanLend);
   }
 
   updateLoanLend() {}
