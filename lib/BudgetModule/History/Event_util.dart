@@ -20,36 +20,46 @@ class Events {
 
     List<IncomeExpense> incomeEvents = incomeExpense.getAllIncomeExpenseList();
     List<LoanLend> loanEvents = loanLend.getAllLoanLendList();
-    Event event = Event(title: "", category: "", amount: 0, date: DateTime.now(), color: true);
+    // Event event = Event(title: "", category: "", amount: 0, date: DateTime.now(), color: true);
     List<Event> events = [];
 
     for (final ie in incomeEvents) {
-      event.title = ie.category;
-      event.date = ie.dateTime;
-      event.amount = ie.amount;
+      var category;
+      var color;
       if (ie.isIncome == true) {
-        event.category = "Income";
-        event.color = true;
+        category = "Income";
+        color = true;
       } else {
-        event.category = "Expense";
-        event.color = false;
+        category = "Expense";
+        color = false;
       }
+      events.add(Event(
+          title: ie.category,
+          date: ie.dateTime,
+          amount: ie.amount,
+          category: category,
+          color: color
+      ));
     }
 
     for (final ll in loanEvents) {
-      event.title = ll.name;
-      event.date = ll.dateTime;
-      event.amount = ll.amount;
+      var category;
+      var color;
       if (ll.isLoan == true) {
-        event.category = "Loan";
-        event.color = false;
+        category = "Loan";
+        color = false;
       } else {
-        event.category = "Lend";
-        event.color = true;
+        category = "Lend";
+        color = true;
       }
+      events.add(Event(
+          title: ll.name,
+          date: ll.dateTime,
+          amount: ll.amount,
+          category: category,
+          color: color
+      ));
     }
-
-    events.add(event);
 
     print('combined: $events');
 
