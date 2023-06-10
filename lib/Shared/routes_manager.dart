@@ -1,5 +1,5 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpense_screen.dart';
-import 'package:budgetlab/HistoryModule/UI/history_screen.dart';
+import 'package:budgetlab/BudgetModule/History/UI/history_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/widgets.dart';
 
