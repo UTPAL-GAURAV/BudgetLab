@@ -22,10 +22,28 @@ class FeaturesTiles extends StatefulWidget {
 class _FeaturesTilesState extends State<FeaturesTiles> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        getLoanLendIconTile(context),
-        getSavingsIconTile(context),
+    return Column(
+      children: <Widget>[
+        Row(
+            children: const [
+              Expanded(
+                flex: 2,
+                child: Text(
+                  "Features",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+        ),
+        Row(
+          children: [
+            getLoanLendIconTile(context),
+           const Padding(
+             padding: EdgeInsets.all(8.0),
+           ),
+           getSavingsIconTile(context),
+          ],
+        )
       ],
     );
   }
@@ -40,6 +58,7 @@ getLoanLendIconTile(context) {
       mainAxisSize: MainAxisSize.min,
       children: [
         FloatingActionButton(
+          heroTag: "tag1",
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: routes['/loanLend']!));
