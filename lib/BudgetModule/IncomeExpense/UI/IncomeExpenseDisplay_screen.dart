@@ -83,7 +83,9 @@ class _IncomeExpenseDisplay extends State<IncomeExpenseDisplay> {
   double calculateTotalExpenses(List<IncomeExpense> transactions) {
     double total = 0.0;
     for (var transaction in transactions) {
-      total += transaction.amount;
+      if(!transaction.isIncome) {
+        total += transaction.amount;
+      }
     }
     return total;
   }
