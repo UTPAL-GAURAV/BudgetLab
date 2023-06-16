@@ -69,9 +69,23 @@ class Events {
 
   static List<Event> filterDayEvent(DateTime date) {
     print('date for filter day event: $date');
-    DateTime nextDay = date.add(Duration(days: 1));
+
+    DateTime startOfDay = DateTime(
+      date.year,
+      date.month,
+      date.day,
+    );
+
+    DateTime endOfDay = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      23,
+      59,
+      59,
+    );
     List<Event> events = getCombinedEvents();
-    List<Event> filteredEvents = events.where((obj) => obj.date.isAfter(date) && obj.date.isBefore(nextDay)).toList();
+    List<Event> filteredEvents = events.where((obj) => obj.date.isAfter(startOfDay) && obj.date.isBefore(endOfDay)).toList();
     print('in filterDayEvent:  $events');
     print('Filtered Events: $filteredEvents');
 
