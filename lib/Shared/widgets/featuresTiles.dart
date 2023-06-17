@@ -41,7 +41,11 @@ class _FeaturesTilesState extends State<FeaturesTiles> {
            const Padding(
              padding: EdgeInsets.all(8.0),
            ),
-           getSavingsIconTile(context),
+            getTransactionIconTile(context),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+            ),
+            getSavingsIconTile(context),
           ],
         )
       ],
@@ -92,6 +96,7 @@ getSavingsIconTile(context) {
       mainAxisSize: MainAxisSize.min,
       children: [
         FloatingActionButton(
+          heroTag: "tag2",
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: routes['/savings']!));
@@ -106,6 +111,38 @@ getSavingsIconTile(context) {
         const SizedBox(height: 8),
         const Text(
           ConstantsManager.SAVINGS,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.blueAccent,
+            fontSize: 14,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+getTransactionIconTile(context) {
+  return SizedBox(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        FloatingActionButton(
+          heroTag: "tag3",
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: routes['/transactions']!));
+          },
+          backgroundColor: Colors.blueAccent,
+          child: const Icon(
+            Icons.receipt_long_sharp,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          ConstantsManager.INCOME_EXPENSE,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.blueAccent,
