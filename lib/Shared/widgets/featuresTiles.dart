@@ -3,6 +3,9 @@ import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../HomeModule/UI/homePage_screen.dart';
+import '../color_manager.dart';
+
 /// Public Method //////////////////////////////////////////////////////////////
 
 getFeaturesTiles() {
@@ -22,33 +25,24 @@ class FeaturesTiles extends StatefulWidget {
 class _FeaturesTilesState extends State<FeaturesTiles> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
+    return Container(
+      height: height(0.15, context),
+      margin: EdgeInsets.all(width(0.05, context)),
+      padding: EdgeInsets.all(width(0.05, context)),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(20.0))
+      ),
+      child:
         Row(
-            children: const [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  "Features",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-        ),
-        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            getLoanLendIconTile(context),
-           const Padding(
-             padding: EdgeInsets.all(8.0),
-           ),
+            _getLoanLendIconTile(context),
+            _getSavingsIconTile(context),
             getTransactionIconTile(context),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-            ),
-            getSavingsIconTile(context),
           ],
         )
-      ],
+      ,
     );
   }
 }
@@ -56,7 +50,7 @@ class _FeaturesTilesState extends State<FeaturesTiles> {
 
 /// ICON BUTTONS ///////////////////////////////////////////////////////////////
 
-getLoanLendIconTile(context) {
+_getLoanLendIconTile(context) {
   return SizedBox(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -75,12 +69,13 @@ getLoanLendIconTile(context) {
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           ConstantsManager.LOAN_LEND,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.blueAccent,
+            color: ColorManager.BLACK_VOID,
             fontSize: 14,
+            fontWeight: FontWeight.bold
           ),
         ),
       ],
@@ -90,7 +85,7 @@ getLoanLendIconTile(context) {
 
 
 
-getSavingsIconTile(context) {
+_getSavingsIconTile(context) {
   return SizedBox(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -109,12 +104,13 @@ getSavingsIconTile(context) {
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           ConstantsManager.SAVINGS,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.blueAccent,
-            fontSize: 14,
+              color: ColorManager.BLACK_VOID,
+              fontSize: 14,
+              fontWeight: FontWeight.bold
           ),
         ),
       ],

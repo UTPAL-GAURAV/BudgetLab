@@ -14,4 +14,16 @@ class ExternalApiService {
       return Gender.neutral;
     }
   }
+
+  /// API to get country flag from country code.
+  /// TODO: Make this work
+  Future<String> getCountryFlag(String countryCode) async {
+    final response = await http.get(Uri.parse('https://www.countryflags.io/$countryCode/flat/64.png'));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(response.body);
+      return "";
+    } else {
+      return "";
+    }
+  }
 }

@@ -30,3 +30,6 @@ var budget = Budget(repeats: "yea", amount: 100);
     store.close();
 
 await avatarService.getGenderAvatarFromName("Gaurav");
+
+Color codes (to set):
+Theme: #0766EB
