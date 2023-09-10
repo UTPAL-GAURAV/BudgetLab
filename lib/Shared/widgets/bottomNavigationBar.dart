@@ -1,3 +1,4 @@
+import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,9 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 90,
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      height: height(0.1, context),
+      decoration: BoxDecoration(
+        color: ColorManager.PRIMARY_BACKGROUND,
       ),
       child: Stack(
         children: [
@@ -47,7 +48,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 ),
                 child: Container(
                   width: double.infinity,
-                  height: 80,
+                  height: height(0.088, context),
                   decoration: BoxDecoration(
                     color: ColorManager.PRIMARY_BACKGROUND,
                     boxShadow: const [
@@ -75,10 +76,10 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.home_rounded,
                   color: Color(0xFF9299A1),
-                  size: 24,
+                  size: height(0.038, context),
                 ),
                 onPressed: () {
                   navigateOnBottomNavigationButtonClick(
@@ -86,10 +87,10 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 },
               ),
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.chat_bubble_rounded,
                   color: Color(0xFF9299A1),
-                  size: 24,
+                  size: height(0.034, context),
                 ),
                 onPressed: () {
                   print('IconButton pressed ...');
@@ -102,8 +103,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                     child: Container(
-                      width: 60,
-                      height: 60,
+                      width: height(0.07, context),
+                      height: height(0.07, context),
                       decoration: BoxDecoration(
                         color: ColorManager.PRIMARY_BLUE,
                         border: Border.all(
@@ -114,10 +115,10 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                       ),
                       child: IconButton(
                         color: Colors.amber,
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.add,
                           color: Colors.white,
-                          size: 30,
+                          size: height(0.038, context),
                         ),
                         onPressed: () {
                           navigateOnBottomNavigationButtonClick(
@@ -139,10 +140,10 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.history,
                     color: Color(0xFF9299A1),
-                    size: 24,
+                    size: height(0.034, context),
                   ),
                   onPressed: () {
                     navigateOnBottomNavigationButtonClick(
@@ -151,10 +152,10 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 ),
               ),
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.settings,
                   color: Color(0xFF9299A1),
-                  size: 24,
+                  size: height(0.034, context),
                 ),
                 onPressed: () {
                   navigateOnBottomNavigationButtonClick(

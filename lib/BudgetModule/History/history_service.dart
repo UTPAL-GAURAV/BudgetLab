@@ -12,6 +12,15 @@ class HistoryService {
     return historyRepository.getAllHistoryList();
   }
 
+  List<History> getCustomHistoryList(int year, int month, int date) {
+    if(month==0 && date==0) {
+      return historyRepository.getHistoryListByYear(year);
+    } else if(date==0) {
+      return historyRepository.getHistoryListByMonth(year, month);
+    }
+    return historyRepository.getHistoryListByDate(year, month, date);
+  }
+
   int addHistoryFromIncomeExpense(IncomeExpense incomeExpense) {
     History history = History(
         year: incomeExpense.dateTime.year,

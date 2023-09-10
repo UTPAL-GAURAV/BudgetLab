@@ -43,11 +43,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
           Column(
             children: [
               BalanceBody.getBalanceBody(),
-              // const Divider(),
-              // // PiggyBalanceTile.getPiggyBalanceTile(),
-              // const Divider(),
               FeaturesTiles.getFeaturesTiles(),
-              // const Divider(),
               Padding(
                 padding: EdgeInsets.fromLTRB(width(0.05, context), 0, 0, 0),
                 child: Align(

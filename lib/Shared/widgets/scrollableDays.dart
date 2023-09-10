@@ -1,5 +1,9 @@
+import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
+import 'package:budgetlab/Shared/color_manager.dart';
+import 'package:budgetlab/Shared/service/providers/historyScrollable_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../BudgetModule/History/UI/history_screen.dart';
 
@@ -48,24 +52,37 @@ class ScrollableDates extends StatefulWidget {
 }
 
 class _ScrollableDatesState extends State<ScrollableDates> {
-  int selectedContainerIndex = 0;
-  int numberOfDaysInPreviousMonth = 1;
-  int currentDay = 1;
-  List<int> dayList = [];
+  late int numberOfDaysInPreviousMonth;
+  // Define extra var & array for Month and Year
+  // 3 parallel lists for edge cases like: new month / new year
+  int currentDate = DateTime.now().day;
+  List<int> dateList = [];
+  int currentMonth = DateTime.now().month;
+  List<int> monthList = [];
+  int currentYear = DateTime.now().year;
+  List<int> yearList = [];
 
   @override
   void initState() {
     super.initState();
-    numberOfDaysInPreviousMonth =
-        getDaysInMonth(DateTime.now().year, DateTime.now().month + 1);
-    currentDay = DateTime.now().day;
-    dayList.add(currentDay);
-    for (int i = 1; i < 7; i++) {
-      currentDay--;
-      if (currentDay == 0) {
-        currentDay = numberOfDaysInPreviousMonth;
+    // Get numberOfDaysInPreviousMonth for reverse date count
+    numberOfDaysInPreviousMonth = getDaysInMonth(currentYear, currentMonth - 1);
+    // Set all 7 dates in reverse order while setting their month & year also for edge cases
+    for (int i = 0; i < 7; i++) {
+      // If currentDate is 0 then it means we have to now get values from previous month
+      if (currentDate == 0) {
+        currentDate = numberOfDaysInPreviousMonth;
+        currentMonth = DateTime.now().month - 1;
+        // If currentMonth is 12 then it means we have to now get values from previous year
+        // as January - 1 = December i.e. 12
+        if (currentMonth == 12) {
+          currentYear = DateTime.now().year - 1;
+        }
       }
-      dayList.add(currentDay);
+      dateList.add(currentDate);
+      monthList.add(currentMonth);
+      yearList.add(currentYear);
+      currentDate--;
     }
   }
 
@@ -74,60 +91,68 @@ class _ScrollableDatesState extends State<ScrollableDates> {
     // Now you can use dayList and other variables in your widget's build method
     return Container(
         height: 100,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 7,
-          itemBuilder: (context, index) {
-            DateTime customDate = DateTime(
-                DateTime.now().year, DateTime.now().month, dayList[index]);
-            String formattedDay = DateFormat.EEEE()
-                .format(customDate)
-                .substring(0, 3)
-                .toUpperCase();
-            bool isSelected = selectedContainerIndex == index;
+        child: Consumer<HistoryScrollableDateProvider>(
+            builder: (context, provider, child) {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 7,
+            itemBuilder: (context, index) {
+              DateTime customDate = DateTime(
+                  DateTime.now().year, DateTime.now().month, dateList[index]);
+              String formattedDay = DateFormat.EEEE()
+                  .format(customDate)
+                  .substring(0, 3)
+                  .toUpperCase();
+              bool isSelected = provider.selectedContainerIndex == index;
 
-            return Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 4.0,
-              ),
-              child: GestureDetector(
+              return GestureDetector(
                 onTap: () {
-                  setState(() {
-                    selectedContainerIndex =
-                        index; // Update the selected index.
-                  });
+                  // To set dot and highlight date/day
+                  provider.setSelectedContainerIndex(index);
+                  // Set date, month and year to show transactions
+                  provider.setSelectedDate(dateList[index]);
+                  provider.setSelectedMonth(monthList[index]);
+                  provider.setSelectedYear(yearList[index]);
                 },
-                child: Center(
-                    child: Column(
-                  children: [
-                    Text(
-                      formattedDay,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: isSelected ? Colors.white : Colors.grey),
-                    ),
-                    Text(
-                      dayList[index].toString(),
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: isSelected ? Colors.white : Colors.grey),
-                    ),
-                    if (isSelected)
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: _getScrollableContainersWidth(context),
+                    vertical: _getScrollableContainersHeight(context),
+                  ),
+                  child: Center(
+                      child: Column(
+                    children: [
+                      Text(
+                        formattedDay,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: isSelected ? Colors.white : Colors.grey),
                       ),
-                  ],
-                )),
-              ),
-            );
-          },
-        ));
+                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.01, context), 0, 0)),
+                      Text(
+                        dateList[index].toString(),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: isSelected ? Colors.white : Colors.grey),
+                      ),
+                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.01, context), 0, 0)),
+                      if (isSelected)
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: ColorManager.HOT_CORAL,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                    ],
+                  )),
+                ),
+              );
+            },
+          );
+        }));
   }
 }
 
@@ -141,20 +166,26 @@ class ScrollableMonths extends StatefulWidget {
 }
 
 class _ScrollableMonthsState extends State<ScrollableMonths> {
-  int selectedContainerIndex = 0;
-  int currentMonth = 1;
+  // Define extra var & array for Year
+  // 2 parallel lists for case like: new year
+  int currentMonth = DateTime.now().month;
   List<int> monthList = [];
+  int currentYear = DateTime.now().year;
+  List<int> yearList = [];
 
   @override
   void initState() {
-    currentMonth = DateTime.now().month;
-    monthList.add(currentMonth);
-    for (int i = 1; i <= 11; i++) {
-      currentMonth--;
+    for (int i = 0; i < 12; i++) {
+      // If currentMonth is 0 then it means we have to now get values from previous year
       if (currentMonth == 0) {
         currentMonth = 12;
+        // If currentMonth is 12 then it means we have to now get values from previous year
+        // as January - 1 = December i.e. 12
+        currentYear = DateTime.now().year - 1;
       }
       monthList.add(currentMonth);
+      yearList.add(currentYear);
+      currentMonth--;
     }
   }
 
@@ -162,51 +193,67 @@ class _ScrollableMonthsState extends State<ScrollableMonths> {
   Widget build(BuildContext context) {
     return Container(
         height: 100,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 12,
-          itemBuilder: (context, index) {
-            final DateTime dateTime =
-                DateTime(DateTime.now().year, monthList[index], 1);
-            final String monthAbbreviation =
-                DateFormat('MMM').format(dateTime).toUpperCase();
-            bool isSelected = selectedContainerIndex == index;
+        child: Consumer<HistoryScrollableDateProvider>(
+            builder: (context, provider, child) {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 12,
+            itemBuilder: (context, index) {
+              final DateTime dateTime =
+                  DateTime(DateTime.now().year, monthList[index], 1);
+              final String monthAbbreviation =
+                  DateFormat('MMM').format(dateTime).toUpperCase();
+              bool isSelected = provider.selectedContainerIndex == index;
 
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedContainerIndex = index; // Update the selected index.
-                });
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 4.0,
-                ),
-                child: Center(
-                    child: Column(
-                  children: [
-                    Text(
-                      monthAbbreviation,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: isSelected ? Colors.white : Colors.grey),
-                    ),
-                    if (isSelected)
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
+              return GestureDetector(
+                onTap: () {
+                  // To set dot and highlight date/day
+                  provider.setSelectedContainerIndex(index);
+                  // Set date, month and year to show transactions
+                  // Set date to 0, as we want to see all transactions of that month
+                  provider.setSelectedDate(0);
+                  provider.setSelectedMonth(monthList[index]);
+                  provider.setSelectedYear(yearList[index]);
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: _getScrollableContainersWidth(context),
+                    vertical: _getScrollableContainersHeight(context),
+                  ),
+                  child: Center(
+                      child: Column(
+                    children: [
+                      Text(
+                        monthAbbreviation,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: isSelected ? Colors.white : Colors.grey),
                       ),
-                  ],
-                )),
-              ),
-            );
-          },
-        ));
+                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.01, context), 0, 0)),
+                      Text(
+                        yearList[index].toString(),
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: isSelected ? Colors.white : Colors.grey),
+                      ),
+                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.018, context), 0, 0)),
+                      if (isSelected)
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                    ],
+                  )),
+                ),
+              );
+            },
+          );
+        }));
   }
 }
 
@@ -220,7 +267,6 @@ class ScrollableYears extends StatefulWidget {
 }
 
 class _ScrollableYearsState extends State<ScrollableYears> {
-  int selectedContainerIndex = 0;
   Set<int> distinctYearsSet = <int>{};
   List<int> yearList = [];
   bool isDataLoaded = false;
@@ -253,45 +299,62 @@ class _ScrollableYearsState extends State<ScrollableYears> {
 
     return Container(
         height: 100,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: yearList.length,
-          itemBuilder: (context, index) {
-            bool isSelected = selectedContainerIndex == index;
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedContainerIndex = index; // Update the selected index.
-                });
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 4.0,
-                ),
-                child: Center(
-                    child: Column(
-                  children: [
-                    Text(
-                      yearList[index].toString(),
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: isSelected ? Colors.white : Colors.grey),
-                    ),
-                    if (isSelected)
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
+        child: Consumer<HistoryScrollableDateProvider>(
+            builder: (context, provider, child) {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: yearList.length,
+            itemBuilder: (context, index) {
+              bool isSelected = provider.selectedContainerIndex == index;
+              return GestureDetector(
+                onTap: () {
+                  // To set dot and highlight date/day
+                  provider.setSelectedContainerIndex(index);
+                  // Set date, month and year to show transactions
+                  // Set date & month to 0, as we want to see all transactions of that year
+                  provider.setSelectedDate(0);
+                  provider.setSelectedMonth(0);
+                  provider.setSelectedYear(yearList[index]);
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: _getScrollableContainersWidth(context),
+                    vertical: _getScrollableContainersHeight(context),
+                  ),
+                  child: Center(
+                      child: Column(
+                    children: [
+                      Text(
+                        yearList[index].toString(),
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: isSelected ? Colors.white : Colors.grey),
                       ),
-                  ],
-                )),
-              ),
-            );
-          },
-        ));
+                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.04, context), 0, 0)),
+                      if (isSelected)
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                    ],
+                  )),
+                ),
+              );
+            },
+          );
+        }));
   }
+}
+
+_getScrollableContainersWidth(BuildContext context) {
+  return width(0.04, context);
+}
+
+_getScrollableContainersHeight(BuildContext context) {
+  return  height(0.01, context);
 }

@@ -21,4 +21,9 @@ class ColorManager {
   static Color PRIMARY_BLUE = Color(0xFF0766EB);
   static Color DARK_GREY = Color(0xFF7B848E);
   static Color BLACK_VOID = Color(0xFF030E25);
+  static Color CYAN = Color(0xFF3DC4DC);
+  // static Color FADED_BLUE = Color(0xFF766FF4);
+  static Color HOT_CORAL = Color(0xFFF45B5B);
+  static Color INCOME_GREEN = Color(0xFF56BA96);
+  static Color EXPENSE_RED = Color(0xFFFD4954);
 }
