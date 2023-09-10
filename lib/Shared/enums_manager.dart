@@ -4,3 +4,8 @@ enum Gender {
   female,
   neutral
 }
+
+enum TransactionCategory {
+  incomeExpense,
+  loanLend
+}

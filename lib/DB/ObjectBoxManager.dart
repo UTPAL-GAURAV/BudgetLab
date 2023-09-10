@@ -1,4 +1,5 @@
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/BudgetModule/History/history_entity.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
 import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/saings_entity.dart';
@@ -18,6 +19,7 @@ class ObjectBoxManager {
   static late Box<LoanLend> loanLendBox;
   static late Box<Metadata> metadataBox;
   static late Box<Savings> savingsBox;
+  static late Box<History> historyBox;
 
   static Future<void> openObjectBoxStore() async {
     // Open ObjectBox Store to use DB
@@ -31,6 +33,7 @@ class ObjectBoxManager {
       loanLendBox = ObjectBoxManager.store.box<LoanLend>();
       metadataBox = ObjectBoxManager.store.box<Metadata>();
       savingsBox = ObjectBoxManager.store.box<Savings>();
+      historyBox = ObjectBoxManager.store.box<History>();
   }
 
   static void closeObjectBoxStore() {

@@ -5,10 +5,6 @@ A new Flutter project.
 ## Team Members
 
 ### Utpal Gaurav
-### Avinash Rao
-### Renu Sri
-### Sugata Kar
-### Yukta Pandey
 
 
 flutter pub run build_runner watch --delete-conflicting-outputs 
