@@ -5,8 +5,6 @@ import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/bottomNavigationBar.dart'
     as BottomNavigationBar;
-import 'package:budgetlab/HomeModule/UI/piggyBalanceTile.dart'
-    as PiggyBalanceTile;
 import 'package:budgetlab/Shared/widgets/featuresTiles.dart' as FeaturesTiles;
 
 import 'notificationBody.dart' as NotificationBody;
@@ -45,13 +43,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
               BalanceBody.getBalanceBody(),
               FeaturesTiles.getFeaturesTiles(),
               Padding(
-                padding: EdgeInsets.fromLTRB(width(0.05, context), 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(screenWidth(0.05, context), 0, 0, 0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Notifications",
                     style:
-                    TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.028, context), fontWeight: FontWeight.bold),
+                    TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.028, context), fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -65,10 +63,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 }
 
-height(double num, BuildContext context) {
+screenHeight(double num, BuildContext context) {
   return MediaQuery.of(context).size.height * num;
 }
 
-width(double num, BuildContext context) {
+screenWidth(double num, BuildContext context) {
   return MediaQuery.of(context).size.width * num;
 }

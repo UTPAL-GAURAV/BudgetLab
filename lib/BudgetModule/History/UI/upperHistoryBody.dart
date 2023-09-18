@@ -39,8 +39,8 @@ class _UpperHistoryBodyState extends State<UpperHistoryBody> {
         children: [
           // Padding(padding: EdgeInsets.fromLTRB(0, height(0.06, context), 0, 0)),
           Padding(
-            padding: EdgeInsets.fromLTRB(width(0.04, context),
-                height(0.06, context), width(0.08, context), 0),
+            padding: EdgeInsets.fromLTRB(screenWidth(0.04, context),
+                screenHeight(0.06, context), screenWidth(0.08, context), 0),
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -48,7 +48,7 @@ class _UpperHistoryBodyState extends State<UpperHistoryBody> {
                 Text(
                   ConstantsManager.HISTORY,
                   style: TextStyle(
-                      color: Colors.white, fontSize: height(0.03, context)),
+                      color: Colors.white, fontSize: screenHeight(0.03, context)),
                 ),
                 // Padding(padding: EdgeInsets.fromLTRB(width(0.4, context), 0, 0, 0)),
                 Expanded(
@@ -87,7 +87,7 @@ class _UpperHistoryBodyState extends State<UpperHistoryBody> {
               ],
             ),
           ),
-          Padding(padding: EdgeInsets.fromLTRB(0, height(0.03, context), 0, 0)),
+          Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.03, context), 0, 0)),
           ValueListenableBuilder(
               valueListenable: showScrollableNotifier,
               builder: (context, value, widget) {

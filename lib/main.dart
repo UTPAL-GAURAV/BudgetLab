@@ -79,13 +79,14 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
 
       CategoryController categoryController = CategoryController();
       MetaDataController metaDataController = MetaDataController();
+      categoryController.addCategory(Category(isExpense: true, name: "Entertainment", icon: 'assets/images/icons/budgetCategory/theater.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Food", icon: 'assets/images/icons/budgetCategory/fast-food.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Fuel", icon: 'assets/images/icons/budgetCategory/fuel.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Rent", icon: 'assets/images/icons/budgetCategory/house.png'));
+      categoryController.addCategory(Category(isExpense: false, name: "Salary", icon: 'assets/images/icons/budgetCategory/salary.png'));
+      categoryController.addCategory(Category(isExpense: true, name: "Shopping", icon: 'assets/images/icons/budgetCategory/trolley.png'));
 
-      categoryController.addCategory(Category(isExpense: false, name: "Salary", icon: 'assets/images/icons/salary.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Food", icon: 'assets/images/icons/fast-food.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Shopping", icon: 'assets/images/icons/trolley.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Fuel", icon: 'assets/images/icons/fuel.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Rent", icon: 'assets/images/icons/house.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Entertainment", icon: 'assets/images/icons/theater.png'));
+
 
       metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "Hello User", currency: "", country: "", countryCode: 0, password: "", hideOn: false, readMessage: false));
     }

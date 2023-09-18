@@ -1,26 +1,32 @@
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/Shared/color_manager.dart';
+import 'package:budgetlab/Shared/service/providers/incomeExpense_provider.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
 getScrollableIncomeExpenseCategory(onCategorySelectedCallback) {
-  return ScrollableIncomeExpenseCategory(onCategorySelected: onCategorySelectedCallback);
+  return ScrollableIncomeExpenseCategory(
+      onCategorySelected: onCategorySelectedCallback);
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
 
 class ScrollableIncomeExpenseCategory extends StatefulWidget {
   final Function(String) onCategorySelected;
-  ScrollableIncomeExpenseCategory({Key? key, required this.onCategorySelected}) : super(key: key);
+  ScrollableIncomeExpenseCategory({Key? key, required this.onCategorySelected})
+      : super(key: key);
 
   @override
   State<ScrollableIncomeExpenseCategory> createState() =>
       _ScrollableIncomeExpenseCategoryState();
 }
 
-class _ScrollableIncomeExpenseCategoryState extends State<ScrollableIncomeExpenseCategory> {
+class _ScrollableIncomeExpenseCategoryState
+    extends State<ScrollableIncomeExpenseCategory> {
   int allCategoryListLength = 0;
   late ValueNotifier<List<Category>> allCategoryList;
 
@@ -41,28 +47,47 @@ class _ScrollableIncomeExpenseCategoryState extends State<ScrollableIncomeExpens
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<List<Category>>(
-      valueListenable: allCategoryList,
-      builder: (context, categoryList, _) {
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: List.generate(
-              categoryList.length,
-              (index) {
-                final category = categoryList[index];
-                return GestureDetector(
-                  onTap: () => widget.onCategorySelected(category.name),
-                  child: Container(
-                    margin: const EdgeInsets.all(6), // Adjust the padding between buttons
-                    child: getIconButtons(category.icon, category.name),
-                  ),
-                );
-              },
+    return Consumer<IncomeExpenseProvider>(builder: (context, provider, child) {
+      return ValueListenableBuilder<List<Category>>(
+        valueListenable: allCategoryList,
+        builder: (context, categoryList, _) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                    categoryList.length,
+                    (index) {
+                      final category = categoryList[index];
+                      bool isSelected = provider.selectedCategory == index;
+                      return GestureDetector(
+                        onTap: () => {
+                          provider.setIsIncome(!category.isExpense),
+                          provider.setSelectedCategory(index),
+                          widget.onCategorySelected(category.name)
+                        },
+                        child: Container(
+                          // Adjust the padding between buttons
+                          margin: const EdgeInsets.all(6),
+                          child: getIconButtons(category, context, isSelected),
+                        ),
+                      );
+                    },
+                  ) +
+                  [
+                    GestureDetector(
+                      onTap: () {
+                        // Handle the onTap for the last button
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(6),
+                        child: getLastIconEditButton(context),
+                      ),
+                    ),
+                  ],
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    });
   }
 }

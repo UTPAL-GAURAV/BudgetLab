@@ -55,7 +55,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                   onFieldSubmitted: (value) => AvatarService()
                       .getGenderAvatarFromName(value)
                       .then((avatarPath) => {avatar = avatarPath}),
-                )),
+                ), context),
                 WidgetManager.getTextFormField(
                   TextFormFieldConfig(
                       labelText: "Amount",
@@ -63,7 +63,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                       keyboardType: TextInputType.number,
                       maxLength: 8,
                       validatorCallback: Validator.validateLendExpenseField,
-                      onSavedCallback: (value) => amount = value!),
+                      onSavedCallback: (value) => amount = value!), context
                 ),
                 Calendar.getCalendar((value) => dateOfReturn = value),
                 WidgetManager.getTextFormField(
@@ -73,7 +73,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                       keyboardType: TextInputType.name,
                       maxLength: 100,
                       validatorCallback: Validator.validateNothing,
-                      onSavedCallback: (value) => notes = value!),
+                      onSavedCallback: (value) => notes = value!), context
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

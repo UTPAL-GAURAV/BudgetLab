@@ -55,7 +55,7 @@ class _LowerHistoryBodyState extends State<LowerHistoryBody> {
 
               return Padding(
                 padding: EdgeInsets.fromLTRB(
-                    width(0.05, context), 0, width(0.05, context), 0),
+                    screenWidth(0.05, context), 0, screenWidth(0.05, context), 0),
                 child: Column(children: [
                   ListTile(
                     leading: CircleAvatar(
@@ -69,7 +69,7 @@ class _LowerHistoryBodyState extends State<LowerHistoryBody> {
                       color: ColorManager.BLACK_VOID
                     ),),
                     subtitle: Padding(
-                      padding: EdgeInsets.fromLTRB(0,height(0.01, context),0,0),
+                      padding: EdgeInsets.fromLTRB(0,screenHeight(0.01, context),0,0),
                       child: Text(displayDate, style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500

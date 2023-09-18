@@ -19,6 +19,10 @@ class ColorManager {
   //New color themes
   static Color BACKGROUND_GREY = Color(0xFFF5F7F8);
   static Color PRIMARY_BLUE = Color(0xFF0766EB);
+  static Color FLUTTER_BLUE = Color(0xFF2196F3);
+  static Color BACKGROUND_LIGHT_BLUE = Color(0xFFB5E2FF);
+  static Color BACKGROUND_LIGHT_RED = Color(0xFFFF9194);
+  static Color BACKGROUND_LIGHT_GREEN = Color(0xFF90EE90);
   static Color DARK_GREY = Color(0xFF7B848E);
   static Color BLACK_VOID = Color(0xFF030E25);
   static Color CYAN = Color(0xFF3DC4DC);

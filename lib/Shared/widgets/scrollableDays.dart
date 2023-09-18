@@ -129,14 +129,14 @@ class _ScrollableDatesState extends State<ScrollableDates> {
                             fontWeight: FontWeight.w500,
                             color: isSelected ? Colors.white : Colors.grey),
                       ),
-                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.01, context), 0, 0)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.01, context), 0, 0)),
                       Text(
                         dateList[index].toString(),
                         style: TextStyle(
                             fontSize: 18,
                             color: isSelected ? Colors.white : Colors.grey),
                       ),
-                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.01, context), 0, 0)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.01, context), 0, 0)),
                       if (isSelected)
                         Container(
                           width: 10,
@@ -230,14 +230,14 @@ class _ScrollableMonthsState extends State<ScrollableMonths> {
                             fontWeight: FontWeight.w500,
                             color: isSelected ? Colors.white : Colors.grey),
                       ),
-                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.01, context), 0, 0)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.01, context), 0, 0)),
                       Text(
                         yearList[index].toString(),
                         style: TextStyle(
                             fontSize: 12,
                             color: isSelected ? Colors.white : Colors.grey),
                       ),
-                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.018, context), 0, 0)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.018, context), 0, 0)),
                       if (isSelected)
                         Container(
                           width: 10,
@@ -331,7 +331,7 @@ class _ScrollableYearsState extends State<ScrollableYears> {
                             fontWeight: FontWeight.w500,
                             color: isSelected ? Colors.white : Colors.grey),
                       ),
-                      Padding(padding: EdgeInsets.fromLTRB(0, height(0.04, context), 0, 0)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.04, context), 0, 0)),
                       if (isSelected)
                         Container(
                           width: 10,
@@ -352,9 +352,9 @@ class _ScrollableYearsState extends State<ScrollableYears> {
 }
 
 _getScrollableContainersWidth(BuildContext context) {
-  return width(0.04, context);
+  return screenWidth(0.04, context);
 }
 
 _getScrollableContainersHeight(BuildContext context) {
-  return  height(0.01, context);
+  return  screenHeight(0.01, context);
 }

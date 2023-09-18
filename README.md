@@ -29,3 +29,5 @@ await avatarService.getGenderAvatarFromName("Gaurav");
 
 Color codes (to set):
 Theme: #0766EB
+https://popsy.co/
+flaticons - for icons - see api

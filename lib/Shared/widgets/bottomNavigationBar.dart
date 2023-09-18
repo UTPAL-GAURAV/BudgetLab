@@ -25,7 +25,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: height(0.1, context),
+      height: screenHeight(0.1, context),
       decoration: BoxDecoration(
         color: ColorManager.PRIMARY_BACKGROUND,
       ),
@@ -48,7 +48,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 ),
                 child: Container(
                   width: double.infinity,
-                  height: height(0.088, context),
+                  height: screenHeight(0.088, context),
                   decoration: BoxDecoration(
                     color: ColorManager.PRIMARY_BACKGROUND,
                     boxShadow: const [
@@ -79,7 +79,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 icon: Icon(
                   Icons.home_rounded,
                   color: Color(0xFF9299A1),
-                  size: height(0.038, context),
+                  size: screenHeight(0.038, context),
                 ),
                 onPressed: () {
                   navigateOnBottomNavigationButtonClick(
@@ -90,7 +90,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 icon: Icon(
                   Icons.chat_bubble_rounded,
                   color: Color(0xFF9299A1),
-                  size: height(0.034, context),
+                  size: screenHeight(0.034, context),
                 ),
                 onPressed: () {
                   print('IconButton pressed ...');
@@ -103,8 +103,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                     child: Container(
-                      width: height(0.07, context),
-                      height: height(0.07, context),
+                      width: screenHeight(0.07, context),
+                      height: screenHeight(0.07, context),
                       decoration: BoxDecoration(
                         color: ColorManager.PRIMARY_BLUE,
                         border: Border.all(
@@ -118,7 +118,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                         icon: Icon(
                           Icons.add,
                           color: Colors.white,
-                          size: height(0.038, context),
+                          size: screenHeight(0.038, context),
                         ),
                         onPressed: () {
                           navigateOnBottomNavigationButtonClick(
@@ -143,7 +143,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   icon: Icon(
                     Icons.history,
                     color: Color(0xFF9299A1),
-                    size: height(0.034, context),
+                    size: screenHeight(0.034, context),
                   ),
                   onPressed: () {
                     navigateOnBottomNavigationButtonClick(
@@ -155,7 +155,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 icon: Icon(
                   Icons.settings,
                   color: Color(0xFF9299A1),
-                  size: height(0.034, context),
+                  size: screenHeight(0.034, context),
                 ),
                 onPressed: () {
                   navigateOnBottomNavigationButtonClick(

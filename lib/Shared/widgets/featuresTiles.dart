@@ -26,9 +26,9 @@ class _FeaturesTilesState extends State<FeaturesTiles> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height(0.15, context),
-      margin: EdgeInsets.all(width(0.05, context)),
-      padding: EdgeInsets.all(width(0.05, context)),
+      height: screenHeight(0.15, context),
+      margin: EdgeInsets.all(screenWidth(0.05, context)),
+      padding: EdgeInsets.all(screenWidth(0.05, context)),
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20.0))

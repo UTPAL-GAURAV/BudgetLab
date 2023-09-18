@@ -42,14 +42,14 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
                 keyboardType: TextInputType.name,
                 maxLength: 100,
                 validatorCallback: Validator.validateNothing,
-                onSavedCallback: (value) => title = value!)),
+                onSavedCallback: (value) => title = value!), context),
             WidgetManager.getTextFormField(TextFormFieldConfig(
                 labelText: "Amount",
                 hintText: " 0",
                 keyboardType: TextInputType.number,
                 maxLength: 8,
                 validatorCallback: Validator.validateLendExpenseField,
-                onSavedCallback: (value) => targetAmount = value!)),
+                onSavedCallback: (value) => targetAmount = value!), context),
             // const Text("Category"),
             // SizedBox(
             //   height: 100,

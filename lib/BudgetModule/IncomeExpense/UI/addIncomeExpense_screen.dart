@@ -1,13 +1,19 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_controller.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
+import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/SettingsModule/metadata_controller.dart';
+import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/scrollableIncomeExpenseCategory.dart';
+import 'package:budgetlab/Shared/service/providers/incomeExpense_provider.dart';
 import 'package:budgetlab/Shared/widgets/toggleButtons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
+import 'package:provider/provider.dart';
 
 import '../../../Shared/constants_manager.dart';
 import '../../../Shared/routes_manager.dart';
@@ -23,7 +29,6 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   final formKey = GlobalKey<FormState>();
   late String amount, note;
   DateTime date = DateTime.now();
-  bool isIncome = false;
   String category = 'Shopping';
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
@@ -43,66 +48,153 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(ConstantsManager.ADD_INCOME_EXPENSE),
-        ),
-        body: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-          return Column(
-            children: [
-              getToggleButtons(
-                  ["Expense", "Income"], ((value) => setState((){ isIncome = value == 1; }))),
-              WidgetManager.getTextFormField(TextFormFieldConfig(
-                  labelText: "Amount",
-                  hintText: " 0",
-                  keyboardType: TextInputType.number,
-                  maxLength: 8,
-                  validatorCallback: isIncome ? Validator.validateAmountField : Validator.validateLendExpenseField,
-                  onSavedCallback: (value) => amount = value!)),
-              WidgetManager.getTextFormField(TextFormFieldConfig(
-                  labelText: "Notes",
-                  hintText: " Tuition fees",
-                  keyboardType: TextInputType.name,
-                  maxLength: 100,
-                  validatorCallback: Validator.validateNothing,
-                  onSavedCallback: (value) => note = value!)),
-              const Text("Category"),
-              SizedBox(
-                height: 100,
-                child: getScrollableIncomeExpenseCategory((value) => category = value),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => IncomeExpenseProvider()),
+        ],
+        child: Consumer<IncomeExpenseProvider>(
+            builder: (context, provider, child) {
+          return Form(
+            key: formKey,
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text(ConstantsManager.ADD_INCOME_EXPENSE),
+                backgroundColor: ColorManager.PRIMARY_BLUE,
               ),
-              Calendar.getCalendar((value) => date = value),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  child: FloatingActionButton.extended(
-                      label: const Text("Save"),
-                      onPressed: () {
-                        formKey.currentState!.save();
-                        if (formKey.currentState!.validate()) {
-                          incomeExpenseController.addIncomeExpense(
-                            IncomeExpense(
-                                isIncome: isIncome,
-                                dateTime: date,
-                                amount: int.parse(amount),
-                                note: note,
-                                category: category),
-                          );
-                          metaDataController.updateCurrentBalance(isIncome, int.parse(amount));
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: routes['/home']!));
-                        }
-                      }),
-                ),
-              ),
-            ],
+              body: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: screenHeight(0.02, context))),
+                      SvgPicture.asset(
+                        'assets/images/illustrations/male/maleIncomeExpense.svg',
+                        fit: BoxFit.fill,
+                        height: screenHeight(0.24, context),
+                        width: screenWidth(0.9, context),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            0,
+                            screenHeight(0.02, context),
+                            0,
+                            screenHeight(0.04, context)),
+                        child: Container(
+                          // Screen sum 100 = 2 of top padding + 24 of illustration + 58 of form container
+                          height: screenHeight(0.58, context),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    screenWidth(0.02, context),
+                                    0,
+                                    screenWidth(0.02, context),
+                                    0),
+                                child: WidgetManager.getTextFormField(
+                                    TextFormFieldConfig(
+                                        labelText: "Amount",
+                                        hintText: " 0",
+                                        keyboardType: TextInputType.number,
+                                        maxLength: 8,
+                                        validatorCallback: provider.isIncome
+                                            ? Validator.validateAmountField
+                                            : Validator
+                                                .validateLendExpenseField,
+                                        onSavedCallback: (value) =>
+                                            amount = value!),
+                                    context),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    screenWidth(0.02, context),
+                                    0,
+                                    screenWidth(0.02, context),
+                                    screenHeight(0.02, context)),
+                                child: WidgetManager.getTextFormField(
+                                    TextFormFieldConfig(
+                                        labelText: "Notes",
+                                        hintText: " Shopping",
+                                        keyboardType: TextInputType.name,
+                                        maxLength: 100,
+                                        validatorCallback:
+                                            Validator.validateNothing,
+                                        onSavedCallback: (value) =>
+                                            note = value!),
+                                    context),
+                              ),
+                              // const Text("Category"),
+                              SizedBox(
+                                height: screenHeight(0.14, context),
+                                child: getScrollableIncomeExpenseCategory(
+                                    (value) => category = value),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    0,
+                                    screenHeight(0.04, context),
+                                    0,
+                                    screenHeight(0.06, context)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/icons/calendar.png',
+                                      fit: BoxFit.fill,
+                                      height: screenHeight(0.05, context),
+                                      width: screenHeight(0.05, context),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: screenWidth(0.04, context))),
+                                    Calendar.getCalendar(
+                                        (value) => date = value),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.90,
+                                child: FloatingActionButton.extended(
+                                    label: Text(
+                                      "SAVE",
+                                      style: TextStyle(
+                                          fontSize:
+                                              screenHeight(0.02, context)),
+                                    ),
+                                    backgroundColor: ColorManager.PRIMARY_BLUE,
+                                    onPressed: () {
+                                      formKey.currentState!.save();
+                                      if (formKey.currentState!.validate()) {
+                                        incomeExpenseController
+                                            .addIncomeExpense(
+                                          IncomeExpense(
+                                              isIncome: provider.isIncome,
+                                              dateTime: date,
+                                              amount: int.parse(amount),
+                                              note: note,
+                                              category: category),
+                                        );
+                                        metaDataController.updateCurrentBalance(
+                                            provider.isIncome, int.parse(amount));
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: routes['/home']!));
+                                      }
+                                    }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ),
           );
-        }),
-      ),
-    );
+        }));
   }
 }

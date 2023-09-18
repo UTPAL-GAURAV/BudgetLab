@@ -1,3 +1,5 @@
+import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/model/callback_model.dart';
@@ -10,12 +12,23 @@ import '../color_manager.dart';
 /// Global Vars to be used by Widgets //////////////////////////////////////////
 
 /// BUTTONS ////////////////////////////////////////////////////////////////////
-getIconButtons(String icon, String label) {
+getIconButtons(Category category, BuildContext context, bool isSelected) {
   return Container(
+    height: screenHeight(0.12, context),
+    constraints: BoxConstraints(
+      minWidth: 90,
+    ),
     decoration: BoxDecoration(
+      color: isSelected
+          ? category.isExpense
+              ? ColorManager.BACKGROUND_LIGHT_RED
+              : ColorManager.BACKGROUND_LIGHT_GREEN
+          : null,
       border: Border.all(
-        color: Colors.blue, // Set the border color
-        width: 1.0, // Set the border width
+        color: category.isExpense
+            ? ColorManager.EXPENSE_RED
+            : ColorManager.INCOME_GREEN, // Set the border color
+        width: 1.2, // Set the border width
       ),
       borderRadius: BorderRadius.circular(8), // Set the border radius
     ),
@@ -25,19 +38,54 @@ getIconButtons(String icon, String label) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            icon,
+            category.icon,
             fit: BoxFit.fill,
-            height: 50,
-            width: 50,
-          ), // Replace with your desired icon
-          const SizedBox(
-              height: 8), // Adjust the spacing between the icon and text
+            height: screenHeight(0.06, context),
+            width: screenHeight(0.06, context),
+          ),
+          SizedBox(
+              height: screenHeight(0.01,
+                  context)), // Adjust the spacing between the icon and text
           Text(
-            label,
+            category.name,
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: ColorManager.BLACK_VOID,
+                fontSize: screenHeight(0.02, context)),
           ), // Replace with your desired text
+        ],
+      ),
+    ),
+  );
+}
+
+getLastIconEditButton(BuildContext context) {
+  return Container(
+    height: screenHeight(0.12, context),
+    constraints: BoxConstraints(
+      minWidth: 90,
+    ),
+    decoration: BoxDecoration(
+      color: ColorManager.BACKGROUND_LIGHT_BLUE,
+      border: Border.all(
+        color: ColorManager.PRIMARY_BLUE, // Set the border color
+        width: 1.2, // Set the border width
+      ),
+      borderRadius: BorderRadius.circular(8), // Set the border radius
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/icons/edit.png',
+            fit: BoxFit.fill,
+            height: screenHeight(0.06, context),
+            width: screenHeight(0.06, context),
+          ),
         ],
       ),
     ),
@@ -65,10 +113,13 @@ getHeaderDividerSizedBox(String displayText) {
   );
 }
 
-getTextFormField(TextFormFieldConfig config) {
+getTextFormField(TextFormFieldConfig config, BuildContext context) {
   return TextFormField(
-    decoration:
-        InputDecoration(hintText: config.hintText, labelText: config.labelText),
+    style: TextStyle(fontSize: screenHeight(0.02, context)),
+    decoration: InputDecoration(
+      hintText: config.hintText,
+      labelText: config.labelText,
+    ),
     keyboardType: config.keyboardType,
     maxLength: config.maxLength,
     validator: (value) {
@@ -84,11 +135,10 @@ getTextFormField(TextFormFieldConfig config) {
   );
 }
 
-
-
 /// BANNERS ////////////////////////////////////////////////////////////////////
 
-getTwinBanners(String title, String subtitle, Color color, double height, double width) {
+getTwinBanners(
+    String title, String subtitle, Color color, double height, double width) {
   return Container(
     decoration: BoxDecoration(
       color: color,
@@ -103,9 +153,20 @@ getTwinBanners(String title, String subtitle, Color color, double height, double
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: ColorManager.DARK_GREY2),),
-            SizedBox(height: 10,),
-            Text(subtitle, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),)
+            Text(
+              title,
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                  color: ColorManager.DARK_GREY2),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              subtitle,
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),
+            )
           ],
         ),
       ),
@@ -113,7 +174,8 @@ getTwinBanners(String title, String subtitle, Color color, double height, double
   );
 }
 
-getSingleBanner(String title, String subtitle, Color color, double height, double width) {
+getSingleBanner(
+    String title, String subtitle, Color color, double height, double width) {
   return Container(
     decoration: BoxDecoration(
       color: color,
@@ -128,9 +190,20 @@ getSingleBanner(String title, String subtitle, Color color, double height, doubl
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: ColorManager.GREY),),
-            SizedBox(height: 10,),
-            Text(subtitle, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),)
+            Text(
+              title,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                  color: ColorManager.GREY),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              subtitle,
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),
+            )
           ],
         ),
       ),
