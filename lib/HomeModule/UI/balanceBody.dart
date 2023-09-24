@@ -23,6 +23,7 @@ class BalanceBody extends StatefulWidget {
 
 class _BalanceBodyState extends State<BalanceBody> {
   String currentBalance = '0';
+  String yourWorth = '0';
 
   MetaDataController metaDataController = MetaDataController();
   late ValueNotifier<List<MetaData>> metadata;
@@ -36,6 +37,7 @@ class _BalanceBodyState extends State<BalanceBody> {
 
   void fetchData() async {
     currentBalance = metaDataController.getCurrentBalance().toString();
+    yourWorth = metaDataController.getYourWorth().toString();
   }
 
   @override
@@ -49,7 +51,7 @@ class _BalanceBodyState extends State<BalanceBody> {
           Padding(
             padding: EdgeInsets.fromLTRB(width(0.04, context),
                 height(0.04, context), width(0.04, context), 0),
-            child: _getForegroundWidget(context, currentBalance),
+            child: _getForegroundWidget(context, currentBalance, yourWorth),
           ),
         ]));
   }
@@ -75,13 +77,13 @@ _getBackgroundWidget(BuildContext context) {
   );
 }
 
-_getForegroundWidget(BuildContext context, String currentBalance) {
+_getForegroundWidget(BuildContext context, String currentBalance, String yourWorth) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       _getTopUserBar(context),
       Padding(padding: EdgeInsets.fromLTRB(0, height(0.04, context), 0, 0)),
-      _getMoneyDisplayTile(context, currentBalance),
+      _getMoneyDisplayTile(context, currentBalance, yourWorth),
     ],
   );
 }
@@ -108,7 +110,7 @@ _getTopUserBar(BuildContext context) {
   );
 }
 
-_getMoneyDisplayTile(BuildContext context, String currentBalance) {
+_getMoneyDisplayTile(BuildContext context, String currentBalance, String yourWorth) {
    String currencySymbol = ConstantsManager.currencies.firstWhere((currency) => currency['currencyCode'] == 'USD')['symbol'] ?? '';
    String currencyName = ConstantsManager.currencies.firstWhere((currency) => currency['currencyCode'] == 'USD')['currencyName'] ?? '';
    ExternalApiService externalApiService = ExternalApiService();
@@ -176,7 +178,7 @@ _getMoneyDisplayTile(BuildContext context, String currentBalance) {
                     ),
                   ),
                   Text(
-                    "10000",
+                    yourWorth,
                     style:
                     TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.02, context)),
                   ),

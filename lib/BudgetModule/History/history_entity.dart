@@ -7,9 +7,12 @@ class History {
   int month;
   int date;
   int day;
-  String title;
-  int amount;
+  DateTime dateTime;
+  String name;
+  double amount;
   bool isIncome;
+  // Stores TransactionCategory in case of Loan Lend
+  // Else stores Category name in case of Income Expense
   String category;
 
   History({
@@ -18,7 +21,8 @@ class History {
     required this.month,
     required this.date,
     required this.day,
-    required this.title,
+    required this.dateTime,
+    this.name = "",
     required this.amount,
     required this.isIncome,
     required this.category

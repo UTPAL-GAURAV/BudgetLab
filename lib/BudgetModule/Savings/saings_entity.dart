@@ -4,8 +4,8 @@ import 'package:objectbox/objectbox.dart';
 class Savings {
   int id;
   String title;
-  int targetAmount;
-  int savedAmount;
+  double targetAmount;
+  double savedAmount;
   String icon;
 
   Savings({

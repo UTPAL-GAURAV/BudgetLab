@@ -13,12 +13,13 @@ String validateNameField(value) {
   return "";
 }
 
+// Validates Income - basically all incoming transactions
 String validateAmountField(value) {
   if (value == null || value.isEmpty) {
     return ConstantsManager.NOT_VALID_AMOUNT;
   }
   try {
-    value = int.parse(value);
+    value = double.parse(value);
   } catch (e) {
     return ConstantsManager.NOT_VALID_AMOUNT;
   }
@@ -29,10 +30,11 @@ String validateAmountField(value) {
   return "";
 }
 
+// Validates Expense, Lend, Investment - basically all outgoing transactions
 String validateLendExpenseField(value) {
   MetaDataController metaDataController = MetaDataController();
   String response = validateAmountField(value);
-  if(response.isEmpty && (int.parse(value) > metaDataController.getCurrentBalance())) {
+  if(response.isEmpty && (double.parse(value) > metaDataController.getCurrentBalance())) {
     return ConstantsManager.NOT_ENOUGH_BALANCE;
   }
   return response;

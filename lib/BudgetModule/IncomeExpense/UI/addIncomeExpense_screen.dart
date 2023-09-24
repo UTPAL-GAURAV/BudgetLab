@@ -1,8 +1,9 @@
+import 'package:budgetlab/BudgetModule/History/history_entity.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_controller.dart';
-import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/Shared/color_manager.dart';
+import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/scrollableIncomeExpenseCategory.dart';
 import 'package:budgetlab/Shared/service/providers/incomeExpense_provider.dart';
@@ -28,8 +29,8 @@ class AddIncomeExpenseScreen extends StatefulWidget {
 class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
   final formKey = GlobalKey<FormState>();
   late String amount, note;
-  DateTime date = DateTime.now();
-  String category = 'Shopping';
+  DateTime dateTime = DateTime.now();
+  String category = '';
 
   IncomeExpenseController incomeExpenseController = IncomeExpenseController();
   MetaDataController metaDataController = MetaDataController();
@@ -52,8 +53,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
         providers: [
           ChangeNotifierProvider(create: (_) => IncomeExpenseProvider()),
         ],
-        child: Consumer<IncomeExpenseProvider>(
-            builder: (context, provider, child) {
+        child: Consumer<IncomeExpenseProvider>(builder: (context, provider, child) {
           return Form(
             key: formKey,
             child: Scaffold(
@@ -61,14 +61,11 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                 title: const Text(ConstantsManager.ADD_INCOME_EXPENSE),
                 backgroundColor: ColorManager.PRIMARY_BLUE,
               ),
-              body: StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
+              body: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              top: screenHeight(0.02, context))),
+                      Padding(padding: EdgeInsets.only(top: screenHeight(0.02, context))),
                       SvgPicture.asset(
                         'assets/images/illustrations/male/maleIncomeExpense.svg',
                         fit: BoxFit.fill,
@@ -76,11 +73,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                         width: screenWidth(0.9, context),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            0,
-                            screenHeight(0.02, context),
-                            0,
-                            screenHeight(0.04, context)),
+                        padding: EdgeInsets.fromLTRB(0, screenHeight(0.02, context), 0, screenHeight(0.04, context)),
                         child: Container(
                           // Screen sum 100 = 2 of top padding + 24 of illustration + 58 of form container
                           height: screenHeight(0.58, context),
@@ -88,30 +81,22 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    screenWidth(0.02, context),
-                                    0,
-                                    screenWidth(0.02, context),
-                                    0),
+                                padding:
+                                    EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
                                 child: WidgetManager.getTextFormField(
                                     TextFormFieldConfig(
                                         labelText: "Amount",
                                         hintText: " 0",
                                         keyboardType: TextInputType.number,
                                         maxLength: 8,
-                                        validatorCallback: provider.isIncome
+                                        validatorCallback: provider.transactionType.name == TransactionType.income.name
                                             ? Validator.validateAmountField
-                                            : Validator
-                                                .validateLendExpenseField,
-                                        onSavedCallback: (value) =>
-                                            amount = value!),
+                                            : Validator.validateLendExpenseField,
+                                        onSavedCallback: (value) => amount = value!),
                                     context),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    screenWidth(0.02, context),
-                                    0,
-                                    screenWidth(0.02, context),
+                                padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context),
                                     screenHeight(0.02, context)),
                                 child: WidgetManager.getTextFormField(
                                     TextFormFieldConfig(
@@ -119,24 +104,18 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                         hintText: " Shopping",
                                         keyboardType: TextInputType.name,
                                         maxLength: 100,
-                                        validatorCallback:
-                                            Validator.validateNothing,
-                                        onSavedCallback: (value) =>
-                                            note = value!),
+                                        validatorCallback: Validator.validateNothing,
+                                        onSavedCallback: (value) => note = value!),
                                     context),
                               ),
                               // const Text("Category"),
                               SizedBox(
                                 height: screenHeight(0.14, context),
-                                child: getScrollableIncomeExpenseCategory(
-                                    (value) => category = value),
+                                child: getScrollableIncomeExpenseCategory((value) => category = value),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    0,
-                                    screenHeight(0.04, context),
-                                    0,
-                                    screenHeight(0.06, context)),
+                                padding:
+                                    EdgeInsets.fromLTRB(0, screenHeight(0.04, context), 0, screenHeight(0.06, context)),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -146,11 +125,8 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                       height: screenHeight(0.05, context),
                                       width: screenHeight(0.05, context),
                                     ),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: screenWidth(0.04, context))),
-                                    Calendar.getCalendar(
-                                        (value) => date = value),
+                                    Padding(padding: EdgeInsets.only(left: screenWidth(0.04, context))),
+                                    Calendar.getCalendar((value) => dateTime = value),
                                   ],
                                 ),
                               ),
@@ -159,29 +135,30 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                 child: FloatingActionButton.extended(
                                     label: Text(
                                       "SAVE",
-                                      style: TextStyle(
-                                          fontSize:
-                                              screenHeight(0.02, context)),
+                                      style: TextStyle(fontSize: screenHeight(0.02, context)),
                                     ),
                                     backgroundColor: ColorManager.PRIMARY_BLUE,
                                     onPressed: () {
                                       formKey.currentState!.save();
                                       if (formKey.currentState!.validate()) {
-                                        incomeExpenseController
-                                            .addIncomeExpense(
-                                          IncomeExpense(
-                                              isIncome: provider.isIncome,
-                                              dateTime: date,
-                                              amount: int.parse(amount),
-                                              note: note,
+                                        incomeExpenseController.addIncomeExpense(
+                                          History(
+                                              year: dateTime.year,
+                                              month: dateTime.month,
+                                              date: dateTime.day,
+                                              day: dateTime.weekday,
+                                              dateTime: dateTime,
+                                              name: note,
+                                              amount: double.parse(amount),
+                                              isIncome:
+                                                  provider.transactionType.name == TransactionType.income.name ? true : false,
                                               category: category),
                                         );
                                         metaDataController.updateCurrentBalance(
-                                            provider.isIncome, int.parse(amount));
+                                            provider.transactionType.name == TransactionType.income.name,
+                                            double.parse(amount), provider.transactionType.name != TransactionType.investment.name);
                                         Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: routes['/home']!));
+                                            context, MaterialPageRoute(builder: routes['/home']!));
                                       }
                                     }),
                               ),

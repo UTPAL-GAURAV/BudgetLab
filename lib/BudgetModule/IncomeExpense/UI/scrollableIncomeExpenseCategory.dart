@@ -1,10 +1,13 @@
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/Shared/color_manager.dart';
+import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:budgetlab/Shared/service/providers/incomeExpense_provider.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../Shared/routes_manager.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
@@ -61,14 +64,14 @@ class _ScrollableIncomeExpenseCategoryState
                       bool isSelected = provider.selectedCategory == index;
                       return GestureDetector(
                         onTap: () => {
-                          provider.setIsIncome(!category.isExpense),
+                          provider.setTransactionType(parseTransactionType(category.transactionType)),
                           provider.setSelectedCategory(index),
                           widget.onCategorySelected(category.name)
                         },
                         child: Container(
                           // Adjust the padding between buttons
                           margin: const EdgeInsets.all(6),
-                          child: getIconButtons(category, context, isSelected),
+                          child: getIconWithLabelButtons(category, context, isSelected),
                         ),
                       );
                     },
@@ -76,7 +79,8 @@ class _ScrollableIncomeExpenseCategoryState
                   [
                     GestureDetector(
                       onTap: () {
-                        // Handle the onTap for the last button
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: routes['/category']!));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(6),

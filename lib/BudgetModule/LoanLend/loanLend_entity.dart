@@ -6,7 +6,7 @@ class LoanLend {
   bool isLoan;
   DateTime dateTime;
   DateTime dateOfReturn;
-  int amount;
+  double amount;
   String name;
   String note;
   String phone;

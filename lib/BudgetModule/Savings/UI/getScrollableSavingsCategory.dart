@@ -55,7 +55,7 @@ class _ScrollableSavingsCategoryState extends State<ScrollableSavingsCategory> {
                   onTap: () => widget.onCategorySelectedCallback(category.icon),
                   child: Container(
                     margin: const EdgeInsets.all(6), // Adjust the padding between buttons
-                    child: getIconButtons(category, context, false),
+                    child: getIconWithLabelButtons(category, context, false),
                   ),
                 );
               },

@@ -1,11 +1,13 @@
 
 import 'package:flutter/cupertino.dart';
 
+import '../../enums_manager.dart';
+
 class IncomeExpenseProvider extends ChangeNotifier {
-  bool _isIncome = false;
-  bool get isIncome => _isIncome;
-  void setIsIncome(bool isIncome) {
-    _isIncome = isIncome;
+  TransactionType _transactionType = TransactionType.expense;
+  TransactionType get transactionType => _transactionType;
+  void setTransactionType(TransactionType transactionType) {
+    _transactionType = transactionType;
     notifyListeners();
   }
 

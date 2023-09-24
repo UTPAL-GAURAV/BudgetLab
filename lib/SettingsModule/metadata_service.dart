@@ -12,15 +12,29 @@ class MetadataService {
     return metadataRepository.updateMetadata(metadata);
   }
 
-  int getCurrentBalance(){
+  // Current Balance
+  double getCurrentBalance(){
     return metadataRepository.getCurrentBalance();
   }
 
-  int addToCurrentBalance(int amount) {
+  int addToCurrentBalance(double amount) {
     return metadataRepository.addToCurrentBalance(amount);
   }
 
-  int subtractToCurrentBalance(int amount) {
+  int subtractToCurrentBalance(double amount) {
     return metadataRepository.subtractToCurrentBalance(amount);
+  }
+
+  // Your Worth
+  double getYourWorth(){
+    return metadataRepository.getYourWorth();
+  }
+
+  int addToYourWorth(double amount) {
+    return metadataRepository.addToYourWorth(amount);
+  }
+
+  int subtractToYourWorth(double amount) {
+    return metadataRepository.subtractToYourWorth(amount);
   }
 }

@@ -29,7 +29,7 @@
     },
     {
       "id": "2:1588695050128735560",
-      "lastPropertyId": "4:3292258396681020156",
+      "lastPropertyId": "12:6137395167917117920",
       "name": "Category",
       "properties": [
         {
@@ -37,11 +37,6 @@
           "name": "id",
           "type": 6,
           "flags": 1
-        },
-        {
-          "id": "2:2752402896608338538",
-          "name": "isExpense",
-          "type": 1
         },
         {
           "id": "3:2832366461472518905",
@@ -52,45 +47,46 @@
           "id": "4:3292258396681020156",
           "name": "icon",
           "type": 9
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "3:1358053335749135773",
-      "lastPropertyId": "6:5580495707262040883",
-      "name": "IncomeExpense",
-      "properties": [
-        {
-          "id": "1:7685506308775661417",
-          "name": "id",
-          "type": 6,
-          "flags": 1
         },
         {
-          "id": "2:7430617893173994657",
-          "name": "isIncome",
+          "id": "5:8479352502840281917",
+          "name": "transactionType",
+          "type": 9
+        },
+        {
+          "id": "6:5387226862446077823",
+          "name": "isCap",
           "type": 1
         },
         {
-          "id": "3:8772035493217625258",
-          "name": "dateTime",
-          "type": 10
-        },
-        {
-          "id": "4:3433267797551436833",
-          "name": "amount",
-          "type": 6
-        },
-        {
-          "id": "5:8378074971595057259",
-          "name": "note",
+          "id": "7:973907858020450545",
+          "name": "cycle",
           "type": 9
         },
         {
-          "id": "6:5580495707262040883",
-          "name": "category",
-          "type": 9
+          "id": "8:389783756576175178",
+          "name": "cycleBudget",
+          "type": 8
+        },
+        {
+          "id": "9:7963792157368934997",
+          "name": "addToNextCycle",
+          "type": 1
+        },
+        {
+          "id": "10:5778259537840492242",
+          "name": "currentCycleAmountLeft",
+          "type": 8
+        },
+        {
+          "id": "11:5520781285941322150",
+          "name": "totalCycleAmount",
+          "type": 8
+        },
+        {
+          "id": "12:6137395167917117920",
+          "name": "totalAmountSpent",
+          "type": 8
         }
       ],
       "relations": []
@@ -124,7 +120,7 @@
         {
           "id": "5:7572490216904874117",
           "name": "amount",
-          "type": 6
+          "type": 8
         },
         {
           "id": "6:472858004322395733",
@@ -168,12 +164,12 @@
         {
           "id": "2:6529066406702624820",
           "name": "currentBalance",
-          "type": 6
+          "type": 8
         },
         {
           "id": "3:7525627846413658126",
           "name": "yourWorth",
-          "type": 6
+          "type": 8
         },
         {
           "id": "4:2882924185126059228",
@@ -232,12 +228,12 @@
         {
           "id": "3:2768477032845607697",
           "name": "targetAmount",
-          "type": 6
+          "type": 8
         },
         {
           "id": "4:3986030090361302007",
           "name": "savedAmount",
-          "type": 6
+          "type": 8
         },
         {
           "id": "5:5271227194289515064",
@@ -249,7 +245,7 @@
     },
     {
       "id": "7:3987736464679128829",
-      "lastPropertyId": "9:5963598722501439673",
+      "lastPropertyId": "11:7096016491200090264",
       "name": "History",
       "properties": [
         {
@@ -279,14 +275,9 @@
           "type": 6
         },
         {
-          "id": "6:6072142397567212822",
-          "name": "title",
-          "type": 9
-        },
-        {
           "id": "7:7500993860638406761",
           "name": "amount",
-          "type": 6
+          "type": 8
         },
         {
           "id": "8:5202608559637055773",
@@ -297,20 +288,75 @@
           "id": "9:5963598722501439673",
           "name": "category",
           "type": 9
+        },
+        {
+          "id": "10:2932975207736369366",
+          "name": "dateTime",
+          "type": 10
+        },
+        {
+          "id": "11:7096016491200090264",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:322351842174973315",
+      "lastPropertyId": "5:720763880684892362",
+      "name": "CycleSavings",
+      "properties": [
+        {
+          "id": "1:2357957203855377126",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7982962980273279162",
+          "name": "categoryName",
+          "type": 9
+        },
+        {
+          "id": "3:2648301658816506991",
+          "name": "cycleName",
+          "type": 9
+        },
+        {
+          "id": "4:6864074120938655723",
+          "name": "cycleAmount",
+          "type": 8
+        },
+        {
+          "id": "5:720763880684892362",
+          "name": "savings",
+          "type": 8
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "7:3987736464679128829",
+  "lastEntityId": "8:322351842174973315",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    1358053335749135773
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    2752402896608338538,
+    6072142397567212822,
+    7685506308775661417,
+    7430617893173994657,
+    8772035493217625258,
+    3433267797551436833,
+    8378074971595057259,
+    5580495707262040883
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

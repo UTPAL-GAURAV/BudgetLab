@@ -12,14 +12,24 @@ class MetaDataController {
     return metadataService.updateMetadata(metadata);
   }
 
-  int getCurrentBalance(){
+  double getCurrentBalance(){
     return metadataService.getCurrentBalance();
   }
 
-  int updateCurrentBalance(bool isAddition, int amount) {
+  double getYourWorth(){
+    return metadataService.getYourWorth();
+  }
+
+  int updateCurrentBalance(bool isAddition, double amount, bool isChangeInWorth) {
     if(isAddition) {
+      if(isChangeInWorth) {
+        metadataService.addToYourWorth(amount);
+      }
       return metadataService.addToCurrentBalance(amount);
     } else {
+      if(isChangeInWorth) {
+        metadataService.subtractToYourWorth(amount);
+      }
       return metadataService.subtractToCurrentBalance(amount);
     }
   }

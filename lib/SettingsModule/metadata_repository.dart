@@ -12,12 +12,13 @@ class MetadataRepository {
     return ObjectBoxManager.metadataBox.put(metadata);
   }
 
-  int getCurrentBalance() {
+  // Current Balance
+  double getCurrentBalance() {
     Metadata? metadata = ObjectBoxManager.metadataBox.get(1);
     return metadata==null? 0: metadata.currentBalance;
   }
 
-  int addToCurrentBalance(int amount) {
+  int addToCurrentBalance(double amount) {
     final queryBuilder = ObjectBoxManager.metadataBox.query(Metadata_.id.equals(1));
     final entity = queryBuilder.build().findFirst();
 
@@ -28,12 +29,40 @@ class MetadataRepository {
     return -1;
   }
 
-  int subtractToCurrentBalance(int amount) {
+  int subtractToCurrentBalance(double amount) {
     final queryBuilder = ObjectBoxManager.metadataBox.query(Metadata_.id.equals(1));
     final entity = queryBuilder.build().findFirst();
 
     if(entity!=null) {
       entity.currentBalance -= amount;
+      return ObjectBoxManager.metadataBox.put(entity);
+    }
+    return -1;
+  }
+
+  // Your Worth
+  double getYourWorth() {
+    Metadata? metadata = ObjectBoxManager.metadataBox.get(1);
+    return metadata==null? 0: metadata.yourWorth;
+  }
+
+  int addToYourWorth(double amount) {
+    final queryBuilder = ObjectBoxManager.metadataBox.query(Metadata_.id.equals(1));
+    final entity = queryBuilder.build().findFirst();
+
+    if(entity!=null) {
+      entity.yourWorth += amount;
+      return ObjectBoxManager.metadataBox.put(entity);
+    }
+    return -1;
+  }
+
+  int subtractToYourWorth(double amount) {
+    final queryBuilder = ObjectBoxManager.metadataBox.query(Metadata_.id.equals(1));
+    final entity = queryBuilder.build().findFirst();
+
+    if(entity!=null) {
+      entity.yourWorth -= amount;
       return ObjectBoxManager.metadataBox.put(entity);
     }
     return -1;

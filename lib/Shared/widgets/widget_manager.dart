@@ -1,18 +1,23 @@
+import 'dart:io';
+
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
+import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/model/callback_model.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
+import 'package:provider/provider.dart';
 
 import '../color_manager.dart';
+import '../service/providers/category_provider.dart';
 
 /// Global Vars to be used by Widgets //////////////////////////////////////////
 
 /// BUTTONS ////////////////////////////////////////////////////////////////////
-getIconButtons(Category category, BuildContext context, bool isSelected) {
+getIconWithLabelButtons(Category category, BuildContext context, bool isSelected) {
   return Container(
     height: screenHeight(0.12, context),
     constraints: BoxConstraints(
@@ -20,12 +25,12 @@ getIconButtons(Category category, BuildContext context, bool isSelected) {
     ),
     decoration: BoxDecoration(
       color: isSelected
-          ? category.isExpense
+          ? category.transactionType == TransactionType.expense.name
               ? ColorManager.BACKGROUND_LIGHT_RED
               : ColorManager.BACKGROUND_LIGHT_GREEN
           : null,
       border: Border.all(
-        color: category.isExpense
+        color: category.transactionType == TransactionType.expense.name
             ? ColorManager.EXPENSE_RED
             : ColorManager.INCOME_GREEN, // Set the border color
         width: 1.2, // Set the border width
@@ -43,20 +48,46 @@ getIconButtons(Category category, BuildContext context, bool isSelected) {
             height: screenHeight(0.06, context),
             width: screenHeight(0.06, context),
           ),
-          SizedBox(
-              height: screenHeight(0.01,
-                  context)), // Adjust the spacing between the icon and text
+          SizedBox(height: screenHeight(0.01, context)), // Adjust the spacing between the icon and text
           Text(
             category.name,
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: ColorManager.BLACK_VOID,
-                fontSize: screenHeight(0.02, context)),
+            style: TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.02, context)),
           ), // Replace with your desired text
         ],
       ),
+    ),
+  );
+}
+
+getIconButtons(String path, BuildContext context, bool isSelected) {
+  return Container(
+    height: screenHeight(0.12, context),
+    width: screenHeight(0.12, context),
+    constraints: BoxConstraints(maxWidth: 80, maxHeight: 80),
+    decoration: BoxDecoration(
+      color: isSelected ? ColorManager.BACKGROUND_LIGHT_BLUE : null,
+      border: Border.all(
+        color: ColorManager.FLUTTER_BLUE, // Set the border color
+        width: 1.2, // Set the border width
+      ),
+      borderRadius: BorderRadius.circular(50), // Set the border radius
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(50), // Ensure image is clipped to the container's border
+      child: path.startsWith('assets/')
+          ? Image.asset(
+              path,
+              fit: BoxFit.fill,
+        height: screenHeight(0.01, context),
+        width: screenHeight(0.01, context),// Ensure the image covers the entire container
+            )
+          : Image.file(
+              File(path),
+              fit: BoxFit.cover, // Ensure the image covers the entire container
+            ),
     ),
   );
 }
@@ -135,10 +166,83 @@ getTextFormField(TextFormFieldConfig config, BuildContext context) {
   );
 }
 
+getTransactionTypeButtonsInARow() {
+  return Consumer<CategoryProvider>(builder: (context, provider, child) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        FloatingActionButton.extended(
+            label: const Text("Expense"),
+            icon: provider.selectedTransactionType == TransactionType.expense
+                ? Container(
+                width: 24, height: 24, child: Image.asset('assets/images/icons/expense.png'))
+                : null,
+            onPressed: () {
+              provider.setSelectedTransactionType(TransactionType.expense);
+            }),
+        FloatingActionButton.extended(
+            label: const Text("Income"),
+            icon: provider.selectedTransactionType == TransactionType.income
+                ? Container(
+                width: 24, height: 24, child: Image.asset('assets/images/icons/income.png'))
+                : null,
+            onPressed: () {
+              provider.setSelectedTransactionType(TransactionType.income);
+            }),
+        FloatingActionButton.extended(
+            label: const Text("Investment"),
+            icon: provider.selectedTransactionType == TransactionType.investment
+                ? Container(
+                width: 24, height: 24, child: Image.asset('assets/images/icons/investment.png'))
+                : null,
+            onPressed: () {
+              provider.setSelectedTransactionType(TransactionType.investment);
+            }),
+      ],
+    );
+  });
+}
+
+getBudgetCycleButtonsInARow() {
+  return Consumer<CategoryProvider>(builder: (context, provider, child) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        FloatingActionButton.extended(
+            label: Text(BudgetCycle.Weekly.name),
+            icon: provider.selectedBudgetCycle == BudgetCycle.Weekly
+                ? Container(
+                width: 24, height: 24, child: Image.asset('assets/images/icons/weekly.png'))
+                : null,
+            onPressed: () {
+              provider.setSelectedBudgetCycle(BudgetCycle.Weekly);
+            }),
+        FloatingActionButton.extended(
+            label: Text(BudgetCycle.Monthly.name),
+            icon: provider.selectedBudgetCycle == BudgetCycle.Monthly
+                ? Container(
+                width: 24, height: 24, child: Image.asset('assets/images/icons/monthly.png'))
+                : null,
+            onPressed: () {
+              provider.setSelectedBudgetCycle(BudgetCycle.Monthly);
+            }),
+        FloatingActionButton.extended(
+            label: Text(BudgetCycle.Yearly.name),
+            icon: provider.selectedBudgetCycle == BudgetCycle.Yearly
+                ? Container(
+                width: 24, height: 24, child: Image.asset('assets/images/icons/yearly.png'))
+                : null,
+            onPressed: () {
+              provider.setSelectedBudgetCycle(BudgetCycle.Yearly);
+            }),
+      ],
+    );
+  });
+}
+
 /// BANNERS ////////////////////////////////////////////////////////////////////
 
-getTwinBanners(
-    String title, String subtitle, Color color, double height, double width) {
+getTwinBanners(String title, String subtitle, Color color, double height, double width) {
   return Container(
     decoration: BoxDecoration(
       color: color,
@@ -155,10 +259,7 @@ getTwinBanners(
           children: [
             Text(
               title,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: ColorManager.DARK_GREY2),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: ColorManager.DARK_GREY2),
             ),
             SizedBox(
               height: 10,
@@ -174,8 +275,7 @@ getTwinBanners(
   );
 }
 
-getSingleBanner(
-    String title, String subtitle, Color color, double height, double width) {
+getSingleBanner(String title, String subtitle, Color color, double height, double width) {
   return Container(
     decoration: BoxDecoration(
       color: color,
@@ -192,10 +292,7 @@ getSingleBanner(
           children: [
             Text(
               title,
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: ColorManager.GREY),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: ColorManager.GREY),
             ),
             SizedBox(
               height: 10,
@@ -210,3 +307,5 @@ getSingleBanner(
     ),
   );
 }
+
+/// DROP DOWNS ////////////////////////////////////////////////////////////////////

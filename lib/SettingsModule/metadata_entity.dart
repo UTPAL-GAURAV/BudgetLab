@@ -3,8 +3,8 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class Metadata {
   int id;
-  int currentBalance;
-  int yourWorth;
+  double currentBalance;
+  double yourWorth;
   String userName;
   String currency;
   String country;

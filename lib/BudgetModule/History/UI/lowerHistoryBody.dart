@@ -63,7 +63,7 @@ class _LowerHistoryBodyState extends State<LowerHistoryBody> {
                       backgroundImage: AssetImage(
                           'assets/images/avatars/neutralGreenHair.jpg'),
                     ),
-                    title: Text(historyList[index].title, style: TextStyle(
+                    title: Text(historyList[index].name, style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                       color: ColorManager.BLACK_VOID

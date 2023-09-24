@@ -1,21 +1,10 @@
-import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_service.dart';
-
-import 'incomeExpense_entity.dart';
+import 'package:budgetlab/BudgetModule/History/history_entity.dart';
+import 'package:budgetlab/BudgetModule/History/history_service.dart';
 
 class IncomeExpenseController {
-  IncomeExpenseService incomeExpenseService = IncomeExpenseService();
-
-  List<IncomeExpense> getAllIncomeExpenseList() {
-    return incomeExpenseService.getAllIncomeExpenseList();
-  }
-
-  int addIncomeExpense(IncomeExpense incomeExpense) {
-    return incomeExpenseService.addIncomeExpense(incomeExpense);
-  }
-
-  updateIncomeExpense() {}
-
-  Future<bool> deleteIncomeExpense(int id) {
-    return incomeExpenseService.deleteIncomeExpense(id);
+  HistoryService historyService = HistoryService();
+  int addIncomeExpense(History history) {
+    //TODO: Update Category table
+    return historyService.addHistory(history);
   }
 }

@@ -7,6 +7,7 @@ import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
 
+import '../../../Shared/color_manager.dart';
 import '../../../Shared/constants_manager.dart';
 import '../../../Shared/model/TextFormFieldConfig.dart';
 import '../../../Shared/routes_manager.dart';
@@ -43,6 +44,37 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
               builder: (BuildContext context, StateSetter setState) {
             return Column(
               children: [
+                // Code of overlapped avatars to add image from gallery
+                // Stack(
+                //   children: [
+                //     CircleAvatar(
+                //       radius: 50,
+                //       backgroundImage: AssetImage(provider.selectedImage),
+                //       backgroundColor: ColorManager.FLUTTER_BLUE,
+                //     ),
+                //     Positioned(
+                //       bottom: 0, // Adjust this value to control the position
+                //       right: 0, // Adjust this value to control the position
+                //       child: CircleAvatar(
+                //         radius: 20,
+                //         child: GestureDetector(
+                //           onTap: () async {
+                //             Map<Permission, PermissionStatus> statuses = await [
+                //               Permission.storage,
+                //             ].request();
+                //             if (statuses[Permission.storage]!.isGranted) {}
+                //             final xFile = await galleryService.getImageFromGallery(); // Open gallery when CircleAvatar is tapped
+                //             provider.setSelectedImage(xFile.path);
+                //           },
+                //           child: CircleAvatar(
+                //             radius: 20,
+                //             backgroundImage: AssetImage('assets/images/icons/budgetCategory/piggy.png'),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 getToggleButtons(
                     ["Loan", "Lend"], ((value) => isLoan = value == 0)),
                 WidgetManager.getTextFormField(TextFormFieldConfig(
@@ -88,13 +120,13 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                                 isLoan: isLoan,
                                 dateTime: DateTime.now(),
                                 dateOfReturn: dateOfReturn,
-                                amount: int.parse(amount),
+                                amount: double.parse(amount),
                                 name: name,
                                 note: notes,
                                 phone: "",
                                 returnStatus: "",
                                 genderEmoji: avatar));
-                            metaDataController.updateCurrentBalance(isLoan, int.parse(amount));
+                            metaDataController.updateCurrentBalance(isLoan, double.parse(amount), false);
                             Navigator.of(context).pop();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: routes['/loanLend']!));

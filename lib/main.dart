@@ -3,6 +3,7 @@ import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/SettingsModule/metadata_entity.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
+import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -79,12 +80,12 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
 
       CategoryController categoryController = CategoryController();
       MetaDataController metaDataController = MetaDataController();
-      categoryController.addCategory(Category(isExpense: true, name: "Entertainment", icon: 'assets/images/icons/budgetCategory/theater.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Food", icon: 'assets/images/icons/budgetCategory/fast-food.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Fuel", icon: 'assets/images/icons/budgetCategory/fuel.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Rent", icon: 'assets/images/icons/budgetCategory/house.png'));
-      categoryController.addCategory(Category(isExpense: false, name: "Salary", icon: 'assets/images/icons/budgetCategory/salary.png'));
-      categoryController.addCategory(Category(isExpense: true, name: "Shopping", icon: 'assets/images/icons/budgetCategory/trolley.png'));
+      categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Entertainment", icon: 'assets/images/icons/budgetCategory/theater.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
+      categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Food", icon: 'assets/images/icons/budgetCategory/fast-food.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
+      categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Fuel", icon: 'assets/images/icons/budgetCategory/fuel.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
+      categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Rent", icon: 'assets/images/icons/budgetCategory/house.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
+      categoryController.addCategory(Category(transactionType: TransactionType.income.name, name: "Salary", icon: 'assets/images/icons/budgetCategory/salary.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
+      categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Shopping", icon: 'assets/images/icons/budgetCategory/trolley.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
 
 
 

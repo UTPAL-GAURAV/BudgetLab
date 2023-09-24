@@ -1,6 +1,6 @@
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/BudgetModule/Budgets/Cycles/cycleSavings_entity.dart';
 import 'package:budgetlab/BudgetModule/History/history_entity.dart';
-import 'package:budgetlab/BudgetModule/IncomeExpense/incomeExpense_entity.dart';
 import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/saings_entity.dart';
 import 'package:budgetlab/SettingsModule/metadata_entity.dart';
@@ -15,7 +15,7 @@ class ObjectBoxManager {
   static late Store store;
   static late Box<Budget> budgetBox;
   static late Box<Category> categoryBox;
-  static late Box<IncomeExpense> incomeExpenseBox;
+  static late Box<CycleSavings> cycleSavingsBox;
   static late Box<LoanLend> loanLendBox;
   static late Box<Metadata> metadataBox;
   static late Box<Savings> savingsBox;
@@ -29,7 +29,7 @@ class ObjectBoxManager {
       // Create Box of all entities
       budgetBox = ObjectBoxManager.store.box<Budget>();
       categoryBox = ObjectBoxManager.store.box<Category>();
-      incomeExpenseBox = ObjectBoxManager.store.box<IncomeExpense>();
+      cycleSavingsBox = ObjectBoxManager.store.box<CycleSavings>();
       loanLendBox = ObjectBoxManager.store.box<LoanLend>();
       metadataBox = ObjectBoxManager.store.box<Metadata>();
       savingsBox = ObjectBoxManager.store.box<Savings>();

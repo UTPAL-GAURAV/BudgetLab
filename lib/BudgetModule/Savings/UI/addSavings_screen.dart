@@ -66,7 +66,7 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
                       if (formKey.currentState!.validate()) {
                         savingsController.addSavings(Savings(
                             title: title,
-                            targetAmount: int.parse(targetAmount),
+                            targetAmount: double.parse(targetAmount),
                             icon: icon,
                             savedAmount: 0));
                         Navigator.pushReplacement(context,
