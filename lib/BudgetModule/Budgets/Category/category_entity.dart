@@ -7,7 +7,7 @@ class Category {
   String name;  // Unique
   String icon;
   bool isCap;
-  String cycle; //repeats
+  String cycle; //repeats, enum is BudgetCycle
   double cycleBudget;
   bool addToNextCycle;
   double currentCycleAmountLeft;

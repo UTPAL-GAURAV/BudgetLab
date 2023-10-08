@@ -3,6 +3,7 @@ import 'package:budgetlab/BudgetModule/History/UI/history_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/widgets.dart';
 
+import '../BudgetModule/Budgets/Budget/UI/budget_screen.dart';
 import '../BudgetModule/Budgets/Category/UI/category_screen.dart';
 import '../BudgetModule/LoanLend/UI/addLoanLend_screen.dart';
 import '../BudgetModule/LoanLend/UI/loanLendHome_screen.dart';
@@ -19,6 +20,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/addIncomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
   '/category': (BuildContext context) => const CategoryScreen(showDeleteButton: false),
   '/history': (BuildContext context) => const HistoryScreen(),
+  '/budget': (BuildContext context) => const BudgetScreen(),
   '/savings': (BuildContext context) => const SavingsHomeScreen(),
   '/addSavings': (BuildContext context) => const AddSavingsScreen()
   // add more routes as needed

@@ -39,7 +39,7 @@ class _FeaturesTilesState extends State<FeaturesTiles> {
           children: [
             _getLoanLendIconTile(context),
             _getSavingsIconTile(context),
-            getTransactionIconTile(context),
+            getBudgetIconTile(context),
           ],
         )
       ,
@@ -118,7 +118,7 @@ _getSavingsIconTile(context) {
   );
 }
 
-getTransactionIconTile(context) {
+getBudgetIconTile(context) {
   return SizedBox(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -127,7 +127,7 @@ getTransactionIconTile(context) {
           heroTag: "tag3",
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: routes['/transactions']!));
+                context, MaterialPageRoute(builder: routes['/budget']!));
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(

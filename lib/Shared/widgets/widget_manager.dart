@@ -308,4 +308,44 @@ getSingleBanner(String title, String subtitle, Color color, double height, doubl
   );
 }
 
-/// DROP DOWNS ////////////////////////////////////////////////////////////////////
+/// LABELS ////////////////////////////////////////////////////////////////////
+
+Container getBudgetMessageForUser(double budgetUsedInPercentage, BuildContext context) {
+  String message = "You're doing great!";
+
+  if(budgetUsedInPercentage >= 1.0) {
+    message = "Hey! Take a break";
+  } else if(budgetUsedInPercentage > 0.8) {
+    message = "Slow down buddy!";
+  }
+
+  return Container(
+    child: Row(
+      children: [
+        Text(message, style: TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.016, context)),),
+        Padding(padding: EdgeInsets.only(left: screenWidth(0.026, context))),
+        getBudgetIconForUser(budgetUsedInPercentage, context),
+      ],
+    ),
+  );
+}
+
+getBudgetIconForUser(double budgetUsedInPercentage, BuildContext context) {
+  String path = 'assets/images/icons/like.png';
+
+  if(budgetUsedInPercentage >= 1.0) {
+    path = "assets/images/icons/no-money.png";
+  } else if(budgetUsedInPercentage > 0.8) {
+    path = "assets/images/icons/warning.png";
+  }
+
+  return Container(
+    padding: EdgeInsets.only(bottom: screenHeight(0.006, context)),
+    child: Image.asset(
+      path,
+      fit: BoxFit.fill,
+      height: screenHeight(0.02, context),
+      width: screenHeight(0.02, context),// Ensure the image covers the entire container
+    ),
+  );
+}

@@ -16,4 +16,8 @@ class CategoryController {
   Future<bool> deleteCategory(int id) {
     return categoryService.deleteCategory(id);
   }
+
+  updateAmountOfCategory(String category, double amountSpent) {
+    return categoryService.updateAmountOfCategory(category, amountSpent);
+  }
 }

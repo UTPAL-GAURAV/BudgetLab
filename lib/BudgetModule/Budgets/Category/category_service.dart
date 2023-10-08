@@ -16,4 +16,11 @@ class CategoryService {
   Future<bool> deleteCategory(int id) {
     return categoryRepository.deleteCategory(id);
   }
+
+  int updateAmountOfCategory(String name, double amountSpent) {
+    Category category = categoryRepository.getCategoryByName(name);
+    category.totalAmountSpent = category.totalAmountSpent + amountSpent;
+    category.currentCycleAmountLeft = category.currentCycleAmountLeft - amountSpent;
+    return categoryRepository.addOrUpdateCategory(category);
+  }
 }

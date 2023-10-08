@@ -4,6 +4,7 @@ class ConstantsManager {
   static const String CONTENT = "CONTENT";
   static const String LOAN_LEND = "Loan/Lend";
   static const String INCOME_EXPENSE = "Transactions";
+  static const String BUDGET = "Budget";
   static const String SAVINGS = "Savings";
   static const String ADD_SAVINGS = "Add Savings";
   static const String ADD_LOAN_LEND = "Add Loan/Lend";

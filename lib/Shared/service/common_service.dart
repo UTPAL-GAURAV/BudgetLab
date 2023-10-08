@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:budgetlab/Shared/service/localStorage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+
+import '../enums_manager.dart';
 
 height(double num, BuildContext context) {
   return MediaQuery.of(context).size.height * num;
@@ -44,4 +48,44 @@ Future<List<String>> _getAssetImages(String assetPath) async {
   }
 
   return assetImages;
+}
+
+Color getBudgetProgressBarColor(double budgetUsedInPercentage) {
+  if (budgetUsedInPercentage >= 1) {
+    return ColorManager.HOT_CORAL;
+  } else if (budgetUsedInPercentage >= 0.8) {
+    return ColorManager.MUSTARD;
+  }
+  return ColorManager.PROGRESS_BLUE;
+}
+
+Color getRandomLightColor(String input) {
+  const int colorCountInList = 6;
+  int i = input.hashCode % colorCountInList;
+  // Avoid Red & Green colors, as it gives wrong impression
+  List<Color> colorList = [
+    ColorManager.LIGHT_CYAN,
+    ColorManager.LIGHTER_PURPLE,
+    ColorManager.LIGHT_BLUE,
+    ColorManager.LIGHT_MAGENTA,
+    ColorManager.LIGHT_YELLOW,
+    ColorManager.LIGHT_ORANGE,
+  ];
+  return colorList[i];
+}
+
+String getCurrentCycleDateFormat(String cycle) {
+  if(cycle == BudgetCycle.Weekly.name) {
+    final now = DateTime.now();
+    // Format the dates as required
+    final formatter = DateFormat('dd MMM');
+    // Calculate date of the previous Monday
+    final formattedPreviousMonday = formatter.format(now.subtract(Duration(days: now.weekday - 1)));
+    // Calculate date of the upcoming Sunday
+    final formattedUpcomingSunday = formatter.format(now.add(Duration(days: 7 - now.weekday)));
+    return "${formattedPreviousMonday} - ${formattedUpcomingSunday}";
+  } else if(cycle == BudgetCycle.Monthly.name) {
+    return DateFormat('MMM, yyyy').format(DateTime.now());
+  }
+  return "Year ${DateTime.now().year}";
 }
