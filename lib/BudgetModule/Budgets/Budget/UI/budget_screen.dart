@@ -2,6 +2,7 @@
 import 'package:budgetlab/BudgetModule/Budgets/Budget/UI/unCappedBudget.dart';
 import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../HomeModule/UI/homePage_screen.dart';
 import '../../../../Shared/routes_manager.dart';
@@ -25,8 +26,9 @@ class _BudgetScreenState extends State<BudgetScreen> {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: routes['/category']!));
+                GoRouter.of(context).pushNamed('category');
+                // Navigator.push(
+                //     context, MaterialPageRoute(builder: routes['/category']!));
               },
             ),
           ],

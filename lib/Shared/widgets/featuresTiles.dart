@@ -2,6 +2,7 @@
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../HomeModule/UI/homePage_screen.dart';
 import '../color_manager.dart';
@@ -58,8 +59,9 @@ _getLoanLendIconTile(context) {
         FloatingActionButton(
           heroTag: "tag1",
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: routes['/loanLend']!));
+            GoRouter.of(context).pushNamed('loanLend');
+            // Navigator.push(
+            //     context, MaterialPageRoute(builder: routes['/loanLend']!));
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(
@@ -126,8 +128,9 @@ getBudgetIconTile(context) {
         FloatingActionButton(
           heroTag: "tag3",
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: routes['/budget']!));
+            GoRouter.of(context).pushNamed('budget');
+            // Navigator.push(
+            //     context, MaterialPageRoute(builder: routes['/budget']!));
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(

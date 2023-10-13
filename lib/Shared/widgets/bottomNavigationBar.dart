@@ -2,8 +2,7 @@ import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/material.dart';
-
-int currentBottomNavigationBarIndex = 0;
+import 'package:go_router/go_router.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
@@ -171,26 +170,20 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
 }
 
 void navigateOnBottomNavigationButtonClick(int index, BuildContext context) {
-  if (RoutesManager.currentBottomNavigationBarIndex == index) {
-    return; // Do nothing if the selected index is already the current index
-  }
-  RoutesManager.currentBottomNavigationBarIndex = index;
-
   switch (index) {
     case 0:
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: routes['/home']!));
+      GoRouter.of(context).pushNamed('home');
       break;
     case 1:
       break;
     case 2:
-      pushCurrentRouteOnHomeRoute(context, '/addIncomeExpense');
+      pushCurrentRouteOnHomeRoute(context, 'addIncomeExpense');
       break;
     case 3:
-      pushCurrentRouteOnHomeRoute(context, '/history');
+      pushCurrentRouteOnHomeRoute(context, 'history');
       break;
     case 4:
-      pushCurrentRouteOnHomeRoute(context, '/settings');
+      pushCurrentRouteOnHomeRoute(context, 'settings');
       break;
     default:
       break;
@@ -200,14 +193,8 @@ void navigateOnBottomNavigationButtonClick(int index, BuildContext context) {
 /// Used for BottomNavigationBar buttons
 /// Replace all routes with Home and put current route on top of Home
 void pushCurrentRouteOnHomeRoute(BuildContext context, String routePage) {
-  Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(builder: routes['/home']!),
-    (route) => false,
-  );
-
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: routes[routePage]!),
-  );
+  while (GoRouter.of(context).canPop()) {
+    GoRouter.of(context).pop();
+  }
+  GoRouter.of(context).pushNamed(routePage);
 }

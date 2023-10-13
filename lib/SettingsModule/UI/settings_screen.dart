@@ -19,13 +19,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void initState() {
-    RoutesManager.currentBottomNavigationBarIndex = 4;
     super.initState();
   }
 
   @override
   void dispose() {
-    RoutesManager.currentBottomNavigationBarIndex = 0;
     super.dispose();
   }
 

@@ -29,6 +29,8 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  _CategoryScreenState({required this.showDeleteButton});
+
   GalleryService galleryService = GalleryService();
   CategoryController categoryController = CategoryController();
   final formKey = GlobalKey<FormState>();
@@ -38,8 +40,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
   bool addToNextCycle = true;
   late String budgetCycleAmount, categoryName, selectedIcon;
   bool showDeleteButton = false;
-
-  _CategoryScreenState({required this.showDeleteButton});
 
   @override
   Widget build(BuildContext context) {
