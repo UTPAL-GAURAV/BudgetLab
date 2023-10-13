@@ -19,7 +19,6 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
-    RoutesManager.currentBottomNavigationBarIndex = 0;
     super.initState();
   }
 

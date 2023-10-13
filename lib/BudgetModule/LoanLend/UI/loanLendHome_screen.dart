@@ -5,6 +5,7 @@ import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
+import 'package:go_router/go_router.dart';
 
 class LoanLendHomeScreen extends StatefulWidget {
   const LoanLendHomeScreen({Key? key}) : super(key: key);
@@ -48,10 +49,11 @@ class _LoanLendHomeScreenState extends State<LoanLendHomeScreen> {
                       label: const Text("Lend/Borrow"),
                       icon: const Icon(Icons.add),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: routes['/addLoanLend']!));
+                        GoRouter.of(context).pushNamed('addLoanLend');
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: routes['/addLoanLend']!));
                       })),
             )
           ],

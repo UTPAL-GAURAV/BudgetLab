@@ -5,10 +5,12 @@ import 'package:budgetlab/SettingsModule/metadata_entity.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'DB/ObjectBoxManager.dart';
 import 'HomeModule/UI/homePage_screen.dart';
+import 'Shared/routes_manager.dart';
 
 Future<void> main() async {
   // Open DB
@@ -22,13 +24,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    // Create an instance of RoutesManager to access the router
+
+    return MaterialApp.router(
       title: ConstantsManager.APP_NAME,
       debugShowCheckedModeBanner: false,
+      routerDelegate: RoutesManager.goRouter.routerDelegate,
+      routeInformationProvider: RoutesManager.goRouter.routeInformationProvider,
+      routeInformationParser: RoutesManager.goRouter.routeInformationParser,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: ConstantsManager.APP_NAME),
+      // home: const MyHomePage(title: ConstantsManager.APP_NAME),
     );
   }
 }

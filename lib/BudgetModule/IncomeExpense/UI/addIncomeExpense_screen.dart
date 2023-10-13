@@ -37,13 +37,11 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
 
   @override
   void initState() {
-    RoutesManager.currentBottomNavigationBarIndex = 2;
     super.initState();
   }
 
   @override
   void dispose() {
-    RoutesManager.currentBottomNavigationBarIndex = 0;
     super.dispose();
   }
 

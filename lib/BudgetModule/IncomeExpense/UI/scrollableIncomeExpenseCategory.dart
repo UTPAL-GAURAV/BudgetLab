@@ -5,6 +5,7 @@ import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:budgetlab/Shared/service/providers/incomeExpense_provider.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Shared/routes_manager.dart';
@@ -79,8 +80,9 @@ class _ScrollableIncomeExpenseCategoryState
                   [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: routes['/category']!));
+                        GoRouter.of(context).pushNamed('category');
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: routes['/category']!));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(6),

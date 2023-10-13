@@ -28,13 +28,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   void initState() {
-    RoutesManager.currentBottomNavigationBarIndex = 3;
     super.initState();
   }
 
   @override
   void dispose() {
-    RoutesManager.currentBottomNavigationBarIndex = 0;
     super.dispose();
   }
 
