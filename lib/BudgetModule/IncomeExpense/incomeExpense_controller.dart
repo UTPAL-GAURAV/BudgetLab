@@ -7,8 +7,7 @@ class IncomeExpenseController {
   CategoryController categoryController = CategoryController();
 
   int addIncomeExpense(History history) {
-    //TODO: Update Category table
-    categoryController.updateAmountOfCategory(history.category, history.amount);
+    categoryController.updateAmountOfCategory(history.category, history.amount, history.dateTime);
     return historyService.addHistory(history);
   }
 }

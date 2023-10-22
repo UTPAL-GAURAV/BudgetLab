@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
+import 'package:go_router/go_router.dart';
 
 import '../../../Shared/color_manager.dart';
 import '../../../Shared/constants_manager.dart';
@@ -127,9 +128,7 @@ class _AddLoanLendScreenState extends State<AddLoanLendScreen> {
                                 returnStatus: "",
                                 genderEmoji: avatar));
                             metaDataController.updateCurrentBalance(isLoan, double.parse(amount), false);
-                            Navigator.of(context).pop();
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: routes['/loanLend']!));
+                            GoRouter.of(context).pushNamed(AppRouteConstants.loanLend);
                           }
                         }),
                   ),

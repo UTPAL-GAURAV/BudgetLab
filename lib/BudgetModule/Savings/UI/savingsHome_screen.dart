@@ -3,6 +3,7 @@ import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
+import 'package:go_router/go_router.dart';
 
 import '../../../Shared/color_manager.dart';
 import '../../../Shared/routes_manager.dart';
@@ -43,10 +44,7 @@ class _SavingsHomeScreenState extends State<SavingsHomeScreen> {
                     label: const Text("Savings"),
                     icon: const Icon(Icons.add),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: routes['/addSavings']!));
+                      GoRouter.of(context).pushNamed(AppRouteConstants.addSavings);
                     })),
           )
         ],

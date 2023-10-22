@@ -9,6 +9,7 @@ import 'package:budgetlab/Shared/service/gallery_service.dart';
 import 'package:budgetlab/Shared/service/providers/category_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -22,15 +23,13 @@ import '../../../../Shared/service/common_service.dart';
 import '../../../../Shared/widgets/widget_manager.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key, required bool showDeleteButton}) : super(key: key);
+  CategoryScreen({Key? key}) : super(key: key);
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState(showDeleteButton: false);
+  State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  _CategoryScreenState({required this.showDeleteButton});
-
   GalleryService galleryService = GalleryService();
   CategoryController categoryController = CategoryController();
   final formKey = GlobalKey<FormState>();
@@ -39,11 +38,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
   bool isExpense = true;
   bool addToNextCycle = true;
   late String budgetCycleAmount, categoryName, selectedIcon;
-  bool showDeleteButton = false;
 
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CategoryProvider()),
@@ -53,6 +50,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             key: formKey,
             child: Scaffold(
               appBar: AppBar(
+                backgroundColor: ColorManager.PRIMARY_BLUE,
                 title: Text('Category'),
               ),
               body: SingleChildScrollView(
@@ -88,25 +86,49 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           child: getScrollableCategoryIcons((value) => selectedIcon = value),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
+                          padding: EdgeInsets.fromLTRB(
+                              screenWidth(0.02, context), screenHeight(0.02, context), screenWidth(0.02, context), 0),
                           child: Row(
                             children: [
-                              const Text("CAP?"),
-                              CupertinoSwitch(
-                                  value: isBudgetCapped,
-                                  onChanged: (bool newValue) {
-                                    setState(() {
-                                      isBudgetCapped = newValue;
-                                    });
-                                  })
+                              Expanded(
+                                flex: 4,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("CAP?"),
+                                    Text(
+                                      "No max limit",
+                                      softWrap: true,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: CupertinoSwitch(
+                                    value: isBudgetCapped,
+                                    onChanged: (bool newValue) {
+                                      setState(() {
+                                        isBudgetCapped = newValue;
+                                      });
+                                    }),
+                              ),
+                              Expanded(
+                                  flex: 4,
+                                  child: Text(
+                                    "Assign max limit to this budget",
+                                    softWrap: true,
+                                  )),
                             ],
                           ),
                         ),
                       ],
                     ),
                     // Visible when only Category needs to be set
+                    // Note: Transaction Type can never change.
                     Padding(
-                      padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
+                      padding: EdgeInsets.fromLTRB(
+                          screenWidth(0.02, context), screenHeight(0.02, context), screenWidth(0.02, context), 0),
                       child: Visibility(
                         visible: !isBudgetCapped,
                         child: Column(
@@ -129,18 +151,48 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           children: [
                             Row(
                               children: [
-                                const Text("It's an "),
-                                CupertinoSwitch(
-                                    // It can either be Expense or Investment, because Income should not be capped
-                                    value: isExpense,
-                                    onChanged: (bool newValue) {
-                                      setState(() {
-                                        isExpense = newValue;
-                                      });
-                                    })
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("It's an "),
+                                      Text(
+                                        "Expense",
+                                        softWrap: true,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: CupertinoSwitch(
+                                      // It can either be Expense or Investment, because Income should not be capped
+                                      value: !isExpense,
+                                      onChanged: (bool newValue) {
+                                        setState(() {
+                                          isExpense = !newValue;
+                                          if (isExpense == true) {
+                                            provider.setSelectedTransactionType(TransactionType.expense);
+                                          } else {
+                                            provider.setSelectedTransactionType(TransactionType.investment);
+                                          }
+                                        });
+                                      }),
+                                ),
+                                Expanded(
+                                    flex: 4,
+                                    child: Text(
+                                      "Investment",
+                                      softWrap: true,
+                                    )),
                               ],
                             ),
-                            getBudgetCycleButtonsInARow(),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: screenHeight(0.02, context), bottom: screenHeight(0.02, context)),
+                              child: getBudgetCycleButtonsInARow(),
+                            ),
                             WidgetManager.getTextFormField(
                                 TextFormFieldConfig(
                                     labelText: "${provider.selectedBudgetCycle.name} Budget",
@@ -150,18 +202,43 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     validatorCallback: Validator.validateAmountField,
                                     onSavedCallback: (value) => budgetCycleAmount = value!),
                                 context),
-                            Row(
-                              children: [
-                                const Text("Refresh? "),
-                                CupertinoSwitch(
-                                    // It can either be Expense or Investment, because Income should not be capped
-                                    value: addToNextCycle,
-                                    onChanged: (bool newValue) {
-                                      setState(() {
-                                        addToNextCycle = newValue;
-                                      });
-                                    })
-                              ],
+                            Padding(
+                              padding: EdgeInsets.only(top: screenHeight(0.02, context)),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text("Refresh? "),
+                                        const Text(
+                                          "Freash budget will start in next cycle ",
+                                          softWrap: true,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: CupertinoSwitch(
+                                        // It can either be Expense or Investment, because Income should not be capped
+                                        value: addToNextCycle,
+                                        onChanged: (bool newValue) {
+                                          setState(() {
+                                            addToNextCycle = newValue;
+                                          });
+                                        }),
+                                  ),
+                                  Expanded(
+                                    flex: 4,
+                                    child: const Text(
+                                      "leftover or extra amount spent will be adjusted in the next cycle",
+                                      softWrap: true,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -179,19 +256,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         onPressed: () {
                           formKey.currentState!.save();
                           if (formKey.currentState!.validate()) {
-                            if(!isBudgetCapped) {
+                            if (!isBudgetCapped) {
                               // Save only category
                               categoryController.addCategory(Category(
-                                  transactionType: provider.selectedTransactionType.name,
-                                  name: categoryName,
-                                  icon: selectedIcon,
-                                  isCap: false,
-                                  cycle: BudgetCycle.none.name,
-                                  cycleBudget: 0,
-                                  addToNextCycle: false,
-                                  currentCycleAmountLeft: 0,
-                                  totalCycleAmount: 0,
-                                  totalAmountSpent: 0,
+                                transactionType: provider.selectedTransactionType.name,
+                                name: categoryName,
+                                icon: selectedIcon,
+                                isCap: false,
+                                cycle: BudgetCycle.none.name,
+                                cycleBudget: 0,
+                                addToNextCycle: false,
+                                currentCycleAmountLeft: 0,
+                                totalCycleAmount: 0,
+                                totalAmountSpent: 0,
                               ));
                             } else {
                               // Save Budget
@@ -208,13 +285,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 totalAmountSpent: 0,
                               ));
                             }
-                            Navigator.pushReplacement(
-                                context, MaterialPageRoute(builder: routes['/addIncomeExpense']!));
+                            GoRouter.of(context).pushNamed(AppRouteConstants.addIncomeExpense);
                           }
                         },
                       ),
-                    )
-                    //TODO: Show delete button when user comes from budget screen
+                    ),
                   ],
                 ),
               ),

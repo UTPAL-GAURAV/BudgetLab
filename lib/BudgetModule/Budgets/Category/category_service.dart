@@ -11,10 +11,12 @@ class CategoryService {
     return categoryRepository.addOrUpdateCategory(category);
   }
 
-  updateCategory() {}
+  updateCategory(Category category, String originalName) {
+    return categoryRepository.updateCategory(category, originalName);
+  }
 
-  Future<bool> deleteCategory(int id) {
-    return categoryRepository.deleteCategory(id);
+  bool deleteCategoryByName(String categoryName) {
+    return categoryRepository.deleteCategoryByName(categoryName);
   }
 
   int updateAmountOfCategory(String name, double amountSpent) {
@@ -22,5 +24,13 @@ class CategoryService {
     category.totalAmountSpent = category.totalAmountSpent + amountSpent;
     category.currentCycleAmountLeft = category.currentCycleAmountLeft - amountSpent;
     return categoryRepository.addOrUpdateCategory(category);
+  }
+
+  String getIconOfCategoryName(categoryName) {
+    return categoryRepository.getIconOfCategoryName(categoryName);
+  }
+
+  Category getCategoryByName(categoryName) {
+    return categoryRepository.getCategoryByName(categoryName);
   }
 }

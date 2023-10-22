@@ -82,7 +82,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 ),
                 onPressed: () {
                   navigateOnBottomNavigationButtonClick(
-                      RoutesIndex.HOME.value, context);
+                      BottomNavigationBarEnum.HOME.value, context);
                 },
               ),
               IconButton(
@@ -121,7 +121,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                         ),
                         onPressed: () {
                           navigateOnBottomNavigationButtonClick(
-                              RoutesIndex.INCOME_EXPENSE.value, context);
+                              BottomNavigationBarEnum.INCOME_EXPENSE.value, context);
                         },
                       ),
                     ),
@@ -146,7 +146,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   ),
                   onPressed: () {
                     navigateOnBottomNavigationButtonClick(
-                        RoutesIndex.HISTORY.value, context);
+                        BottomNavigationBarEnum.HISTORY.value, context);
                   },
                 ),
               ),
@@ -158,7 +158,7 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                 ),
                 onPressed: () {
                   navigateOnBottomNavigationButtonClick(
-                      RoutesIndex.SETTINGS.value, context);
+                      BottomNavigationBarEnum.SETTINGS.value, context);
                 },
               ),
             ],

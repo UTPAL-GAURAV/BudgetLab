@@ -5,6 +5,7 @@ import 'callback_model.dart';
 class TextFormFieldConfig {
   final String labelText;
   final String hintText;
+  final String initialText;
   final TextInputType keyboardType;
   final int maxLength;
   final FieldValidator validatorCallback;
@@ -18,6 +19,7 @@ class TextFormFieldConfig {
     required this.maxLength,
     required this.validatorCallback,
     required this.onSavedCallback,
+    this.initialText = "",
     this.onFieldSubmitted,
   });
 }

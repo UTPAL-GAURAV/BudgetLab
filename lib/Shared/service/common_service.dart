@@ -75,7 +75,7 @@ Color getRandomLightColor(String input) {
 }
 
 String getCurrentCycleDateFormat(String cycle) {
-  if(cycle == BudgetCycle.Weekly.name) {
+  if (cycle == BudgetCycle.Weekly.name) {
     final now = DateTime.now();
     // Format the dates as required
     final formatter = DateFormat('dd MMM');
@@ -84,8 +84,31 @@ String getCurrentCycleDateFormat(String cycle) {
     // Calculate date of the upcoming Sunday
     final formattedUpcomingSunday = formatter.format(now.add(Duration(days: 7 - now.weekday)));
     return "${formattedPreviousMonday} - ${formattedUpcomingSunday}";
-  } else if(cycle == BudgetCycle.Monthly.name) {
+  } else if (cycle == BudgetCycle.Monthly.name) {
     return DateFormat('MMM, yyyy').format(DateTime.now());
   }
   return "Year ${DateTime.now().year}";
+}
+
+bool checkIfCurrentDateIsWithinCurrentCycle(String cycle, DateTime currentDateTime) {
+  final now = DateTime.now();
+  if (cycle == BudgetCycle.Weekly.name) {
+    // Calculate date of the previous Monday
+    final previousMonday = now.subtract(Duration(days: now.weekday - 1));
+    // Calculate date of the upcoming Sunday
+    final upcomingSunday = now.add(Duration(days: 7 - now.weekday));
+    if (currentDateTime.isAfter(previousMonday) && currentDateTime.isBefore(upcomingSunday)) {
+      return true;
+    }
+  } else if (cycle == BudgetCycle.Monthly.name) {
+    if (currentDateTime.month == DateTime.now().month) {
+      return true;
+    }
+  } else if (cycle == BudgetCycle.Yearly.name) {
+    if (currentDateTime.year == DateTime.now().year) {
+      return true;
+    }
+  }
+
+  return false;
 }

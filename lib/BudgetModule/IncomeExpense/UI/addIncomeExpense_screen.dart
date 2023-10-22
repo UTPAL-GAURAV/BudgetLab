@@ -14,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Shared/constants_manager.dart';
@@ -155,8 +156,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                         metaDataController.updateCurrentBalance(
                                             provider.transactionType.name == TransactionType.income.name,
                                             double.parse(amount), provider.transactionType.name != TransactionType.investment.name);
-                                        Navigator.pushReplacement(
-                                            context, MaterialPageRoute(builder: routes['/home']!));
+                                        GoRouter.of(context).pushNamed(AppRouteConstants.home);
                                       }
                                     }),
                               ),

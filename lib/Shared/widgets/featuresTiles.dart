@@ -59,9 +59,7 @@ _getLoanLendIconTile(context) {
         FloatingActionButton(
           heroTag: "tag1",
           onPressed: () {
-            GoRouter.of(context).pushNamed('loanLend');
-            // Navigator.push(
-            //     context, MaterialPageRoute(builder: routes['/loanLend']!));
+            GoRouter.of(context).pushNamed(AppRouteConstants.loanLend);
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(
@@ -95,8 +93,7 @@ _getSavingsIconTile(context) {
         FloatingActionButton(
           heroTag: "tag2",
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: routes['/savings']!));
+            GoRouter.of(context).pushNamed(AppRouteConstants.savings);
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(
@@ -128,9 +125,7 @@ getBudgetIconTile(context) {
         FloatingActionButton(
           heroTag: "tag3",
           onPressed: () {
-            GoRouter.of(context).pushNamed('budget');
-            // Navigator.push(
-            //     context, MaterialPageRoute(builder: routes['/budget']!));
+            GoRouter.of(context).pushNamed(AppRouteConstants.budget);
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(

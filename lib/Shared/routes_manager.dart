@@ -17,59 +17,43 @@ import '../SettingsModule/UI/settings_screen.dart';
 import '../main.dart';
 import 'constants_manager.dart';
 
-/// Kept specially for bottom navigation bar
-final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
-  '/settings': (BuildContext context) => const SettingsScreen(),
-  '/home': (BuildContext context) => const HomePageScreen(),
-  // '/loanLend': (BuildContext context) => const LoanLendHomeScreen(),
-  '/addLoanLend': (BuildContext context) => const AddLoanLendScreen(),
-  // '/incomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
-  '/addIncomeExpense': (BuildContext context) => const AddIncomeExpenseScreen(),
-  // '/category': (BuildContext context) => const CategoryScreen(showDeleteButton: false),
-  '/history': (BuildContext context) => const HistoryScreen(),
-  // '/budget': (BuildContext context) => const BudgetScreen(),
-  // '/savings': (BuildContext context) => const SavingsHomeScreen(),
-  // '/addSavings': (BuildContext context) => const AddSavingsScreen(),
-  // '/budgetOverview': (BuildContext context) => BudgetOverviewScreen(category : null),
-  // add more routes as needed
-};
 
-enum RoutesIndex {
+enum BottomNavigationBarEnum {
   HOME,
   INCOME_EXPENSE,
   HISTORY,
   SETTINGS,
 }
 
-extension RoutesIndexValues on RoutesIndex {
+extension BottomNavigationBarRoutesIndexValues on BottomNavigationBarEnum {
   int get value {
     switch (this) {
-      case RoutesIndex.HOME:
+      case BottomNavigationBarEnum.HOME:
         return 0;
-      case RoutesIndex.INCOME_EXPENSE:
+      case BottomNavigationBarEnum.INCOME_EXPENSE:
         return 2;
-      case RoutesIndex.HISTORY:
+      case BottomNavigationBarEnum.HISTORY:
         return 3;
-      case RoutesIndex.SETTINGS:
+      case BottomNavigationBarEnum.SETTINGS:
         return 4;
     }
   }
 }
 
-// extension RoutesIndexPath on RoutesIndex {
-//   String get value {
-//     switch(this) {
-//       case RoutesIndex.HOME:
-//         return '/home';
-//       case RoutesIndex.INCOME_EXPENSE:
-//         return '/incomeExpense';
-//       case RoutesIndex.HISTORY:
-//         return '';
-//       case RoutesIndex.SETTINGS:
-//         return '/settings';
-//     }
-//   }
-// }
+class AppRouteConstants {
+  static const String home = 'home';
+  static const String addIncomeExpense = 'addIncomeExpense';
+  static const String addLoanLend = 'addLoanLend';
+  static const String addSavings = 'addSavings';
+  static const String budget = 'budget';
+  static const String budgetOverview = 'budgetOverview';
+  static const String category = 'category';
+  static const String history = 'history';
+  static const String incomeExpense = 'incomeExpense';
+  static const String loanLend = 'loanLend';
+  static const String savings = 'savings';
+  static const String settings = 'settings';
+}
 
 class RoutesManager {
 
@@ -80,67 +64,74 @@ class RoutesManager {
           return MaterialPage(child: MyHomePage(title: ConstantsManager.APP_NAME));
         }),
     GoRoute(
-        name: 'home',
+        name: AppRouteConstants.home,
         path: '/home',
         pageBuilder: (context, state) {
           return MaterialPage(child: HomePageScreen());
         }),
     GoRoute(
-        name: 'addIncomeExpense',
+        name: AppRouteConstants.addIncomeExpense,
         path: '/addIncomeExpense',
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddIncomeExpenseScreen());
         }),
     GoRoute(
-        name: 'addLoanLend',
+        name: AppRouteConstants.addLoanLend,
         path: '/addLoanLend',
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddLoanLendScreen());
         }),
     GoRoute(
-        name: 'addSavings',
+        name: AppRouteConstants.addSavings,
         path: '/addSavings',
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddSavingsScreen());
         }),
     GoRoute(
-        name: 'budget',
+        name: AppRouteConstants.budget,
         path: '/budget',
         pageBuilder: (context, state) {
           return const MaterialPage(child: BudgetScreen());
         }),
     GoRoute(
-        name: 'category',
-        path: '/category',
+        name: AppRouteConstants.budgetOverview,
+        path: '/budgetOverview',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: CategoryScreen(showDeleteButton: false));
+          final category = state.extra as Category;
+          return MaterialPage(child: BudgetOverviewScreen(category: category));
         }),
     GoRoute(
-        name: 'history',
+        name: AppRouteConstants.category,
+        path: '/category',
+        pageBuilder: (context, state) {
+          return MaterialPage(child: CategoryScreen());
+        }),
+    GoRoute(
+        name: AppRouteConstants.history,
         path: '/history',
         pageBuilder: (context, state) {
           return const MaterialPage(child: HistoryScreen());
         }),
     GoRoute(
-        name: 'incomeExpense',
+        name: AppRouteConstants.incomeExpense,
         path: '/incomeExpense',
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddIncomeExpenseScreen());
         }),
     GoRoute(
-        name: 'loanLend',
+        name: AppRouteConstants.loanLend,
         path: '/loanLend',
         pageBuilder: (context, state) {
           return const MaterialPage(child: LoanLendHomeScreen());
         }),
     GoRoute(
-        name: 'savings',
+        name: AppRouteConstants.savings,
         path: '/savings',
         pageBuilder: (context, state) {
           return const MaterialPage(child: SavingsHomeScreen());
         }),
     GoRoute(
-        name: 'settings',
+        name: AppRouteConstants.settings,
         path: '/settings',
         pageBuilder: (context, state) {
           return const MaterialPage(child: SettingsScreen());

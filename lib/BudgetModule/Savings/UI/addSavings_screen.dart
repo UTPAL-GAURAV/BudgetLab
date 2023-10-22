@@ -4,6 +4,7 @@ import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
+import 'package:go_router/go_router.dart';
 
 import '../../../Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
@@ -69,8 +70,7 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
                             targetAmount: double.parse(targetAmount),
                             icon: icon,
                             savedAmount: 0));
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: routes['/home']!));
+                        GoRouter.of(context).pushNamed(AppRouteConstants.home);
                       }
                     }),
               ),

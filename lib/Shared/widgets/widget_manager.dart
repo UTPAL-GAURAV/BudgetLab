@@ -7,6 +7,7 @@ import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:budgetlab/Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/model/callback_model.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
 import 'package:provider/provider.dart';
@@ -151,6 +152,7 @@ getTextFormField(TextFormFieldConfig config, BuildContext context) {
       hintText: config.hintText,
       labelText: config.labelText,
     ),
+    initialValue: config.initialText,
     keyboardType: config.keyboardType,
     maxLength: config.maxLength,
     validator: (value) {

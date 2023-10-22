@@ -4,6 +4,7 @@ import 'package:objectbox/objectbox.dart';
 class Category {
   int id;
   String transactionType;  // Income, Expense, Investment
+  @Unique()
   String name;  // Unique
   String icon;
   bool isCap;

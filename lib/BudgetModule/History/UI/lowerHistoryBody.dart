@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../Shared/color_manager.dart';
 import '../../../Shared/constants_manager.dart';
+import '../../Budgets/Category/category_service.dart';
 import 'history_screen.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
@@ -23,6 +24,7 @@ class LowerHistoryBody extends StatefulWidget {
 }
 
 class _LowerHistoryBodyState extends State<LowerHistoryBody> {
+  CategoryService categoryService = CategoryService();
   List<History> historyList = [];
 
   @override
@@ -61,7 +63,7 @@ class _LowerHistoryBodyState extends State<LowerHistoryBody> {
                     leading: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * 0.06,
                       backgroundImage: AssetImage(
-                          'assets/images/avatars/neutralGreenHair.jpg'),
+                          categoryService.getIconOfCategoryName(historyList[index].category)),
                     ),
                     title: Text(historyList[index].name, style: TextStyle(
                       fontSize: 18,

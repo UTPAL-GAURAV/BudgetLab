@@ -5,6 +5,7 @@ import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../Shared/routes_manager.dart';
@@ -53,8 +54,7 @@ class _CappedBudgetState extends State<CappedBudget> {
 
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(
-                    context, '/budgetOverview', arguments: categoryList[index]);
+                GoRouter.of(context).pushNamed(AppRouteConstants.budgetOverview, extra: categoryList[index]);
               },
               child: Container(
                 margin: EdgeInsets.fromLTRB(0, screenHeight(0.01, context), 0, screenHeight(0.014, context)),
