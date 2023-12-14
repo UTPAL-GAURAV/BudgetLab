@@ -149,13 +149,16 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                               dateTime: dateTime,
                                               name: note,
                                               amount: double.parse(amount),
-                                              isIncome:
-                                                  provider.transactionType.name == TransactionType.income.name ? true : false,
-                                              category: category),
+                                              isIncome: provider.transactionType.name == TransactionType.income.name
+                                                  ? true
+                                                  : false,
+                                              category: category,
+                                              icon: provider.selectedIcon),
                                         );
                                         metaDataController.updateCurrentBalance(
                                             provider.transactionType.name == TransactionType.income.name,
-                                            double.parse(amount), provider.transactionType.name != TransactionType.investment.name);
+                                            double.parse(amount),
+                                            provider.transactionType.name != TransactionType.investment.name);
                                         GoRouter.of(context).pushNamed(AppRouteConstants.home);
                                       }
                                     }),

@@ -109,6 +109,5 @@ bool checkIfCurrentDateIsWithinCurrentCycle(String cycle, DateTime currentDateTi
       return true;
     }
   }
-
   return false;
 }

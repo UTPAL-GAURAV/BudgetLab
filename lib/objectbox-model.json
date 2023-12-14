@@ -41,7 +41,9 @@
         {
           "id": "3:2832366461472518905",
           "name": "name",
-          "type": 9
+          "type": 9,
+          "flags": 2080,
+          "indexId": "1:4327239478694468136"
         },
         {
           "id": "4:3292258396681020156",
@@ -245,7 +247,7 @@
     },
     {
       "id": "7:3987736464679128829",
-      "lastPropertyId": "11:7096016491200090264",
+      "lastPropertyId": "12:1460929216125297274",
       "name": "History",
       "properties": [
         {
@@ -298,6 +300,11 @@
           "id": "11:7096016491200090264",
           "name": "name",
           "type": 9
+        },
+        {
+          "id": "12:1460929216125297274",
+          "name": "icon",
+          "type": 9
         }
       ],
       "relations": []
@@ -335,10 +342,145 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "9:5126511546810773527",
+      "lastPropertyId": "3:8837202966013133991",
+      "name": "Friends",
+      "properties": [
+        {
+          "id": "1:5827196188719938209",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3072277284371081392",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:8837202966013133991",
+          "name": "icon",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:6362659386523650964",
+      "lastPropertyId": "3:1619140383627690108",
+      "name": "Group",
+      "properties": [
+        {
+          "id": "1:310900044453679625",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3058460519951156708",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1619140383627690108",
+          "name": "icon",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "11:520960766983948235",
+      "lastPropertyId": "3:2150200838227492351",
+      "name": "GroupMembers",
+      "properties": [
+        {
+          "id": "1:97156444794382016",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7167412204902423051",
+          "name": "groupId",
+          "type": 6
+        },
+        {
+          "id": "3:2150200838227492351",
+          "name": "friendId",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "12:840889493507509112",
+      "lastPropertyId": "4:6763028955777967473",
+      "name": "SplitTransaction",
+      "properties": [
+        {
+          "id": "1:1937721111396553229",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2858083537152189617",
+          "name": "transactionId",
+          "type": 9
+        },
+        {
+          "id": "3:9060836898517480071",
+          "name": "friendId",
+          "type": 9
+        },
+        {
+          "id": "4:6763028955777967473",
+          "name": "amount",
+          "type": 8
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "13:4979216734157937974",
+      "lastPropertyId": "5:4434860534992700745",
+      "name": "Transactions",
+      "properties": [
+        {
+          "id": "1:1305970761317894798",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1878704471891415556",
+          "name": "dateTime",
+          "type": 10
+        },
+        {
+          "id": "3:5896601802616622223",
+          "name": "friendId",
+          "type": 9
+        },
+        {
+          "id": "4:199414810754258260",
+          "name": "groupId",
+          "type": 9
+        },
+        {
+          "id": "5:4434860534992700745",
+          "name": "amount",
+          "type": 8
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "8:322351842174973315",
-  "lastIndexId": "0:0",
+  "lastEntityId": "13:4979216734157937974",
+  "lastIndexId": "1:4327239478694468136",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

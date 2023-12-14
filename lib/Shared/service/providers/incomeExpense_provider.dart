@@ -18,6 +18,13 @@ class IncomeExpenseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  late String _selectedIcon;
+  String get selectedIcon => _selectedIcon;
+  void setSelectedIcon(String icon) {
+    _selectedIcon = icon;
+    notifyListeners();
+  }
+
   DateTime _selectedDate = DateTime.now();
   DateTime get selectedDate => _selectedDate;
   void setSelectedDate(DateTime date) {

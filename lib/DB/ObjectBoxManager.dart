@@ -3,6 +3,11 @@ import 'package:budgetlab/BudgetModule/Budgets/Cycles/cycleSavings_entity.dart';
 import 'package:budgetlab/BudgetModule/History/history_entity.dart';
 import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/saings_entity.dart';
+import 'package:budgetlab/FairShareModule/FairShare_Entities/friends_entity.dart';
+import 'package:budgetlab/FairShareModule/FairShare_Entities/group_entity.dart';
+import 'package:budgetlab/FairShareModule/FairShare_Entities/group_members_entity.dart';
+import 'package:budgetlab/FairShareModule/FairShare_Entities/split_transaction_entity.dart';
+import 'package:budgetlab/FairShareModule/FairShare_Entities/transactions_entity.dart';
 import 'package:budgetlab/SettingsModule/metadata_entity.dart';
 import 'package:flutter/widgets.dart';
 import '../BudgetModule/Budgets/Budget/budget_entity.dart';
@@ -21,6 +26,13 @@ class ObjectBoxManager {
   static late Box<Savings> savingsBox;
   static late Box<History> historyBox;
 
+  // FairShare Module
+  static late Box<Group> groupBox;
+  static late Box<GroupMembers> groupMembersBox;
+  static late Box<Friends> friendsBox;
+  static late Box<SplitTransaction> splitTransactionBox;
+  static late Box<Transactions> transactionsBox;
+
   static Future<void> openObjectBoxStore() async {
     // Open ObjectBox Store to use DB
       WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +46,13 @@ class ObjectBoxManager {
       metadataBox = ObjectBoxManager.store.box<Metadata>();
       savingsBox = ObjectBoxManager.store.box<Savings>();
       historyBox = ObjectBoxManager.store.box<History>();
+
+    // Create Box of all entities of FairShare Module
+      groupBox = ObjectBoxManager.store.box<Group>();
+      groupMembersBox = ObjectBoxManager.store.box<GroupMembers>();
+      friendsBox = ObjectBoxManager.store.box<Friends>();
+      splitTransactionBox = ObjectBoxManager.store.box<SplitTransaction>();
+      transactionsBox = ObjectBoxManager.store.box<Transactions>();
   }
 
   static void closeObjectBoxStore() {

@@ -20,6 +20,11 @@ import 'BudgetModule/Budgets/Cycles/cycleSavings_entity.dart';
 import 'BudgetModule/History/history_entity.dart';
 import 'BudgetModule/LoanLend/loanLend_entity.dart';
 import 'BudgetModule/Savings/saings_entity.dart';
+import 'FairShareModule/FairShare_Entities/friends_entity.dart';
+import 'FairShareModule/FairShare_Entities/group_entity.dart';
+import 'FairShareModule/FairShare_Entities/group_members_entity.dart';
+import 'FairShareModule/FairShare_Entities/split_transaction_entity.dart';
+import 'FairShareModule/FairShare_Entities/transactions_entity.dart';
 import 'SettingsModule/metadata_entity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -64,7 +69,8 @@ final _entities = <ModelEntity>[
             id: const IdUid(3, 2832366461472518905),
             name: 'name',
             type: 9,
-            flags: 0),
+            flags: 2080,
+            indexId: const IdUid(1, 4327239478694468136)),
         ModelProperty(
             id: const IdUid(4, 3292258396681020156),
             name: 'icon',
@@ -268,7 +274,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(7, 3987736464679128829),
       name: 'History',
-      lastPropertyId: const IdUid(11, 7096016491200090264),
+      lastPropertyId: const IdUid(12, 1460929216125297274),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -320,6 +326,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(11, 7096016491200090264),
             name: 'name',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 1460929216125297274),
+            name: 'icon',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -357,6 +368,141 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(9, 5126511546810773527),
+      name: 'Friends',
+      lastPropertyId: const IdUid(3, 8837202966013133991),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 5827196188719938209),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3072277284371081392),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 8837202966013133991),
+            name: 'icon',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(10, 6362659386523650964),
+      name: 'Group',
+      lastPropertyId: const IdUid(3, 1619140383627690108),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 310900044453679625),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3058460519951156708),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1619140383627690108),
+            name: 'icon',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(11, 520960766983948235),
+      name: 'GroupMembers',
+      lastPropertyId: const IdUid(3, 2150200838227492351),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 97156444794382016),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 7167412204902423051),
+            name: 'groupId',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2150200838227492351),
+            name: 'friendId',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(12, 840889493507509112),
+      name: 'SplitTransaction',
+      lastPropertyId: const IdUid(4, 6763028955777967473),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 1937721111396553229),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 2858083537152189617),
+            name: 'transactionId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 9060836898517480071),
+            name: 'friendId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 6763028955777967473),
+            name: 'amount',
+            type: 8,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(13, 4979216734157937974),
+      name: 'Transactions',
+      lastPropertyId: const IdUid(5, 4434860534992700745),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 1305970761317894798),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1878704471891415556),
+            name: 'dateTime',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 5896601802616622223),
+            name: 'friendId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 199414810754258260),
+            name: 'groupId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 4434860534992700745),
+            name: 'amount',
+            type: 8,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -387,8 +533,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(8, 322351842174973315),
-      lastIndexId: const IdUid(0, 0),
+      lastEntityId: const IdUid(13, 4979216734157937974),
+      lastIndexId: const IdUid(1, 4327239478694468136),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [1358053335749135773],
@@ -693,7 +839,8 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (History object, fb.Builder fbb) {
           final categoryOffset = fbb.writeString(object.category);
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(12);
+          final iconOffset = fbb.writeString(object.icon);
+          fbb.startTable(13);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.year);
           fbb.addInt64(2, object.month);
@@ -704,6 +851,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(8, categoryOffset);
           fbb.addInt64(9, object.dateTime.millisecondsSinceEpoch);
           fbb.addOffset(10, nameOffset);
+          fbb.addOffset(11, iconOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -730,6 +878,8 @@ ModelDefinition getObjectBoxModel() {
               const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
           final categoryParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 20, '');
+          final iconParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 26, '');
           final object = History(
               id: idParam,
               year: yearParam,
@@ -740,7 +890,8 @@ ModelDefinition getObjectBoxModel() {
               name: nameParam,
               amount: amountParam,
               isIncome: isIncomeParam,
-              category: categoryParam);
+              category: categoryParam,
+              icon: iconParam);
 
           return object;
         }),
@@ -784,6 +935,179 @@ ModelDefinition getObjectBoxModel() {
               cycleName: cycleNameParam,
               cycleAmount: cycleAmountParam,
               savings: savingsParam);
+
+          return object;
+        }),
+    Friends: EntityDefinition<Friends>(
+        model: _entities[7],
+        toOneRelations: (Friends object) => [],
+        toManyRelations: (Friends object) => {},
+        getId: (Friends object) => object.id,
+        setId: (Friends object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Friends object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final iconOffset = fbb.writeString(object.icon);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, iconOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final iconParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = Friends(id: idParam, name: nameParam, icon: iconParam);
+
+          return object;
+        }),
+    Group: EntityDefinition<Group>(
+        model: _entities[8],
+        toOneRelations: (Group object) => [],
+        toManyRelations: (Group object) => {},
+        getId: (Group object) => object.id,
+        setId: (Group object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Group object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final iconOffset = fbb.writeString(object.icon);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, iconOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final iconParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = Group(id: idParam, name: nameParam, icon: iconParam);
+
+          return object;
+        }),
+    GroupMembers: EntityDefinition<GroupMembers>(
+        model: _entities[9],
+        toOneRelations: (GroupMembers object) => [],
+        toManyRelations: (GroupMembers object) => {},
+        getId: (GroupMembers object) => object.id,
+        setId: (GroupMembers object, int id) {
+          object.id = id;
+        },
+        objectToFB: (GroupMembers object, fb.Builder fbb) {
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addInt64(1, object.groupId);
+          fbb.addInt64(2, object.friendId);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final groupIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
+          final friendIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final object = GroupMembers(
+              id: idParam, groupId: groupIdParam, friendId: friendIdParam);
+
+          return object;
+        }),
+    SplitTransaction: EntityDefinition<SplitTransaction>(
+        model: _entities[10],
+        toOneRelations: (SplitTransaction object) => [],
+        toManyRelations: (SplitTransaction object) => {},
+        getId: (SplitTransaction object) => object.id,
+        setId: (SplitTransaction object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SplitTransaction object, fb.Builder fbb) {
+          final transactionIdOffset = fbb.writeString(object.transactionId);
+          final friendIdOffset = fbb.writeString(object.friendId);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, transactionIdOffset);
+          fbb.addOffset(2, friendIdOffset);
+          fbb.addFloat64(3, object.amount);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final transactionIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, '');
+          final friendIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final amountParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final object = SplitTransaction(
+              id: idParam,
+              transactionId: transactionIdParam,
+              friendId: friendIdParam,
+              amount: amountParam);
+
+          return object;
+        }),
+    Transactions: EntityDefinition<Transactions>(
+        model: _entities[11],
+        toOneRelations: (Transactions object) => [],
+        toManyRelations: (Transactions object) => {},
+        getId: (Transactions object) => object.id,
+        setId: (Transactions object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Transactions object, fb.Builder fbb) {
+          final friendIdOffset = fbb.writeString(object.friendId);
+          final groupIdOffset = fbb.writeString(object.groupId);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addInt64(1, object.dateTime.millisecondsSinceEpoch);
+          fbb.addOffset(2, friendIdOffset);
+          fbb.addOffset(3, groupIdOffset);
+          fbb.addFloat64(4, object.amount);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0));
+          final friendIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final groupIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 10, '');
+          final amountParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final object = Transactions(
+              id: idParam,
+              dateTime: dateTimeParam,
+              friendId: friendIdParam,
+              groupId: groupIdParam,
+              amount: amountParam);
 
           return object;
         })
@@ -988,6 +1312,9 @@ class History_ {
 
   /// see [History.name]
   static final name = QueryStringProperty<History>(_entities[5].properties[9]);
+
+  /// see [History.icon]
+  static final icon = QueryStringProperty<History>(_entities[5].properties[10]);
 }
 
 /// [CycleSavings] entity fields to define ObjectBox queries.
@@ -1011,4 +1338,85 @@ class CycleSavings_ {
   /// see [CycleSavings.savings]
   static final savings =
       QueryDoubleProperty<CycleSavings>(_entities[6].properties[4]);
+}
+
+/// [Friends] entity fields to define ObjectBox queries.
+class Friends_ {
+  /// see [Friends.id]
+  static final id = QueryIntegerProperty<Friends>(_entities[7].properties[0]);
+
+  /// see [Friends.name]
+  static final name = QueryStringProperty<Friends>(_entities[7].properties[1]);
+
+  /// see [Friends.icon]
+  static final icon = QueryStringProperty<Friends>(_entities[7].properties[2]);
+}
+
+/// [Group] entity fields to define ObjectBox queries.
+class Group_ {
+  /// see [Group.id]
+  static final id = QueryIntegerProperty<Group>(_entities[8].properties[0]);
+
+  /// see [Group.name]
+  static final name = QueryStringProperty<Group>(_entities[8].properties[1]);
+
+  /// see [Group.icon]
+  static final icon = QueryStringProperty<Group>(_entities[8].properties[2]);
+}
+
+/// [GroupMembers] entity fields to define ObjectBox queries.
+class GroupMembers_ {
+  /// see [GroupMembers.id]
+  static final id =
+      QueryIntegerProperty<GroupMembers>(_entities[9].properties[0]);
+
+  /// see [GroupMembers.groupId]
+  static final groupId =
+      QueryIntegerProperty<GroupMembers>(_entities[9].properties[1]);
+
+  /// see [GroupMembers.friendId]
+  static final friendId =
+      QueryIntegerProperty<GroupMembers>(_entities[9].properties[2]);
+}
+
+/// [SplitTransaction] entity fields to define ObjectBox queries.
+class SplitTransaction_ {
+  /// see [SplitTransaction.id]
+  static final id =
+      QueryIntegerProperty<SplitTransaction>(_entities[10].properties[0]);
+
+  /// see [SplitTransaction.transactionId]
+  static final transactionId =
+      QueryStringProperty<SplitTransaction>(_entities[10].properties[1]);
+
+  /// see [SplitTransaction.friendId]
+  static final friendId =
+      QueryStringProperty<SplitTransaction>(_entities[10].properties[2]);
+
+  /// see [SplitTransaction.amount]
+  static final amount =
+      QueryDoubleProperty<SplitTransaction>(_entities[10].properties[3]);
+}
+
+/// [Transactions] entity fields to define ObjectBox queries.
+class Transactions_ {
+  /// see [Transactions.id]
+  static final id =
+      QueryIntegerProperty<Transactions>(_entities[11].properties[0]);
+
+  /// see [Transactions.dateTime]
+  static final dateTime =
+      QueryIntegerProperty<Transactions>(_entities[11].properties[1]);
+
+  /// see [Transactions.friendId]
+  static final friendId =
+      QueryStringProperty<Transactions>(_entities[11].properties[2]);
+
+  /// see [Transactions.groupId]
+  static final groupId =
+      QueryStringProperty<Transactions>(_entities[11].properties[3]);
+
+  /// see [Transactions.amount]
+  static final amount =
+      QueryDoubleProperty<Transactions>(_entities[11].properties[4]);
 }

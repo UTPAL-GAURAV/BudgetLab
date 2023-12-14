@@ -14,6 +14,7 @@ class History {
   // Stores TransactionCategory in case of Loan Lend
   // Else stores Category name in case of Income Expense
   String category;
+  String icon;
 
   History({
     this.id = 0,
@@ -25,6 +26,7 @@ class History {
     this.name = "",
     required this.amount,
     required this.isIncome,
-    required this.category
+    required this.category,
+    required this.icon
   });
 }

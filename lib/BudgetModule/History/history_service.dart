@@ -30,7 +30,9 @@ class HistoryService {
         name: loanLend.name,  // Stores name in case of Loan Lend
         amount: loanLend.amount,
         isIncome: loanLend.isLoan,
-        category: TransactionCategory.loanLend.name); // Stores TransactionCategory in case of Loan Lend
+        category: TransactionCategory.loanLend.name,
+    //TODO: add icon or default icon
+    icon: ''); // Stores TransactionCategory in case of Loan Lend
     return addHistory(history);
   }
 

@@ -67,6 +67,7 @@ class _ScrollableIncomeExpenseCategoryState
                         onTap: () => {
                           provider.setTransactionType(parseTransactionType(category.transactionType)),
                           provider.setSelectedCategory(index),
+                          provider.setSelectedIcon(category.icon),
                           widget.onCategorySelected(category.name)
                         },
                         child: Container(
