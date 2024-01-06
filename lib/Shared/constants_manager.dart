@@ -7,6 +7,7 @@ class ConstantsManager {
   static const String BUDGET = "Budget";
   static const String SAVINGS = "Savings";
   static const String ADD_SAVINGS = "Add Savings";
+  static const String ADD_TO_SAVINGS = "Add to Savings";
   static const String ADD_LOAN_LEND = "Add Loan/Lend";
   static const String PROFILE = "Profile";
   static const String ADD_INCOME_EXPENSE = "Add Income/Expense";

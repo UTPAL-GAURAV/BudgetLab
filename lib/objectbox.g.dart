@@ -19,7 +19,8 @@ import 'BudgetModule/Budgets/Category/category_entity.dart';
 import 'BudgetModule/Budgets/Cycles/cycleSavings_entity.dart';
 import 'BudgetModule/History/history_entity.dart';
 import 'BudgetModule/LoanLend/loanLend_entity.dart';
-import 'BudgetModule/Savings/saings_entity.dart';
+import 'BudgetModule/Savings/Savings_SavingsTransactions/savingsTransactions_entity.dart';
+import 'BudgetModule/Savings/savings_entity.dart';
 import 'FairShareModule/FairShare_Entities/friends_entity.dart';
 import 'FairShareModule/FairShare_Entities/group_entity.dart';
 import 'FairShareModule/FairShare_Entities/group_members_entity.dart';
@@ -181,7 +182,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(5, 3071978227778497905),
       name: 'Metadata',
-      lastPropertyId: const IdUid(10, 5205876471603607160),
+      lastPropertyId: const IdUid(12, 1895656972425575759),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -233,6 +234,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(10, 5205876471603607160),
             name: 'readMessage',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 3908663817435824728),
+            name: 'gender',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 1895656972425575759),
+            name: 'language',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -240,7 +251,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 5953722859783493972),
       name: 'Savings',
-      lastPropertyId: const IdUid(5, 5271227194289515064),
+      lastPropertyId: const IdUid(6, 1258910402027424384),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -252,7 +263,8 @@ final _entities = <ModelEntity>[
             id: const IdUid(2, 2945359868757435183),
             name: 'title',
             type: 9,
-            flags: 0),
+            flags: 2080,
+            indexId: const IdUid(2, 9210716317928578648)),
         ModelProperty(
             id: const IdUid(3, 2768477032845607697),
             name: 'targetAmount',
@@ -267,6 +279,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 5271227194289515064),
             name: 'icon',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 1258910402027424384),
+            name: 'targetDateTime',
+            type: 10,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -503,6 +520,40 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(14, 2661245381863430462),
+      name: 'SavingsTransactions',
+      lastPropertyId: const IdUid(5, 1536883669931863952),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2085213643352415251),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3636710907147488798),
+            name: 'savingsId',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 8437810130010016236),
+            name: 'amount',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 1799800122051093764),
+            name: 'dateTime',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1536883669931863952),
+            name: 'notes',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -533,8 +584,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(13, 4979216734157937974),
-      lastIndexId: const IdUid(1, 4327239478694468136),
+      lastEntityId: const IdUid(14, 2661245381863430462),
+      lastIndexId: const IdUid(2, 9210716317928578648),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [1358053335749135773],
@@ -735,7 +786,8 @@ ModelDefinition getObjectBoxModel() {
           final currencyOffset = fbb.writeString(object.currency);
           final countryOffset = fbb.writeString(object.country);
           final passwordOffset = fbb.writeString(object.password);
-          fbb.startTable(11);
+          final languageOffset = fbb.writeString(object.language);
+          fbb.startTable(13);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.currentBalance);
           fbb.addFloat64(2, object.yourWorth);
@@ -746,6 +798,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(7, passwordOffset);
           fbb.addBool(8, object.hideOn);
           fbb.addBool(9, object.readMessage);
+          fbb.addBool(10, object.gender);
+          fbb.addOffset(11, languageOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -760,6 +814,10 @@ ModelDefinition getObjectBoxModel() {
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0);
           final userNameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 10, '');
+          final genderParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 24, false);
+          final languageParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 26, '');
           final currencyParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 12, '');
           final countryParam = const fb.StringReader(asciiOptimization: true)
@@ -777,6 +835,8 @@ ModelDefinition getObjectBoxModel() {
               currentBalance: currentBalanceParam,
               yourWorth: yourWorthParam,
               userName: userNameParam,
+              gender: genderParam,
+              language: languageParam,
               currency: currencyParam,
               country: countryParam,
               countryCode: countryCodeParam,
@@ -797,12 +857,13 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Savings object, fb.Builder fbb) {
           final titleOffset = fbb.writeString(object.title);
           final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(6);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addFloat64(2, object.targetAmount);
           fbb.addFloat64(3, object.savedAmount);
           fbb.addOffset(4, iconOffset);
+          fbb.addInt64(5, object.targetDateTime.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -819,12 +880,15 @@ ModelDefinition getObjectBoxModel() {
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 10, 0);
           final iconParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 12, '');
+          final targetDateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
           final object = Savings(
               id: idParam,
               title: titleParam,
               targetAmount: targetAmountParam,
               savedAmount: savedAmountParam,
-              icon: iconParam);
+              icon: iconParam,
+              targetDateTime: targetDateTimeParam);
 
           return object;
         }),
@@ -1110,6 +1174,47 @@ ModelDefinition getObjectBoxModel() {
               amount: amountParam);
 
           return object;
+        }),
+    SavingsTransactions: EntityDefinition<SavingsTransactions>(
+        model: _entities[12],
+        toOneRelations: (SavingsTransactions object) => [],
+        toManyRelations: (SavingsTransactions object) => {},
+        getId: (SavingsTransactions object) => object.id,
+        setId: (SavingsTransactions object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SavingsTransactions object, fb.Builder fbb) {
+          final notesOffset = fbb.writeString(object.notes);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addInt64(1, object.savingsId);
+          fbb.addFloat64(2, object.amount);
+          fbb.addInt64(3, object.dateTime.millisecondsSinceEpoch);
+          fbb.addOffset(4, notesOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final savingsIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
+          final amountParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
+          final notesParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final object = SavingsTransactions(
+              id: idParam,
+              savingsId: savingsIdParam,
+              amount: amountParam,
+              dateTime: dateTimeParam,
+              notes: notesParam);
+
+          return object;
         })
   };
 
@@ -1254,6 +1359,14 @@ class Metadata_ {
   /// see [Metadata.readMessage]
   static final readMessage =
       QueryBooleanProperty<Metadata>(_entities[3].properties[9]);
+
+  /// see [Metadata.gender]
+  static final gender =
+      QueryBooleanProperty<Metadata>(_entities[3].properties[10]);
+
+  /// see [Metadata.language]
+  static final language =
+      QueryStringProperty<Metadata>(_entities[3].properties[11]);
 }
 
 /// [Savings] entity fields to define ObjectBox queries.
@@ -1274,6 +1387,10 @@ class Savings_ {
 
   /// see [Savings.icon]
   static final icon = QueryStringProperty<Savings>(_entities[4].properties[4]);
+
+  /// see [Savings.targetDateTime]
+  static final targetDateTime =
+      QueryIntegerProperty<Savings>(_entities[4].properties[5]);
 }
 
 /// [History] entity fields to define ObjectBox queries.
@@ -1419,4 +1536,27 @@ class Transactions_ {
   /// see [Transactions.amount]
   static final amount =
       QueryDoubleProperty<Transactions>(_entities[11].properties[4]);
+}
+
+/// [SavingsTransactions] entity fields to define ObjectBox queries.
+class SavingsTransactions_ {
+  /// see [SavingsTransactions.id]
+  static final id =
+      QueryIntegerProperty<SavingsTransactions>(_entities[12].properties[0]);
+
+  /// see [SavingsTransactions.savingsId]
+  static final savingsId =
+      QueryIntegerProperty<SavingsTransactions>(_entities[12].properties[1]);
+
+  /// see [SavingsTransactions.amount]
+  static final amount =
+      QueryDoubleProperty<SavingsTransactions>(_entities[12].properties[2]);
+
+  /// see [SavingsTransactions.dateTime]
+  static final dateTime =
+      QueryIntegerProperty<SavingsTransactions>(_entities[12].properties[3]);
+
+  /// see [SavingsTransactions.notes]
+  static final notes =
+      QueryStringProperty<SavingsTransactions>(_entities[12].properties[4]);
 }

@@ -6,6 +6,8 @@ class Metadata {
   double currentBalance;
   double yourWorth;
   String userName;
+  bool gender;
+  String language;
   String currency;
   String country;
   int countryCode;
@@ -18,6 +20,8 @@ class Metadata {
     this.currentBalance = 0,
     this.yourWorth = 0,
     this.userName = "Hello User",
+    this.gender = false,
+    this.language = "EN",
     this.currency = "USD",
     this.country = "",
     this.countryCode = 0,

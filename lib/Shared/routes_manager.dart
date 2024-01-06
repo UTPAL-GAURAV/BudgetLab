@@ -1,16 +1,19 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpense_screen.dart';
 import 'package:budgetlab/BudgetModule/History/UI/history_screen.dart';
+import 'package:budgetlab/BudgetModule/Savings/UI/savingsOverview_screen.dart';
+import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../BudgetModule/Budgets/Budget/UI/budgetOverview_screen.dart';
-import '../BudgetModule/Budgets/Budget/UI/budget_screen.dart';
+import '../BudgetModule/Budgets/Budget/UI/budgetHome_screen.dart';
 import '../BudgetModule/Budgets/Category/UI/category_screen.dart';
 import '../BudgetModule/Budgets/Category/category_entity.dart';
 import '../BudgetModule/LoanLend/UI/addLoanLend_screen.dart';
 import '../BudgetModule/LoanLend/UI/loanLendHome_screen.dart';
+import '../BudgetModule/Savings/Savings_SavingsTransactions/UI/addSavingsTransaction_screen.dart';
 import '../BudgetModule/Savings/UI/addSavings_screen.dart';
 import '../BudgetModule/Savings/UI/savingsHome_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
@@ -45,6 +48,7 @@ class AppRouteConstants {
   static const String addIncomeExpense = 'addIncomeExpense';
   static const String addLoanLend = 'addLoanLend';
   static const String addSavings = 'addSavings';
+  static const String addSavingsTransaction = 'addSavingsTransaction';
   static const String budget = 'budget';
   static const String budgetOverview = 'budgetOverview';
   static const String category = 'category';
@@ -52,6 +56,7 @@ class AppRouteConstants {
   static const String incomeExpense = 'incomeExpense';
   static const String loanLend = 'loanLend';
   static const String savings = 'savings';
+  static const String savingsOverview = 'savingsOverview';
   static const String settings = 'settings';
 }
 
@@ -86,6 +91,13 @@ class RoutesManager {
         path: '/addSavings',
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddSavingsScreen());
+        }),
+    GoRoute(
+        name: AppRouteConstants.addSavingsTransaction,
+        path: '/addSavingsTransaction',
+        pageBuilder: (context, state) {
+          final savings = state.extra as Savings;
+          return MaterialPage(child: AddSavingsTransactionScreen(savings: savings));
         }),
     GoRoute(
         name: AppRouteConstants.budget,
@@ -129,6 +141,13 @@ class RoutesManager {
         path: '/savings',
         pageBuilder: (context, state) {
           return const MaterialPage(child: SavingsHomeScreen());
+        }),
+    GoRoute(
+        name: AppRouteConstants.savingsOverview,
+        path: '/savingsOverview',
+        pageBuilder: (context, state) {
+          final savings = state.extra as Savings;
+          return MaterialPage(child: SavingsOverviewScreen(savings: savings));
         }),
     GoRoute(
         name: AppRouteConstants.settings,

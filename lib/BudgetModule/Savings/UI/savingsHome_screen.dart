@@ -1,10 +1,12 @@
-import 'package:budgetlab/BudgetModule/Savings/UI/scrollableSavingsTransactions.dart';
+import 'package:budgetlab/BudgetModule/Savings/UI/scrollableSavings.dart';
+import 'package:budgetlab/BudgetModule/Savings/Savings_SavingsTransactions/UI/scrollableSavingsTransactions.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:go_router/go_router.dart';
 
+import '../../../HomeModule/UI/homePage_screen.dart';
 import '../../../Shared/color_manager.dart';
 import '../../../Shared/routes_manager.dart';
 
@@ -21,33 +23,36 @@ class _SavingsHomeScreenState extends State<SavingsHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(ConstantsManager.SAVINGS),
-      ),
-      body: Column(
-        children: [
-          Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 4, 16),
-              child:
-              WidgetManager.getSingleBanner("SAVINGS", "10,500", ColorManager.LIGHT_GREEN, 100, MediaQuery.of(context).size.width * 0.45)),
-
-          // Text(
-          //   " Total Savings : 20,000",
-          //   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
-          // ),
-          WidgetManager.getHeaderDividerSizedBox(ConstantsManager.TRANSACTIONS),
-          getScrollableSavingsTransactions(),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-                alignment: Alignment.bottomRight,
-                child: FloatingActionButton.extended(
-                    label: const Text("Savings"),
-                    icon: const Icon(Icons.add),
-                    onPressed: () {
-                      GoRouter.of(context).pushNamed(AppRouteConstants.addSavings);
-                    })),
-          )
+        backgroundColor: ColorManager.PRIMARY_BLUE,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              GoRouter.of(context).pushNamed(AppRouteConstants.addSavings);
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: routes['/category']!));
+            },
+          ),
         ],
+      ),
+      body: Container(
+        color: ColorManager.PRIMARY_BACKGROUND,
+        width: MediaQuery.of(context).size.width,
+        height: screenHeight(1.0, context) - AppBar().preferredSize.height,
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), screenHeight(0.01, context),
+                screenWidth(0.02, context), screenHeight(0.01, context)),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: getScrollableSavings(),
+                  ),
+                ],
+              ),
+            ),
+        ),
       ),
     );
   }

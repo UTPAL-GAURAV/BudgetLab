@@ -241,32 +241,36 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                         if (formKey.currentState!.validate()) {
                           if (!isBudgetCapped) {
                             // Save only category
-                            categoryController.updateCategory(Category(
-                              transactionType: provider.selectedTransactionType.name,
-                              name: categoryName,
-                              icon: selectedIcon,
-                              isCap: false,
-                              cycle: BudgetCycle.none.name,
-                              cycleBudget: 0,
-                              addToNextCycle: false,
-                              currentCycleAmountLeft: 0,
-                              totalCycleAmount: 0,
-                              totalAmountSpent: 0,
-                            ), originalName);
+                            categoryController.updateCategory(
+                                Category(
+                                  transactionType: provider.selectedTransactionType.name,
+                                  name: categoryName,
+                                  icon: selectedIcon,
+                                  isCap: false,
+                                  cycle: BudgetCycle.none.name,
+                                  cycleBudget: 0,
+                                  addToNextCycle: false,
+                                  currentCycleAmountLeft: 0,
+                                  totalCycleAmount: 0,
+                                  totalAmountSpent: 0,
+                                ),
+                                originalName);
                           } else {
                             // Save Budget
-                            categoryController.updateCategory(Category(
-                              transactionType: provider.selectedTransactionType.name,
-                              name: categoryName,
-                              icon: selectedIcon,
-                              isCap: true,
-                              cycle: provider.selectedBudgetCycle.name,
-                              cycleBudget: double.parse(budgetCycleAmount),
-                              addToNextCycle: addToNextCycle,
-                              currentCycleAmountLeft: double.parse(budgetCycleAmount),
-                              totalCycleAmount: double.parse(budgetCycleAmount),
-                              totalAmountSpent: 0,
-                            ), originalName);
+                            categoryController.updateCategory(
+                                Category(
+                                  transactionType: provider.selectedTransactionType.name,
+                                  name: categoryName,
+                                  icon: selectedIcon,
+                                  isCap: true,
+                                  cycle: provider.selectedBudgetCycle.name,
+                                  cycleBudget: double.parse(budgetCycleAmount),
+                                  addToNextCycle: addToNextCycle,
+                                  currentCycleAmountLeft: double.parse(budgetCycleAmount),
+                                  totalCycleAmount: double.parse(budgetCycleAmount),
+                                  totalAmountSpent: 0,
+                                ),
+                                originalName);
                           }
                           GoRouter.of(context).pushNamed(AppRouteConstants.budget);
                         }

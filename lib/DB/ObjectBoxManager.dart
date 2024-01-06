@@ -2,7 +2,8 @@ import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/BudgetModule/Budgets/Cycles/cycleSavings_entity.dart';
 import 'package:budgetlab/BudgetModule/History/history_entity.dart';
 import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
-import 'package:budgetlab/BudgetModule/Savings/saings_entity.dart';
+import 'package:budgetlab/BudgetModule/Savings/Savings_SavingsTransactions/savingsTransactions_entity.dart';
+import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
 import 'package:budgetlab/FairShareModule/FairShare_Entities/friends_entity.dart';
 import 'package:budgetlab/FairShareModule/FairShare_Entities/group_entity.dart';
 import 'package:budgetlab/FairShareModule/FairShare_Entities/group_members_entity.dart';
@@ -24,6 +25,7 @@ class ObjectBoxManager {
   static late Box<LoanLend> loanLendBox;
   static late Box<Metadata> metadataBox;
   static late Box<Savings> savingsBox;
+  static late Box<SavingsTransactions> savingsTransactionsBox;
   static late Box<History> historyBox;
 
   // FairShare Module
@@ -45,6 +47,7 @@ class ObjectBoxManager {
       loanLendBox = ObjectBoxManager.store.box<LoanLend>();
       metadataBox = ObjectBoxManager.store.box<Metadata>();
       savingsBox = ObjectBoxManager.store.box<Savings>();
+      savingsTransactionsBox = ObjectBoxManager.store.box<SavingsTransactions>();
       historyBox = ObjectBoxManager.store.box<History>();
 
     // Create Box of all entities of FairShare Module

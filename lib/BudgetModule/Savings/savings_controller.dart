@@ -1,4 +1,4 @@
-import 'package:budgetlab/BudgetModule/Savings/saings_entity.dart';
+import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_service.dart';
 
 
@@ -10,6 +10,14 @@ class SavingsController {
   }
 
   int addSavings(Savings savings) {
-    return savingsService.addOrUpdateSavings(savings);
+    return savingsService.addSavings(savings);
+  }
+
+  int updateSavings(Savings savings, String originalTitle) {
+    return savingsService.updateSavings(savings, originalTitle);
+  }
+
+  bool deleteSavingsByTitle(String savingsTitle) {
+    return savingsService.deleteSavingsByTitle(savingsTitle);
   }
 }
