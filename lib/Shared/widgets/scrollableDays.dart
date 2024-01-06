@@ -39,7 +39,7 @@ int getDaysInMonth(int year, int month) {
     30,
     31
   ];
-  return daysInMonth[month - 1];
+  return daysInMonth[month];
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
