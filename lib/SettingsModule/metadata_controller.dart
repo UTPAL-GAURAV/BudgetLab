@@ -20,17 +20,15 @@ class MetaDataController {
     return metadataService.getYourWorth();
   }
 
-  int updateCurrentBalance(bool isAddition, double amount, bool isChangeInWorth) {
-    if(isAddition) {
-      if(isChangeInWorth) {
-        metadataService.addToYourWorth(amount);
-      }
-      return metadataService.addToCurrentBalance(amount);
-    } else {
-      if(isChangeInWorth) {
-        metadataService.subtractToYourWorth(amount);
-      }
-      return metadataService.subtractToCurrentBalance(amount);
-    }
+  // int updateCurrentBalance(bool isAddition, double amount, bool isChangeInWorth) {
+  //   return metadataService.updateCurrentBalance(isAddition, amount, isChangeInWorth);
+  // }
+
+  double getExpendableAmount(){
+    return metadataService.getExpendableAmount();
+  }
+
+  int updateExpendableAmount(bool isAddition, double amount, bool isChangeInCurrentBalance, bool isChangeInWorth) {
+    return metadataService.updateExpendableAmount(isAddition, amount, isChangeInCurrentBalance, isChangeInWorth);
   }
 }

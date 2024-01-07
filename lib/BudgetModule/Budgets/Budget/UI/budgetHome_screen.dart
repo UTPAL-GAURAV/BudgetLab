@@ -26,9 +26,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                GoRouter.of(context).pushNamed('category');
-                // Navigator.push(
-                //     context, MaterialPageRoute(builder: routes['/category']!));
+                GoRouter.of(context).pushNamed(AppRouteConstants.category);
               },
             ),
           ],

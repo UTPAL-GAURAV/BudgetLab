@@ -1,7 +1,3 @@
-import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
-import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
-import 'package:budgetlab/BudgetModule/LoanLend/loanLend_controller.dart';
-import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/Savings_SavingsTransactions/savingsTransactions_controller.dart';
 import 'package:budgetlab/BudgetModule/Savings/Savings_SavingsTransactions/savingsTransactions_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_controller.dart';
@@ -59,6 +55,10 @@ class _ScrollableSavingsTransactionsState extends State<ScrollableSavingsTransac
             ),
             child: ListTile(
               tileColor: ColorManager.VISTA_WHITE,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                    16), // adjust the radius of shadow
+              ),
               leading: Text(
                 "Rs.${savingsTransactions.amount}",
                 style: TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.018, context)),

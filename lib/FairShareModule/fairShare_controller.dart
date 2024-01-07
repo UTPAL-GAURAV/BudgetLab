@@ -7,6 +7,7 @@ import 'fairShare_service.dart';
 class FairShareController {
   FairShareService fairShareService = FairShareService();
 
+  // Group
   List<Group> getAllGroupList() {
     return fairShareService.getAllGroupList();
   }

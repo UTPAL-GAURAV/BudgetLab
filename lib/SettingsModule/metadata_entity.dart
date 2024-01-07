@@ -5,6 +5,7 @@ class Metadata {
   int id;
   double currentBalance;
   double yourWorth;
+  double expendableAmount; // Amount that is available for expense (currentBalance - savings)
   String userName;
   bool gender;
   String language;
@@ -19,6 +20,7 @@ class Metadata {
     this.id = 0,
     this.currentBalance = 0,
     this.yourWorth = 0,
+    this.expendableAmount = 0,
     this.userName = "Hello User",
     this.gender = false,
     this.language = "EN",

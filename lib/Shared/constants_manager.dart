@@ -13,6 +13,7 @@ class ConstantsManager {
   static const String ADD_INCOME_EXPENSE = "Add Income/Expense";
   static const String AVAILABLE_BALANCE = "Available Balance";
   static const String YOUR_WORTH = "Your Worth";
+  static const String EXPENDABLE_AMOUNT = "Expendable Amt.";
   static const String HISTORY = "History";
 
 

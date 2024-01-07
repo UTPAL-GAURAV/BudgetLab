@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import '../../SettingsModule/metadata_controller.dart';
@@ -22,8 +23,7 @@ class BalanceBody extends StatefulWidget {
 }
 
 class _BalanceBodyState extends State<BalanceBody> {
-  String currentBalance = '0';
-  String yourWorth = '0';
+  String currentBalance = '0', yourWorth = '0', expendableAmount = '0';
 
   MetaDataController metaDataController = MetaDataController();
   late ValueNotifier<List<MetaData>> metadata;
@@ -38,6 +38,7 @@ class _BalanceBodyState extends State<BalanceBody> {
   void fetchData() async {
     currentBalance = metaDataController.getCurrentBalance().toString();
     yourWorth = metaDataController.getYourWorth().toString();
+    expendableAmount = metaDataController.getExpendableAmount().toString();
   }
 
   @override
@@ -49,9 +50,9 @@ class _BalanceBodyState extends State<BalanceBody> {
         child: Stack(children: [
           _getBackgroundWidget(context),
           Padding(
-            padding: EdgeInsets.fromLTRB(width(0.04, context),
-                height(0.04, context), width(0.04, context), 0),
-            child: _getForegroundWidget(context, currentBalance, yourWorth),
+            padding: EdgeInsets.fromLTRB(screenWidth(0.04, context),
+                screenHeight(0.04, context), screenWidth(0.04, context), 0),
+            child: _getForegroundWidget(context, currentBalance, yourWorth, expendableAmount),
           ),
         ]));
   }
@@ -77,13 +78,13 @@ _getBackgroundWidget(BuildContext context) {
   );
 }
 
-_getForegroundWidget(BuildContext context, String currentBalance, String yourWorth) {
+_getForegroundWidget(BuildContext context, String currentBalance, String yourWorth, String expendableAmount) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       _getTopUserBar(context),
-      Padding(padding: EdgeInsets.fromLTRB(0, height(0.04, context), 0, 0)),
-      _getMoneyDisplayTile(context, currentBalance, yourWorth),
+      Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.04, context), 0, 0)),
+      _getMoneyDisplayTile(context, currentBalance, yourWorth, expendableAmount),
     ],
   );
 }
@@ -102,7 +103,7 @@ _getTopUserBar(BuildContext context) {
           child: Text(
             ConstantsManager.APP_NAME,
             style:
-                TextStyle(color: Colors.white, fontSize: height(0.03, context)),
+                TextStyle(color: Colors.white, fontSize: screenHeight(0.03, context)),
           ),
         ),
       ),
@@ -110,16 +111,16 @@ _getTopUserBar(BuildContext context) {
   );
 }
 
-_getMoneyDisplayTile(BuildContext context, String currentBalance, String yourWorth) {
+_getMoneyDisplayTile(BuildContext context, String currentBalance, String yourWorth, String expendableAmount) {
    String currencySymbol = ConstantsManager.currencies.firstWhere((currency) => currency['currencyCode'] == 'USD')['symbol'] ?? '';
-   String currencyName = ConstantsManager.currencies.firstWhere((currency) => currency['currencyCode'] == 'USD')['currencyName'] ?? '';
+   String currencyName = 'USD';
    ExternalApiService externalApiService = ExternalApiService();
    // await externalApiService.getCountryFlag('US');
 
    return Container(
-    height: height(0.2, context),
-    width: MediaQuery.of(context).size.width * 0.9,
-    padding: EdgeInsets.all(width(0.05, context)),
+    height: screenHeight(0.2, context),
+    width:  screenWidth(0.9, context),
+    padding: EdgeInsets.fromLTRB(screenWidth(0.05, context), screenHeight(0.02, context), screenWidth(0.05, context), screenHeight(0.01, context)),
     decoration: BoxDecoration(
         color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
     child: Row(
@@ -132,55 +133,55 @@ _getMoneyDisplayTile(BuildContext context, String currentBalance, String yourWor
               Text(
                 ConstantsManager.AVAILABLE_BALANCE,
                 style:
-                TextStyle(color: ColorManager.DARK_GREY, fontSize: height(0.02, context)),
+                TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.02, context)),
               ),
               Row(
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                      maxHeight: height(0.048, context),
+                      maxHeight: screenHeight(0.048, context),
                     ),
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: Text(
                         currencySymbol,
                         style:
-                        TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.048, context), fontWeight: FontWeight.bold),
+                        TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.048, context), fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                   Text(
                     currentBalance,
                     style:
-                    TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.048, context), fontWeight: FontWeight.bold),
+                    TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.048, context), fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              Padding(padding: EdgeInsets.fromLTRB(0, height(0.026, context), 0, 0)),
+              Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.008, context), 0, 0)),
               Text(
                 ConstantsManager.YOUR_WORTH,
                 style:
-                TextStyle(color: ColorManager.DARK_GREY, fontSize: height(0.02, context)),
+                TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.02, context)),
               ),
               Row(
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                        maxHeight: height(0.02, context),
+                        maxHeight: screenHeight(0.02, context),
                     ),
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: Text(
                         currencySymbol,
                         style:
-                        TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.02, context)),
+                        TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.02, context)),
                       ),
                     ),
                   ),
                   Text(
                     yourWorth,
                     style:
-                    TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.02, context)),
+                    TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.02, context)),
                   ),
                 ],
               )
@@ -195,20 +196,49 @@ _getMoneyDisplayTile(BuildContext context, String currentBalance, String yourWor
               backgroundImage:
               AssetImage('assets/images/avatars/neutralGreenHair.jpg'),
             ),
-            Padding(padding: EdgeInsets.fromLTRB(0, height(0.04, context), 0, 0)),
-            Container(
-              constraints: BoxConstraints(
-                maxWidth: width(0.4, context),
-              ),
-              child: FittedBox(
-                fit: BoxFit.fill,
-                child: Text(
-                  currencyName,
-                  style:
-                  TextStyle(color: ColorManager.BLACK_VOID, fontSize: height(0.02, context)),
-                ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, screenHeight(0.004, context), screenWidth(0.026, context), 0),
+              child: Text(
+                currencyName,
+                style:
+                TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.02, context)),
               ),
             ),
+
+            Padding(padding: EdgeInsets.fromLTRB(0, screenHeight(0.008, context), 0, 0)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  ConstantsManager.EXPENDABLE_AMOUNT,
+                  style:
+                  TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.02, context)),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      constraints: BoxConstraints(
+                        maxHeight: screenHeight(0.02, context),
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Text(
+                          currencySymbol,
+                          style:
+                          TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.02, context)),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      expendableAmount,
+                      style:
+                      TextStyle(color: ColorManager.BLACK_VOID, fontSize: screenHeight(0.02, context)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
           ],
         ),
       ],

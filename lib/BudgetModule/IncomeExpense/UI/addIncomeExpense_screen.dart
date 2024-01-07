@@ -155,10 +155,14 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                               category: category,
                                               icon: provider.selectedIcon),
                                         );
-                                        metaDataController.updateCurrentBalance(
+                                        // Before Deleting Check if updateExpendableAmount is working as updateCurrentBalance
+                                        // metaDataController.updateCurrentBalance(
+                                        //     provider.transactionType.name == TransactionType.income.name,
+                                        //     double.parse(amount),
+                                        //     provider.transactionType.name != TransactionType.investment.name);
+                                        metaDataController.updateExpendableAmount(
                                             provider.transactionType.name == TransactionType.income.name,
-                                            double.parse(amount),
-                                            provider.transactionType.name != TransactionType.investment.name);
+                                            double.parse(amount), true, provider.transactionType.name != TransactionType.investment.name);
                                         GoRouter.of(context).pushNamed(AppRouteConstants.home);
                                       }
                                     }),

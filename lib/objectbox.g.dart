@@ -18,7 +18,6 @@ import 'BudgetModule/Budgets/Budget/budget_entity.dart';
 import 'BudgetModule/Budgets/Category/category_entity.dart';
 import 'BudgetModule/Budgets/Cycles/cycleSavings_entity.dart';
 import 'BudgetModule/History/history_entity.dart';
-import 'BudgetModule/LoanLend/loanLend_entity.dart';
 import 'BudgetModule/Savings/Savings_SavingsTransactions/savingsTransactions_entity.dart';
 import 'BudgetModule/Savings/savings_entity.dart';
 import 'FairShareModule/FairShare_Entities/friends_entity.dart';
@@ -121,68 +120,9 @@ final _entities = <ModelEntity>[
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(4, 9052435534381775407),
-      name: 'LoanLend',
-      lastPropertyId: const IdUid(10, 83039039708730487),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 2062997448433781121),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 3324376512030445888),
-            name: 'isLoan',
-            type: 1,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 4028527212899484197),
-            name: 'dateTime',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 2845511107751879036),
-            name: 'dateOfReturn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 7572490216904874117),
-            name: 'amount',
-            type: 8,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 472858004322395733),
-            name: 'note',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(7, 8637945009649281167),
-            name: 'phone',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(8, 8499334383457211072),
-            name: 'returnStatus',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(9, 2156790177571280887),
-            name: 'name',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(10, 83039039708730487),
-            name: 'genderEmoji',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
       id: const IdUid(5, 3071978227778497905),
       name: 'Metadata',
-      lastPropertyId: const IdUid(12, 1895656972425575759),
+      lastPropertyId: const IdUid(13, 5459545563587063662),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -244,6 +184,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(12, 1895656972425575759),
             name: 'language',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 5459545563587063662),
+            name: 'expendableAmount',
+            type: 8,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -411,30 +356,6 @@ final _entities = <ModelEntity>[
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(10, 6362659386523650964),
-      name: 'Group',
-      lastPropertyId: const IdUid(3, 1619140383627690108),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 310900044453679625),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 3058460519951156708),
-            name: 'name',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 1619140383627690108),
-            name: 'icon',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
       id: const IdUid(11, 520960766983948235),
       name: 'GroupMembers',
       lastPropertyId: const IdUid(3, 2150200838227492351),
@@ -554,6 +475,40 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(15, 821376214972628997),
+      name: 'Group',
+      lastPropertyId: const IdUid(5, 6648128419559188737),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 4707787477890195930),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3586950412657930610),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 9197823752132488887),
+            name: 'icon',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 6871565381573941187),
+            name: 'isGroup',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 6648128419559188737),
+            name: 'amountStatus',
+            type: 8,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -584,11 +539,15 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(14, 2661245381863430462),
+      lastEntityId: const IdUid(15, 821376214972628997),
       lastIndexId: const IdUid(2, 9210716317928578648),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [1358053335749135773],
+      retiredEntityUids: const [
+        1358053335749135773,
+        9052435534381775407,
+        6362659386523650964
+      ],
       retiredIndexUids: const [],
       retiredPropertyUids: const [
         2752402896608338538,
@@ -598,7 +557,21 @@ ModelDefinition getObjectBoxModel() {
         8772035493217625258,
         3433267797551436833,
         8378074971595057259,
-        5580495707262040883
+        5580495707262040883,
+        2062997448433781121,
+        3324376512030445888,
+        4028527212899484197,
+        2845511107751879036,
+        7572490216904874117,
+        472858004322395733,
+        8637945009649281167,
+        8499334383457211072,
+        2156790177571280887,
+        83039039708730487,
+        310900044453679625,
+        3058460519951156708,
+        1619140383627690108,
+        2550539467851032523
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -706,75 +679,8 @@ ModelDefinition getObjectBoxModel() {
 
           return object;
         }),
-    LoanLend: EntityDefinition<LoanLend>(
-        model: _entities[2],
-        toOneRelations: (LoanLend object) => [],
-        toManyRelations: (LoanLend object) => {},
-        getId: (LoanLend object) => object.id,
-        setId: (LoanLend object, int id) {
-          object.id = id;
-        },
-        objectToFB: (LoanLend object, fb.Builder fbb) {
-          final noteOffset = fbb.writeString(object.note);
-          final phoneOffset = fbb.writeString(object.phone);
-          final returnStatusOffset = fbb.writeString(object.returnStatus);
-          final nameOffset = fbb.writeString(object.name);
-          final genderEmojiOffset = fbb.writeString(object.genderEmoji);
-          fbb.startTable(11);
-          fbb.addInt64(0, object.id);
-          fbb.addBool(1, object.isLoan);
-          fbb.addInt64(2, object.dateTime.millisecondsSinceEpoch);
-          fbb.addInt64(3, object.dateOfReturn.millisecondsSinceEpoch);
-          fbb.addFloat64(4, object.amount);
-          fbb.addOffset(5, noteOffset);
-          fbb.addOffset(6, phoneOffset);
-          fbb.addOffset(7, returnStatusOffset);
-          fbb.addOffset(8, nameOffset);
-          fbb.addOffset(9, genderEmojiOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final isLoanParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 6, false);
-          final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
-          final dateOfReturnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
-          final amountParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0);
-          final nameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 20, '');
-          final noteParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 14, '');
-          final phoneParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 16, '');
-          final returnStatusParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 18, '');
-          final genderEmojiParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 22, '');
-          final object = LoanLend(
-              id: idParam,
-              isLoan: isLoanParam,
-              dateTime: dateTimeParam,
-              dateOfReturn: dateOfReturnParam,
-              amount: amountParam,
-              name: nameParam,
-              note: noteParam,
-              phone: phoneParam,
-              returnStatus: returnStatusParam,
-              genderEmoji: genderEmojiParam);
-
-          return object;
-        }),
     Metadata: EntityDefinition<Metadata>(
-        model: _entities[3],
+        model: _entities[2],
         toOneRelations: (Metadata object) => [],
         toManyRelations: (Metadata object) => {},
         getId: (Metadata object) => object.id,
@@ -787,7 +693,7 @@ ModelDefinition getObjectBoxModel() {
           final countryOffset = fbb.writeString(object.country);
           final passwordOffset = fbb.writeString(object.password);
           final languageOffset = fbb.writeString(object.language);
-          fbb.startTable(13);
+          fbb.startTable(14);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.currentBalance);
           fbb.addFloat64(2, object.yourWorth);
@@ -800,6 +706,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addBool(9, object.readMessage);
           fbb.addBool(10, object.gender);
           fbb.addOffset(11, languageOffset);
+          fbb.addFloat64(12, object.expendableAmount);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -812,6 +719,8 @@ ModelDefinition getObjectBoxModel() {
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
           final yourWorthParam =
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final expendableAmountParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 28, 0);
           final userNameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 10, '');
           final genderParam =
@@ -834,6 +743,7 @@ ModelDefinition getObjectBoxModel() {
               id: idParam,
               currentBalance: currentBalanceParam,
               yourWorth: yourWorthParam,
+              expendableAmount: expendableAmountParam,
               userName: userNameParam,
               gender: genderParam,
               language: languageParam,
@@ -847,7 +757,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     Savings: EntityDefinition<Savings>(
-        model: _entities[4],
+        model: _entities[3],
         toOneRelations: (Savings object) => [],
         toManyRelations: (Savings object) => {},
         getId: (Savings object) => object.id,
@@ -893,7 +803,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     History: EntityDefinition<History>(
-        model: _entities[5],
+        model: _entities[4],
         toOneRelations: (History object) => [],
         toManyRelations: (History object) => {},
         getId: (History object) => object.id,
@@ -960,7 +870,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     CycleSavings: EntityDefinition<CycleSavings>(
-        model: _entities[6],
+        model: _entities[5],
         toOneRelations: (CycleSavings object) => [],
         toManyRelations: (CycleSavings object) => {},
         getId: (CycleSavings object) => object.id,
@@ -1003,7 +913,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     Friends: EntityDefinition<Friends>(
-        model: _entities[7],
+        model: _entities[6],
         toOneRelations: (Friends object) => [],
         toManyRelations: (Friends object) => {},
         getId: (Friends object) => object.id,
@@ -1033,39 +943,8 @@ ModelDefinition getObjectBoxModel() {
 
           return object;
         }),
-    Group: EntityDefinition<Group>(
-        model: _entities[8],
-        toOneRelations: (Group object) => [],
-        toManyRelations: (Group object) => {},
-        getId: (Group object) => object.id,
-        setId: (Group object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Group object, fb.Builder fbb) {
-          final nameOffset = fbb.writeString(object.name);
-          final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(4);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, nameOffset);
-          fbb.addOffset(2, iconOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final nameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final iconParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final object = Group(id: idParam, name: nameParam, icon: iconParam);
-
-          return object;
-        }),
     GroupMembers: EntityDefinition<GroupMembers>(
-        model: _entities[9],
+        model: _entities[7],
         toOneRelations: (GroupMembers object) => [],
         toManyRelations: (GroupMembers object) => {},
         getId: (GroupMembers object) => object.id,
@@ -1095,7 +974,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     SplitTransaction: EntityDefinition<SplitTransaction>(
-        model: _entities[10],
+        model: _entities[8],
         toOneRelations: (SplitTransaction object) => [],
         toManyRelations: (SplitTransaction object) => {},
         getId: (SplitTransaction object) => object.id,
@@ -1134,7 +1013,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     Transactions: EntityDefinition<Transactions>(
-        model: _entities[11],
+        model: _entities[9],
         toOneRelations: (Transactions object) => [],
         toManyRelations: (Transactions object) => {},
         getId: (Transactions object) => object.id,
@@ -1176,7 +1055,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     SavingsTransactions: EntityDefinition<SavingsTransactions>(
-        model: _entities[12],
+        model: _entities[10],
         toOneRelations: (SavingsTransactions object) => [],
         toManyRelations: (SavingsTransactions object) => {},
         getId: (SavingsTransactions object) => object.id,
@@ -1213,6 +1092,48 @@ ModelDefinition getObjectBoxModel() {
               amount: amountParam,
               dateTime: dateTimeParam,
               notes: notesParam);
+
+          return object;
+        }),
+    Group: EntityDefinition<Group>(
+        model: _entities[11],
+        toOneRelations: (Group object) => [],
+        toManyRelations: (Group object) => {},
+        getId: (Group object) => object.id,
+        setId: (Group object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Group object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final iconOffset = fbb.writeString(object.icon);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, iconOffset);
+          fbb.addBool(3, object.isGroup);
+          fbb.addFloat64(4, object.amountStatus);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final iconParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final isGroupParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final amountStatusParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final object = Group(
+              id: idParam,
+              name: nameParam,
+              icon: iconParam,
+              isGroup: isGroupParam,
+              amountStatus: amountStatusParam);
 
           return object;
         })
@@ -1279,284 +1200,256 @@ class Category_ {
       QueryDoubleProperty<Category>(_entities[1].properties[10]);
 }
 
-/// [LoanLend] entity fields to define ObjectBox queries.
-class LoanLend_ {
-  /// see [LoanLend.id]
-  static final id = QueryIntegerProperty<LoanLend>(_entities[2].properties[0]);
-
-  /// see [LoanLend.isLoan]
-  static final isLoan =
-      QueryBooleanProperty<LoanLend>(_entities[2].properties[1]);
-
-  /// see [LoanLend.dateTime]
-  static final dateTime =
-      QueryIntegerProperty<LoanLend>(_entities[2].properties[2]);
-
-  /// see [LoanLend.dateOfReturn]
-  static final dateOfReturn =
-      QueryIntegerProperty<LoanLend>(_entities[2].properties[3]);
-
-  /// see [LoanLend.amount]
-  static final amount =
-      QueryDoubleProperty<LoanLend>(_entities[2].properties[4]);
-
-  /// see [LoanLend.note]
-  static final note = QueryStringProperty<LoanLend>(_entities[2].properties[5]);
-
-  /// see [LoanLend.phone]
-  static final phone =
-      QueryStringProperty<LoanLend>(_entities[2].properties[6]);
-
-  /// see [LoanLend.returnStatus]
-  static final returnStatus =
-      QueryStringProperty<LoanLend>(_entities[2].properties[7]);
-
-  /// see [LoanLend.name]
-  static final name = QueryStringProperty<LoanLend>(_entities[2].properties[8]);
-
-  /// see [LoanLend.genderEmoji]
-  static final genderEmoji =
-      QueryStringProperty<LoanLend>(_entities[2].properties[9]);
-}
-
 /// [Metadata] entity fields to define ObjectBox queries.
 class Metadata_ {
   /// see [Metadata.id]
-  static final id = QueryIntegerProperty<Metadata>(_entities[3].properties[0]);
+  static final id = QueryIntegerProperty<Metadata>(_entities[2].properties[0]);
 
   /// see [Metadata.currentBalance]
   static final currentBalance =
-      QueryDoubleProperty<Metadata>(_entities[3].properties[1]);
+      QueryDoubleProperty<Metadata>(_entities[2].properties[1]);
 
   /// see [Metadata.yourWorth]
   static final yourWorth =
-      QueryDoubleProperty<Metadata>(_entities[3].properties[2]);
+      QueryDoubleProperty<Metadata>(_entities[2].properties[2]);
 
   /// see [Metadata.userName]
   static final userName =
-      QueryStringProperty<Metadata>(_entities[3].properties[3]);
+      QueryStringProperty<Metadata>(_entities[2].properties[3]);
 
   /// see [Metadata.currency]
   static final currency =
-      QueryStringProperty<Metadata>(_entities[3].properties[4]);
+      QueryStringProperty<Metadata>(_entities[2].properties[4]);
 
   /// see [Metadata.country]
   static final country =
-      QueryStringProperty<Metadata>(_entities[3].properties[5]);
+      QueryStringProperty<Metadata>(_entities[2].properties[5]);
 
   /// see [Metadata.countryCode]
   static final countryCode =
-      QueryIntegerProperty<Metadata>(_entities[3].properties[6]);
+      QueryIntegerProperty<Metadata>(_entities[2].properties[6]);
 
   /// see [Metadata.password]
   static final password =
-      QueryStringProperty<Metadata>(_entities[3].properties[7]);
+      QueryStringProperty<Metadata>(_entities[2].properties[7]);
 
   /// see [Metadata.hideOn]
   static final hideOn =
-      QueryBooleanProperty<Metadata>(_entities[3].properties[8]);
+      QueryBooleanProperty<Metadata>(_entities[2].properties[8]);
 
   /// see [Metadata.readMessage]
   static final readMessage =
-      QueryBooleanProperty<Metadata>(_entities[3].properties[9]);
+      QueryBooleanProperty<Metadata>(_entities[2].properties[9]);
 
   /// see [Metadata.gender]
   static final gender =
-      QueryBooleanProperty<Metadata>(_entities[3].properties[10]);
+      QueryBooleanProperty<Metadata>(_entities[2].properties[10]);
 
   /// see [Metadata.language]
   static final language =
-      QueryStringProperty<Metadata>(_entities[3].properties[11]);
+      QueryStringProperty<Metadata>(_entities[2].properties[11]);
+
+  /// see [Metadata.expendableAmount]
+  static final expendableAmount =
+      QueryDoubleProperty<Metadata>(_entities[2].properties[12]);
 }
 
 /// [Savings] entity fields to define ObjectBox queries.
 class Savings_ {
   /// see [Savings.id]
-  static final id = QueryIntegerProperty<Savings>(_entities[4].properties[0]);
+  static final id = QueryIntegerProperty<Savings>(_entities[3].properties[0]);
 
   /// see [Savings.title]
-  static final title = QueryStringProperty<Savings>(_entities[4].properties[1]);
+  static final title = QueryStringProperty<Savings>(_entities[3].properties[1]);
 
   /// see [Savings.targetAmount]
   static final targetAmount =
-      QueryDoubleProperty<Savings>(_entities[4].properties[2]);
+      QueryDoubleProperty<Savings>(_entities[3].properties[2]);
 
   /// see [Savings.savedAmount]
   static final savedAmount =
-      QueryDoubleProperty<Savings>(_entities[4].properties[3]);
+      QueryDoubleProperty<Savings>(_entities[3].properties[3]);
 
   /// see [Savings.icon]
-  static final icon = QueryStringProperty<Savings>(_entities[4].properties[4]);
+  static final icon = QueryStringProperty<Savings>(_entities[3].properties[4]);
 
   /// see [Savings.targetDateTime]
   static final targetDateTime =
-      QueryIntegerProperty<Savings>(_entities[4].properties[5]);
+      QueryIntegerProperty<Savings>(_entities[3].properties[5]);
 }
 
 /// [History] entity fields to define ObjectBox queries.
 class History_ {
   /// see [History.id]
-  static final id = QueryIntegerProperty<History>(_entities[5].properties[0]);
+  static final id = QueryIntegerProperty<History>(_entities[4].properties[0]);
 
   /// see [History.year]
-  static final year = QueryIntegerProperty<History>(_entities[5].properties[1]);
+  static final year = QueryIntegerProperty<History>(_entities[4].properties[1]);
 
   /// see [History.month]
   static final month =
-      QueryIntegerProperty<History>(_entities[5].properties[2]);
+      QueryIntegerProperty<History>(_entities[4].properties[2]);
 
   /// see [History.date]
-  static final date = QueryIntegerProperty<History>(_entities[5].properties[3]);
+  static final date = QueryIntegerProperty<History>(_entities[4].properties[3]);
 
   /// see [History.day]
-  static final day = QueryIntegerProperty<History>(_entities[5].properties[4]);
+  static final day = QueryIntegerProperty<History>(_entities[4].properties[4]);
 
   /// see [History.amount]
   static final amount =
-      QueryDoubleProperty<History>(_entities[5].properties[5]);
+      QueryDoubleProperty<History>(_entities[4].properties[5]);
 
   /// see [History.isIncome]
   static final isIncome =
-      QueryBooleanProperty<History>(_entities[5].properties[6]);
+      QueryBooleanProperty<History>(_entities[4].properties[6]);
 
   /// see [History.category]
   static final category =
-      QueryStringProperty<History>(_entities[5].properties[7]);
+      QueryStringProperty<History>(_entities[4].properties[7]);
 
   /// see [History.dateTime]
   static final dateTime =
-      QueryIntegerProperty<History>(_entities[5].properties[8]);
+      QueryIntegerProperty<History>(_entities[4].properties[8]);
 
   /// see [History.name]
-  static final name = QueryStringProperty<History>(_entities[5].properties[9]);
+  static final name = QueryStringProperty<History>(_entities[4].properties[9]);
 
   /// see [History.icon]
-  static final icon = QueryStringProperty<History>(_entities[5].properties[10]);
+  static final icon = QueryStringProperty<History>(_entities[4].properties[10]);
 }
 
 /// [CycleSavings] entity fields to define ObjectBox queries.
 class CycleSavings_ {
   /// see [CycleSavings.id]
   static final id =
-      QueryIntegerProperty<CycleSavings>(_entities[6].properties[0]);
+      QueryIntegerProperty<CycleSavings>(_entities[5].properties[0]);
 
   /// see [CycleSavings.categoryName]
   static final categoryName =
-      QueryStringProperty<CycleSavings>(_entities[6].properties[1]);
+      QueryStringProperty<CycleSavings>(_entities[5].properties[1]);
 
   /// see [CycleSavings.cycleName]
   static final cycleName =
-      QueryStringProperty<CycleSavings>(_entities[6].properties[2]);
+      QueryStringProperty<CycleSavings>(_entities[5].properties[2]);
 
   /// see [CycleSavings.cycleAmount]
   static final cycleAmount =
-      QueryDoubleProperty<CycleSavings>(_entities[6].properties[3]);
+      QueryDoubleProperty<CycleSavings>(_entities[5].properties[3]);
 
   /// see [CycleSavings.savings]
   static final savings =
-      QueryDoubleProperty<CycleSavings>(_entities[6].properties[4]);
+      QueryDoubleProperty<CycleSavings>(_entities[5].properties[4]);
 }
 
 /// [Friends] entity fields to define ObjectBox queries.
 class Friends_ {
   /// see [Friends.id]
-  static final id = QueryIntegerProperty<Friends>(_entities[7].properties[0]);
+  static final id = QueryIntegerProperty<Friends>(_entities[6].properties[0]);
 
   /// see [Friends.name]
-  static final name = QueryStringProperty<Friends>(_entities[7].properties[1]);
+  static final name = QueryStringProperty<Friends>(_entities[6].properties[1]);
 
   /// see [Friends.icon]
-  static final icon = QueryStringProperty<Friends>(_entities[7].properties[2]);
-}
-
-/// [Group] entity fields to define ObjectBox queries.
-class Group_ {
-  /// see [Group.id]
-  static final id = QueryIntegerProperty<Group>(_entities[8].properties[0]);
-
-  /// see [Group.name]
-  static final name = QueryStringProperty<Group>(_entities[8].properties[1]);
-
-  /// see [Group.icon]
-  static final icon = QueryStringProperty<Group>(_entities[8].properties[2]);
+  static final icon = QueryStringProperty<Friends>(_entities[6].properties[2]);
 }
 
 /// [GroupMembers] entity fields to define ObjectBox queries.
 class GroupMembers_ {
   /// see [GroupMembers.id]
   static final id =
-      QueryIntegerProperty<GroupMembers>(_entities[9].properties[0]);
+      QueryIntegerProperty<GroupMembers>(_entities[7].properties[0]);
 
   /// see [GroupMembers.groupId]
   static final groupId =
-      QueryIntegerProperty<GroupMembers>(_entities[9].properties[1]);
+      QueryIntegerProperty<GroupMembers>(_entities[7].properties[1]);
 
   /// see [GroupMembers.friendId]
   static final friendId =
-      QueryIntegerProperty<GroupMembers>(_entities[9].properties[2]);
+      QueryIntegerProperty<GroupMembers>(_entities[7].properties[2]);
 }
 
 /// [SplitTransaction] entity fields to define ObjectBox queries.
 class SplitTransaction_ {
   /// see [SplitTransaction.id]
   static final id =
-      QueryIntegerProperty<SplitTransaction>(_entities[10].properties[0]);
+      QueryIntegerProperty<SplitTransaction>(_entities[8].properties[0]);
 
   /// see [SplitTransaction.transactionId]
   static final transactionId =
-      QueryStringProperty<SplitTransaction>(_entities[10].properties[1]);
+      QueryStringProperty<SplitTransaction>(_entities[8].properties[1]);
 
   /// see [SplitTransaction.friendId]
   static final friendId =
-      QueryStringProperty<SplitTransaction>(_entities[10].properties[2]);
+      QueryStringProperty<SplitTransaction>(_entities[8].properties[2]);
 
   /// see [SplitTransaction.amount]
   static final amount =
-      QueryDoubleProperty<SplitTransaction>(_entities[10].properties[3]);
+      QueryDoubleProperty<SplitTransaction>(_entities[8].properties[3]);
 }
 
 /// [Transactions] entity fields to define ObjectBox queries.
 class Transactions_ {
   /// see [Transactions.id]
   static final id =
-      QueryIntegerProperty<Transactions>(_entities[11].properties[0]);
+      QueryIntegerProperty<Transactions>(_entities[9].properties[0]);
 
   /// see [Transactions.dateTime]
   static final dateTime =
-      QueryIntegerProperty<Transactions>(_entities[11].properties[1]);
+      QueryIntegerProperty<Transactions>(_entities[9].properties[1]);
 
   /// see [Transactions.friendId]
   static final friendId =
-      QueryStringProperty<Transactions>(_entities[11].properties[2]);
+      QueryStringProperty<Transactions>(_entities[9].properties[2]);
 
   /// see [Transactions.groupId]
   static final groupId =
-      QueryStringProperty<Transactions>(_entities[11].properties[3]);
+      QueryStringProperty<Transactions>(_entities[9].properties[3]);
 
   /// see [Transactions.amount]
   static final amount =
-      QueryDoubleProperty<Transactions>(_entities[11].properties[4]);
+      QueryDoubleProperty<Transactions>(_entities[9].properties[4]);
 }
 
 /// [SavingsTransactions] entity fields to define ObjectBox queries.
 class SavingsTransactions_ {
   /// see [SavingsTransactions.id]
   static final id =
-      QueryIntegerProperty<SavingsTransactions>(_entities[12].properties[0]);
+      QueryIntegerProperty<SavingsTransactions>(_entities[10].properties[0]);
 
   /// see [SavingsTransactions.savingsId]
   static final savingsId =
-      QueryIntegerProperty<SavingsTransactions>(_entities[12].properties[1]);
+      QueryIntegerProperty<SavingsTransactions>(_entities[10].properties[1]);
 
   /// see [SavingsTransactions.amount]
   static final amount =
-      QueryDoubleProperty<SavingsTransactions>(_entities[12].properties[2]);
+      QueryDoubleProperty<SavingsTransactions>(_entities[10].properties[2]);
 
   /// see [SavingsTransactions.dateTime]
   static final dateTime =
-      QueryIntegerProperty<SavingsTransactions>(_entities[12].properties[3]);
+      QueryIntegerProperty<SavingsTransactions>(_entities[10].properties[3]);
 
   /// see [SavingsTransactions.notes]
   static final notes =
-      QueryStringProperty<SavingsTransactions>(_entities[12].properties[4]);
+      QueryStringProperty<SavingsTransactions>(_entities[10].properties[4]);
+}
+
+/// [Group] entity fields to define ObjectBox queries.
+class Group_ {
+  /// see [Group.id]
+  static final id = QueryIntegerProperty<Group>(_entities[11].properties[0]);
+
+  /// see [Group.name]
+  static final name = QueryStringProperty<Group>(_entities[11].properties[1]);
+
+  /// see [Group.icon]
+  static final icon = QueryStringProperty<Group>(_entities[11].properties[2]);
+
+  /// see [Group.isGroup]
+  static final isGroup =
+      QueryBooleanProperty<Group>(_entities[11].properties[3]);
+
+  /// see [Group.amountStatus]
+  static final amountStatus =
+      QueryDoubleProperty<Group>(_entities[11].properties[4]);
 }

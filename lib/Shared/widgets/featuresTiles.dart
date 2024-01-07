@@ -59,7 +59,7 @@ _getLoanLendIconTile(context) {
         FloatingActionButton(
           heroTag: "tag1",
           onPressed: () {
-            GoRouter.of(context).pushNamed(AppRouteConstants.loanLend);
+            GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
           },
           backgroundColor: Colors.blueAccent,
           child: const Icon(

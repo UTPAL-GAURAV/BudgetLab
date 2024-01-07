@@ -67,4 +67,32 @@ class MetadataRepository {
     }
     return -1;
   }
+
+  // Expendable Amount
+  double getExpendableAmount() {
+    Metadata? metadata = ObjectBoxManager.metadataBox.get(1);
+    return metadata==null? 0: metadata.expendableAmount;
+  }
+
+  int addToExpendableAmount(double amount) {
+    final queryBuilder = ObjectBoxManager.metadataBox.query(Metadata_.id.equals(1));
+    final entity = queryBuilder.build().findFirst();
+
+    if(entity!=null) {
+      entity.expendableAmount += amount;
+      return ObjectBoxManager.metadataBox.put(entity);
+    }
+    return -1;
+  }
+
+  int subtractToExpendableAmount(double amount) {
+    final queryBuilder = ObjectBoxManager.metadataBox.query(Metadata_.id.equals(1));
+    final entity = queryBuilder.build().findFirst();
+
+    if(entity!=null) {
+      entity.expendableAmount -= amount;
+      return ObjectBoxManager.metadataBox.put(entity);
+    }
+    return -1;
+  }
 }

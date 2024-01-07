@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../HomeModule/UI/homePage_screen.dart';
+import '../../../Shared/color_manager.dart';
 import '../../../Shared/model/TextFormFieldConfig.dart';
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
 
@@ -26,12 +27,12 @@ class AddSavingsScreen extends StatefulWidget {
 
 class _AddSavingsScreenState extends State<AddSavingsScreen> {
   GalleryService galleryService = GalleryService();
+  SavingsController savingsController = SavingsController();
+
   final formKey = GlobalKey<FormState>();
   late String targetAmount, title;
   String icon = 'assets/images/icons/budgetCategory/piggy.png';
   DateTime dateTime = DateTime.now();
-
-  SavingsController savingsController = SavingsController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,11 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
       key: formKey,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: ColorManager.PRIMARY_BLUE,
+          foregroundColor: Colors.white,
           title: const Text(ConstantsManager.ADD_SAVINGS),
         ),
-        body: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+        body: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return Column(children: [
             GestureDetector(
               onTap: () async {
@@ -59,23 +61,26 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
                 child: getLastIconEditButton(context),
               ),
             ),
-            WidgetManager.getTextFormField(TextFormFieldConfig(
-                labelText: "Title",
-                hintText: " Car, House",
-                keyboardType: TextInputType.name,
-                maxLength: 100,
-                validatorCallback: Validator.validateNothing,
-                onSavedCallback: (value) => title = value!), context),
-            WidgetManager.getTextFormField(TextFormFieldConfig(
-                labelText: "Amount",
-                hintText: " 0",
-                keyboardType: TextInputType.number,
-                maxLength: 8,
-                validatorCallback: Validator.validateLendExpenseField,
-                onSavedCallback: (value) => targetAmount = value!), context),
+            WidgetManager.getTextFormField(
+                TextFormFieldConfig(
+                    labelText: "Title",
+                    hintText: " Car, House",
+                    keyboardType: TextInputType.name,
+                    maxLength: 100,
+                    validatorCallback: Validator.validateNothing,
+                    onSavedCallback: (value) => title = value!),
+                context),
+            WidgetManager.getTextFormField(
+                TextFormFieldConfig(
+                    labelText: "Amount",
+                    hintText: " 0",
+                    keyboardType: TextInputType.number,
+                    maxLength: 8,
+                    validatorCallback: Validator.validateLendExpenseField,
+                    onSavedCallback: (value) => targetAmount = value!),
+                context),
             Padding(
-              padding:
-              EdgeInsets.fromLTRB(0, screenHeight(0.04, context), 0, screenHeight(0.06, context)),
+              padding: EdgeInsets.fromLTRB(0, screenHeight(0.04, context), 0, screenHeight(0.06, context)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -93,9 +98,10 @@ class _AddSavingsScreenState extends State<AddSavingsScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.50,
+                width: screenWidth(0.9, context),
                 child: FloatingActionButton.extended(
-                    label: const Text("Save"),
+                    label: Text("SAVE", style: TextStyle(color: Colors.white, fontSize: screenHeight(0.02, context))),
+                    backgroundColor: ColorManager.PRIMARY_BLUE,
                     onPressed: () {
                       formKey.currentState!.save();
                       if (formKey.currentState!.validate()) {

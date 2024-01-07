@@ -1,4 +1,3 @@
-import 'package:budgetlab/BudgetModule/LoanLend/loanLend_entity.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
 
 import '../../DB/ObjectBoxManager.dart';

@@ -11,11 +11,11 @@ import '../BudgetModule/Budgets/Budget/UI/budgetOverview_screen.dart';
 import '../BudgetModule/Budgets/Budget/UI/budgetHome_screen.dart';
 import '../BudgetModule/Budgets/Category/UI/category_screen.dart';
 import '../BudgetModule/Budgets/Category/category_entity.dart';
-import '../BudgetModule/LoanLend/UI/addLoanLend_screen.dart';
-import '../BudgetModule/LoanLend/UI/loanLendHome_screen.dart';
 import '../BudgetModule/Savings/Savings_SavingsTransactions/UI/addSavingsTransaction_screen.dart';
 import '../BudgetModule/Savings/UI/addSavings_screen.dart';
 import '../BudgetModule/Savings/UI/savingsHome_screen.dart';
+import '../FairShareModule/UI/createGroup_screen.dart';
+import '../FairShareModule/UI/fairShareHome_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
 import '../main.dart';
 import 'constants_manager.dart';
@@ -46,15 +46,16 @@ extension BottomNavigationBarRoutesIndexValues on BottomNavigationBarEnum {
 class AppRouteConstants {
   static const String home = 'home';
   static const String addIncomeExpense = 'addIncomeExpense';
-  static const String addLoanLend = 'addLoanLend';
+  static const String addFairShare = 'addFairShare';
   static const String addSavings = 'addSavings';
   static const String addSavingsTransaction = 'addSavingsTransaction';
   static const String budget = 'budget';
   static const String budgetOverview = 'budgetOverview';
   static const String category = 'category';
+  static const String createFairShareGroup = 'createFairShareGroup';
+  static const String fairShare = 'fairShare';
   static const String history = 'history';
   static const String incomeExpense = 'incomeExpense';
-  static const String loanLend = 'loanLend';
   static const String savings = 'savings';
   static const String savingsOverview = 'savingsOverview';
   static const String settings = 'settings';
@@ -80,12 +81,12 @@ class RoutesManager {
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddIncomeExpenseScreen());
         }),
-    GoRoute(
-        name: AppRouteConstants.addLoanLend,
-        path: '/addLoanLend',
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: AddLoanLendScreen());
-        }),
+    // GoRoute(
+    //     name: AppRouteConstants.addFairShare,
+    //     path: '/addFairShare',
+    //     pageBuilder: (context, state) {
+    //       return const MaterialPage(child: AddLoanLendScreen());
+    //     }),
     GoRoute(
         name: AppRouteConstants.addSavings,
         path: '/addSavings',
@@ -119,6 +120,12 @@ class RoutesManager {
           return MaterialPage(child: CategoryScreen());
         }),
     GoRoute(
+        name: AppRouteConstants.createFairShareGroup,
+        path: '/createFairShareGroup',
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: CreateFairShareGroupScreen());
+        }),
+    GoRoute(
         name: AppRouteConstants.history,
         path: '/history',
         pageBuilder: (context, state) {
@@ -131,10 +138,10 @@ class RoutesManager {
           return const MaterialPage(child: AddIncomeExpenseScreen());
         }),
     GoRoute(
-        name: AppRouteConstants.loanLend,
-        path: '/loanLend',
+        name: AppRouteConstants.fairShare,
+        path: '/fairShare',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: LoanLendHomeScreen());
+          return const MaterialPage(child: FairShareHomeScreen());
         }),
     GoRoute(
         name: AppRouteConstants.savings,
