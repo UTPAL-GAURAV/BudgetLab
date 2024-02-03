@@ -21,6 +21,7 @@ import '../FairShareModule/UI/fairShareAddPeopleToGroup_screen.dart';
 import '../FairShareModule/UI/fairShareGroupSettings_screen.dart';
 import '../FairShareModule/UI/fairShareHome_screen.dart';
 import '../FairShareModule/UI/fairShareGroup_screen.dart';
+import '../FairShareModule/UI/selectFairShareIndividual_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
 import '../main.dart';
 import 'constants_manager.dart';
@@ -67,6 +68,7 @@ class AppRouteConstants {
   static const String incomeExpense = 'incomeExpense';
   static const String savings = 'savings';
   static const String savingsOverview = 'savingsOverview';
+  static const String selectFairShareIndividual = 'selectFairShareIndividual';
   static const String settings = 'settings';
 }
 
@@ -185,6 +187,12 @@ class RoutesManager {
         pageBuilder: (context, state) {
           final savings = state.extra as Savings;
           return MaterialPage(child: SavingsOverviewScreen(savings: savings));
+        }),
+    GoRoute(
+        name: AppRouteConstants.selectFairShareIndividual,
+        path: '/selectFairShareIndividual',
+        pageBuilder: (context, state) {
+          return MaterialPage(child: SelectFairShareIndividualScreen());
         }),
     GoRoute(
         name: AppRouteConstants.settings,

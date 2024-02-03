@@ -29,6 +29,7 @@ class ColorManager {
   static Color DARK_GREY = Color(0xFF7B848E);
   static Color DARKER_GREY = Color(0xFF444444);
   static Color BLACK_VOID = Color(0xFF030E25);
+  static Color BLACK_FADED = Color(0xFF292B3D);
   static Color CYAN = Color(0xFF3DC4DC);
   // static Color FADED_BLUE = Color(0xFF766FF4);
   static Color HOT_CORAL = Color(0xFFF45B5B);

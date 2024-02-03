@@ -15,20 +15,20 @@ import '../../Shared/widgets/widget_manager.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
-getFairShareGroups() {
-  return const FairShareGroups();
+getFairShareIndividuals() {
+  return const FairShareIndividuals();
 }
 
 /// Widget /////////////////////////////////////////////////////////////////////
 
-class FairShareGroups extends StatefulWidget {
-  const FairShareGroups({Key? key}) : super(key: key);
+class FairShareIndividuals extends StatefulWidget {
+  const FairShareIndividuals({Key? key}) : super(key: key);
 
   @override
-  State<FairShareGroups> createState() => _FairShareGroupsState();
+  State<FairShareIndividuals> createState() => _FairShareIndividualsState();
 }
 
-class _FairShareGroupsState extends State<FairShareGroups> {
+class _FairShareIndividualsState extends State<FairShareIndividuals> {
   FairShareController fairShareController = FairShareController();
 
   List<Group> groupList = [];
@@ -46,14 +46,12 @@ class _FairShareGroupsState extends State<FairShareGroups> {
         physics: NeverScrollableScrollPhysics(),
         itemCount: groupList.length,
         itemBuilder: (context, index) {
-          if (groupList[index].isGroup) {
+          if (!groupList[index].isGroup) {
             double amountStatus = groupList[index].amountStatus;
             String path = groupList[index].icon;
             String message = amountStatus < 0
                 ? "You owe ${amountStatus}"
-                : amountStatus == 0
-                    ? "settled up"
-                    : "You are owed: ${amountStatus}";
+                : "You are owed: ${amountStatus}";
 
             return GestureDetector(
               onTap: () {
@@ -74,15 +72,7 @@ class _FairShareGroupsState extends State<FairShareGroups> {
                 ),
                 child: Row(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(screenWidth(0.04, context), 0, screenWidth(0.04, context), 0),
-                      child: SizedBox(
-                        height: screenHeight(0.09, context),
-                        width: screenHeight(0.09, context),
-                        child: getImageToDisplay(path, ConstantsManager.EXPENSE_IMAGE, 0.2, 0.3, context),
-                      ),
-
-                    ),
+                    getImageToDisplay(path, ConstantsManager.NEUTRAL_HUMAN_AVATAR, 0.2, 0.2, context),
                     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(screenWidth(0.05, context), screenWidth(0.05, context), 0, 0),
@@ -95,8 +85,7 @@ class _FairShareGroupsState extends State<FairShareGroups> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            screenWidth(0.05, context), screenWidth(0.02, context), 0, screenWidth(0.05, context)),
+                        padding: EdgeInsets.fromLTRB(screenWidth(0.05, context), screenWidth(0.02, context), 0, screenWidth(0.05, context)),
                         child: Text(
                           message,
                           style: TextStyle(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:budgetlab/Shared/color_manager.dart';
 import 'package:budgetlab/Shared/service/localStorage_service.dart';
@@ -57,6 +58,25 @@ Color getBudgetProgressBarColor(double budgetUsedInPercentage) {
     return ColorManager.MUSTARD;
   }
   return ColorManager.PROGRESS_BLUE;
+}
+
+String getFairShareGroupIcon(FairShareGroupCategory category) {
+  if(category == FairShareGroupCategory.travel) {
+    Random random = Random();
+    int number = random.nextInt(3);
+    switch(number) {
+      case 0: return "assets/images/icons/trip1.png";
+      case 1: return "assets/images/icons/trip2.png";
+      case 2: return "assets/images/icons/trip3.png";
+    }
+  } else if(category == FairShareGroupCategory.dineOut) {
+    return "assets/images/icons/food2.png";
+  } else if(category == FairShareGroupCategory.home) {
+    return "assets/images/icons/house2.png";
+  } else if(category == FairShareGroupCategory.couple) {
+    return "assets/images/icons/couple.png";
+  }
+  return "assets/images/icons/expenseList.png";
 }
 
 Color getRandomLightColor(String input) {

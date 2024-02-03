@@ -40,9 +40,7 @@ class _FairShareGroupSettingsState extends State<FairShareGroupSettings> {
             Container(
               child: Row(
                 children: [
-                  Positioned.fill(
-                    child: getImageToDisplay(widget.group.icon, ConstantsManager.EXPENSE_IMAGE,0.2, 0.3, context),
-                  ),
+                  getImageToDisplay(widget.group.icon, ConstantsManager.EXPENSE_IMAGE,0.2, 0.3, context),
                   Spacer(), // This will push the next widget to the right
                   IconButton(
                     icon: Icon(Icons.edit),

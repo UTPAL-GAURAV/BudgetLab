@@ -48,7 +48,7 @@ class _CalendarState extends State<Calendar> {
         widget.updateValueOnPressed(selectedDate);
       },
       child: Text(
-        DateFormat('dd-MM-yyyy').format(selectedDate),
+        DateFormat('dd MMM yyyy').format(selectedDate),
         style: TextStyle(fontSize: screenHeight(0.02, context), color: ColorManager.PRIMARY_BLUE),
       ),
     );

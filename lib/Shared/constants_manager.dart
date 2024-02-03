@@ -2,6 +2,7 @@ class ConstantsManager {
   /// APP //////////////////////////////////////////////////////////////////////
   static const String APP_NAME = "BudgetLab";
   static const String CONTENT = "CONTENT";
+  static const String CREATE_GROUP = "Create Group";
   static const String LOAN_LEND = "Loan/Lend";
   static const String INCOME_EXPENSE = "Transactions";
   static const String BUDGET = "Budget";
@@ -32,6 +33,8 @@ class ConstantsManager {
 
   /// IMAGES //////////////////////////////////////////////////////////////////
   static const EXPENSE_IMAGE ='assets/images/icons/expense.png';
+  static const EXPENSE_LIST ='assets/images/icons/expenseList.png';
+  static const NEUTRAL_HUMAN_AVATAR ='assets/images/avatars/neutralGreenHair.png';
 
   /// DAYS & MONTHS ////////////////////////////////////////////////////////////
   static final Map<int, String> weekday = {

@@ -1,4 +1,5 @@
 import '../BudgetModule/History/history_entity.dart';
+import '../Shared/enums_manager.dart';
 import 'FairShare_Entities/friends_entity.dart';
 import 'FairShare_Entities/group_entity.dart';
 import 'FairShare_Entities/group_members_entity.dart';
@@ -18,12 +19,12 @@ class FairShareController {
     return fairShareService.addNewGroup(group);
   }
 
-  List<Transactions> getAllGroupTransactions() {
-    return fairShareService.getAllGroupTransactions();
+  List<Transactions> getAllGroupTransactions(String groupId) {
+    return fairShareService.getAllGroupTransactions(groupId);
   }
 
   int addNewGroupTransaction(Transactions transaction, History history) {
-    return fairShareService.addNewGroupTransaction(transaction);
+    return fairShareService.addNewGroupTransaction(transaction, history);
   }
 
   int deleteGroup(int x) {

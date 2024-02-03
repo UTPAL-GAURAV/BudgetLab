@@ -55,7 +55,7 @@ class _FairShareGroupMembersState extends State<FairShareGroupMembers> {
             },
             child: Row(
               children: [
-                Positioned.fill(
+                Container(
                   child: getImageToDisplay(groupMembersList[index].icon, ConstantsManager.EXPENSE_IMAGE, 0.2, 0.3, context),
                 ),
                 Padding(

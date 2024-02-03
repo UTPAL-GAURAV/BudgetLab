@@ -45,7 +45,7 @@ class _FairShareGroupScrollableTransactionsState extends State<FairShareGroupScr
 
   @override
   void initState() {
-    allTransactionList = fairShareController.getAllGroupTransactions();
+    allTransactionList = fairShareController.getAllGroupTransactions(widget.onGroupSelected.id.toString());
     userUniqieId = metaDataController.getAllMetadata()?.userUniqueId ?? "00000";
     super.initState();
   }
@@ -62,10 +62,12 @@ class _FairShareGroupScrollableTransactionsState extends State<FairShareGroupScr
               String monthNameAbbreviation =
                   ConstantsManager.months[allTransactionList[index].dateTime.month].toString().substring(0, 3);
               String displayDate = allTransactionList[index].dateTime.day.toString();
-              String photoPath = allTransactionList[index].photos.isNotEmpty? allTransactionList[index].photos[0]:"";
+              String photoPath = allTransactionList[index].photos.isNotEmpty ? allTransactionList[index].photos[0] : "";
               bool isLent = allTransactionList[index].friendId == userUniqieId;
-              String lentBorrowedText = isLent? "you lent" : "you borrowed";
-              String whoPaidText = isLent? "You paid" : "${fairShareController.getFriendNameFromId(allTransactionList[index].friendId)} paid";
+              String lentBorrowedText = isLent ? "you lent" : "you borrowed";
+              String whoPaidText = isLent
+                  ? "You paid"
+                  : "${fairShareController.getFriendNameFromId(allTransactionList[index].friendId)} paid";
 
               return GestureDetector(
                 onTap: () {
@@ -74,8 +76,9 @@ class _FairShareGroupScrollableTransactionsState extends State<FairShareGroupScr
                 child: Container(
                   // margin: EdgeInsets.fromLTRB(0, screenHeight(0.01, context), 0, screenHeight(0.014, context)),
                   padding: EdgeInsets.fromLTRB(screenWidth(0.00, context), screenHeight(0.01, context),
-                      screenWidth(0.00, context), screenHeight(0.01, context)),
-                  decoration: BoxDecoration(color: Colors.white,
+                      screenWidth(0.01, context), screenHeight(0.01, context)),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
                     border: Border(
                       bottom: BorderSide(
                         color: Colors.grey,
@@ -97,14 +100,14 @@ class _FairShareGroupScrollableTransactionsState extends State<FairShareGroupScr
                                   Text(
                                     monthNameAbbreviation,
                                     style: TextStyle(
-                                        color: ColorManager.BLACK_VOID,
+                                        color: ColorManager.BLACK_FADED,
                                         fontSize: screenHeight(0.022, context),
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     displayDate,
                                     style: TextStyle(
-                                        color: ColorManager.BLACK_VOID,
+                                        color: ColorManager.BLACK_FADED,
                                         fontSize: screenHeight(0.022, context),
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -112,25 +115,23 @@ class _FairShareGroupScrollableTransactionsState extends State<FairShareGroupScr
                               ),
                             ),
                           ),
-
                           Expanded(
                             flex: 1,
                             child: getImageToDisplay(photoPath, ConstantsManager.EXPENSE_IMAGE, 0.1, 0.1, context),
                           ),
-
                           Expanded(
                             flex: 3,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 16, right: 8),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     allTransactionList[index].name,
                                     style: TextStyle(
-                                        color: ColorManager.BLACK_VOID,
+                                        color: ColorManager.BLACK_FADED,
                                         fontSize: screenHeight(0.016, context),
-                                        fontWeight: FontWeight.w400,
-                                    ),
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "$whoPaidText $currencySymbol ${allTransactionList[index].amount.toString()}",
@@ -143,22 +144,22 @@ class _FairShareGroupScrollableTransactionsState extends State<FairShareGroupScr
                               ),
                             ),
                           ),
-
                           Expanded(
                             flex: 2,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   lentBorrowedText,
                                   style: TextStyle(
-                                      color: isLent? ColorManager.CLOVER_GREEN : ColorManager.HOT_CORAL,
+                                      color: isLent ? ColorManager.CLOVER_GREEN : ColorManager.HOT_CORAL,
                                       fontSize: screenHeight(0.016, context),
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   "$currencySymbol ${allTransactionList[index].amount.toString()}",
                                   style: TextStyle(
-                                      color: isLent? ColorManager.CLOVER_GREEN : ColorManager.HOT_CORAL,
+                                      color: isLent ? ColorManager.CLOVER_GREEN : ColorManager.HOT_CORAL,
                                       fontSize: screenHeight(0.016, context),
                                       fontWeight: FontWeight.bold),
                                 )

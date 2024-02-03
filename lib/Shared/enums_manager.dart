@@ -48,3 +48,11 @@ BudgetCycle parseBudgetCycle(String value) {
       throw ArgumentError('Invalid BudgetCycle: $value');
   }
 }
+
+enum FairShareGroupCategory {
+  travel,
+  dineOut,
+  home,
+  couple,
+  other
+}

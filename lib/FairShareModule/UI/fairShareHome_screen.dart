@@ -7,6 +7,7 @@ import '../../HomeModule/UI/homePage_screen.dart';
 import '../../Shared/color_manager.dart';
 import '../../Shared/routes_manager.dart';
 import 'fairShareGroups.dart';
+import 'fairShareIndividuals.dart';
 
 class FairShareHomeScreen extends StatefulWidget {
   const FairShareHomeScreen({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.group_add),
             onPressed: () {
               GoRouter.of(context).pushNamed(AppRouteConstants.createFairShareGroup);
             },
@@ -64,11 +65,19 @@ class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
                     ),
                   ),
                   Container(
-                    child: getFairShareGroups(),
+                    child: getFairShareIndividuals(),
                   ),
                 ],
               ),
             )),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.add, color: Colors.white),
+        label: Text("Add Individual Expense", style: TextStyle(color: Colors.white, fontSize: screenHeight(0.02, context))),
+        backgroundColor: ColorManager.PRIMARY_BLUE,
+        onPressed: () {
+          GoRouter.of(context).pushNamed(AppRouteConstants.selectFairShareIndividual);
+        },
       ),
     );
   }

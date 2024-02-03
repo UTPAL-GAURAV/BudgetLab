@@ -1,5 +1,9 @@
+import 'package:budgetlab/BudgetModule/History/history_entity.dart';
+import 'package:budgetlab/BudgetModule/History/history_service.dart';
 import 'package:budgetlab/FairShareModule/FairShare_Entities/friends_entity.dart';
+import 'package:budgetlab/SettingsModule/metadata_service.dart';
 
+import '../Shared/enums_manager.dart';
 import 'FairShare_Entities/group_entity.dart';
 import 'FairShare_Entities/group_members_entity.dart';
 import 'FairShare_Entities/split_transaction_entity.dart';
@@ -8,6 +12,8 @@ import 'fairShare_repository.dart';
 
 class FairShareService {
   FairShareRepository fairShareRepository = FairShareRepository();
+  HistoryService historyService = HistoryService();
+  MetadataService metadataService = MetadataService();
 
   List<Group> getAllGroupList() {
     return fairShareRepository.getAllGroupList();
@@ -17,11 +23,18 @@ class FairShareService {
     return fairShareRepository.addNewGroup(group);
   }
 
-  List<Transactions> getAllGroupTransactions() {
-    return fairShareRepository.getAllGroupTransactions();
+  List<Transactions> getAllGroupTransactions(String groupId) {
+    return fairShareRepository.getAllGroupTransactions(groupId);
   }
 
-  int addNewGroupTransaction(Transactions transaction) {
+  int addNewGroupTransaction(Transactions transaction, History history) {
+    // add in history
+    historyService.addHistory(history);
+    // subtract from Available Balance & Expendable amount
+    metadataService.updateExpendableAmount(false, transaction.amount, true, false);
+    //TODO: Calculate split amount for your worth (a model class is needed)
+    // metadataService.updateYourWorth(false, amount);
+
     return fairShareRepository.addNewGroupTransaction(transaction);
   }
 

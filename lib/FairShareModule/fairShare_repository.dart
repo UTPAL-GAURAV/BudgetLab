@@ -21,8 +21,9 @@ class FairShareRepository {
     return ObjectBoxManager.groupBox.removeAsync(id);
   }
 
-  List<Transactions> getAllGroupTransactions() {
-    return ObjectBoxManager.transactionsBox.getAll();
+  List<Transactions> getAllGroupTransactions(String groupId) {
+    final queryBuilder = ObjectBoxManager.transactionsBox.query(Transactions_.groupId.equals(groupId));
+    return queryBuilder.build().find();
   }
 
   int addNewGroupTransaction(Transactions transaction) {
