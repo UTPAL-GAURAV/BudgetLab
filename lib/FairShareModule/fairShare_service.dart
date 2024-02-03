@@ -1,3 +1,5 @@
+import 'package:budgetlab/FairShareModule/FairShare_Entities/friends_entity.dart';
+
 import 'FairShare_Entities/group_entity.dart';
 import 'FairShare_Entities/group_members_entity.dart';
 import 'FairShare_Entities/split_transaction_entity.dart';
@@ -31,8 +33,19 @@ class FairShareService {
     return fairShareRepository.addNewSplitTransaction(splitTransaction);
   }
 
-  List<GroupMembers> getAllGroupMemberList() {
-    return fairShareRepository.getAllGroupMemberList();
+  List<GroupMembers> getAllGroupMemberList(int groupId) {
+    return fairShareRepository.getAllGroupMemberList(groupId);
+  }
+
+  List<Friends> getAllFriendsOfThisGroup(int groupId) {
+    final List<GroupMembers> groupMembers = fairShareRepository.getAllGroupMemberList(groupId);
+    List<int> groupFriendsIds = [];
+    groupMembers.forEach((member) {
+      groupFriendsIds.add(member.id);
+    });
+    return fairShareRepository.getFriends(groupFriendsIds).where((friend) => friend != null)
+        .cast<Friends>() // Cast the list to remove nullability
+        .toList();
   }
 
   List<int> addNewGroupMember(List<GroupMembers> groupMembers) {

@@ -95,7 +95,7 @@
     },
     {
       "id": "5:3071978227778497905",
-      "lastPropertyId": "13:5459545563587063662",
+      "lastPropertyId": "14:6777320338138352674",
       "name": "Metadata",
       "properties": [
         {
@@ -163,6 +163,11 @@
           "id": "13:5459545563587063662",
           "name": "expendableAmount",
           "type": 8
+        },
+        {
+          "id": "14:6777320338138352674",
+          "name": "userUniqueId",
+          "type": 9
         }
       ],
       "relations": []
@@ -308,7 +313,7 @@
     },
     {
       "id": "9:5126511546810773527",
-      "lastPropertyId": "3:8837202966013133991",
+      "lastPropertyId": "5:3770566182708049643",
       "name": "Friends",
       "properties": [
         {
@@ -325,6 +330,16 @@
         {
           "id": "3:8837202966013133991",
           "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "4:540831852607451879",
+          "name": "userUniqueId",
+          "type": 9
+        },
+        {
+          "id": "5:3770566182708049643",
+          "name": "phoneNumber",
           "type": 9
         }
       ],
@@ -385,7 +400,7 @@
     },
     {
       "id": "13:4979216734157937974",
-      "lastPropertyId": "5:4434860534992700745",
+      "lastPropertyId": "7:1720852377386971089",
       "name": "Transactions",
       "properties": [
         {
@@ -413,6 +428,16 @@
           "id": "5:4434860534992700745",
           "name": "amount",
           "type": 8
+        },
+        {
+          "id": "6:9154800048148810301",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "7:1720852377386971089",
+          "name": "photos",
+          "type": 30
         }
       ],
       "relations": []
@@ -453,7 +478,7 @@
     },
     {
       "id": "15:821376214972628997",
-      "lastPropertyId": "5:6648128419559188737",
+      "lastPropertyId": "6:6484592006996044017",
       "name": "Group",
       "properties": [
         {
@@ -481,6 +506,11 @@
           "id": "5:6648128419559188737",
           "name": "amountStatus",
           "type": 8
+        },
+        {
+          "id": "6:6484592006996044017",
+          "name": "groupUniqueId",
+          "type": 9
         }
       ],
       "relations": []

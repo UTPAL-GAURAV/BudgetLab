@@ -3,6 +3,7 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class Metadata {
   int id;
+  String userUniqueId;   // To identify user globally (email / contact number)
   double currentBalance;
   double yourWorth;
   double expendableAmount; // Amount that is available for expense (currentBalance - savings)
@@ -18,6 +19,7 @@ class Metadata {
 
   Metadata({
     this.id = 0,
+    this.userUniqueId = "00000",
     this.currentBalance = 0,
     this.yourWorth = 0,
     this.expendableAmount = 0,

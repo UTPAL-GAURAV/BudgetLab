@@ -18,14 +18,14 @@ import 'package:budgetlab/Shared/widgets/calendar.dart' as Calendar;
 import '../../../Shared/service/gallery_service.dart';
 import '../../../Shared/widgets/widget_manager.dart';
 
-class AddSavingsScreen extends StatefulWidget {
-  const AddSavingsScreen({Key? key}) : super(key: key);
+class CreateSavingsScreen extends StatefulWidget {
+  const CreateSavingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddSavingsScreen> createState() => _AddSavingsScreenState();
+  State<CreateSavingsScreen> createState() => _CreateSavingsScreenState();
 }
 
-class _AddSavingsScreenState extends State<AddSavingsScreen> {
+class _CreateSavingsScreenState extends State<CreateSavingsScreen> {
   GalleryService galleryService = GalleryService();
   SavingsController savingsController = SavingsController();
 

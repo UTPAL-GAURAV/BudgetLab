@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../HomeModule/UI/homePage_screen.dart';
 import '../../Shared/constants_manager.dart';
@@ -76,11 +77,11 @@ class _CreateFairShareGroupScreenState extends State<CreateFairShareGroupScreen>
                     label: Text("SAVE", style: TextStyle(color: Colors.white, fontSize: screenHeight(0.02, context))),
                     backgroundColor: ColorManager.PRIMARY_BLUE,
                     onPressed: () {
+                      Group group = Group(name: groupName, isGroup: true, amountStatus: 0, icon: icon, groupUniqueId: Uuid().v4());
                       formKey.currentState!.save();
                       if (formKey.currentState!.validate()) {
-                        fairShareController
-                            .addNewGroup(Group(name: groupName, isGroup: true, amountStatus: 0, icon: icon));
-                        GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
+                        fairShareController.addNewGroup(group);
+                        GoRouter.of(context).pushNamed(AppRouteConstants.groupScreen, extra: group);
                       }
                     }),
               ),

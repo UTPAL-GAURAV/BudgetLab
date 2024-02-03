@@ -122,7 +122,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(5, 3071978227778497905),
       name: 'Metadata',
-      lastPropertyId: const IdUid(13, 5459545563587063662),
+      lastPropertyId: const IdUid(14, 6777320338138352674),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -189,6 +189,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(13, 5459545563587063662),
             name: 'expendableAmount',
             type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(14, 6777320338138352674),
+            name: 'userUniqueId',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -334,7 +339,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(9, 5126511546810773527),
       name: 'Friends',
-      lastPropertyId: const IdUid(3, 8837202966013133991),
+      lastPropertyId: const IdUid(5, 3770566182708049643),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -350,6 +355,16 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(3, 8837202966013133991),
             name: 'icon',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 540831852607451879),
+            name: 'userUniqueId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 3770566182708049643),
+            name: 'phoneNumber',
             type: 9,
             flags: 0)
       ],
@@ -411,7 +426,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(13, 4979216734157937974),
       name: 'Transactions',
-      lastPropertyId: const IdUid(5, 4434860534992700745),
+      lastPropertyId: const IdUid(7, 1720852377386971089),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -438,6 +453,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 4434860534992700745),
             name: 'amount',
             type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 9154800048148810301),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 1720852377386971089),
+            name: 'photos',
+            type: 30,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -479,7 +504,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(15, 821376214972628997),
       name: 'Group',
-      lastPropertyId: const IdUid(5, 6648128419559188737),
+      lastPropertyId: const IdUid(6, 6484592006996044017),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -506,6 +531,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 6648128419559188737),
             name: 'amountStatus',
             type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 6484592006996044017),
+            name: 'groupUniqueId',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -693,7 +723,8 @@ ModelDefinition getObjectBoxModel() {
           final countryOffset = fbb.writeString(object.country);
           final passwordOffset = fbb.writeString(object.password);
           final languageOffset = fbb.writeString(object.language);
-          fbb.startTable(14);
+          final userUniqueIdOffset = fbb.writeString(object.userUniqueId);
+          fbb.startTable(15);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.currentBalance);
           fbb.addFloat64(2, object.yourWorth);
@@ -707,6 +738,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addBool(10, object.gender);
           fbb.addOffset(11, languageOffset);
           fbb.addFloat64(12, object.expendableAmount);
+          fbb.addOffset(13, userUniqueIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -715,6 +747,9 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final userUniqueIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 30, '');
           final currentBalanceParam =
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
           final yourWorthParam =
@@ -741,6 +776,7 @@ ModelDefinition getObjectBoxModel() {
               const fb.BoolReader().vTableGet(buffer, rootOffset, 22, false);
           final object = Metadata(
               id: idParam,
+              userUniqueId: userUniqueIdParam,
               currentBalance: currentBalanceParam,
               yourWorth: yourWorthParam,
               expendableAmount: expendableAmountParam,
@@ -923,10 +959,14 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Friends object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(4);
+          final userUniqueIdOffset = fbb.writeString(object.userUniqueId);
+          final phoneNumberOffset = fbb.writeString(object.phoneNumber);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addOffset(2, iconOffset);
+          fbb.addOffset(3, userUniqueIdOffset);
+          fbb.addOffset(4, phoneNumberOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -935,11 +975,22 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final userUniqueIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 10, '');
           final nameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final iconParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
-          final object = Friends(id: idParam, name: nameParam, icon: iconParam);
+          final phoneNumberParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final object = Friends(
+              id: idParam,
+              userUniqueId: userUniqueIdParam,
+              name: nameParam,
+              icon: iconParam,
+              phoneNumber: phoneNumberParam);
 
           return object;
         }),
@@ -1023,12 +1074,17 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Transactions object, fb.Builder fbb) {
           final friendIdOffset = fbb.writeString(object.friendId);
           final groupIdOffset = fbb.writeString(object.groupId);
-          fbb.startTable(6);
+          final nameOffset = fbb.writeString(object.name);
+          final photosOffset = fbb.writeList(
+              object.photos.map(fbb.writeString).toList(growable: false));
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.dateTime.millisecondsSinceEpoch);
           fbb.addOffset(2, friendIdOffset);
           fbb.addOffset(3, groupIdOffset);
           fbb.addFloat64(4, object.amount);
+          fbb.addOffset(5, nameOffset);
+          fbb.addOffset(6, photosOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -1039,18 +1095,26 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0));
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
           final friendIdParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
           final groupIdParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 10, '');
           final amountParam =
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final photosParam = const fb.ListReader<String>(
+                  fb.StringReader(asciiOptimization: true),
+                  lazy: false)
+              .vTableGet(buffer, rootOffset, 16, []);
           final object = Transactions(
               id: idParam,
               dateTime: dateTimeParam,
+              name: nameParam,
               friendId: friendIdParam,
               groupId: groupIdParam,
-              amount: amountParam);
+              amount: amountParam,
+              photos: photosParam);
 
           return object;
         }),
@@ -1106,12 +1170,14 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Group object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(6);
+          final groupUniqueIdOffset = fbb.writeString(object.groupUniqueId);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addOffset(2, iconOffset);
           fbb.addBool(3, object.isGroup);
           fbb.addFloat64(4, object.amountStatus);
+          fbb.addOffset(5, groupUniqueIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -1120,6 +1186,9 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final groupUniqueIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 14, '');
           final nameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final iconParam = const fb.StringReader(asciiOptimization: true)
@@ -1130,6 +1199,7 @@ ModelDefinition getObjectBoxModel() {
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0);
           final object = Group(
               id: idParam,
+              groupUniqueId: groupUniqueIdParam,
               name: nameParam,
               icon: iconParam,
               isGroup: isGroupParam,
@@ -1252,6 +1322,10 @@ class Metadata_ {
   /// see [Metadata.expendableAmount]
   static final expendableAmount =
       QueryDoubleProperty<Metadata>(_entities[2].properties[12]);
+
+  /// see [Metadata.userUniqueId]
+  static final userUniqueId =
+      QueryStringProperty<Metadata>(_entities[2].properties[13]);
 }
 
 /// [Savings] entity fields to define ObjectBox queries.
@@ -1352,6 +1426,14 @@ class Friends_ {
 
   /// see [Friends.icon]
   static final icon = QueryStringProperty<Friends>(_entities[6].properties[2]);
+
+  /// see [Friends.userUniqueId]
+  static final userUniqueId =
+      QueryStringProperty<Friends>(_entities[6].properties[3]);
+
+  /// see [Friends.phoneNumber]
+  static final phoneNumber =
+      QueryStringProperty<Friends>(_entities[6].properties[4]);
 }
 
 /// [GroupMembers] entity fields to define ObjectBox queries.
@@ -1409,6 +1491,14 @@ class Transactions_ {
   /// see [Transactions.amount]
   static final amount =
       QueryDoubleProperty<Transactions>(_entities[9].properties[4]);
+
+  /// see [Transactions.name]
+  static final name =
+      QueryStringProperty<Transactions>(_entities[9].properties[5]);
+
+  /// see [Transactions.photos]
+  static final photos =
+      QueryStringVectorProperty<Transactions>(_entities[9].properties[6]);
 }
 
 /// [SavingsTransactions] entity fields to define ObjectBox queries.
@@ -1452,4 +1542,8 @@ class Group_ {
   /// see [Group.amountStatus]
   static final amountStatus =
       QueryDoubleProperty<Group>(_entities[11].properties[4]);
+
+  /// see [Group.groupUniqueId]
+  static final groupUniqueId =
+      QueryStringProperty<Group>(_entities[11].properties[5]);
 }

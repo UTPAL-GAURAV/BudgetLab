@@ -18,10 +18,8 @@ import '../../../../Shared/service/common_service.dart';
 import '../../savings_entity.dart';
 
 class AddSavingsTransactionScreen extends StatefulWidget {
-  late Savings savings;
-  AddSavingsTransactionScreen({Key? key, required this.savings}) : super(key: key) {
-    this.savings = savings;
-  }
+  final Savings savings;
+  const AddSavingsTransactionScreen({Key? key, required this.savings}) : super(key: key);
 
   @override
   State<AddSavingsTransactionScreen> createState() => _AddSavingsTransactionScreenState();

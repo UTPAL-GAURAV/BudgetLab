@@ -21,10 +21,8 @@ import '../category_controller.dart';
 import 'categoryDelete_popUp.dart';
 
 class CategoryEditScreen extends StatefulWidget {
-  late Category category;
-  CategoryEditScreen({Key? key, required Category category}) : super(key: key) {
-    this.category = category;
-  }
+  final Category category;
+  const CategoryEditScreen({Key? key, required  this.category}) : super(key: key);
 
   @override
   State<CategoryEditScreen> createState() => _CategoryEditScreenState();

@@ -1,5 +1,6 @@
 
 import 'package:budgetlab/FairShareModule/FairShare_Entities/group_members_entity.dart';
+import 'package:budgetlab/objectbox.g.dart';
 
 import '../DB/ObjectBoxManager.dart';
 import 'FairShare_Entities/friends_entity.dart';
@@ -36,8 +37,9 @@ class FairShareRepository {
     return ObjectBoxManager.splitTransactionBox.put(splitTransaction);
   }
 
-  List<GroupMembers> getAllGroupMemberList() {
-    return ObjectBoxManager.groupMembersBox.getAll();
+  List<GroupMembers> getAllGroupMemberList(int groupId) {
+    final queryBuilder = ObjectBoxManager.groupMembersBox.query(GroupMembers_.id.equals(groupId));
+    return queryBuilder.build().find();
   }
 
   List<int> addNewGroupMember(List<GroupMembers> groupMembers) {
@@ -50,6 +52,10 @@ class FairShareRepository {
 
   List<Friends> getAllFriendsList() {
     return ObjectBoxManager.friendsBox.getAll();
+  }
+
+  List<Friends?> getFriends(List<int> friendIds) {
+    return ObjectBoxManager.friendsBox.getMany(friendIds);
   }
 
   List<int> addNewFriends(List<Friends> friends) {

@@ -19,10 +19,8 @@ import '../../../Shared/service/providers/savings_provider.dart';
 import '../../../Shared/widgets/widget_manager.dart';
 
 class SavingsOverviewScreen extends StatefulWidget {
-  late Savings savings;
-  SavingsOverviewScreen({Key? key, required this.savings}) : super(key: key) {
-    this.savings = savings;
-  }
+  final Savings savings;
+  const SavingsOverviewScreen({Key? key, required this.savings}) : super(key: key);
 
   @override
   State<SavingsOverviewScreen> createState() => _SavingsOverviewScreenState();

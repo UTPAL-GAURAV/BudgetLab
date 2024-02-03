@@ -8,8 +8,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../HomeModule/UI/homePage_screen.dart';
 import '../../Shared/color_manager.dart';
+import '../../Shared/constants_manager.dart';
 import '../../Shared/routes_manager.dart';
 import '../../Shared/service/common_service.dart';
+import '../../Shared/widgets/widget_manager.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 
@@ -55,7 +57,7 @@ class _FairShareGroupsState extends State<FairShareGroups> {
 
             return GestureDetector(
               onTap: () {
-                // GoRouter.of(context).pushNamed(AppRouteConstants.budgetOverview, extra: groupList[index]);
+                GoRouter.of(context).pushNamed(AppRouteConstants.groupScreen, extra: groupList[index]);
               },
               child: Container(
                 margin: EdgeInsets.fromLTRB(0, screenHeight(0.01, context), 0, screenHeight(0.016, context)),
@@ -73,30 +75,7 @@ class _FairShareGroupsState extends State<FairShareGroups> {
                 child: Row(
                   children: [
                     Positioned.fill(
-                      child: ClipRRect(
-                        // Ensure image is clipped to the container's border
-                        child: path.startsWith('assets/')
-                            ? Image.asset(
-                                path,
-                                fit: BoxFit.fill,
-                                height: screenWidth(0.2, context),
-                                width: screenWidth(0.3, context), // Ensure the image covers the entire container
-                              )
-                            : File(path).existsSync() // Check if the file exists
-                                ? Image.file(
-                                    File(path),
-                                    fit: BoxFit.cover,
-                                    height: screenWidth(0.2, context),
-                                    width: screenWidth(0.3, context), // Ensure the image covers the entire container
-                                  )
-                                // In case user deletes File path image
-                                : Image.asset(
-                                    'assets/images/icons/budgetCategory/piggy.png', // Path to your default image in the assets folder
-                                    fit: BoxFit.fill,
-                                    height: screenWidth(0.2, context),
-                                    width: screenWidth(0.3, context), // Ensure the image covers the entire container
-                                  ),
-                      ),
+                      child: getImageToDisplay(path, ConstantsManager.EXPENSE_IMAGE, 0.2, 0.3, context),
                     ),
                     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Padding(

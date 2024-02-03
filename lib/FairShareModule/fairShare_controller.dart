@@ -1,3 +1,5 @@
+import '../BudgetModule/History/history_entity.dart';
+import 'FairShare_Entities/friends_entity.dart';
 import 'FairShare_Entities/group_entity.dart';
 import 'FairShare_Entities/group_members_entity.dart';
 import 'FairShare_Entities/split_transaction_entity.dart';
@@ -20,23 +22,41 @@ class FairShareController {
     return fairShareService.getAllGroupTransactions();
   }
 
-  int addNewGroupTransaction(Transactions transaction) {
+  int addNewGroupTransaction(Transactions transaction, History history) {
     return fairShareService.addNewGroupTransaction(transaction);
   }
 
+  int deleteGroup(int x) {
+    return 0;
+  }
+
+
+  // Group Members
+  List<GroupMembers> getAllGroupMemberList(int groupId) {
+    return fairShareService.getAllGroupMemberList(groupId);
+  }
+
+  List<Friends> getAllFriendsOfThisGroup(int groupId) {
+    return fairShareService.getAllFriendsOfThisGroup(groupId);
+  }
+
+  List<int> addNewGroupMember(List<GroupMembers> groupMembers) {
+    return fairShareService.addNewGroupMember(groupMembers);
+  }
+
+
+  // Friends
+  String getFriendNameFromId(String friendId) {
+    return "friend 1";
+  }
+
+
+  // Transactions
   List<SplitTransaction> getSplitTransactions(int transactionId) {
     return fairShareService.getSplitTransactions(transactionId);
   }
 
   int addNewSplitTransaction(SplitTransaction splitTransaction) {
     return fairShareService.addNewSplitTransaction(splitTransaction);
-  }
-
-  List<GroupMembers> getAllGroupMemberList() {
-    return fairShareService.getAllGroupMemberList();
-  }
-
-  List<int> addNewGroupMember(List<GroupMembers> groupMembers) {
-    return fairShareService.addNewGroupMember(groupMembers);
   }
 }

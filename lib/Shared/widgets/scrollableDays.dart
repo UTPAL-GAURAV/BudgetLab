@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../BudgetModule/History/UI/history_screen.dart';
+import '../../BudgetModule/History/UI/historyHome_screen.dart';
 
 /// Public Method //////////////////////////////////////////////////////////////
 

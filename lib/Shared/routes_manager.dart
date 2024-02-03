@@ -1,7 +1,8 @@
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpense_screen.dart';
-import 'package:budgetlab/BudgetModule/History/UI/history_screen.dart';
+import 'package:budgetlab/BudgetModule/History/UI/historyHome_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/UI/savingsOverview_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
+import 'package:budgetlab/FairShareModule/UI/addFairShareTransaction_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,10 +13,14 @@ import '../BudgetModule/Budgets/Budget/UI/budgetHome_screen.dart';
 import '../BudgetModule/Budgets/Category/UI/category_screen.dart';
 import '../BudgetModule/Budgets/Category/category_entity.dart';
 import '../BudgetModule/Savings/Savings_SavingsTransactions/UI/addSavingsTransaction_screen.dart';
-import '../BudgetModule/Savings/UI/addSavings_screen.dart';
+import '../BudgetModule/Savings/UI/createSavings_screen.dart';
 import '../BudgetModule/Savings/UI/savingsHome_screen.dart';
-import '../FairShareModule/UI/createGroup_screen.dart';
+import '../FairShareModule/FairShare_Entities/group_entity.dart';
+import '../FairShareModule/UI/createFairShareGroup_screen.dart';
+import '../FairShareModule/UI/fairShareAddPeopleToGroup_screen.dart';
+import '../FairShareModule/UI/fairShareGroupSettings_screen.dart';
 import '../FairShareModule/UI/fairShareHome_screen.dart';
+import '../FairShareModule/UI/fairShareGroup_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
 import '../main.dart';
 import 'constants_manager.dart';
@@ -47,6 +52,7 @@ class AppRouteConstants {
   static const String home = 'home';
   static const String addIncomeExpense = 'addIncomeExpense';
   static const String addFairShare = 'addFairShare';
+  static const String addFairShareTransaction = 'addFairShareTransaction';
   static const String addSavings = 'addSavings';
   static const String addSavingsTransaction = 'addSavingsTransaction';
   static const String budget = 'budget';
@@ -54,6 +60,9 @@ class AppRouteConstants {
   static const String category = 'category';
   static const String createFairShareGroup = 'createFairShareGroup';
   static const String fairShare = 'fairShare';
+  static const String fairShareAddPeopleToGroup = 'fairShareAddPeopleToGroup';
+  static const String fairShareGroupSettings = 'fairShareGroupSettings';
+  static const String groupScreen = 'groupScreen';
   static const String history = 'history';
   static const String incomeExpense = 'incomeExpense';
   static const String savings = 'savings';
@@ -81,17 +90,18 @@ class RoutesManager {
         pageBuilder: (context, state) {
           return const MaterialPage(child: AddIncomeExpenseScreen());
         }),
-    // GoRoute(
-    //     name: AppRouteConstants.addFairShare,
-    //     path: '/addFairShare',
-    //     pageBuilder: (context, state) {
-    //       return const MaterialPage(child: AddLoanLendScreen());
-    //     }),
+    GoRoute(
+        name: AppRouteConstants.addFairShareTransaction,
+        path: '/addFairShareTransaction',
+        pageBuilder: (context, state) {
+          final group = state.extra as Group;
+          return MaterialPage(child: AddFairShareTransactionScreen(group: group));
+        }),
     GoRoute(
         name: AppRouteConstants.addSavings,
         path: '/addSavings',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: AddSavingsScreen());
+          return const MaterialPage(child: CreateSavingsScreen());
         }),
     GoRoute(
         name: AppRouteConstants.addSavingsTransaction,
@@ -142,6 +152,26 @@ class RoutesManager {
         path: '/fairShare',
         pageBuilder: (context, state) {
           return const MaterialPage(child: FairShareHomeScreen());
+        }),
+    GoRoute(
+        name: AppRouteConstants.fairShareAddPeopleToGroup,
+        path: '/fairShareAddPeopleToGroup',
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: FairShareAddPeopleToGroupScreen());
+        }),
+    GoRoute(
+        name: AppRouteConstants.groupScreen,
+        path: '/groupScreen',
+        pageBuilder: (context, state) {
+          final group = state.extra as Group;
+          return MaterialPage(child: FairShareGroupScreen(group: group));
+        }),
+    GoRoute(
+        name: AppRouteConstants.fairShareGroupSettings,
+        path: '/fairShareGroupSettings',
+        pageBuilder: (context, state) {
+          final group = state.extra as Group;
+          return MaterialPage(child: FairShareGroupSettings(group: group));
         }),
     GoRoute(
         name: AppRouteConstants.savings,

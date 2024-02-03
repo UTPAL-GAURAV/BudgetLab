@@ -82,8 +82,8 @@ getIconButtons(String path, BuildContext context, bool isSelected) {
           ? Image.asset(
               path,
               fit: BoxFit.fill,
-        height: screenHeight(0.01, context),
-        width: screenHeight(0.01, context),// Ensure the image covers the entire container
+              height: screenHeight(0.01, context),
+              width: screenHeight(0.01, context), // Ensure the image covers the entire container
             )
           : Image.file(
               File(path),
@@ -176,8 +176,7 @@ getTransactionTypeButtonsInARow() {
         FloatingActionButton.extended(
             label: const Text("Expense"),
             icon: provider.selectedTransactionType == TransactionType.expense
-                ? Container(
-                width: 24, height: 24, child: Image.asset('assets/images/icons/expense.png'))
+                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/expense.png'))
                 : null,
             onPressed: () {
               provider.setSelectedTransactionType(TransactionType.expense);
@@ -185,8 +184,7 @@ getTransactionTypeButtonsInARow() {
         FloatingActionButton.extended(
             label: const Text("Income"),
             icon: provider.selectedTransactionType == TransactionType.income
-                ? Container(
-                width: 24, height: 24, child: Image.asset('assets/images/icons/income.png'))
+                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/income.png'))
                 : null,
             onPressed: () {
               provider.setSelectedTransactionType(TransactionType.income);
@@ -194,8 +192,7 @@ getTransactionTypeButtonsInARow() {
         FloatingActionButton.extended(
             label: const Text("Investment"),
             icon: provider.selectedTransactionType == TransactionType.investment
-                ? Container(
-                width: 24, height: 24, child: Image.asset('assets/images/icons/investment.png'))
+                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/investment.png'))
                 : null,
             onPressed: () {
               provider.setSelectedTransactionType(TransactionType.investment);
@@ -213,8 +210,7 @@ getBudgetCycleButtonsInARow() {
         FloatingActionButton.extended(
             label: Text(BudgetCycle.Weekly.name),
             icon: provider.selectedBudgetCycle == BudgetCycle.Weekly
-                ? Container(
-                width: 24, height: 24, child: Image.asset('assets/images/icons/weekly.png'))
+                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/weekly.png'))
                 : null,
             onPressed: () {
               provider.setSelectedBudgetCycle(BudgetCycle.Weekly);
@@ -222,8 +218,7 @@ getBudgetCycleButtonsInARow() {
         FloatingActionButton.extended(
             label: Text(BudgetCycle.Monthly.name),
             icon: provider.selectedBudgetCycle == BudgetCycle.Monthly
-                ? Container(
-                width: 24, height: 24, child: Image.asset('assets/images/icons/monthly.png'))
+                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/monthly.png'))
                 : null,
             onPressed: () {
               provider.setSelectedBudgetCycle(BudgetCycle.Monthly);
@@ -231,8 +226,7 @@ getBudgetCycleButtonsInARow() {
         FloatingActionButton.extended(
             label: Text(BudgetCycle.Yearly.name),
             icon: provider.selectedBudgetCycle == BudgetCycle.Yearly
-                ? Container(
-                width: 24, height: 24, child: Image.asset('assets/images/icons/yearly.png'))
+                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/yearly.png'))
                 : null,
             onPressed: () {
               provider.setSelectedBudgetCycle(BudgetCycle.Yearly);
@@ -315,16 +309,19 @@ getSingleBanner(String title, String subtitle, Color color, double height, doubl
 Container getBudgetMessageForUser(double budgetUsedInPercentage, BuildContext context) {
   String message = "You're doing great!";
 
-  if(budgetUsedInPercentage >= 1.0) {
+  if (budgetUsedInPercentage >= 1.0) {
     message = "Hey! Take a break";
-  } else if(budgetUsedInPercentage > 0.8) {
+  } else if (budgetUsedInPercentage > 0.8) {
     message = "Slow down buddy!";
   }
 
   return Container(
     child: Row(
       children: [
-        Text(message, style: TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.016, context)),),
+        Text(
+          message,
+          style: TextStyle(color: ColorManager.DARK_GREY, fontSize: screenHeight(0.016, context)),
+        ),
         Padding(padding: EdgeInsets.only(left: screenWidth(0.026, context))),
         getBudgetIconForUser(budgetUsedInPercentage, context),
       ],
@@ -335,9 +332,9 @@ Container getBudgetMessageForUser(double budgetUsedInPercentage, BuildContext co
 getBudgetIconForUser(double budgetUsedInPercentage, BuildContext context) {
   String path = 'assets/images/icons/like.png';
 
-  if(budgetUsedInPercentage >= 1.0) {
+  if (budgetUsedInPercentage >= 1.0) {
     path = "assets/images/icons/no-money.png";
-  } else if(budgetUsedInPercentage > 0.8) {
+  } else if (budgetUsedInPercentage > 0.8) {
     path = "assets/images/icons/warning.png";
   }
 
@@ -347,7 +344,36 @@ getBudgetIconForUser(double budgetUsedInPercentage, BuildContext context) {
       path,
       fit: BoxFit.fill,
       height: screenHeight(0.02, context),
-      width: screenHeight(0.02, context),// Ensure the image covers the entire container
+      width: screenHeight(0.02, context), // Ensure the image covers the entire container
     ),
+  );
+}
+
+/// PICTURES ////////////////////////////////////////////////////////////////////
+
+getImageToDisplay(String path, String backupImage, double height, double width, BuildContext context) {
+  return ClipRRect(
+    // Ensure image is clipped to the container's border
+    child: path.startsWith('assets/')
+        ? Image.asset(
+            path,
+            fit: BoxFit.fill,
+            height: screenWidth(height, context),
+            width: screenWidth(width, context), // Ensure the image covers the entire container
+          )
+        : File(path).existsSync() // Check if the file exists
+            ? Image.file(
+                File(path),
+                fit: BoxFit.cover,
+                height: screenWidth(height, context),
+                width: screenWidth(width, context), // Ensure the image covers the entire container
+              )
+            // In case user deletes File path image
+            : Image.asset(
+                backupImage, // Path to your default image in the assets folder
+                fit: BoxFit.fill,
+                height: screenWidth(height, context),
+                width: screenWidth(width, context), // Ensure the image covers the entire container
+              ),
   );
 }
