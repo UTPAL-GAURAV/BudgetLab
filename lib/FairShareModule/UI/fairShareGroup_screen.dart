@@ -55,7 +55,7 @@ class _FairShareGroupScreenState extends State<FairShareGroupScreen> {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/avatars/neutralGreenHair.jpg'),
+                        image: AssetImage(widget.group.icon),
                         fit: BoxFit.cover,
                       ),
                     ),

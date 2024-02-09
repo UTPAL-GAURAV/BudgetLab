@@ -73,7 +73,7 @@ class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add, color: Colors.white),
-        label: Text("Add Individual Expense", style: TextStyle(color: Colors.white, fontSize: screenHeight(0.02, context))),
+        label: Text("Add Expense", style: TextStyle(color: Colors.white, fontSize: screenHeight(0.02, context))),
         backgroundColor: ColorManager.PRIMARY_BLUE,
         onPressed: () {
           GoRouter.of(context).pushNamed(AppRouteConstants.selectFairShareIndividual);

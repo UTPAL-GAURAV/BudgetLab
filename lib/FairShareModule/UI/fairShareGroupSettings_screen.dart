@@ -34,13 +34,13 @@ class _FairShareGroupSettingsState extends State<FairShareGroupSettings> {
         foregroundColor: Colors.white,
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(screenWidth(0.03, context), 0, 1, 0),
+        padding: EdgeInsets.fromLTRB(screenWidth(0.03, context), screenWidth(0.03, context), screenWidth(0.03, context), 0),
         child: Column(
           children: [
             Container(
               child: Row(
                 children: [
-                  getImageToDisplay(widget.group.icon, ConstantsManager.EXPENSE_IMAGE,0.2, 0.3, context),
+                  getImageToDisplay(widget.group.icon, ConstantsManager.EXPENSE_IMAGE, 0.2, 0.2, context),
                   Spacer(), // This will push the next widget to the right
                   IconButton(
                     icon: Icon(Icons.edit),
@@ -51,25 +51,28 @@ class _FairShareGroupSettingsState extends State<FairShareGroupSettings> {
                 ],
               ),
             ),
-            Row(children: [
-              Text(
-                widget.group.name,
-                style: TextStyle(
-                    color: ColorManager.DARK_GREY, fontSize: screenHeight(0.028, context), fontWeight: FontWeight.bold),
-              ),
-              Spacer(), // This will push the next widget to the right
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  // GoRouter.of(context).pushNamed(AppRouteConstants.createFairShareGroup);
-                },
-              ),
-            ]),
+            Padding(
+              padding: const EdgeInsets.only(top: 14.0, bottom: 12),
+              child: Row(children: [
+                Text(
+                  widget.group.name,
+                  style: TextStyle(
+                      color: ColorManager.BLACK_FADED, fontSize: screenHeight(0.028, context), fontWeight: FontWeight.bold),
+                ),
+                Spacer(), // This will push the next widget to the right
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    // GoRouter.of(context).pushNamed(AppRouteConstants.createFairShareGroup);
+                  },
+                ),
+              ]),
+            ),
             Row(children: [
               Text(
                 "Simplify Group Debts",
                 style: TextStyle(
-                    color: ColorManager.DARK_GREY, fontSize: screenHeight(0.028, context), fontWeight: FontWeight.bold),
+                    color: ColorManager.BLACK_FADED, fontSize: screenHeight(0.028, context), fontWeight: FontWeight.bold),
               ),
               Spacer(), // This will push the next widget to the right
               CupertinoSwitch(
@@ -78,12 +81,12 @@ class _FairShareGroupSettingsState extends State<FairShareGroupSettings> {
                     setState(() {
                       isSwitchedSimplifyGroupDebts = newValue;
                     });
-                  })
+                  }),
             ]),
+            Padding(padding: EdgeInsets.only(bottom: 30)),
             Divider(
-              color: Colors.black,
-              height: 4,
-              thickness: 2,
+              color: ColorManager.DARK_GREY,
+              thickness: 1,
             ),
             Text(
               "Group Members",
@@ -130,6 +133,9 @@ class _FairShareGroupSettingsState extends State<FairShareGroupSettings> {
             ),
             getFairShareGroupMembers(widget.group),
             GestureDetector(
+              onTap: () {
+                _showLeaveGroupSlideUpWidget(context, fairShareController, widget.group.id);
+              },
               child: Row(
                 children: [
                   Icon(Icons.exit_to_app),
@@ -143,28 +149,87 @@ class _FairShareGroupSettingsState extends State<FairShareGroupSettings> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                fairShareController.deleteGroup(0);
-              },
-              child: Row(
-                children: [
-                  Icon(Icons.delete),
-                  Expanded(
-                    child: Text(
-                      "  Delete Group",
-                      style: TextStyle(
-                          color: ColorManager.DARK_GREY,
-                          fontSize: screenHeight(0.028, context),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
+            // Delete group is not needed and people can leave
           ],
         ),
       ),
     );
   }
+}
+
+void _showLeaveGroupSlideUpWidget(BuildContext context, FairShareController fairShareController, int groupId) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        height: 170,
+        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+        child: Column(
+          children: [
+            Container(
+              height: 6,
+              width: 60,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 10)),
+            Text(
+              'Leave Group?',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Padding(padding: EdgeInsets.only(top: 10)),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Are you sure you want to leave this group?',
+                  style: TextStyle(fontSize: 17,),
+                )),
+            Padding(padding: EdgeInsets.only(top: 18)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    fairShareController.deleteGroup(groupId);
+                    // TODO: Delete group from firebase if last member
+                    GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.exit_to_app,
+                        color: ColorManager.CHILLY_PEPPER,
+                      ),
+                      Text(
+                        "  Leave Group",
+                        style: TextStyle(
+                            color: ColorManager.CHILLY_PEPPER,
+                            fontSize: screenHeight(0.028, context),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "  Cancel      ",
+                    style: TextStyle(
+                        color: ColorManager.PRIMARY_BLUE,
+                        fontSize: screenHeight(0.028, context),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

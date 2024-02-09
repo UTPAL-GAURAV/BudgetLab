@@ -17,15 +17,15 @@ import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
 
 import '../FairShare_Entities/transactions_entity.dart';
 
-class AddFairShareTransactionScreen extends StatefulWidget {
+class AddFairShareGroupTransactionScreen extends StatefulWidget {
   final Group group;
-  const AddFairShareTransactionScreen({Key? key, required this.group}) : super(key: key);
+  const AddFairShareGroupTransactionScreen({Key? key, required this.group}) : super(key: key);
 
   @override
-  State<AddFairShareTransactionScreen> createState() => _AddFairShareTransactionScreenState();
+  State<AddFairShareGroupTransactionScreen> createState() => _AddFairShareGroupTransactionScreenState();
 }
 
-class _AddFairShareTransactionScreenState extends State<AddFairShareTransactionScreen> {
+class _AddFairShareGroupTransactionScreenState extends State<AddFairShareGroupTransactionScreen> {
   FairShareController fairShareController = FairShareController();
 
   final formKey = GlobalKey<FormState>();
@@ -77,95 +77,65 @@ class _AddFairShareTransactionScreenState extends State<AddFairShareTransactionS
                                 onSavedCallback: (value) => note = value!),
                             context),
                       ),
-
-                      /// Display widgets based on Group / Individual transaction
-                      if (widget.group != null)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Paid by  ",
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Paid by  ",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10, 3, 10, 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(6.0),
+                              border: Border.all(),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorManager.BLUE.withOpacity(1),
+                                  blurRadius: 1,
+                                  offset: const Offset(1, 1), // shadow position
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              " you ",
                               style: TextStyle(
                                 fontSize: 20,
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(10, 3, 10, 6),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.0),
-                                border: Border.all(),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorManager.BLUE.withOpacity(1),
-                                    blurRadius: 1,
-                                    offset: const Offset(1, 1), // shadow position
-                                  ),
-                                ],
-                              ),
-                              child: Text(
-                                " you ",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
+                          ),
+                          Text(
+                            "  and split  ",
+                            style: TextStyle(
+                              fontSize: 20,
                             ),
-                            Text(
-                              "  and split  ",
+                          ),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10, 3, 10, 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(6.0),
+                              border: Border.all(),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorManager.BLUE.withOpacity(1),
+                                  blurRadius: 1,
+                                  offset: const Offset(1, 1), // shadow position
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              " equally ",
                               style: TextStyle(
                                 fontSize: 20,
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(10, 3, 10, 6),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.0),
-                                border: Border.all(),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorManager.BLUE.withOpacity(1),
-                                    blurRadius: 1,
-                                    offset: const Offset(1, 1), // shadow position
-                                  ),
-                                ],
-                              ),
-                              child: Text(
-                                " equally ",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      else
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(10, 3, 10, 6),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.0),
-                                border: Border.all(),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorManager.BLUE.withOpacity(1),
-                                    blurRadius: 1,
-                                    offset: const Offset(1, 1), // shadow position
-                                  ),
-                                ],
-                              ),
-                              child: Text(
-                                " Paid by you and split equally ",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, screenHeight(0.06, context), 0, screenHeight(0.06, context)),
                         child: Row(

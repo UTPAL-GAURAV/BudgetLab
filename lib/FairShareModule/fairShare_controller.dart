@@ -1,3 +1,5 @@
+import 'package:contacts_service/contacts_service.dart';
+
 import '../BudgetModule/History/history_entity.dart';
 import '../Shared/enums_manager.dart';
 import 'FairShare_Entities/friends_entity.dart';
@@ -27,10 +29,9 @@ class FairShareController {
     return fairShareService.addNewGroupTransaction(transaction, history);
   }
 
-  int deleteGroup(int x) {
-    return 0;
+  Future<bool> deleteGroup(int groupId) {
+    return fairShareService.deleteGroup(groupId);
   }
-
 
   // Group Members
   List<GroupMembers> getAllGroupMemberList(int groupId) {
@@ -45,12 +46,16 @@ class FairShareController {
     return fairShareService.addNewGroupMember(groupMembers);
   }
 
-
   // Friends
   String getFriendNameFromId(String friendId) {
     return "friend 1";
   }
 
+  // Individual
+  int addNewIndividualTransaction(
+      Transactions transaction, History history, List<Group> groups, List<Contact> contacts) {
+    return 0;
+  }
 
   // Transactions
   List<SplitTransaction> getSplitTransactions(int transactionId) {

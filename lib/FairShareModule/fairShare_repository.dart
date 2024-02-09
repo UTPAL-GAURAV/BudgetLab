@@ -17,8 +17,8 @@ class FairShareRepository {
     return ObjectBoxManager.groupBox.put(group);
   }
 
-  Future<bool> deleteGroup(int id) {
-    return ObjectBoxManager.groupBox.removeAsync(id);
+  Future<bool> deleteGroup(int groupId) {
+    return ObjectBoxManager.groupBox.removeAsync(groupId);
   }
 
   List<Transactions> getAllGroupTransactions(String groupId) {

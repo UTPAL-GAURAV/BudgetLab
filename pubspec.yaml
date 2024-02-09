@@ -53,6 +53,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   share_plus: ^7.2.1
   fluttercontactpicker: ^4.7.0
+  contacts_service: ^0.6.3
 
 dev_dependencies:
   flutter_test:

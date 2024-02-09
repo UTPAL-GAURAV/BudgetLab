@@ -38,6 +38,10 @@ class FairShareService {
     return fairShareRepository.addNewGroupTransaction(transaction);
   }
 
+  Future<bool> deleteGroup(int groupId) {
+    return fairShareRepository.deleteGroup(groupId);
+  }
+
   List<SplitTransaction> getSplitTransactions(int transactionId) {
     return fairShareRepository.getSplitTransactions(transactionId);
   }

@@ -24,6 +24,7 @@ class _SavingsHomeScreenState extends State<SavingsHomeScreen> {
       appBar: AppBar(
         title: const Text(ConstantsManager.SAVINGS),
         backgroundColor: ColorManager.PRIMARY_BLUE,
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: Icon(Icons.add),

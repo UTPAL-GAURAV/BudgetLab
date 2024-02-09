@@ -2,7 +2,7 @@ import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpense_screen.
 import 'package:budgetlab/BudgetModule/History/UI/historyHome_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/UI/savingsOverview_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
-import 'package:budgetlab/FairShareModule/UI/addFairShareTransaction_screen.dart';
+import 'package:budgetlab/FairShareModule/UI/addFairShareGroupTransaction_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -21,7 +21,7 @@ import '../FairShareModule/UI/fairShareAddPeopleToGroup_screen.dart';
 import '../FairShareModule/UI/fairShareGroupSettings_screen.dart';
 import '../FairShareModule/UI/fairShareHome_screen.dart';
 import '../FairShareModule/UI/fairShareGroup_screen.dart';
-import '../FairShareModule/UI/selectFairShareIndividual_screen.dart';
+import '../FairShareModule/UI/addFairShareIndividualTransaction_screen.dart';
 import '../SettingsModule/UI/settings_screen.dart';
 import '../main.dart';
 import 'constants_manager.dart';
@@ -97,7 +97,7 @@ class RoutesManager {
         path: '/addFairShareTransaction',
         pageBuilder: (context, state) {
           final group = state.extra as Group;
-          return MaterialPage(child: AddFairShareTransactionScreen(group: group));
+          return MaterialPage(child: AddFairShareGroupTransactionScreen(group: group));
         }),
     GoRoute(
         name: AppRouteConstants.addSavings,
@@ -192,7 +192,7 @@ class RoutesManager {
         name: AppRouteConstants.selectFairShareIndividual,
         path: '/selectFairShareIndividual',
         pageBuilder: (context, state) {
-          return MaterialPage(child: SelectFairShareIndividualScreen());
+          return MaterialPage(child: AddFairShareIndividualTransactionScreen());
         }),
     GoRoute(
         name: AppRouteConstants.settings,
