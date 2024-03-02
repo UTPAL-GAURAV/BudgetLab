@@ -231,7 +231,7 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                     child: FloatingActionButton.extended(
                       label: Text(
                         "SAVE",
-                        style: TextStyle(fontSize: screenHeight(0.02, context)),
+                        style: TextStyle(fontSize: screenHeight(0.02, context), color: Colors.white),
                       ),
                       backgroundColor: ColorManager.PRIMARY_BLUE,
                       onPressed: () {
@@ -275,12 +275,13 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                       },
                     ),
                   ),
+                  Padding(padding: EdgeInsets.only(top: 20)),
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.90,
                       child: FloatingActionButton.extended(
                           label: Text(
                             "DELETE",
-                            style: TextStyle(fontSize: screenHeight(0.02, context)),
+                            style: TextStyle(fontSize: screenHeight(0.02, context), color: Colors.white),
                           ),
                           backgroundColor: ColorManager.EXPENSE_RED,
                           onPressed: () {

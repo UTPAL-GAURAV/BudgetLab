@@ -38,7 +38,7 @@ class _LowerHistoryBodyState extends State<LowerHistoryBody> {
       height: MediaQuery.of(context).size.height * 0.63,
       child: Consumer<HistoryScrollableDateProvider>(
           builder: (context, provider, child) {
-        historyList = historyService.getCustomHistoryList(provider.selectedYear,
+        historyList = historyController.getAllHistoryListByDate(provider.selectedYear,
             provider.selectedMonth, provider.selectedDate);
         return ListView.builder(
             scrollDirection: Axis.vertical,

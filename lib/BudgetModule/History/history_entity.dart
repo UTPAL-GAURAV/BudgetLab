@@ -15,6 +15,7 @@ class History {
   // Else stores Category name in case of Income Expense
   String category;
   String icon;
+  List<String> photos;
 
   History({
     this.id = 0,
@@ -27,6 +28,7 @@ class History {
     required this.amount,
     required this.isIncome,
     required this.category,
-    required this.icon
+    required this.icon,
+    this.photos = const [],
   });
 }

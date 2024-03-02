@@ -10,13 +10,17 @@ class HistoryService {
     return historyRepository.getAllHistoryList();
   }
 
-  List<History> getCustomHistoryList(int year, int month, int date) {
+  List<History> getAllHistoryListByDate(int year, int month, int date) {
     if(month==0 && date==0) {
       return historyRepository.getHistoryListByYear(year);
     } else if(date==0) {
       return historyRepository.getHistoryListByMonth(year, month);
     }
     return historyRepository.getHistoryListByDate(year, month, date);
+  }
+
+  List<History> getHistoryListByCategory(String categoryName) {
+    return historyRepository.getHistoryListByCategory(categoryName);
   }
 
   // int addHistoryFromLoanLend(LoanLend loanLend) {

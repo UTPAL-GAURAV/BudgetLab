@@ -241,7 +241,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(7, 3987736464679128829),
       name: 'History',
-      lastPropertyId: const IdUid(12, 1460929216125297274),
+      lastPropertyId: const IdUid(13, 8583594335008061125),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -298,6 +298,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(12, 1460929216125297274),
             name: 'icon',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 8583594335008061125),
+            name: 'photos',
+            type: 30,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -850,7 +855,9 @@ ModelDefinition getObjectBoxModel() {
           final categoryOffset = fbb.writeString(object.category);
           final nameOffset = fbb.writeString(object.name);
           final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(13);
+          final photosOffset = fbb.writeList(
+              object.photos.map(fbb.writeString).toList(growable: false));
+          fbb.startTable(14);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.year);
           fbb.addInt64(2, object.month);
@@ -862,6 +869,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(9, object.dateTime.millisecondsSinceEpoch);
           fbb.addOffset(10, nameOffset);
           fbb.addOffset(11, iconOffset);
+          fbb.addOffset(12, photosOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -890,6 +898,10 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 20, '');
           final iconParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 26, '');
+          final photosParam = const fb.ListReader<String>(
+                  fb.StringReader(asciiOptimization: true),
+                  lazy: false)
+              .vTableGet(buffer, rootOffset, 28, []);
           final object = History(
               id: idParam,
               year: yearParam,
@@ -901,7 +913,8 @@ ModelDefinition getObjectBoxModel() {
               amount: amountParam,
               isIncome: isIncomeParam,
               category: categoryParam,
-              icon: iconParam);
+              icon: iconParam,
+              photos: photosParam);
 
           return object;
         }),
@@ -1391,6 +1404,10 @@ class History_ {
 
   /// see [History.icon]
   static final icon = QueryStringProperty<History>(_entities[4].properties[10]);
+
+  /// see [History.photos]
+  static final photos =
+      QueryStringVectorProperty<History>(_entities[4].properties[11]);
 }
 
 /// [CycleSavings] entity fields to define ObjectBox queries.

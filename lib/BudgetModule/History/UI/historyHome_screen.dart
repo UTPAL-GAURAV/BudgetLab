@@ -1,4 +1,5 @@
 import 'package:budgetlab/BudgetModule/History/UI/upperHistoryBody.dart';
+import 'package:budgetlab/BudgetModule/History/history_controller.dart';
 import 'package:budgetlab/BudgetModule/History/history_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,7 +16,7 @@ import '../../../Shared/service/providers/historyScrollable_provider.dart';
 import '../../../Shared/widgets/scrollableDays.dart';
 import 'lowerHistoryBody.dart';
 
-HistoryService historyService = HistoryService();
+HistoryController historyController = HistoryController();
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({Key? key}) : super(key: key);

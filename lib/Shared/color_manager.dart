@@ -4,7 +4,7 @@ class ColorManager {
   static Color PRIMARY = const Color(0xFF4B39EF);
   static Color PRIMARY_BACKGROUND = const Color(0xFFF1F4F8);
   static Color LIGHT_GREY = const Color(0xFFededed);
-  static Color LIGHT_GREY2 = const Color(0xFFF5F5F5);
+  static Color LIGHT_GREY2 = const Color(0xFFCBCBCB);
   // static Color DARK_GREY = const Color(0xFFadadad);
   static Color DARK_GREY2 = const Color(0xFF757575);
   static Color GREY = const Color(0xFF9E9E9E);

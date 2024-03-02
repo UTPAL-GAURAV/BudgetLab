@@ -1,4 +1,5 @@
-import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpense_screen.dart';
+import 'package:budgetlab/BudgetModule/Budgets/Budget/budget_entity.dart';
+import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpenseAI_screen.dart';
 import 'package:budgetlab/BudgetModule/History/UI/historyHome_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/UI/savingsOverview_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import '../BudgetModule/Budgets/Budget/UI/addIncomeExpense_screen.dart';
 import '../BudgetModule/Budgets/Budget/UI/budgetOverview_screen.dart';
 import '../BudgetModule/Budgets/Budget/UI/budgetHome_screen.dart';
 import '../BudgetModule/Budgets/Category/UI/category_screen.dart';
@@ -52,6 +54,7 @@ extension BottomNavigationBarRoutesIndexValues on BottomNavigationBarEnum {
 class AppRouteConstants {
   static const String home = 'home';
   static const String addIncomeExpense = 'addIncomeExpense';
+  static const String addIncomeExpenseAI = 'addIncomeExpenseAI';
   static const String addFairShare = 'addFairShare';
   static const String addFairShareTransaction = 'addFairShareTransaction';
   static const String addSavings = 'addSavings';
@@ -65,7 +68,6 @@ class AppRouteConstants {
   static const String fairShareGroupSettings = 'fairShareGroupSettings';
   static const String groupScreen = 'groupScreen';
   static const String history = 'history';
-  static const String incomeExpense = 'incomeExpense';
   static const String savings = 'savings';
   static const String savingsOverview = 'savingsOverview';
   static const String selectFairShareIndividual = 'selectFairShareIndividual';
@@ -87,17 +89,24 @@ class RoutesManager {
           return MaterialPage(child: HomePageScreen());
         }),
     GoRoute(
-        name: AppRouteConstants.addIncomeExpense,
-        path: '/addIncomeExpense',
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: AddIncomeExpenseScreen());
-        }),
-    GoRoute(
         name: AppRouteConstants.addFairShareTransaction,
         path: '/addFairShareTransaction',
         pageBuilder: (context, state) {
           final group = state.extra as Group;
           return MaterialPage(child: AddFairShareGroupTransactionScreen(group: group));
+        }),
+    GoRoute(
+        name: AppRouteConstants.addIncomeExpense,
+        path: '/addIncomeExpense',
+        pageBuilder: (context, state) {
+          final category = state.extra as Category;
+          return MaterialPage(child: AddIncomeExpenseScreen(category: category));
+        }),
+    GoRoute(
+        name: AppRouteConstants.addIncomeExpenseAI,
+        path: '/addIncomeExpenseAI',
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: AddIncomeExpenseScreenAI());
         }),
     GoRoute(
         name: AppRouteConstants.addSavings,
@@ -142,12 +151,6 @@ class RoutesManager {
         path: '/history',
         pageBuilder: (context, state) {
           return const MaterialPage(child: HistoryScreen());
-        }),
-    GoRoute(
-        name: AppRouteConstants.incomeExpense,
-        path: '/incomeExpense',
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: AddIncomeExpenseScreen());
         }),
     GoRoute(
         name: AppRouteConstants.fairShare,

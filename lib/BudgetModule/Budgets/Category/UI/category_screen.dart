@@ -51,6 +51,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: Scaffold(
               appBar: AppBar(
                 backgroundColor: ColorManager.PRIMARY_BLUE,
+                foregroundColor: Colors.white,
                 title: Text('Category'),
               ),
               body: SingleChildScrollView(
@@ -90,7 +91,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               screenWidth(0.02, context), screenHeight(0.02, context), screenWidth(0.02, context), 0),
                           child: Row(
                             children: [
-                              Expanded(
+                              const Expanded(
                                 flex: 4,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +114,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       });
                                     }),
                               ),
-                              Expanded(
+                              const Expanded(
                                   flex: 4,
                                   child: Text(
                                     "Assign max limit to this budget",
@@ -250,7 +251,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: FloatingActionButton.extended(
                         label: Text(
                           "SAVE",
-                          style: TextStyle(fontSize: screenHeight(0.02, context)),
+                          style: TextStyle(fontSize: screenHeight(0.02, context), color: Colors.white),
                         ),
                         backgroundColor: ColorManager.PRIMARY_BLUE,
                         onPressed: () {
@@ -285,7 +286,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 totalAmountSpent: 0,
                               ));
                             }
-                            GoRouter.of(context).pushNamed(AppRouteConstants.addIncomeExpense);
+                            GoRouter.of(context).pushNamed(AppRouteConstants.budget);
                           }
                         },
                       ),

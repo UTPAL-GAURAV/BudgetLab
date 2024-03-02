@@ -20,14 +20,14 @@ import 'package:provider/provider.dart';
 import '../../../Shared/constants_manager.dart';
 import '../../../Shared/routes_manager.dart';
 
-class AddIncomeExpenseScreen extends StatefulWidget {
-  const AddIncomeExpenseScreen({Key? key}) : super(key: key);
+class AddIncomeExpenseScreenAI extends StatefulWidget {
+  const AddIncomeExpenseScreenAI({Key? key}) : super(key: key);
 
   @override
-  State<AddIncomeExpenseScreen> createState() => _AddIncomeExpenseScreenState();
+  State<AddIncomeExpenseScreenAI> createState() => _AddIncomeExpenseScreenAIState();
 }
 
-class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
+class _AddIncomeExpenseScreenAIState extends State<AddIncomeExpenseScreenAI> {
   final formKey = GlobalKey<FormState>();
   late String amount, note;
   DateTime dateTime = DateTime.now();
@@ -59,23 +59,17 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
               appBar: AppBar(
                 title: const Text(ConstantsManager.ADD_INCOME_EXPENSE),
                 backgroundColor: ColorManager.PRIMARY_BLUE,
+                foregroundColor: Colors.white,
               ),
-              body: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-                return SingleChildScrollView(
-                  child: Column(
+              body: SingleChildScrollView(
+                child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                  return Column(
                     children: [
-                      Padding(padding: EdgeInsets.only(top: screenHeight(0.02, context))),
-                      SvgPicture.asset(
-                        'assets/images/illustrations/male/maleIncomeExpense.svg',
-                        fit: BoxFit.fill,
-                        height: screenHeight(0.24, context),
-                        width: screenWidth(0.9, context),
-                      ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, screenHeight(0.02, context), 0, screenHeight(0.04, context)),
                         child: Container(
                           // Screen sum 100 = 2 of top padding + 24 of illustration + 58 of form container
-                          height: screenHeight(0.58, context),
+                          // height: screenHeight(0.58, context),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -134,7 +128,7 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                                 child: FloatingActionButton.extended(
                                     label: Text(
                                       "SAVE",
-                                      style: TextStyle(fontSize: screenHeight(0.02, context)),
+                                      style: TextStyle(fontSize: screenHeight(0.02, context), color: Colors.white),
                                     ),
                                     backgroundColor: ColorManager.PRIMARY_BLUE,
                                     onPressed: () {
@@ -171,10 +165,16 @@ class _AddIncomeExpenseScreenState extends State<AddIncomeExpenseScreen> {
                           ),
                         ),
                       ),
+                      SvgPicture.asset(
+                        'assets/images/illustrations/male/maleIncomeExpense.svg',
+                        fit: BoxFit.fill,
+                        height: screenHeight(0.24, context),
+                        width: screenWidth(0.9, context),
+                      ),
                     ],
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ),
           );
         }));

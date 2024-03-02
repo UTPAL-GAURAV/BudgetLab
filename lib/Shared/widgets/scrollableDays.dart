@@ -278,7 +278,7 @@ class _ScrollableYearsState extends State<ScrollableYears> {
   }
 
   Future<void> loadData() async {
-    distinctYearsSet = await historyService.getAllDistinctYears();
+    distinctYearsSet = await historyController.getAllDistinctYears();
     yearList = distinctYearsSet.toList();
     if (yearList.isEmpty) {
       yearList.add(DateTime.now().year);

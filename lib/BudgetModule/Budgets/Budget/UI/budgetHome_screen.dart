@@ -22,6 +22,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
         appBar: AppBar(
           title: const Text("Budgets"),
           backgroundColor: ColorManager.PRIMARY_BLUE,
+          foregroundColor: Colors.white,
           actions: [
             IconButton(
               icon: Icon(Icons.add),
