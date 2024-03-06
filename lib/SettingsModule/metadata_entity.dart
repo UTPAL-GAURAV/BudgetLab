@@ -23,7 +23,7 @@ class Metadata {
     this.currentBalance = 0,
     this.yourWorth = 0,
     this.expendableAmount = 0,
-    this.userName = "Hello User",
+    this.userName = "User",
     this.gender = false,
     this.language = "EN",
     this.currency = "USD",
