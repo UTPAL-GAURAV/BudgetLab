@@ -124,6 +124,10 @@ getLastIconEditButton(BuildContext context) {
   );
 }
 
+getLoginButton() {
+
+}
+
 /// Text Boxes /////////////////////////////////////////////////////////////////
 getHeaderDividerSizedBox(String displayText) {
   return Container(

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:budgetlab/Shared/widgets/widget_manager.dart' as WidgetManager;
 import 'package:budgetlab/Shared/widgets/bottomNavigationBar.dart' as BottomNavigationBar;
-import 'package:sign_in_button/sign_in_button.dart';
 
 import '../../Shared/color_manager.dart';
 import '../../Shared/constants_manager.dart';
@@ -60,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 radius: 50,
                 child: ClipOval(
                   child: getImageToDisplay(
-                      _user!.photoURL!, 'assets/images/avatars/neutralGreenHair.jpg', 0.5, 0.5, context),
+                      _user?.photoURL?? 'assets/images/avatars/neutralGreenHair.jpg', 'assets/images/avatars/neutralGreenHair.jpg', 0.5, 0.5, context),
                 ),
               )),
           Padding(

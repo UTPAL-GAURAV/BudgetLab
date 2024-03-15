@@ -62,11 +62,13 @@ class MyHomePage extends StatefulWidget {
  * WidgetsBindingObserver keeps track of lifecycle.
  */
 class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
+
   // This method is required for lifecycle management
   @override
   void initState() {
     super.initState();
     setOnFirstRun();
+    _loadPreferences();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -77,6 +79,13 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       ObjectBoxManager.closeObjectBoxStore();
     } else if (state == AppLifecycleState.resumed) {
       ObjectBoxManager.openObjectBoxStore();
+    }
+  }
+
+  Future<void> _loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('introQuestionnairePending') ?? true) {
+      GoRouter.of(context).pushReplacementNamed(AppRouteConstants.introQuestionnaire);
     }
   }
 
@@ -104,11 +113,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Shopping", icon: 'assets/images/icons/budgetCategory/trolley.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
 
       metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "User", currency: "", country: "", countryCode: 0, password: "", hideOn: false, readMessage: false));
-
-
-    }
-    if(prefs.getBool('introQuestionnairePending') ?? true) {
-      GoRouter.of(context).pushNamed(AppRouteConstants.introQuestionnaire);
     }
   }
 }

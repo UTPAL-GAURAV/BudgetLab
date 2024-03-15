@@ -59,8 +59,11 @@ dependencies:
   firebase_auth: ^4.17.6
   google_sign_in: ^6.2.1
   font_awesome_flutter: ^10.7.0
-  sign_in_button: ^3.2.0
   currency_picker: ^2.0.21
+  firebase_messaging: ^14.7.19
+  flutter_local_notifications: ^17.0.0
+  app_settings: ^5.1.1
+  firebase_database: ^10.4.9
 
 dev_dependencies:
   flutter_test:

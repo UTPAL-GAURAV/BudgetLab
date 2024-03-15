@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "213976987974",
+    "firebase_url": "https://budgetlab-6e9dd-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "budgetlab-6e9dd",
     "storage_bucket": "budgetlab-6e9dd.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.budgetlab"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "213976987974-60ku8hfrh8uual104fg5f2t8omje88vo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.budgetlab",
+            "certificate_hash": "db5478bb32855d8a9bc014cf76fce840e7c4f9e4"
+          }
+        },
+        {
+          "client_id": "213976987974-d4c8bkvgqkloh5ap5ggv72rmmsolbrhu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBNNGE34OZgH1s80ZrQCZOvLsu2rUs-fP8"
@@ -20,7 +34,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213976987974-d4c8bkvgqkloh5ap5ggv72rmmsolbrhu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "213976987974-k10i81ievdmblkugndvo9977oca6mjha.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.budgetlab"
+              }
+            }
+          ]
         }
       }
     }
