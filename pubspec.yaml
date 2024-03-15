@@ -54,6 +54,16 @@ dependencies:
   share_plus: ^7.2.1
   fluttercontactpicker: ^4.7.0
   contacts_service: ^0.6.3
+  firebase_core: ^2.25.5
+  cloud_firestore: ^4.15.6
+  firebase_auth: ^4.17.6
+  google_sign_in: ^6.2.1
+  font_awesome_flutter: ^10.7.0
+  currency_picker: ^2.0.21
+  firebase_messaging: ^14.7.19
+  flutter_local_notifications: ^17.0.0
+  app_settings: ^5.1.1
+  firebase_database: ^10.4.9
 
 dev_dependencies:
   flutter_test:

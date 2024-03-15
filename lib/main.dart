@@ -6,6 +6,8 @@ import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/enums_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'DB/ObjectBoxManager.dart';
@@ -15,6 +17,13 @@ import 'Shared/routes_manager.dart';
 Future<void> main() async {
   // Open DB
   await ObjectBoxManager.openObjectBoxStore();
+  //TODO: Shift to fairshare
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -53,11 +62,13 @@ class MyHomePage extends StatefulWidget {
  * WidgetsBindingObserver keeps track of lifecycle.
  */
 class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
+
   // This method is required for lifecycle management
   @override
   void initState() {
     super.initState();
     setOnFirstRun();
+    _loadPreferences();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -68,6 +79,13 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       ObjectBoxManager.closeObjectBoxStore();
     } else if (state == AppLifecycleState.resumed) {
       ObjectBoxManager.openObjectBoxStore();
+    }
+  }
+
+  Future<void> _loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('introQuestionnairePending') ?? true) {
+      GoRouter.of(context).pushReplacementNamed(AppRouteConstants.introQuestionnaire);
     }
   }
 
@@ -94,9 +112,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       categoryController.addCategory(Category(transactionType: TransactionType.income.name, name: "Salary", icon: 'assets/images/icons/budgetCategory/salary.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
       categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Shopping", icon: 'assets/images/icons/budgetCategory/trolley.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
 
-
-
-      metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "Hello User", currency: "", country: "", countryCode: 0, password: "", hideOn: false, readMessage: false));
+      metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "User", currency: "", country: "", countryCode: 0, password: "", hideOn: false, readMessage: false));
     }
   }
 }

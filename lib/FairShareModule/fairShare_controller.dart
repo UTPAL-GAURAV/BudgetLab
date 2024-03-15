@@ -1,4 +1,5 @@
 import 'package:contacts_service/contacts_service.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../BudgetModule/History/history_entity.dart';
 import '../Shared/enums_manager.dart';
@@ -7,9 +8,40 @@ import 'FairShare_Entities/group_entity.dart';
 import 'FairShare_Entities/group_members_entity.dart';
 import 'FairShare_Entities/split_transaction_entity.dart';
 import 'FairShare_Entities/transactions_entity.dart';
+import 'Models/fairShare_GroupMembers_model.dart';
+import 'Models/fairShare_GroupMetadata_model.dart';
 import 'fairShare_service.dart';
 
 class FairShareController {
+  // Firebase realtime DB
+  bool loading = false;
+  final databaseRef = FirebaseDatabase.instance.ref('LoanLend');  // Members is a table here, called as 'node' in firebase
+  void someMethod(String groupId) {
+    print("qqqqqqqq");
+
+    FairShareGroupMembers g1 = FairShareGroupMembers(membersMap: {
+      'person1': {'person2': 10, 'person3': 3},
+      'person2': {'person1': -3, 'person2': 0},
+    });
+
+    FairShareGroupMetadata metadata = FairShareGroupMetadata(
+      groupName: 'WonderLa',
+      isGroup: true,
+      icon: '',
+    );
+
+    databaseRef.child(groupId).set({
+      'metadata': metadata.toJson(),
+      'members': g1.toJson()
+    }).then((value) {
+      //show toast message
+    }).onError((error, stackTrace) {
+      print("error wwwwwwwwwww ------------------------");
+      print(error);
+      print(stackTrace);
+    });
+  }
+
   FairShareService fairShareService = FairShareService();
 
   // Group

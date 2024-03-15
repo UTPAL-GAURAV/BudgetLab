@@ -1,4 +1,7 @@
 
+import 'package:budgetlab/FairShareModule/fairShare_controller.dart';
+import 'package:budgetlab/Shared/service/notification_service.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +20,21 @@ class FairShareHomeScreen extends StatefulWidget {
 }
 
 class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
+
+  NotificationServices notificationServices = NotificationServices();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    notificationServices.requestNotificationPermission();
+    notificationServices.isDeviceTokenRefreash();
+    notificationServices.getDeviceToken().then((value) {
+      print("Device Token");
+      print(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +94,8 @@ class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
         label: Text("Add Expense", style: TextStyle(color: Colors.white, fontSize: screenHeight(0.02, context))),
         backgroundColor: ColorManager.PRIMARY_BLUE,
         onPressed: () {
+          // FairShareController fairShareController = FairShareController();
+          // fairShareController.someMethod('123456');
           GoRouter.of(context).pushNamed(AppRouteConstants.selectFairShareIndividual);
         },
       ),

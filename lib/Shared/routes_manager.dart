@@ -5,6 +5,7 @@ import 'package:budgetlab/BudgetModule/Savings/UI/savingsOverview_screen.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
 import 'package:budgetlab/FairShareModule/UI/addFairShareGroupTransaction_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
+import 'package:budgetlab/SettingsModule/UI/introQuestionare_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -68,6 +69,7 @@ class AppRouteConstants {
   static const String fairShareGroupSettings = 'fairShareGroupSettings';
   static const String groupScreen = 'groupScreen';
   static const String history = 'history';
+  static const String introQuestionnaire = 'introQuestionnaire';
   static const String savings = 'savings';
   static const String savingsOverview = 'savingsOverview';
   static const String selectFairShareIndividual = 'selectFairShareIndividual';
@@ -151,6 +153,12 @@ class RoutesManager {
         path: '/history',
         pageBuilder: (context, state) {
           return const MaterialPage(child: HistoryScreen());
+        }),
+    GoRoute(
+        name: AppRouteConstants.introQuestionnaire,
+        path: '/introQuestionnaire',
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: IntroQuestionareScreen());
         }),
     GoRoute(
         name: AppRouteConstants.fairShare,

@@ -124,6 +124,10 @@ getLastIconEditButton(BuildContext context) {
   );
 }
 
+getLoginButton() {
+
+}
+
 /// Text Boxes /////////////////////////////////////////////////////////////////
 getHeaderDividerSizedBox(String displayText) {
   return Container(
@@ -352,6 +356,8 @@ getBudgetIconForUser(double budgetUsedInPercentage, BuildContext context) {
 /// PICTURES ////////////////////////////////////////////////////////////////////
 
 getImageToDisplay(String path, String backupImage, double height, double width, BuildContext context) {
+  Uri? uri = Uri.tryParse(path);
+
   return ClipRRect(
     // Ensure image is clipped to the container's border
     child: path.startsWith('assets/')
@@ -369,11 +375,18 @@ getImageToDisplay(String path, String backupImage, double height, double width, 
                 width: screenWidth(width, context), // Ensure the image covers the entire container
               )
             // In case user deletes File path image
-            : Image.asset(
-                backupImage, // Path to your default image in the assets folder
-                fit: BoxFit.fill,
-                height: screenWidth(height, context),
-                width: screenWidth(width, context), // Ensure the image covers the entire container
-              ),
+            : (uri != null && (uri.scheme == 'http' || uri.scheme == 'https'))
+                ? Image.network(
+                    path,
+                    fit: BoxFit.cover,
+                    height: screenWidth(height, context),
+                    width: screenWidth(width, context), // Ensure the image covers the entire container
+                  )
+                : Image.asset(
+                    backupImage, // Path to your default image in the assets folder
+                    fit: BoxFit.fill,
+                    height: screenWidth(height, context),
+                    width: screenWidth(width, context), // Ensure the image covers the entire container
+                  ),
   );
 }
