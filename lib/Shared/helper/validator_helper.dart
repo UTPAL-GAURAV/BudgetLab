@@ -1,4 +1,6 @@
 
+import 'package:budgetlab/BudgetModule/Budgets/Category/category_controller.dart';
+import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
 import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 
@@ -39,4 +41,18 @@ String validateLendExpenseField(value) {
   }
   return response;
 }
+
+// Validates duplicate names of Category/Budget field
+String validateCategoryDuplicateValueField(String value) {
+  CategoryController categoryController = CategoryController();
+  List<Category> categoryList = categoryController.getAllCategoryList();
+  String response = validateNameField(value);
+  for (Category element in categoryList) {
+    if (element.name.toLowerCase() == value.toLowerCase()) {
+      return ConstantsManager.DUPLICATE_TEXT;
+    }
+  }
+  return response;
+}
+
 

@@ -56,25 +56,32 @@ _getLoanLendIconTile(context) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FloatingActionButton(
-          heroTag: "tag1",
-          onPressed: () {
-            GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
-          },
-          backgroundColor: Colors.blueAccent,
-          child: const Icon(
-            Icons.swap_horiz,
-            color: Colors.white,
-            size: 30,
+        SizedBox(
+          width: screenWidth(0.2, context),
+          child: FloatingActionButton(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            heroTag: "tag1",
+            onPressed: () {
+              GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
+            },
+            backgroundColor: ColorManager.LIGHT_ORANGE,
+            child: Icon(
+              Icons.swap_horiz,
+              color: ColorManager.DARK_ORANGE,
+              size: 40,
+            ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         Text(
           ConstantsManager.LOAN_LEND,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: ColorManager.BLACK_VOID,
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: FontWeight.bold
           ),
         ),
@@ -90,25 +97,32 @@ _getSavingsIconTile(context) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FloatingActionButton(
-          heroTag: "tag2",
-          onPressed: () {
-            GoRouter.of(context).pushNamed(AppRouteConstants.savings);
-          },
-          backgroundColor: Colors.blueAccent,
-          child: const Icon(
-            Icons.savings,
-            color: Colors.white,
-            size: 30,
+        SizedBox(
+          width: screenWidth(0.2, context),
+          child: FloatingActionButton(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            heroTag: "tag2",
+            onPressed: () {
+              GoRouter.of(context).pushNamed(AppRouteConstants.savings);
+            },
+            backgroundColor: ColorManager.LIGHTER_GREEN,
+            child: Icon(
+              Icons.savings,
+              color: ColorManager.DARKER_GREEN,
+              size: 40,
+            ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         Text(
           ConstantsManager.SAVINGS,
           textAlign: TextAlign.center,
           style: TextStyle(
               color: ColorManager.BLACK_VOID,
-              fontSize: 14,
+              fontSize: 15,
               fontWeight: FontWeight.bold
           ),
         ),
@@ -122,25 +136,33 @@ getBudgetIconTile(context) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FloatingActionButton(
-          heroTag: "tag3",
-          onPressed: () {
-            GoRouter.of(context).pushNamed(AppRouteConstants.budget);
-          },
-          backgroundColor: Colors.blueAccent,
-          child: const Icon(
-            Icons.receipt_long_sharp,
-            color: Colors.white,
-            size: 30,
+        SizedBox(
+          width: screenWidth(0.2, context),
+          child: FloatingActionButton(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            heroTag: "tag3",
+            onPressed: () {
+              GoRouter.of(context).pushNamed(AppRouteConstants.budget);
+            },
+            backgroundColor: ColorManager.LIGHT_BLUE,
+            child: Icon(
+              Icons.receipt_long_sharp,
+              color: ColorManager.DARK_BLUE,
+              size: 40,
+            ),
           ),
         ),
-        const SizedBox(height: 8),
-        const Text(
+        const SizedBox(height: 10),
+        Text(
           ConstantsManager.INCOME_EXPENSE,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.blueAccent,
-            fontSize: 14,
+            color: ColorManager.BLACK_VOID,
+            fontSize: 15,
+            fontWeight: FontWeight.bold
           ),
         ),
       ],

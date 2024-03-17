@@ -36,8 +36,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   bool isBudgetCapped = false;
   bool isExpense = true;
-  bool addToNextCycle = true;
-  late String budgetCycleAmount, categoryName, selectedIcon;
+  bool addToNextCycle = false;
+  late String budgetCycleAmount, categoryName;
+  String selectedIcon = 'assets/images/icons/budgetCategory/piggy.png';
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               appBar: AppBar(
                 backgroundColor: ColorManager.PRIMARY_BLUE,
                 foregroundColor: Colors.white,
-                title: Text('Category'),
+                title: Text('Create New Budget'),
               ),
               body: SingleChildScrollView(
                 child: Column(
@@ -64,11 +65,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               screenWidth(0.02, context), screenHeight(0.04, context)),
                           child: WidgetManager.getTextFormField(
                               TextFormFieldConfig(
-                                  labelText: "Category Name",
+                                  labelText: "Budget Name",
                                   hintText: " Shopping",
                                   keyboardType: TextInputType.name,
                                   maxLength: 15,
-                                  validatorCallback: Validator.validateNothing,
+                                  validatorCallback: Validator.validateCategoryDuplicateValueField,
                                   onSavedCallback: (value) => categoryName = value!),
                               context),
                         ),
@@ -78,7 +79,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "Select Icon",
-                              style: TextStyle(color: ColorManager.DARK_GREY, fontSize: height(0.02, context)),
+                              style: TextStyle(
+                                  color: ColorManager.BLACK_VOID,
+                                  fontSize: height(0.02, context),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),
@@ -88,17 +92,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(
-                              screenWidth(0.02, context), screenHeight(0.02, context), screenWidth(0.02, context), 0),
+                              screenWidth(0.02, context), screenHeight(0.03, context), screenWidth(0.02, context), 0),
                           child: Row(
                             children: [
-                              const Expanded(
+                              Expanded(
                                 flex: 4,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("CAP?"),
                                     Text(
-                                      "No max limit",
+                                      "CAP?",
+                                      style: TextStyle(
+                                          color: ColorManager.BLACK_VOID,
+                                          fontSize: height(0.02, context),
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "No max limit on this budget",
                                       softWrap: true,
                                     ),
                                   ],
@@ -127,25 +137,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                     // Visible when only Category needs to be set
                     // Note: Transaction Type can never change.
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          screenWidth(0.02, context), screenHeight(0.02, context), screenWidth(0.02, context), 0),
-                      child: Visibility(
-                        visible: !isBudgetCapped,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
-                              child: getTransactionTypeButtonsInARow(),
+                    Visibility(
+                      visible: !isBudgetCapped,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: screenHeight(0.05, context)),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text("Select Category type ",
+                                style: TextStyle(
+                                    color: ColorManager.BLACK_VOID,
+                                    fontSize: height(0.02, context),
+                                    fontWeight: FontWeight.w500),),
                             ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(screenWidth(0.02, context), screenHeight(0.02, context), screenWidth(0.02, context), 0),
+                            child: getTransactionTypeButtonsInARow(),
+                          ),
+                        ],
                       ),
                     ),
                     // Visible when capped budget needs to be set
                     Padding(
-                      padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
+                      padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), screenHeight(0.03, context), screenWidth(0.02, context), 0),
                       child: Visibility(
                         visible: isBudgetCapped,
                         child: Column(
@@ -157,7 +174,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text("It's an "),
+                                      Text("It's an ",
+                                        style: TextStyle(
+                                            color: ColorManager.BLACK_VOID,
+                                            fontSize: height(0.02, context),
+                                            fontWeight: FontWeight.w500),),
                                       Text(
                                         "Expense",
                                         softWrap: true,
@@ -168,6 +189,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: CupertinoSwitch(
+                                      trackColor: ColorManager.HOT_CORAL,
                                       // It can either be Expense or Investment, because Income should not be capped
                                       value: !isExpense,
                                       onChanged: (bool newValue) {
@@ -190,13 +212,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               ],
                             ),
                             Padding(
+                              padding: EdgeInsets.only(top: screenHeight(0.05, context)),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("Select Budget Cycle ",
+                                  style: TextStyle(
+                                      color: ColorManager.BLACK_VOID,
+                                      fontSize: height(0.02, context),
+                                      fontWeight: FontWeight.w500),),
+                              ),
+                            ),
+                            Padding(
                               padding: EdgeInsets.only(
-                                  top: screenHeight(0.02, context), bottom: screenHeight(0.02, context)),
+                                  top: screenHeight(0.02, context), bottom: screenHeight(0.05, context)),
                               child: getBudgetCycleButtonsInARow(),
                             ),
                             WidgetManager.getTextFormField(
                                 TextFormFieldConfig(
-                                    labelText: "${provider.selectedBudgetCycle.name} Budget",
+                                    labelText: "Set ${provider.selectedBudgetCycle.name} Budget",
                                     hintText: " 0",
                                     keyboardType: TextInputType.number,
                                     maxLength: 8,
@@ -204,7 +237,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     onSavedCallback: (value) => budgetCycleAmount = value!),
                                 context),
                             Padding(
-                              padding: EdgeInsets.only(top: screenHeight(0.02, context)),
+                              padding: EdgeInsets.only(top: screenHeight(0.04, context)),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -212,9 +245,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        const Text("Refresh? "),
+                                         Text("Refresh? ",
+                                          style: TextStyle(
+                                              color: ColorManager.BLACK_VOID,
+                                              fontSize: height(0.02, context),
+                                              fontWeight: FontWeight.w500),),
                                         const Text(
-                                          "Freash budget will start in next cycle ",
+                                          "Fresh budget will start in next cycle ",
                                           softWrap: true,
                                         ),
                                       ],
@@ -234,7 +271,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   Expanded(
                                     flex: 4,
                                     child: const Text(
-                                      "leftover or extra amount spent will be adjusted in the next cycle",
+                                      "Leftover or extra amount spent will be adjusted in the next cycle",
                                       softWrap: true,
                                     ),
                                   )
@@ -245,50 +282,52 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: screenHeight(0.04, context))),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.90,
-                      child: FloatingActionButton.extended(
-                        label: Text(
-                          "SAVE",
-                          style: TextStyle(fontSize: screenHeight(0.02, context), color: Colors.white),
-                        ),
-                        backgroundColor: ColorManager.PRIMARY_BLUE,
-                        onPressed: () {
-                          formKey.currentState!.save();
-                          if (formKey.currentState!.validate()) {
-                            if (!isBudgetCapped) {
-                              // Save only category
-                              categoryController.addCategory(Category(
-                                transactionType: provider.selectedTransactionType.name,
-                                name: categoryName,
-                                icon: selectedIcon,
-                                isCap: false,
-                                cycle: BudgetCycle.none.name,
-                                cycleBudget: 0,
-                                addToNextCycle: false,
-                                currentCycleAmountLeft: 0,
-                                totalCycleAmount: 0,
-                                totalAmountSpent: 0,
-                              ));
-                            } else {
-                              // Save Budget
-                              categoryController.addCategory(Category(
-                                transactionType: provider.selectedTransactionType.name,
-                                name: categoryName,
-                                icon: selectedIcon,
-                                isCap: true,
-                                cycle: provider.selectedBudgetCycle.name,
-                                cycleBudget: double.parse(budgetCycleAmount),
-                                addToNextCycle: addToNextCycle,
-                                currentCycleAmountLeft: double.parse(budgetCycleAmount),
-                                totalCycleAmount: double.parse(budgetCycleAmount),
-                                totalAmountSpent: 0,
-                              ));
+                    Padding(
+                      padding: EdgeInsets.only(top: screenHeight(0.08, context), bottom: screenHeight(0.08, context)),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.90,
+                        child: FloatingActionButton.extended(
+                          label: Text(
+                            "SAVE",
+                            style: TextStyle(fontSize: screenHeight(0.02, context), color: Colors.white),
+                          ),
+                          backgroundColor: ColorManager.PRIMARY_BLUE,
+                          onPressed: () {
+                            formKey.currentState!.save();
+                            if (formKey.currentState!.validate()) {
+                              if (!isBudgetCapped) {
+                                // Save only category
+                                categoryController.addCategory(Category(
+                                  transactionType: provider.selectedTransactionType.name,
+                                  name: categoryName,
+                                  icon: selectedIcon,
+                                  isCap: false,
+                                  cycle: BudgetCycle.none.name,
+                                  cycleBudget: 0,
+                                  addToNextCycle: false,
+                                  currentCycleAmountLeft: 0,
+                                  totalCycleAmount: 0,
+                                  totalAmountSpent: 0,
+                                ));
+                              } else {
+                                // Save Budget
+                                categoryController.addCategory(Category(
+                                  transactionType: provider.selectedTransactionType.name,
+                                  name: categoryName,
+                                  icon: selectedIcon,
+                                  isCap: true,
+                                  cycle: provider.selectedBudgetCycle.name,
+                                  cycleBudget: double.parse(budgetCycleAmount),
+                                  addToNextCycle: addToNextCycle,
+                                  currentCycleAmountLeft: double.parse(budgetCycleAmount),
+                                  totalCycleAmount: double.parse(budgetCycleAmount),
+                                  totalAmountSpent: 0,
+                                ));
+                              }
+                              GoRouter.of(context).pushNamed(AppRouteConstants.budget);
                             }
-                            GoRouter.of(context).pushNamed(AppRouteConstants.budget);
-                          }
-                        },
+                          },
+                        ),
                       ),
                     ),
                   ],

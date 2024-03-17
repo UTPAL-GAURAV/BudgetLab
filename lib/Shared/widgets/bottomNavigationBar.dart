@@ -85,16 +85,16 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                       BottomNavigationBarEnum.HOME.value, context);
                 },
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.chat_bubble_rounded,
-                  color: Color(0xFF9299A1),
-                  size: screenHeight(0.034, context),
-                ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(
+              //     Icons.chat_bubble_rounded,
+              //     color: Color(0xFF9299A1),
+              //     size: screenHeight(0.034, context),
+              //   ),
+              //   onPressed: () {
+              //     print('IconButton pressed ...');
+              //   },
+              // ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -150,17 +150,17 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
                   },
                 ),
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.settings,
-                  color: Color(0xFF9299A1),
-                  size: screenHeight(0.034, context),
-                ),
-                onPressed: () {
-                  navigateOnBottomNavigationButtonClick(
-                      BottomNavigationBarEnum.SETTINGS.value, context);
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(
+              //     Icons.settings,
+              //     color: Color(0xFF9299A1),
+              //     size: screenHeight(0.034, context),
+              //   ),
+              //   onPressed: () {
+              //     navigateOnBottomNavigationButtonClick(
+              //         BottomNavigationBarEnum.SETTINGS.value, context);
+              //   },
+              // ),
             ],
           ),
         ],

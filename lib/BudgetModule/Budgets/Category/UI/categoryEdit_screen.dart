@@ -22,7 +22,7 @@ import 'categoryDelete_popUp.dart';
 
 class CategoryEditScreen extends StatefulWidget {
   final Category category;
-  const CategoryEditScreen({Key? key, required  this.category}) : super(key: key);
+  const CategoryEditScreen({Key? key, required this.category}) : super(key: key);
 
   @override
   State<CategoryEditScreen> createState() => _CategoryEditScreenState();
@@ -67,12 +67,12 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                             screenWidth(0.02, context), screenHeight(0.04, context)),
                         child: WidgetManager.getTextFormField(
                             TextFormFieldConfig(
-                                labelText: "Category Name",
+                                labelText: "Budget Name",
                                 hintText: widget.category.name,
                                 initialText: widget.category.name,
                                 keyboardType: TextInputType.name,
                                 maxLength: 15,
-                                validatorCallback: Validator.validateNothing,
+                                validatorCallback: Validator.validateCategoryDuplicateValueField,
                                 onSavedCallback: (value) => categoryName = value!),
                             context),
                       ),
@@ -82,7 +82,10 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Select Icon",
-                            style: TextStyle(color: ColorManager.DARK_GREY, fontSize: height(0.02, context)),
+                            style: TextStyle(
+                                color: ColorManager.BLACK_VOID,
+                                fontSize: height(0.02, context),
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -91,7 +94,7 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                         child: getScrollableCategoryIcons((value) => selectedIcon = value),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
+                        padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), screenHeight(0.03, context), screenWidth(0.02, context), 0),
                         child: Row(
                           children: [
                             Expanded(
@@ -99,9 +102,15 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("CAP?"),
                                   Text(
-                                    "No max limit",
+                                    "CAP?",
+                                    style: TextStyle(
+                                        color: ColorManager.BLACK_VOID,
+                                        fontSize: height(0.02, context),
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    "No max limit on this budget",
                                     softWrap: true,
                                   ),
                                 ],
@@ -131,54 +140,29 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                   // Note: Transaction Type can never change.
                   // Visible when capped budget needs to be set
                   Padding(
-                    padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), 0, screenWidth(0.02, context), 0),
+                    padding: EdgeInsets.fromLTRB(screenWidth(0.02, context), screenHeight(0.05, context), screenWidth(0.02, context), 0),
                     child: Visibility(
                       visible: isBudgetCapped,
                       child: Column(
                         children: [
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       flex: 4,
-                          //       child: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           const Text("It's an "),
-                          //           Text(
-                          //             "Expense",
-                          //             softWrap: true,
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //     Expanded(
-                          //       flex: 2,
-                          //       child: CupertinoSwitch(
-                          //           // It can either be Expense or Investment, because Income should not be capped
-                          //           value: !isExpense,
-                          //           onChanged: (bool newValue) {
-                          //             setState(() {
-                          //               isExpense = !newValue;
-                          //               if (isExpense == true) {
-                          //                 provider.setSelectedTransactionType(TransactionType.expense);
-                          //               } else {
-                          //                 provider.setSelectedTransactionType(TransactionType.investment);
-                          //               }
-                          //             });
-                          //           }),
-                          //     ),
-                          //     Expanded(
-                          //         flex: 4,
-                          //         child: Text(
-                          //           "Investment",
-                          //           softWrap: true,
-                          //         )),
-                          //   ],
-                          // ),
-                          getBudgetCycleButtonsInARow(),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Select Budget Cycle ",
+                              style: TextStyle(
+                                  color: ColorManager.BLACK_VOID,
+                                  fontSize: height(0.02, context),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(top: screenHeight(0.02, context), bottom: screenHeight(0.05, context)),
+                            child: getBudgetCycleButtonsInARow(),
+                          ),
                           WidgetManager.getTextFormField(
                               TextFormFieldConfig(
-                                  labelText: "${provider.selectedBudgetCycle.name} Budget",
+                                  labelText: "Set ${provider.selectedBudgetCycle.name} Budget",
                                   hintText: " 0",
                                   initialText: budgetCycleAmount,
                                   keyboardType: TextInputType.number,
@@ -186,46 +170,55 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                                   validatorCallback: Validator.validateAmountField,
                                   onSavedCallback: (value) => budgetCycleAmount = value!),
                               context),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Refresh? "),
-                                    const Text(
-                                      "Freash budget will start in next cycle ",
-                                      softWrap: true,
-                                    ),
-                                  ],
+                          Padding(
+                            padding: EdgeInsets.only(top: screenHeight(0.04, context)),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Refresh? ",
+                                        style: TextStyle(
+                                            color: ColorManager.BLACK_VOID,
+                                            fontSize: height(0.02, context),
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const Text(
+                                        "Fresh budget will start in next cycle ",
+                                        softWrap: true,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: CupertinoSwitch(
-                                    // It can either be Expense or Investment, because Income should not be capped
-                                    value: addToNextCycle,
-                                    onChanged: (bool newValue) {
-                                      setState(() {
-                                        addToNextCycle = newValue;
-                                      });
-                                    }),
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: const Text(
-                                  "leftover or extra amount spent will be adjusted in the next cycle",
-                                  softWrap: true,
+                                Expanded(
+                                  flex: 2,
+                                  child: CupertinoSwitch(
+                                      // It can either be Expense or Investment, because Income should not be capped
+                                      value: addToNextCycle,
+                                      onChanged: (bool newValue) {
+                                        setState(() {
+                                          addToNextCycle = newValue;
+                                        });
+                                      }),
                                 ),
-                              )
-                            ],
+                                Expanded(
+                                  flex: 4,
+                                  child: const Text(
+                                    "Leftover or extra amount spent will be adjusted in the next cycle",
+                                    softWrap: true,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(top: screenHeight(0.04, context))),
+                  Padding(padding: EdgeInsets.only(top: screenHeight(0.08, context))),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.90,
                     child: FloatingActionButton.extended(
@@ -275,7 +268,7 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                       },
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(top: 20)),
+                  Padding(padding: EdgeInsets.only(top: 30)),
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.90,
                       child: FloatingActionButton.extended(
@@ -286,7 +279,8 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                           backgroundColor: ColorManager.EXPENSE_RED,
                           onPressed: () {
                             categoryDeletePopUp(context, categoryName);
-                          }))
+                          })),
+                  Padding(padding: EdgeInsets.only(top: 40)),
                 ],
               ),
             ),

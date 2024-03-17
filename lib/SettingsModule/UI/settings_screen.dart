@@ -1,3 +1,5 @@
+import 'package:budgetlab/SettingsModule/metadata_controller.dart';
+import 'package:budgetlab/SettingsModule/metadata_entity.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:budgetlab/Shared/service/avatar_service.dart';
 import 'package:budgetlab/Shared/service/login_service.dart';
@@ -20,9 +22,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  MetaDataController metaDataController = MetaDataController();
+
   LoginService loginService = LoginService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   User? _user;
+
+  bool isSwitchedHide = false;
+  AvatarService avatarService = AvatarService();
 
   @override
   void initState() {
@@ -39,12 +46,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  bool isSwitchedHide = false;
-
-  AvatarService avatarService = AvatarService();
-
   @override
   Widget build(BuildContext context) {
+    Metadata metadata = metaDataController.getAllMetadata()?? Metadata();
     return Scaffold(
       appBar: AppBar(
         title: const Text(ConstantsManager.PROFILE),
@@ -65,14 +69,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              "Hello User",
+              "Hello ${metadata.userName}",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(0.0),
             child: Text(
-              _user == null ? "Login to unlock more features" : _user!.email!,
+              _user == null ? "Sign in to unlock more features!" : _user!.email!,
               style: TextStyle(fontSize: 20, color: Colors.grey),
             ),
           ),

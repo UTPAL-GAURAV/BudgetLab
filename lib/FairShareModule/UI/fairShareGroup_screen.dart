@@ -66,6 +66,12 @@ class _FairShareGroupScreenState extends State<FairShareGroupScreen> {
                 ],
               ),
             ),
+            leading: GestureDetector(
+              onTap: () {
+                    GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
+              },
+              child: Icon(Icons.arrow_back),
+            ),
             title: Text(widget.group.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
             actions: [
               IconButton(

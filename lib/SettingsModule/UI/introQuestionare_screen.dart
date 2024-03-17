@@ -1,5 +1,6 @@
 import 'package:budgetlab/SettingsModule/metadata_controller.dart';
 import 'package:budgetlab/SettingsModule/metadata_entity.dart';
+import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _IntroQuestionareScreenState extends State<IntroQuestionareScreen> {
               Row(
                 children: [
                   Text(
-                    "BudgetLab",
+                    ConstantsManager.APP_NAME,
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   ),
                   CircleAvatar(
@@ -135,8 +136,13 @@ class _IntroQuestionareScreenState extends State<IntroQuestionareScreen> {
                           onPressed: () async {
                             formKey.currentState!.save();
                             if (formKey.currentState!.validate()) {
-                              metaDataController
-                                  .updateMetadata(Metadata(userName: userName, gender: gender, currency: currency));
+                              Metadata? currentMetadata = metaDataController.getAllMetadata();
+                              currentMetadata ??= Metadata(); // Assign default metadata if fetched is null
+                              currentMetadata.userName = userName;
+                              currentMetadata.gender = gender;
+                              currentMetadata.currency = currency;
+                              currentMetadata.country = selectedCurrency.flag!;
+                              metaDataController.updateMetadata(currentMetadata);
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               await prefs.setBool('introQuestionnairePending', false);
                               GoRouter.of(context).pushNamed(AppRouteConstants.home);

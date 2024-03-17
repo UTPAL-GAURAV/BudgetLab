@@ -3,7 +3,7 @@ class ConstantsManager {
   static const String APP_NAME = "BudgetLab";
   static const String CONTENT = "CONTENT";
   static const String CREATE_GROUP = "Create Group";
-  static const String LOAN_LEND = "Loan/Lend";
+  static const String LOAN_LEND = "Loan-Lend";
   static const String INCOME_EXPENSE = "Transactions";
   static const String BUDGET = "Budget";
   static const String SAVINGS = "Savings";
@@ -16,10 +16,16 @@ class ConstantsManager {
   static const String YOUR_WORTH = "Your Worth";
   static const String EXPENDABLE_AMOUNT = "Expendable Amt.";
   static const String HISTORY = "History";
+  static const String NO_NOTIFICATIONS = "No notifications";
+  static const String NO_CAPPED_BUDGET = "No Capped Budget";
+  static const String NO_UNCAPPED_BUDGET = "No Un-capped Budget";
+  static const String NO_SPLIT_GROUPS = "No Split Groups";
+  static const String NO_INDIVIDUAL_SPLITS = "No Individual Splits";
 
 
   /// ERROR ////////////////////////////////////////////////////////////////////
   static const String NO_TEXT = "Please enter some text";
+  static const String DUPLICATE_TEXT = "This name already exists";
   static const String NOT_VALID_AMOUNT = "Enter a valid amount";
   static const String NOT_ENOUGH_BALANCE = "Not enough balance";
 

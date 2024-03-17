@@ -4,8 +4,9 @@ import 'metadata_entity.dart';
 
 class MetadataService {
   MetadataRepository metadataRepository = MetadataRepository();
+
   Metadata? getAllMetadata() {
-    metadataRepository.getAllMetadata();
+    return metadataRepository.getAllMetadata();
   }
 
   int updateMetadata(Metadata metadata) {

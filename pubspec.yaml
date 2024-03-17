@@ -94,6 +94,8 @@ flutter:
     - assets/images/icons/
     - assets/images/icons/budgetCategory/
     - assets/images/icons/fairShare/
+    - assets/images/stickers/
+    - assets/images/illustrations/
     - assets/images/illustrations/male/
     - assets/images/illustrations/female/
 

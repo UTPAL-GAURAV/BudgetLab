@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../../HomeModule/UI/homePage_screen.dart';
 import '../../Shared/color_manager.dart';
 import '../../Shared/routes_manager.dart';
+import '../../Shared/service/whatsapp_service.dart';
 import 'fairShareGroups.dart';
 import 'fairShareIndividuals.dart';
 
@@ -25,14 +26,26 @@ class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    // Notification
     notificationServices.requestNotificationPermission();
     notificationServices.isDeviceTokenRefreash();
     notificationServices.getDeviceToken().then((value) {
       print("Device Token");
       print(value);
     });
+
+    // Whatsapp
+    WhatsApp whatsapp = WhatsApp();
+    whatsapp.setup(
+      accessToken: "YOUR_ACCESS_TOKEN_HERE",
+      fromNumberId: 919901502338,
+    );
+    whatsapp.messagesText(
+        to: 919901502338,
+        message: "Hey, download budgetLab. follow me on https://example.com",
+        previewUrl: true
+    );
   }
 
   @override
@@ -42,6 +55,13 @@ class _FairShareHomeScreenState extends State<FairShareHomeScreen> {
         title: const Text("Fair Share"),
         backgroundColor: ColorManager.PRIMARY_BLUE,
         foregroundColor: Colors.white,
+        // Note: Needed because, not having it produces glitch on back button
+        leading: GestureDetector(
+          onTap: () {
+            GoRouter.of(context).pushReplacementNamed(AppRouteConstants.home);
+          },
+          child: Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.group_add),

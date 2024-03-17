@@ -15,6 +15,7 @@ class ColorManager {
   static Color LIGHT_RED = Color(0xFFFFCDD2);
   static Color LIGHT_PURPLE = Color(0xFFD1C4E9);
   static Color LAVENDER = Color(0xFFE6E6FA);
+  static Color LAVENDER_SAVOR = Color(0xFFEADEFF);
   static Color LIGHT_GREEN = Color(0xFF9CCC65);
 
   //New color themes
@@ -38,13 +39,16 @@ class ColorManager {
   static Color GOLDEN = Color(0xFFFFDF00);
   static Color MUSTARD = Color(0xFFEFCC00);
 
-  // Light color themes
+  // Light & Dark color themes
   static Color LIGHT_CYAN = Color(0xFFD2F7FF);
   static Color LIGHTER_PURPLE = Color(0xFFDAE0FD);
   static Color LIGHT_BLUE = Color(0xFFD4EBFF);
+  static Color DARK_BLUE = Color(0xFF0665EB);
   static Color LIGHT_MAGENTA = Color(0xFFFFD4FD);
   static Color LIGHT_YELLOW = Color(0xFFFEFFD4);
   static Color LIGHT_ORANGE = Color(0xFFFFEBD4);
+  static Color DARK_ORANGE = Color(0xFFFE8A02);
   static Color LIGHT_BROWN = Color(0xFFFFDFE0);
   static Color LIGHTER_GREEN = Color(0xFFDEFFDC);
+  static Color DARKER_GREEN = Color(0xFF1DBF4E);
 }

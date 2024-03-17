@@ -69,10 +69,10 @@ getIconButtons(String path, BuildContext context, bool isSelected) {
     width: screenHeight(0.12, context),
     constraints: BoxConstraints(maxWidth: 80, maxHeight: 80),
     decoration: BoxDecoration(
-      color: isSelected ? ColorManager.BACKGROUND_LIGHT_BLUE : null,
+      color: isSelected ? ColorManager.LAVENDER_SAVOR : null,
       border: Border.all(
-        color: ColorManager.FLUTTER_BLUE, // Set the border color
-        width: 1.2, // Set the border width
+        color: isSelected ? ColorManager.PRIMARY_BLUE : ColorManager.FLUTTER_BLUE, // Set the border color
+        width: isSelected ? 2 : 1.2, // Set the border width
       ),
       borderRadius: BorderRadius.circular(50), // Set the border radius
     ),
@@ -124,9 +124,7 @@ getLastIconEditButton(BuildContext context) {
   );
 }
 
-getLoginButton() {
-
-}
+getLoginButton() {}
 
 /// Text Boxes /////////////////////////////////////////////////////////////////
 getHeaderDividerSizedBox(String displayText) {
@@ -173,68 +171,119 @@ getTextFormField(TextFormFieldConfig config, BuildContext context) {
 }
 
 getTransactionTypeButtonsInARow() {
+  // Note: Removing heroTag will throw error in console as it becomes common for every FloatingActionButton
   return Consumer<CategoryProvider>(builder: (context, provider, child) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        FloatingActionButton.extended(
-            label: const Text("Expense"),
-            icon: provider.selectedTransactionType == TransactionType.expense
-                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/expense.png'))
-                : null,
-            onPressed: () {
-              provider.setSelectedTransactionType(TransactionType.expense);
-            }),
-        FloatingActionButton.extended(
-            label: const Text("Income"),
-            icon: provider.selectedTransactionType == TransactionType.income
-                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/income.png'))
-                : null,
-            onPressed: () {
-              provider.setSelectedTransactionType(TransactionType.income);
-            }),
-        FloatingActionButton.extended(
-            label: const Text("Investment"),
-            icon: provider.selectedTransactionType == TransactionType.investment
-                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/investment.png'))
-                : null,
-            onPressed: () {
-              provider.setSelectedTransactionType(TransactionType.investment);
-            }),
+        Expanded(
+          flex: 1,
+          child: FloatingActionButton.extended(
+              heroTag: "ExpenseTransactionType",
+              label: const Text("Expense"),
+              icon: provider.selectedTransactionType == TransactionType.expense
+                  ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/expense.png'))
+                  : null,
+              backgroundColor: provider.selectedTransactionType == TransactionType.expense
+                  ? ColorManager.LAVENDER_SAVOR
+                  : ColorManager.LIGHT_GREY,
+              onPressed: () {
+                provider.setSelectedTransactionType(TransactionType.expense);
+              }),
+        ),
+        SizedBox(width: 8),
+        Expanded(
+          flex: 1,
+          child: FloatingActionButton.extended(
+              heroTag: "IncomeTransactionType",
+              label: const Text("Income"),
+              icon: provider.selectedTransactionType == TransactionType.income
+                  ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/income.png'))
+                  : null,
+              backgroundColor: provider.selectedTransactionType == TransactionType.income
+                  ? ColorManager.LAVENDER_SAVOR
+                  : ColorManager.LIGHT_GREY,
+              onPressed: () {
+                provider.setSelectedTransactionType(TransactionType.income);
+              }),
+        ),
+        SizedBox(width: 8),
+        Expanded(
+          flex: 1,
+          child: FloatingActionButton.extended(
+              heroTag: "InvestmentTransactionType",
+              label: const Text("Investment"),
+              icon: provider.selectedTransactionType == TransactionType.investment
+                  ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/investment.png'))
+                  : null,
+              backgroundColor: provider.selectedTransactionType == TransactionType.investment
+                  ? ColorManager.LAVENDER_SAVOR
+                  : ColorManager.LIGHT_GREY,
+              onPressed: () {
+                provider.setSelectedTransactionType(TransactionType.investment);
+              }),
+        ),
       ],
     );
   });
 }
 
 getBudgetCycleButtonsInARow() {
+  // Note: Removing heroTag will throw error in console as it becomes common for every FloatingActionButton
   return Consumer<CategoryProvider>(builder: (context, provider, child) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        FloatingActionButton.extended(
-            label: Text(BudgetCycle.Weekly.name),
-            icon: provider.selectedBudgetCycle == BudgetCycle.Weekly
-                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/weekly.png'))
-                : null,
-            onPressed: () {
-              provider.setSelectedBudgetCycle(BudgetCycle.Weekly);
-            }),
-        FloatingActionButton.extended(
-            label: Text(BudgetCycle.Monthly.name),
-            icon: provider.selectedBudgetCycle == BudgetCycle.Monthly
-                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/monthly.png'))
-                : null,
-            onPressed: () {
-              provider.setSelectedBudgetCycle(BudgetCycle.Monthly);
-            }),
-        FloatingActionButton.extended(
-            label: Text(BudgetCycle.Yearly.name),
-            icon: provider.selectedBudgetCycle == BudgetCycle.Yearly
-                ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/yearly.png'))
-                : null,
-            onPressed: () {
-              provider.setSelectedBudgetCycle(BudgetCycle.Yearly);
-            }),
+        Expanded(
+          flex: 1,
+          child: FloatingActionButton.extended(
+              heroTag: "WeeklyCycle",
+              label: Text(BudgetCycle.Weekly.name),
+              icon: provider.selectedBudgetCycle == BudgetCycle.Weekly
+                  ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/weekly.png'))
+                  : null,
+              backgroundColor: provider.selectedBudgetCycle == BudgetCycle.Weekly
+                  ? ColorManager.LAVENDER_SAVOR
+                  : ColorManager.LIGHT_GREY,
+              // elevation: provider.selectedBudgetCycle == BudgetCycle.Weekly ? 6 : 0,
+              onPressed: () {
+                provider.setSelectedBudgetCycle(BudgetCycle.Weekly);
+              }),
+        ),
+        SizedBox(width: 8),
+        Expanded(
+          flex: 1,
+          child: FloatingActionButton.extended(
+              heroTag: "MonthlyCycle",
+              label: Text(BudgetCycle.Monthly.name),
+              icon: provider.selectedBudgetCycle == BudgetCycle.Monthly
+                  ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/monthly.png'))
+                  : null,
+              backgroundColor: provider.selectedBudgetCycle == BudgetCycle.Monthly
+                  ? ColorManager.LAVENDER_SAVOR
+                  : ColorManager.LIGHT_GREY,
+              // elevation: provider.selectedBudgetCycle == BudgetCycle.Monthly ? 6 : 0,
+              onPressed: () {
+                provider.setSelectedBudgetCycle(BudgetCycle.Monthly);
+              }),
+        ),
+        SizedBox(width: 8),
+        Expanded(
+          flex: 1,
+          child: FloatingActionButton.extended(
+              heroTag: "YearlyCycle",
+              label: Text(BudgetCycle.Yearly.name),
+              icon: provider.selectedBudgetCycle == BudgetCycle.Yearly
+                  ? Container(width: 24, height: 24, child: Image.asset('assets/images/icons/yearly.png'))
+                  : null,
+              backgroundColor: provider.selectedBudgetCycle == BudgetCycle.Yearly
+                  ? ColorManager.LAVENDER_SAVOR
+                  : ColorManager.LIGHT_GREY,
+              // elevation: provider.selectedBudgetCycle == BudgetCycle.Yearly ? 6 : 0,
+              onPressed: () {
+                provider.setSelectedBudgetCycle(BudgetCycle.Yearly);
+              }),
+        ),
       ],
     );
   });
@@ -388,5 +437,27 @@ getImageToDisplay(String path, String backupImage, double height, double width, 
                     height: screenWidth(height, context),
                     width: screenWidth(width, context), // Ensure the image covers the entire container
                   ),
+  );
+}
+
+getEditableImagesWallpaperStack(String imagePath, double imageSize, double cameraSize,BuildContext context) {
+  return Stack(
+    children: [
+      Container(
+        width: imageSize,
+        height: imageSize,
+        child: getImageToDisplay(imagePath, imagePath, 0.2, 0.2, context),
+      ),
+      Positioned(
+        bottom: 0,
+        right: 0,
+        // child: Icon(Icons.camera_alt, size: 40, color: ColorManager.FLUTTER_BLUE,),
+        child: Container(
+            width: cameraSize,
+            height: cameraSize,
+            child: getImageToDisplay(
+                'assets/images/stickers/camera2.png', 'assets/images/stickers/camera2.png', 0.2, 0.2, context)),
+      )
+    ],
   );
 }

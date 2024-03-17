@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver{
       categoryController.addCategory(Category(transactionType: TransactionType.income.name, name: "Salary", icon: 'assets/images/icons/budgetCategory/salary.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
       categoryController.addCategory(Category(transactionType: TransactionType.expense.name, name: "Shopping", icon: 'assets/images/icons/budgetCategory/trolley.png', isCap: false, cycle: BudgetCycle.none.name, cycleBudget: 0, addToNextCycle: false, currentCycleAmountLeft: 0, totalCycleAmount: 0, totalAmountSpent: 0));
 
-      metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "User", currency: "", country: "", countryCode: 0, password: "", hideOn: false, readMessage: false));
+      metaDataController.updateMetadata(Metadata(currentBalance: 0, yourWorth: 0, userName: "User", currency: "USD", country: "US", countryCode: 1, password: "", hideOn: false, readMessage: false));
     }
   }
 }
