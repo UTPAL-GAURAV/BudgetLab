@@ -1,6 +1,7 @@
 
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/routes_manager.dart';
+import 'package:budgetlab/Shared/widgets/widget_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -68,16 +69,17 @@ _getLoanLendIconTile(context) {
               GoRouter.of(context).pushNamed(AppRouteConstants.fairShare);
             },
             backgroundColor: ColorManager.LIGHT_ORANGE,
-            child: Icon(
-              Icons.swap_horiz,
-              color: ColorManager.DARK_ORANGE,
-              size: 40,
-            ),
+            child: getImageToDisplay('assets/images/icons/group.png', 'assets/images/icons/group.png', 0.09, 0.09, context),
+            // child: Icon(
+            //   Icons.swap_horiz,
+            //   color: ColorManager.DARK_ORANGE,
+            //   size: 40,
+            // ),
           ),
         ),
         const SizedBox(height: 10),
         Text(
-          ConstantsManager.LOAN_LEND,
+          ConstantsManager.SPLIT,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: ColorManager.BLACK_VOID,
@@ -109,11 +111,12 @@ _getSavingsIconTile(context) {
               GoRouter.of(context).pushNamed(AppRouteConstants.savings);
             },
             backgroundColor: ColorManager.LIGHTER_GREEN,
-            child: Icon(
-              Icons.savings,
-              color: ColorManager.DARKER_GREEN,
-              size: 40,
-            ),
+            child: getImageToDisplay('assets/images/icons/jar.png', 'assets/images/icons/jar.png', 0.09, 0.09, context),
+            // child: Icon(
+            //   Icons.savings,
+            //   color: ColorManager.DARKER_GREEN,
+            //   size: 40,
+            // ),
           ),
         ),
         const SizedBox(height: 10),
@@ -148,16 +151,17 @@ getBudgetIconTile(context) {
               GoRouter.of(context).pushNamed(AppRouteConstants.budget);
             },
             backgroundColor: ColorManager.LIGHT_BLUE,
-            child: Icon(
-              Icons.receipt_long_sharp,
-              color: ColorManager.DARK_BLUE,
-              size: 40,
-            ),
+            child: getImageToDisplay('assets/images/icons/budget.png', 'assets/images/icons/budget.png', 0.09, 0.09, context),
+            // child: Icon(
+            //   Icons.receipt_long_sharp,
+            //   color: ColorManager.DARK_BLUE,
+            //   size: 40,
+            // ),
           ),
         ),
         const SizedBox(height: 10),
         Text(
-          ConstantsManager.INCOME_EXPENSE,
+          ConstantsManager.BUDGET,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: ColorManager.BLACK_VOID,

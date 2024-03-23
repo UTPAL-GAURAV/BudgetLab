@@ -32,7 +32,7 @@ String validateAmountField(value) {
   return "";
 }
 
-// Validates Expense, Lend, Investment - basically all outgoing transactions
+// Validates Expense, Lend, Investment, new Savings transaction - basically all outgoing transactions
 String validateLendExpenseField(value) {
   MetaDataController metaDataController = MetaDataController();
   String response = validateAmountField(value);

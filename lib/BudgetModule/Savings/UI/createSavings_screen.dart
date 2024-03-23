@@ -31,7 +31,7 @@ class _CreateSavingsScreenState extends State<CreateSavingsScreen> {
 
   final formKey = GlobalKey<FormState>();
   late String targetAmount, title;
-  String icon = 'assets/images/icons/budgetCategory/piggy.png';
+  String icon = '';
   DateTime dateTime = DateTime.now();
 
   @override
@@ -76,7 +76,7 @@ class _CreateSavingsScreenState extends State<CreateSavingsScreen> {
                     hintText: " 0",
                     keyboardType: TextInputType.number,
                     maxLength: 8,
-                    validatorCallback: Validator.validateLendExpenseField,
+                    validatorCallback: Validator.validateAmountField,
                     onSavedCallback: (value) => targetAmount = value!),
                 context),
             Padding(
@@ -110,7 +110,8 @@ class _CreateSavingsScreenState extends State<CreateSavingsScreen> {
                             targetAmount: double.parse(targetAmount),
                             savedAmount: 0,
                             icon: icon,
-                            targetDateTime: dateTime));
+                            targetDateTime: dateTime,
+                            startDateTime: DateTime.now()));
                         GoRouter.of(context).pushNamed(AppRouteConstants.savings);
                       }
                     }),

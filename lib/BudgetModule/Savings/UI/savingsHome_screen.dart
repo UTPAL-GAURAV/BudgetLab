@@ -1,5 +1,4 @@
-import 'package:budgetlab/BudgetModule/Savings/UI/scrollableSavings.dart';
-import 'package:budgetlab/BudgetModule/Savings/Savings_SavingsTransactions/UI/scrollableSavingsTransactions.dart';
+import 'package:budgetlab/BudgetModule/Savings/UI/scrollableSavings_screen.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

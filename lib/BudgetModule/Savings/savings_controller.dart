@@ -15,11 +15,11 @@ class SavingsController {
     return savingsService.addSavings(savings);
   }
 
-  int updateSavings(Savings savings, String originalTitle) {
-    return savingsService.updateSavings(savings, originalTitle);
+  int updateSavings(Savings savings) {
+    return savingsService.updateSavings(savings);
   }
 
-  bool deleteSavingsByTitle(String savingsTitle) {
-    return savingsService.deleteSavingsByTitle(savingsTitle);
+  bool deleteSavingsById(int savingsId) {
+    return savingsService.deleteSavingsById(savingsId);
   }
 }

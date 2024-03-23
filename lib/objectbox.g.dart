@@ -201,7 +201,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 5953722859783493972),
       name: 'Savings',
-      lastPropertyId: const IdUid(6, 1258910402027424384),
+      lastPropertyId: const IdUid(7, 317102568815924531),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -233,6 +233,11 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(6, 1258910402027424384),
             name: 'targetDateTime',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 317102568815924531),
+            name: 'startDateTime',
             type: 10,
             flags: 0)
       ],
@@ -808,13 +813,14 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Savings object, fb.Builder fbb) {
           final titleOffset = fbb.writeString(object.title);
           final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(7);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addFloat64(2, object.targetAmount);
           fbb.addFloat64(3, object.savedAmount);
           fbb.addOffset(4, iconOffset);
           fbb.addInt64(5, object.targetDateTime.millisecondsSinceEpoch);
+          fbb.addInt64(6, object.startDateTime.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -833,13 +839,16 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 12, '');
           final targetDateTimeParam = DateTime.fromMillisecondsSinceEpoch(
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
+          final startDateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
           final object = Savings(
               id: idParam,
               title: titleParam,
               targetAmount: targetAmountParam,
               savedAmount: savedAmountParam,
               icon: iconParam,
-              targetDateTime: targetDateTimeParam);
+              targetDateTime: targetDateTimeParam,
+              startDateTime: startDateTimeParam);
 
           return object;
         }),
@@ -1363,6 +1372,10 @@ class Savings_ {
   /// see [Savings.targetDateTime]
   static final targetDateTime =
       QueryIntegerProperty<Savings>(_entities[3].properties[5]);
+
+  /// see [Savings.startDateTime]
+  static final startDateTime =
+      QueryIntegerProperty<Savings>(_entities[3].properties[6]);
 }
 
 /// [History] entity fields to define ObjectBox queries.

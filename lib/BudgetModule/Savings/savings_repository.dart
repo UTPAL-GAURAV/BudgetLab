@@ -8,12 +8,16 @@ class SavingsRepository {
     return ObjectBoxManager.savingsBox.getAll();
   }
 
+  Savings getSavingsById(int savingsId) {
+    return ObjectBoxManager.savingsBox.query(Savings_.id.equals(savingsId)).build().find().first;
+  }
+
   int addSavings(Savings savings) {
     return ObjectBoxManager.savingsBox.put(savings);
   }
 
-  int updateSavings(Savings savings, String originalTitle) {
-    Savings existingSavings = getSavingsByTitle(originalTitle);
+  int updateSavings(Savings savings) {
+    Savings existingSavings = getSavingsById(savings.id);
     existingSavings.title = savings.title;
     existingSavings.targetAmount = savings.targetAmount;
     existingSavings.targetDateTime = savings.targetDateTime;
@@ -22,12 +26,7 @@ class SavingsRepository {
     return ObjectBoxManager.savingsBox.put(existingSavings);
   }
 
-  Savings getSavingsByTitle(String title) {
-    return ObjectBoxManager.savingsBox.query(Savings_.title.equals(title)).build().find().first;
-  }
-
-  bool deleteSavingsByTitle(String savingsTitle) {
-    final Savings savings = getSavingsByTitle(savingsTitle);
-    return ObjectBoxManager.savingsBox.remove(savings.id);
+  bool deleteSavingsById(int savingsId) {
+    return ObjectBoxManager.savingsBox.remove(savingsId);
   }
 }

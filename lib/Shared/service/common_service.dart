@@ -94,6 +94,21 @@ Color getRandomLightColor(String input) {
   return colorList[i];
 }
 
+Color getRandomDarkColor(String input) {
+  const int colorCountInList = 6;
+  int i = input.hashCode % colorCountInList;
+  // Avoid Red & Green colors, as it gives wrong impression
+  List<Color> colorList = [
+    ColorManager.CYAN,
+    ColorManager.DARKER_GREEN,
+    ColorManager.BLUE,
+    ColorManager.HOT_CORAL,
+    ColorManager.GOLDEN,
+    ColorManager.DARK_ORANGE,
+  ];
+  return colorList[i];
+}
+
 String getCurrentCycleDateFormat(String cycle) {
   if (cycle == BudgetCycle.Weekly.name) {
     final now = DateTime.now();

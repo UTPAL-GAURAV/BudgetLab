@@ -1,7 +1,7 @@
 import 'package:budgetlab/BudgetModule/Budgets/Budget/budget_entity.dart';
 import 'package:budgetlab/BudgetModule/IncomeExpense/UI/addIncomeExpenseAI_screen.dart';
 import 'package:budgetlab/BudgetModule/History/UI/historyHome_screen.dart';
-import 'package:budgetlab/BudgetModule/Savings/UI/savingsOverview_screen.dart';
+import 'package:budgetlab/BudgetModule/Savings/UI/savingsEdit.dart';
 import 'package:budgetlab/BudgetModule/Savings/savings_entity.dart';
 import 'package:budgetlab/FairShareModule/UI/addFairShareGroupTransaction_screen.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
@@ -15,9 +15,10 @@ import '../BudgetModule/Budgets/Budget/UI/budgetOverview_screen.dart';
 import '../BudgetModule/Budgets/Budget/UI/budgetHome_screen.dart';
 import '../BudgetModule/Budgets/Category/UI/category_screen.dart';
 import '../BudgetModule/Budgets/Category/category_entity.dart';
-import '../BudgetModule/Savings/Savings_SavingsTransactions/UI/addSavingsTransaction_screen.dart';
+import '../BudgetModule/Savings/Savings_SavingsTransactions/UI/addSavingsTransaction.dart';
 import '../BudgetModule/Savings/UI/createSavings_screen.dart';
 import '../BudgetModule/Savings/UI/savingsHome_screen.dart';
+import '../BudgetModule/Savings/UI/savingsOverview_screen.dart';
 import '../FairShareModule/FairShare_Entities/group_entity.dart';
 import '../FairShareModule/UI/createFairShareGroup_screen.dart';
 import '../FairShareModule/UI/fairShareAddPeopleToGroup_screen.dart';
@@ -121,7 +122,7 @@ class RoutesManager {
         path: '/addSavingsTransaction',
         pageBuilder: (context, state) {
           final savings = state.extra as Savings;
-          return MaterialPage(child: AddSavingsTransactionScreen(savings: savings));
+          return MaterialPage(child: AddSavingsTransaction(savings: savings));
         }),
     GoRoute(
         name: AppRouteConstants.budget,

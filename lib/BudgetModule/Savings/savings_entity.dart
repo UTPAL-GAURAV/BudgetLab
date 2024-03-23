@@ -9,6 +9,7 @@ class Savings {
   double savedAmount;
   String icon;
   DateTime targetDateTime;
+  DateTime startDateTime;
 
   Savings({
     this.id = 0,
@@ -17,5 +18,6 @@ class Savings {
     required this.savedAmount,
     this.icon = 'assets/images/icons/save.png',
     required this.targetDateTime,
+    required this.startDateTime,
   });
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:budgetlab/BudgetModule/Budgets/Category/category_entity.dart';
+import 'package:budgetlab/BudgetModule/Savings/savings_controller.dart';
 import 'package:budgetlab/HomeModule/UI/homePage_screen.dart';
 import 'package:budgetlab/Shared/constants_manager.dart';
 import 'package:budgetlab/Shared/enums_manager.dart';
@@ -10,8 +11,11 @@ import 'package:budgetlab/Shared/routes_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:budgetlab/Shared/helper/validator_helper.dart' as Validator;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../BudgetModule/Savings/Savings_SavingsTransactions/savingsTransactions_controller.dart';
+import '../../BudgetModule/Savings/savings_entity.dart';
 import '../color_manager.dart';
 import '../service/providers/category_provider.dart';
 
@@ -400,6 +404,53 @@ getBudgetIconForUser(double budgetUsedInPercentage, BuildContext context) {
       width: screenHeight(0.02, context), // Ensure the image covers the entire container
     ),
   );
+}
+
+String getSavingsEstimatedDateMessageForUser(Savings savings) {
+  if(savings.savedAmount <= 0) {
+    return "With this rate: Your estimated saving target of Rs. ${savings.targetAmount} will never complete";
+  }
+
+  DateTime startDateTime = savings.startDateTime;
+  DateTime nowDateTime = DateTime.now();
+  int daysTillNow = nowDateTime.difference(startDateTime).inDays + 1;
+  double eachDayTargetAmountAchieved = savings.savedAmount / daysTillNow;
+
+  int willCompleteInDays = savings.targetAmount ~/ eachDayTargetAmountAchieved; // ~ symbol handles int conversion
+  DateTime willCompleteOnDate = startDateTime.add(Duration(days: willCompleteInDays));
+
+  return "With this rate: Your estimated saving target of Rs. ${savings.targetAmount} "
+      "will complete on date ${DateFormat('dd, MMM, yyyy').format(willCompleteOnDate)}";
+}
+
+Text getSavingsMessageForUser(Savings savings) {
+  if(savings.savedAmount<=0) {
+    return const Text("Your savings rate is low",
+      style: TextStyle(
+        color: Colors.red,
+      ),);
+  }
+
+  DateTime startDateTime = savings.startDateTime;
+  DateTime targetDateTime = savings.targetDateTime;
+  int totalDays = targetDateTime.difference(startDateTime).inDays;
+  double eachDayTargetAmount = savings.targetAmount / totalDays;
+
+  DateTime nowDateTime = DateTime.now();
+  int daysTillNow = nowDateTime.difference(startDateTime).inDays + 1;
+  double eachDayTargetAmountAchieved = savings.savedAmount / daysTillNow;
+
+  if(eachDayTargetAmountAchieved < eachDayTargetAmount) {
+    return const Text("Your savings rate is low",
+    style: TextStyle(
+      color: Colors.red,
+    ),);
+  }
+
+  return Text("Good Job",
+    style: TextStyle(
+        color: Colors.blue
+    ),);
 }
 
 /// PICTURES ////////////////////////////////////////////////////////////////////

@@ -174,7 +174,7 @@
     },
     {
       "id": "6:5953722859783493972",
-      "lastPropertyId": "6:1258910402027424384",
+      "lastPropertyId": "7:317102568815924531",
       "name": "Savings",
       "properties": [
         {
@@ -208,6 +208,11 @@
         {
           "id": "6:1258910402027424384",
           "name": "targetDateTime",
+          "type": 10
+        },
+        {
+          "id": "7:317102568815924531",
+          "name": "startDateTime",
           "type": 10
         }
       ],

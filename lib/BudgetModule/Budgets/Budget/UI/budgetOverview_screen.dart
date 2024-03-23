@@ -19,13 +19,6 @@ class BudgetOverviewScreen extends StatefulWidget {
 }
 
 class _BudgetOverviewScreenState extends State<BudgetOverviewScreen> {
-  late CategoryEditScreen _categoryEditScreen;
-  @override
-  void initState() {
-    super.initState();
-    _categoryEditScreen = CategoryEditScreen(category: widget.category);
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -67,7 +60,7 @@ class _BudgetOverviewScreenState extends State<BudgetOverviewScreen> {
             children: [
               AddIncomeExpenseScreen(category: widget.category,),
               getBudgetHistory(widget.category),
-              _categoryEditScreen,
+              CategoryEditScreen(category: widget.category)
             ],
           ),
         ),

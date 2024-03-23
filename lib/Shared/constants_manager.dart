@@ -19,8 +19,10 @@ class ConstantsManager {
   static const String NO_NOTIFICATIONS = "No notifications";
   static const String NO_CAPPED_BUDGET = "No Capped Budget";
   static const String NO_UNCAPPED_BUDGET = "No Un-capped Budget";
+  static const String NO_SAVINGS = "No Savings";
   static const String NO_SPLIT_GROUPS = "No Split Groups";
   static const String NO_INDIVIDUAL_SPLITS = "No Individual Splits";
+  static const String SPLIT = "Split";
 
 
   /// ERROR ////////////////////////////////////////////////////////////////////
